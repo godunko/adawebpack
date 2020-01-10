@@ -40,6 +40,21 @@ package body WASM.Objects is
       end if;
    end Finalize;
 
+   ----------------
+   -- Identifier --
+   ----------------
+
+   function Identifier
+     (Self : Object_Reference'Class) return Object_Identifier is
+   begin
+      if Self.Shared = null then
+         return 0;
+
+      else
+         return Self.Shared.Identifier;
+      end if;
+   end Identifier;
+
    -----------------
    -- Instantiate --
    -----------------

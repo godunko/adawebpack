@@ -16,8 +16,14 @@ package WASM.Objects is
 
    type Object_Reference is tagged private;
 
+   function Identifier
+     (Self : Object_Reference'Class) return Object_Identifier;
+   --  Returns object identifier of given reference.
+
    function Instantiate
      (Identifier : Object_Identifier) return Object_Reference;
+   --  Create and initialize instance of object reference for the object
+   --  with given identifier.
 
 private
 
