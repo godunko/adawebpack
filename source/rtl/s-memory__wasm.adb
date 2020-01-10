@@ -59,7 +59,8 @@ package body System.Memory is
    function C_Malloc (Size : size_t) return System.Address;
    pragma Export (C, C_Malloc, "malloc");
 
-   function C_Calloc (N_Elem : size_t; Elem_Size : size_t) return System.Address;
+   function C_Calloc
+    (N_Elem : size_t; Elem_Size : size_t) return System.Address;
    pragma Export (C, C_Calloc, "calloc");
 
    procedure C_Free (Ptr : System.Address);
@@ -124,7 +125,7 @@ package body System.Memory is
      (N_Elem : size_t; Elem_Size : size_t) return System.Address
    is
    begin
-      return Malloc (N_Elem * Elem_Size);
+      return C_Malloc (N_Elem * Elem_Size);
    end C_Calloc;
 
    --------------
@@ -141,7 +142,6 @@ package body System.Memory is
    ------------
 
    procedure C_Free (Ptr : System.Address) is
-      pragma Unreferenced (Ptr);
    begin
       Free (Ptr);
    end C_Free;
