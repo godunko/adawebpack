@@ -130,7 +130,7 @@ s-except.ads \
 NOTWASM_COMPILABLE_ZFP_SPECS= \
 
 COMPILE+=--target=wasm32 -gnateT=../../../arbw_src/source/rtl/wasm32.atp
-ARBW_SRC=arbw_src/source/rtl
+ARBW_SRC=arbw_src/source
 
 ZFPINCLUDE=lib/rts-native/adainclude
 ZFPLIB=lib/rts-native/adalib
@@ -143,8 +143,6 @@ wasm: build
 	done
 	cp -p $(GNAT_SRC)/hie/a-tags__c.ads $(ZFPINCLUDE)/a-tags.ads
 	cp -p $(GNAT_SRC)/hie/a-tags__c.adb $(ZFPINCLUDE)/a-tags.adb
-#	cp -p $(GNAT_SRC)/hie/a-except__c.adb $(ZFPINCLUDE)/a-except.adb
-#	cp -p $(GNAT_SRC)/hie/a-except__zfp.ads $(ZFPINCLUDE)/a-except.ads
 	cp -p $(GNAT_SRC)/hie/a-except__cert.adb $(ZFPINCLUDE)/a-except.adb
 	cp -p $(GNAT_SRC)/hie/a-except__cert.ads $(ZFPINCLUDE)/a-except.ads
 	cp -p $(GNAT_SRC)/hie/a-excach__cert.adb $(ZFPINCLUDE)/a-excach.adb
@@ -163,19 +161,19 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-parame__zfp.ads $(ZFPINCLUDE)/s-parame.ads
-	cp -p $(ARBW_SRC)/system-wasm.ads $(ZFPINCLUDE)/system.ads
+	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
 	cp -p $(GNAT_SRC)/hie/s-stalib__zfp.ads $(ZFPINCLUDE)/s-stalib.ads
 	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
-	cp -p $(ARBW_SRC)/a-elchha.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-soflin.ads $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-soflin.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-excmac.ads $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-excmac.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-init.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-traceb.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/s-memory.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/a-elchha.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-soflin.ads $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-soflin.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-memory.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
