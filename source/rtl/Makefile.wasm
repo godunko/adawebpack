@@ -152,7 +152,8 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
 	cp -p $(GNAT_SRC)/hie/s-except__cert.ads $(ZFPINCLUDE)/s-except.ads
 	cp -p $(GNAT_SRC)/hie/s-bb.ads $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-init.ads $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-init.ads $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-memory__zfp.ads $(ZFPINCLUDE)/s-memory.ads
@@ -171,7 +172,6 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/s-soflin.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-memory.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \

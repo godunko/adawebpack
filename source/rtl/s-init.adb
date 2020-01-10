@@ -86,7 +86,7 @@ package body System.Init is
    -- Runtime_Initialize --
    ------------------------
 
-   procedure Runtime_Initialize is
+   procedure Runtime_Initialize (Install_Handler : Integer) is
    begin
 --      --  Ensure that the tasking run time is initialized when using this run
 --      --  time. This initialization is required by the support for exceptions
