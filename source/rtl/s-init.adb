@@ -36,6 +36,12 @@
 
 package body System.Init is
 
+   Gl_Main_Priority : Integer := -1;
+   pragma Export (C, Gl_Main_Priority, "__gl_main_priority");
+
+   Gl_Main_CPU : Integer := -1;
+   pragma Export (C, Gl_Main_CPU, "__gl_main_cpu");
+
    ------------------------
    --  Local procedures  --
    ------------------------
