@@ -52,8 +52,8 @@ package System.Soft_Links is
 --   package SST renames System.Secondary_Stack;
 
    subtype EOA is Ada.Exceptions.Exception_Occurrence_Access;
---   subtype EO is Ada.Exceptions.Exception_Occurrence;
---
+   subtype EO is Ada.Exceptions.Exception_Occurrence;
+
 --   function Current_Target_Exception return EO;
 --   pragma Import
 --     (Ada, Current_Target_Exception, "__gnat_current_target_exception");
@@ -62,14 +62,14 @@ package System.Soft_Links is
 --   --  First we have the access subprogram types used to establish the links.
 --   --  The approach is to establish variables containing access subprogram
 --  --  values, which by default point to dummy no tasking versions of routines.
---
---   type No_Param_Proc     is access procedure;
---   pragma Favor_Top_Level (No_Param_Proc);
---   pragma Suppress_Initialization (No_Param_Proc);
---   --  Some uninitialized objects of that type are initialized by the Binder
---   --  so it is important that such objects are not reset to null during
---   --  elaboration.
---
+
+   type No_Param_Proc     is access procedure;
+   pragma Favor_Top_Level (No_Param_Proc);
+   pragma Suppress_Initialization (No_Param_Proc);
+   --  Some uninitialized objects of that type are initialized by the Binder
+   --  so it is important that such objects are not reset to null during
+   --  elaboration.
+
 --   type Addr_Param_Proc   is access procedure (Addr : Address);
 --   pragma Favor_Top_Level (Addr_Param_Proc);
 --   type EO_Param_Proc     is access procedure (Excep : EO);
@@ -169,10 +169,10 @@ package System.Soft_Links is
 --   procedure Task_Termination_NT (Excep : EO);
 --   --  Handle task termination routines for the environment task (non-tasking
 --   --  case, does nothing).
---
---   procedure Adafinal_NT;
---   --  Shuts down the runtime system (non-tasking case)
---
+
+   procedure Adafinal_NT;
+   --  Shuts down the runtime system (non-tasking case)
+
 --   Abort_Defer : No_Param_Proc := Abort_Defer_NT'Access;
 --   pragma Suppress (Access_Check, Abort_Defer);
 --   --  Defer task abort (task/non-task case as appropriate)
@@ -226,15 +226,15 @@ package System.Soft_Links is
 --
 --   Task_Termination_Handler : EO_Param_Proc := Task_Termination_NT'Access;
 --   --  Handle task termination routines (task/non-task case as appropriate)
---
---   Finalize_Library_Objects : No_Param_Proc;
---   pragma Export (C, Finalize_Library_Objects,
---                  "__gnat_finalize_library_objects");
---   --  Will be initialized by the binder
---
---   Adafinal : No_Param_Proc := Adafinal_NT'Access;
---   --  Performs the finalization of the Ada Runtime
---
+
+   Finalize_Library_Objects : No_Param_Proc;
+   pragma Export (C, Finalize_Library_Objects,
+                  "__gnat_finalize_library_objects");
+   --  Will be initialized by the binder
+
+   Adafinal : No_Param_Proc := Adafinal_NT'Access;
+   --  Performs the finalization of the Ada Runtime
+
 --   function  Get_Jmpbuf_Address_NT return  Address;
 --   procedure Set_Jmpbuf_Address_NT (Addr : Address);
 --
@@ -459,13 +459,6 @@ package System.Soft_Links is
 --   pragma Suppress (Access_Check, Get_Integer_Call);
 --   pragma Suppress (Access_Check, Set_Integer_Call);
 --   pragma Suppress (Access_Check, Get_EOA_Call);
---
---   procedure Null_Adafinal;
---   --  Shuts down the runtime system (non-tasking no-finalization case,
---   --  does nothing)
---
---   Adafinal : No_Param_Proc := Null_Adafinal'Access;
---   --  Performs the finalization of the Ada Runtime
 --
 --   function  Get_Sec_Stack_NT return  SST.SS_Stack_Ptr;
 --   procedure Set_Sec_Stack_NT (Stack : SST.SS_Stack_Ptr);

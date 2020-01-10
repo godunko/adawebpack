@@ -117,7 +117,6 @@ s-maccod.ads \
 s-powtab.ads \
 s-unstyp.ads \
 s-parame.ads \
-s-stalib.ads \
 system.ads   \
 machcode.ads \
 text_io.ads  \
@@ -164,7 +163,8 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
-	cp -p $(GNAT_SRC)/hie/s-stalib__zfp.ads $(ZFPINCLUDE)/s-stalib.ads
+	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(ZFPINCLUDE)/s-stalib.adb
+	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(ZFPINCLUDE)/s-stalib.ads
 	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
 	cp -p $(ARBW_SRC)/rtl/a-elchha.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-soflin.ads $(ZFPINCLUDE)/

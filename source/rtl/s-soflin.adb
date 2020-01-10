@@ -76,28 +76,28 @@ package body System.Soft_Links is
 --   begin
 --      null;
 --   end Abort_Undefer_NT;
---
---   -----------------
---   -- Adafinal_NT --
---   -----------------
---
---   procedure Adafinal_NT is
---   begin
---      --  Handle normal task termination by the environment task, but only
---      --  for the normal task termination. In the case of Abnormal and
---      --  Unhandled_Exception they must have been handled before, and the
---      --  task termination soft link must have been changed so the task
---      --  termination routine is not executed twice.
---
+
+   -----------------
+   -- Adafinal_NT --
+   -----------------
+
+   procedure Adafinal_NT is
+   begin
+      --  Handle normal task termination by the environment task, but only
+      --  for the normal task termination. In the case of Abnormal and
+      --  Unhandled_Exception they must have been handled before, and the
+      --  task termination soft link must have been changed so the task
+      --  termination routine is not executed twice.
+
 --      Task_Termination_Handler.all (Ada.Exceptions.Null_Occurrence);
---
---      --  Finalize all library-level controlled objects if needed
---
---      if Finalize_Library_Objects /= null then
---         Finalize_Library_Objects.all;
---      end if;
---   end Adafinal_NT;
---
+
+      --  Finalize all library-level controlled objects if needed
+
+      if Finalize_Library_Objects /= null then
+         Finalize_Library_Objects.all;
+      end if;
+   end Adafinal_NT;
+
 --   ---------------------------
 --   -- Check_Abort_Status_NT --
 --   ---------------------------
@@ -376,15 +376,6 @@ package body System.Soft_Links is
 --   begin
 --      return Get_Sec_Stack.all;
 --   end Get_Sec_Stack_Soft;
---
---   -------------------
---   -- Null_Adafinal --
---   -------------------
---
---   procedure Null_Adafinal is
---   begin
---      null;
---   end Null_Adafinal;
 --
 --   ------------------------
 --   -- Get_GNAT_Exception --
