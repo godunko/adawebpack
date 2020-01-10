@@ -1,8 +1,9 @@
 
+with Ada.Unchecked_Deallocation;
+
 package body WASM.Objects is
 
-   procedure Seize (Identifier : Object_Identifier)
-     with Import => True, Link_Name => "__awasm_object_seize";
+   use type Interfaces.Unsigned_32;
 
    procedure Release (Identifier : Object_Identifier)
      with Import => True, Link_Name => "__awasm_object_release";
@@ -13,8 +14,8 @@ package body WASM.Objects is
 
    overriding procedure Adjust (Self : in out Object_Reference) is
    begin
-      if Self.Identifier /= 0 then
-         Seize (Self.Identifier);
+      if Self.Shared /= null then
+         Self.Shared.Counter := Self.Shared.Counter + 1;
       end if;
    end Adjust;
 
@@ -23,10 +24,19 @@ package body WASM.Objects is
    --------------
 
    overriding procedure Finalize (Self : in out Object_Reference) is
+      procedure Free is
+        new Ada.Unchecked_Deallocation (Shared_Data, Shared_Data_Access);
+
    begin
-      if Self.Identifier /= 0 then
-         Release (Self.Identifier);
-         Self.Identifier := 0;
+      if Self.Shared /= null then
+         Self.Shared.Counter := Self.Shared.Counter - 1;
+
+         if Self.Shared.Counter = 0 then
+            Release (Self.Shared.Identifier);
+            Free (Self.Shared);
+         end if;
+
+         Self.Shared := null;
       end if;
    end Finalize;
 
@@ -37,9 +47,10 @@ package body WASM.Objects is
    function Instantiate
      (Identifier : Object_Identifier) return Object_Reference is
    begin
-      Seize (Identifier);
-
-      return (Ada.Finalization.Controlled with Identifier => Identifier);
+      return
+       (Ada.Finalization.Controlled
+          with Shared =>
+            new Shared_Data'(Counter => <>, Identifier => Identifier));
    end Instantiate;
 
 end WASM.Objects;

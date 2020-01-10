@@ -23,8 +23,15 @@ private
 
    type Object_Identifier is new Interfaces.Unsigned_32;
 
+   type Shared_Data is record
+      Counter    : Interfaces.Unsigned_32 := 1;
+      Identifier : Object_Identifier      := 0;
+   end record;
+
+   type Shared_Data_Access is access all Shared_Data;
+
    type Object_Reference is new Ada.Finalization.Controlled with record
-      Identifier : Object_Identifier := 0;
+      Shared : Shared_Data_Access;
    end record;
 
    overriding procedure Adjust (Self : in out Object_Reference);
