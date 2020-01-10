@@ -157,6 +157,7 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-memory__zfp.ads $(ZFPINCLUDE)/s-memory.ads
+	cp -p $(ARBW_SRC)/rtl/s-memory__wasm.adb $(ZFPINCLUDE)/s-memory.adb
 	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
@@ -173,7 +174,6 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-memory.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
