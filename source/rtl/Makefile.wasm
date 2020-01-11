@@ -177,8 +177,8 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-parame__wasm.ads $(ZFPINCLUDE)/s-parame.ads
-	cp -p $(ARBW_SRC)/rtl/s-soflin_wasm.adb $(ZFPINCLUDE)/s-soflin.adb
-	cp -p $(ARBW_SRC)/rtl/s-soflin_wasm.ads $(ZFPINCLUDE)/s-soflin.ads
+	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.adb $(ZFPINCLUDE)/s-soflin.adb
+	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.ads $(ZFPINCLUDE)/s-soflin.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
