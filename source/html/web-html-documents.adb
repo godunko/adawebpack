@@ -17,7 +17,8 @@ package body Web.HTML.Documents is
 --
 --   function Get_Element_By_Id
 --    (Self       : Document'Class;
---     Element_Id : Wide_String) return Web.HTML.Elements.HTML_Element is
+--     Element_Id : Web.Strings.Web_String)
+--       return Web.HTML.Elements.HTML_Element is
 --   begin
 --      return
 --        Web.HTML.Elements.Instantiate
