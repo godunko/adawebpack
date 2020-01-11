@@ -2,6 +2,7 @@
 with Web.DOM.Elements;
 with Web.DOM.Nodes;
 with Web.DOM.Non_Element_Parent_Nodes;
+with Web.Strings;
 
 package Web.DOM.Documents is
 
@@ -14,6 +15,6 @@ package Web.DOM.Documents is
 
    overriding function Get_Element_By_Id
     (Self       : Document;
-     Element_Id : Wide_String) return Web.DOM.Elements.Element;
+     Element_Id : Web.Strings.Web_String) return Web.DOM.Elements.Element;
 
 end Web.DOM.Documents;

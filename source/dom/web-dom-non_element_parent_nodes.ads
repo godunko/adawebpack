@@ -1,5 +1,6 @@
 
 with Web.DOM.Elements;
+with Web.Strings;
 
 package Web.DOM.Non_Element_Parent_Nodes is
 
@@ -9,7 +10,8 @@ package Web.DOM.Non_Element_Parent_Nodes is
 
    not overriding function Get_Element_By_Id
     (Self       : Non_Element_Parent_Node;
-     Element_Id : Wide_String) return Web.DOM.Elements.Element is abstract;
+     Element_Id : Web.Strings.Web_String)
+       return Web.DOM.Elements.Element is abstract;
    --  Returns the first element within node's descendants whose ID is
    --  Element_Id.
 
