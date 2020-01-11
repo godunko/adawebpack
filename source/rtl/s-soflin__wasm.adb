@@ -271,16 +271,16 @@ package body System.Soft_Links is
 --   begin
 --      Set_Sec_Stack (Stack);
 --   end Set_Sec_Stack_Soft;
---
---   ------------------
---   -- Task_Lock_NT --
---   ------------------
---
---   procedure Task_Lock_NT is
---   begin
---      null;
---   end Task_Lock_NT;
---
+
+   ------------------
+   -- Task_Lock_NT --
+   ------------------
+
+   procedure Task_Lock_NT is
+   begin
+      null;
+   end Task_Lock_NT;
+
 --   ------------------
 --   -- Task_Name_NT --
 --   -------------------
@@ -299,15 +299,15 @@ package body System.Soft_Links is
 --   begin
 --      null;
 --   end Task_Termination_NT;
---
---   --------------------
---   -- Task_Unlock_NT --
---   --------------------
---
---   procedure Task_Unlock_NT is
---   begin
---      null;
---   end Task_Unlock_NT;
+
+   --------------------
+   -- Task_Unlock_NT --
+   --------------------
+
+   procedure Task_Unlock_NT is
+   begin
+      null;
+   end Task_Unlock_NT;
 
 
 ------------------------------------------------------------------------------

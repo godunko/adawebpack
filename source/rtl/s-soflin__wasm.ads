@@ -117,11 +117,11 @@ package System.Soft_Links is
 --   type Task_Name_Call is access
 --     function return String;
 --   pragma Favor_Top_Level (Task_Name_Call);
---
---   --  Suppress checks on all these types, since we know the corresponding
---   --  values can never be null (the soft links are always initialized).
---
---   pragma Suppress (Access_Check, No_Param_Proc);
+
+   --  Suppress checks on all these types, since we know the corresponding
+   --  values can never be null (the soft links are always initialized).
+
+   pragma Suppress (Access_Check, No_Param_Proc);
 --   pragma Suppress (Access_Check, Addr_Param_Proc);
 --   pragma Suppress (Access_Check, EO_Param_Proc);
 --   pragma Suppress (Access_Check, Get_Address_Call);
@@ -161,13 +161,13 @@ package System.Soft_Links is
 --   function Check_Abort_Status_NT return Integer;
 --   --  Returns Boolean'Pos (True) iff abort signal should raise
 --   --  Standard'Abort_Signal.
---
---   procedure Task_Lock_NT;
---   --  Lock out other tasks (non-tasking case, does nothing)
---
---   procedure Task_Unlock_NT;
---   --  Release lock set by Task_Lock (non-tasking case, does nothing)
---
+
+   procedure Task_Lock_NT;
+   --  Lock out other tasks (non-tasking case, does nothing)
+
+   procedure Task_Unlock_NT;
+   --  Release lock set by Task_Lock (non-tasking case, does nothing)
+
 --   procedure Task_Termination_NT (Excep : EO);
 --   --  Handle task termination routines for the environment task (non-tasking
 --   --  case, does nothing).
@@ -189,43 +189,43 @@ package System.Soft_Links is
 --   Check_Abort_Status : Get_Integer_Call := Check_Abort_Status_NT'Access;
 --   --  Called when Abort_Signal is delivered to the process.  Checks to
 --   --  see if signal should result in raising Standard'Abort_Signal.
---
---   Lock_Task : No_Param_Proc := Task_Lock_NT'Access;
---   --  Locks out other tasks. Preceding a section of code by Task_Lock and
---   --  following it by Task_Unlock creates a critical region. This is used
---   --  for ensuring that a region of non-tasking code (such as code used to
---   --  allocate memory) is tasking safe. Note that it is valid for calls to
---   --  Task_Lock/Task_Unlock to be nested, and this must work properly, i.e.
---   --  only the corresponding outer level Task_Unlock will actually unlock.
---   --  This routine also prevents against asynchronous aborts (abort is
---   --  deferred).
---
---   Unlock_Task : No_Param_Proc := Task_Unlock_NT'Access;
---   --  Releases lock previously set by call to Lock_Task. In the nested case,
---   --  all nested locks must be released before other tasks competing for the
---   --  tasking lock are released.
---   --
---   --  In the non nested case, this routine terminates the protection against
---   --  asynchronous aborts introduced by Lock_Task (unless abort was already
---   --  deferred before the call to Lock_Task (e.g in a protected procedures).
---   --
---   --  Note: the recommended protocol for using Lock_Task and Unlock_Task
---   --  is as follows:
---   --
---   --    Locked_Processing : begin
---   --       System.Soft_Links.Lock_Task.all;
---   --       ...
---   --       System.Soft_Links.Unlock_Task.all;
---   --
---   --    exception
---   --       when others =>
---   --          System.Soft_Links.Unlock_Task.all;
---   --          raise;
---   --    end Locked_Processing;
---   --
---   --  This ensures that the lock is not left set if an exception is raised
---   --  explicitly or implicitly during the critical locked region.
---
+
+   Lock_Task : No_Param_Proc := Task_Lock_NT'Access;
+   --  Locks out other tasks. Preceding a section of code by Task_Lock and
+   --  following it by Task_Unlock creates a critical region. This is used
+   --  for ensuring that a region of non-tasking code (such as code used to
+   --  allocate memory) is tasking safe. Note that it is valid for calls to
+   --  Task_Lock/Task_Unlock to be nested, and this must work properly, i.e.
+   --  only the corresponding outer level Task_Unlock will actually unlock.
+   --  This routine also prevents against asynchronous aborts (abort is
+   --  deferred).
+
+   Unlock_Task : No_Param_Proc := Task_Unlock_NT'Access;
+   --  Releases lock previously set by call to Lock_Task. In the nested case,
+   --  all nested locks must be released before other tasks competing for the
+   --  tasking lock are released.
+   --
+   --  In the non nested case, this routine terminates the protection against
+   --  asynchronous aborts introduced by Lock_Task (unless abort was already
+   --  deferred before the call to Lock_Task (e.g in a protected procedures).
+   --
+   --  Note: the recommended protocol for using Lock_Task and Unlock_Task
+   --  is as follows:
+   --
+   --    Locked_Processing : begin
+   --       System.Soft_Links.Lock_Task.all;
+   --       ...
+   --       System.Soft_Links.Unlock_Task.all;
+   --
+   --    exception
+   --       when others =>
+   --          System.Soft_Links.Unlock_Task.all;
+   --          raise;
+   --    end Locked_Processing;
+   --
+   --  This ensures that the lock is not left set if an exception is raised
+   --  explicitly or implicitly during the critical locked region.
+
 --   Task_Termination_Handler : EO_Param_Proc := Task_Termination_NT'Access;
 --   --  Handle task termination routines (task/non-task case as appropriate)
 
@@ -459,7 +459,6 @@ package System.Soft_Links is
 --   --  The approach is to establish variables containing access subprogram
 --   --  values which by default point to dummy no tasking versions of routines.
 --
---   type No_Param_Proc     is access procedure;
 --   type EO_Param_Proc     is access procedure (Excep : EO);
 --
 --   type Get_Stack_Call  is access function return SST.SS_Stack_Ptr;
@@ -473,7 +472,6 @@ package System.Soft_Links is
 --   --  Suppress checks on all these types, since we know corresponding values
 --   --  can never be null (the soft links are always initialized).
 --
---   pragma Suppress (Access_Check, No_Param_Proc);
 --   pragma Suppress (Access_Check, Get_Stack_Call);
 --   pragma Suppress (Access_Check, Set_Stack_Call);
 --   pragma Suppress (Access_Check, Get_Integer_Call);
