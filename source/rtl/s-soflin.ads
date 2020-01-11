@@ -386,28 +386,27 @@ package System.Soft_Links is
 --   procedure Set_Sec_Stack_Soft (Stack : SST.SS_Stack_Ptr);
 --   pragma Inline (Get_Sec_Stack_Soft);
 --   pragma Inline (Set_Sec_Stack_Soft);
---
---   --  The following is a dummy record designed to mimic Communication_Block as
---   --  defined in s-tpobop.ads:
---
---   --     type Communication_Block is record
---   --        Self      : Task_Id;  --  An access type
---   --        Enqueued  : Boolean := True;
---   --        Cancelled : Boolean := False;
---   --     end record;
---
---   --  The record is used in the construction of the predefined dispatching
---   --  primitive _disp_asynchronous_select in order to avoid the import of
---   --  System.Tasking.Protected_Objects.Operations. Note that this package
---   --  is always imported in the presence of interfaces since the dispatch
---   --  table uses entities from here.
---
---   type Dummy_Communication_Block is record
---      Comp_1 : Address;  --  Address and access have the same size
---      Comp_2 : Boolean;
---      Comp_3 : Boolean;
---   end record;
---
+
+   --  The following is a dummy record designed to mimic Communication_Block as
+   --  defined in s-tpobop.ads:
+
+   --     type Communication_Block is record
+   --        Self      : Task_Id;  --  An access type
+   --        Enqueued  : Boolean := True;
+   --        Cancelled : Boolean := False;
+   --     end record;
+
+   --  The record is used in the construction of the predefined dispatching
+   --  primitive _disp_asynchronous_select in order to avoid the import of
+   --  System.Tasking.Protected_Objects.Operations. Note that this package
+   --  is always imported in the presence of interfaces since the dispatch
+   --  table uses entities from here.
+
+   type Dummy_Communication_Block is record
+      Comp_1 : Address;  --  Address and access have the same size
+      Comp_2 : Boolean;
+      Comp_3 : Boolean;
+   end record;
 
 --  XXX: Ravenscar / CERT
 

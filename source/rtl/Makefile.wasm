@@ -1,9 +1,16 @@
 # WASM runtime
 
 COMMON_ZFP_SRCS= \
+ada.ads      \
 a-assert.adb \
 a-assert.ads \
-ada.ads      \
+a-elchha.ads \
+a-exctra.adb \
+a-exctra.ads \
+a-finali.adb \
+a-finali.ads \
+a-tags.ads   \
+a-tags.adb   \
 a-unccon.ads \
 a-uncdea.ads \
 gnat.ads     \
@@ -34,9 +41,13 @@ s-fatgen.adb \
 s-fatgen.ads \
 s-fatsfl.ads \
 s-fatlfl.ads \
+s-finroo.adb \
+s-finroo.ads \
 s-flocon.ads \
 s-fore.ads   \
 s-fore.adb   \
+s-htable.adb \
+s-htable.ads \
 s-imenne.adb \
 s-imenne.ads \
 s-imgboo.adb \
@@ -57,6 +68,10 @@ s-maccod.ads \
 s-powtab.ads \
 s-stoele.adb \
 s-stoele.ads \
+s-strhas.adb \
+s-strhas.ads \
+s-traent.adb \
+s-traent.ads \
 s-unstyp.ads \
 s-valboo.adb \
 s-valboo.ads \
@@ -70,24 +85,24 @@ s-vallli.adb \
 s-vallli.ads \
 s-valllu.adb \
 s-valllu.ads \
+s-valuti.adb \
 s-valuti.ads \
 s-valuns.adb \
 s-valuns.ads \
+s-wchcnv.adb \
+s-wchcnv.ads \
+s-wchcon.adb \
+s-wchcon.ads \
+s-wchjis.adb \
+s-wchjis.ads \
+s-wchstw.adb \
+s-wchstw.ads \
 machcode.ads \
 text_io.ads  \
 unchconv.ads \
 unchdeal.ads \
 \
 a-contai.ads \
-a-finali.ads \
-a-finali.adb \
-s-finroo.ads \
-s-finroo.adb \
-s-traent.ads \
-s-traent.adb \
-a-exctra.adb \
-a-exctra.ads \
-a-elchha.ads
 
 #a-conhel.ads \
 #a-conhel.adb \
@@ -97,7 +112,6 @@ s-atocou.adb \
 #s-soliin.adb \
 
 NOTWASM_ZFP_SRCS = \
-s-valuti.adb \
 
 COMPILABLE_ZFP_SPECS= \
 ada.ads      \
@@ -140,8 +154,6 @@ wasm: build
 	for f in $(COMMON_ZFP_SRCS); do \
 	  cp -p $(GNAT_SRC)/libgnat/$$f $(ZFPINCLUDE); \
 	done
-	cp -p $(GNAT_SRC)/hie/a-tags__c.ads $(ZFPINCLUDE)/a-tags.ads
-	cp -p $(GNAT_SRC)/hie/a-tags__c.adb $(ZFPINCLUDE)/a-tags.adb
 	cp -p $(GNAT_SRC)/hie/a-except__cert.adb $(ZFPINCLUDE)/a-except.adb
 	cp -p $(GNAT_SRC)/hie/a-except__cert.ads $(ZFPINCLUDE)/a-except.ads
 	cp -p $(GNAT_SRC)/hie/a-excach__cert.adb $(ZFPINCLUDE)/a-excach.adb
@@ -158,8 +170,10 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(ZFPINCLUDE)/s-memory.ads
 	cp -p $(ARBW_SRC)/rtl/s-memory__wasm.adb $(ZFPINCLUDE)/s-memory.adb
+	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(ZFPINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-parame__zfp.ads $(ZFPINCLUDE)/s-parame.ads
 	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
