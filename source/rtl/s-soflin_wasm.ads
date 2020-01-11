@@ -29,6 +29,8 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+--  This is the WASM version of this package
+
 --  This package contains a set of subprogram access variables that access
 --  some low-level primitives that are different depending whether tasking is
 --  involved or not (e.g. the Get/Set_Jmpbuf_Address that needs to provide a
@@ -43,13 +45,13 @@ pragma Style_Checks (Off);
 with Ada.Exceptions;
 with System.Exceptions.Machine;
 --  with System.Parameters;
---  with System.Secondary_Stack;
+with System.Secondary_Stack;
 --  with System.Stack_Checking;
 
 package System.Soft_Links is
    pragma Preelaborate;
 
---   package SST renames System.Secondary_Stack;
+   package SST renames System.Secondary_Stack;
 
    subtype EOA is Ada.Exceptions.Exception_Occurrence_Access;
    subtype EO is Ada.Exceptions.Exception_Occurrence;
@@ -94,9 +96,9 @@ package System.Soft_Links is
 --   pragma Favor_Top_Level (Set_EOA_Call);
 --   type Set_EO_Call       is access procedure (Excep : EO);
 --   pragma Favor_Top_Level (Set_EO_Call);
---
---   type Get_Stack_Call    is access function return SST.SS_Stack_Ptr;
---   pragma Favor_Top_Level (Get_Stack_Call);
+
+   type Get_Stack_Call    is access function return SST.SS_Stack_Ptr;
+   pragma Favor_Top_Level (Get_Stack_Call);
 --   type Set_Stack_Call    is access procedure (Stack : SST.SS_Stack_Ptr);
 --   pragma Favor_Top_Level (Set_Stack_Call);
 --
@@ -129,7 +131,7 @@ package System.Soft_Links is
 --   pragma Suppress (Access_Check, Set_Integer_Call);
 --   pragma Suppress (Access_Check, Get_EOA_Call);
 --   pragma Suppress (Access_Check, Set_EOA_Call);
---   pragma Suppress (Access_Check, Get_Stack_Call);
+   pragma Suppress (Access_Check, Get_Stack_Call);
 --   pragma Suppress (Access_Check, Set_Stack_Call);
 --   pragma Suppress (Access_Check, Timed_Delay_Call);
 --   pragma Suppress (Access_Check, Get_Stack_Access_Call);
@@ -240,11 +242,11 @@ package System.Soft_Links is
 --
 --   Get_Jmpbuf_Address : Get_Address_Call := Get_Jmpbuf_Address_NT'Access;
 --   Set_Jmpbuf_Address : Set_Address_Call := Set_Jmpbuf_Address_NT'Access;
---
---   function  Get_Sec_Stack_NT return  SST.SS_Stack_Ptr;
+
+   function  Get_Sec_Stack_NT return  SST.SS_Stack_Ptr;
 --   procedure Set_Sec_Stack_NT (Stack : SST.SS_Stack_Ptr);
---
---   Get_Sec_Stack : Get_Stack_Call := Get_Sec_Stack_NT'Access;
+
+   Get_Sec_Stack : Get_Stack_Call := Get_Sec_Stack_NT'Access;
 --   Set_Sec_Stack : Set_Stack_Call := Set_Sec_Stack_NT'Access;
 --
 --   function Get_Current_Excep_NT return EOA;
@@ -319,15 +321,25 @@ package System.Soft_Links is
    --  When invoked, this routine saves an exception occurrence into a hidden
    --  reference. Subsequent calls will have no effect.
 
---   ------------------------
---   -- Task Specific Data --
---   ------------------------
---
---   --  Here we define a single type that encapsulates the various task
---   --  specific data. This type is used to store the necessary data into the
---   --  Task_Control_Block or into a global variable in the non tasking case.
---
---   type TSD is record
+   ------------------------
+   -- Task Specific Data --
+   ------------------------
+
+   Max_Nbr_Occurrences : constant := 8;
+   --  Maximum number of in-flight (or nested) exceptions. An exception is
+   --  said in-flight when it is propagated or could be reraised.
+   --  XXX from certified profile. need to be removed
+
+   type Exceptions_Array is array (1 .. Max_Nbr_Occurrences) of
+     aliased System.Exceptions.Machine.GNAT_GCC_Exception;
+   --  Array for in-flight exceptions
+   --  XXX from certified profile. need to be removed
+
+   --  Here we define a single type that encapsulates the various task
+   --  specific data. This type is used to store the necessary data into the
+   --  Task_Control_Block or into a global variable in the non tasking case.
+
+   type TSD is record
 --      Pri_Stack_Info : aliased Stack_Checking.Stack_Info;
 --      --  Information on stack (Base/Limit/Size) used by System.Stack_Checking.
 --      --  If this TSD does not belong to the environment task, the Size field
@@ -339,10 +351,10 @@ package System.Soft_Links is
 --      --  longjmp/setjmp buffer for exception management. These buffers are
 --      --  threaded into a stack, and the address here is the top of the stack.
 --      --  A null address means that no exception handler is currently active.
---
---      Sec_Stack_Ptr : SST.SS_Stack_Ptr;
---      --  Pointer of the allocated secondary stack
---
+
+      Sec_Stack_Ptr : SST.SS_Stack_Ptr;
+      --  Pointer of the allocated secondary stack
+
 --      Current_Excep : aliased EO;
 --      --  Exception occurrence that contains the information for the current
 --      --  exception. Note that any exception in the same task destroys this
@@ -351,8 +363,17 @@ package System.Soft_Links is
 --      --
 --      --  Also act as a list of the active exceptions in the case of the GCC
 --      --  exception mechanism, organized as a stack with the most recent first.
---   end record;
---
+
+      --  XXX from certified profile, need to be removed.
+
+      Last_Exception : Natural := 0;
+      --  Index of the last exception used in the array of exception. 0 means
+      --  no exception used.
+
+      Exceptions : Exceptions_Array;
+      --  Per thread static buffer of exceptions
+   end record;
+
 --   procedure Create_TSD
 --     (New_TSD        : in out TSD;
 --      Sec_Stack      : SST.SS_Stack_Ptr;
@@ -484,21 +505,21 @@ package System.Soft_Links is
 --      Size          : System.Storage_Elements.Storage_Offset;
 --   end record;
 --   pragma Suppress_Initialization (Stack_Info);
-
-   Max_Nbr_Occurrences : constant := 8;
-   --  Maximum number of in-flight (or nested) exceptions. An exception is
-   --  said in-flight when it is propagated or could be reraised.
-
-   type Exceptions_Array is array (1 .. Max_Nbr_Occurrences) of
-     aliased System.Exceptions.Machine.GNAT_GCC_Exception;
-   --  Array for in-flight exceptions
+--
+--   Max_Nbr_Occurrences : constant := 8;
+--   --  Maximum number of in-flight (or nested) exceptions. An exception is
+--   --  said in-flight when it is propagated or could be reraised.
+--
+--   type Exceptions_Array is array (1 .. Max_Nbr_Occurrences) of
+--     aliased System.Exceptions.Machine.GNAT_GCC_Exception;
+--   --  Array for in-flight exceptions
 
 --   type Sjlj_Function_Context is null record;
 --   type Sjlj_Function_Context_Acc is access Sjlj_Function_Context;
 --   pragma Convention (C, Sjlj_Function_Context_Acc);
 --   --  Ada opaque representation of the SjLj function context pointer
 
-   type TSD is record
+--   type TSD is record
 --      Pri_Stack_Info : aliased Stack_Info;
 --      --  Information on stack (Base/Limit/Size) used by System.Stack_Checking.
 --      --  If this TSD does not belong to the environment task, the Size field
@@ -510,14 +531,14 @@ package System.Soft_Links is
 --
 --      Sjlj_Context : Sjlj_Function_Context_Acc := null;
 --      --  Pointer to the function context for sjlj exception
-
-      Last_Exception : Natural := 0;
-      --  Index of the last exception used in the array of exception. 0 means
-      --  no exception used.
-
-      Exceptions : Exceptions_Array;
-      --  Per thread static buffer of exceptions
-   end record;
+--
+--      Last_Exception : Natural := 0;
+--      --  Index of the last exception used in the array of exception. 0 means
+--      --  no exception used.
+--
+--      Exceptions : Exceptions_Array;
+--      --  Per thread static buffer of exceptions
+--   end record;
 
    type TSD_Access is access all TSD;
 
@@ -537,10 +558,10 @@ package System.Soft_Links is
 --  XXX: END CERT
 
 private
---   NT_TSD : TSD;
---   --  The task specific data for the main task when the Ada tasking run-time
---   --  is not used. It relies on the default initialization of NT_TSD. It is
---   --  placed here and not the body to ensure the default initialization does
---   --  not clobber the secondary stack initialization that occurs as part of
---   --  System.Soft_Links.Initialization.
+   NT_TSD : aliased TSD;
+   --  The task specific data for the main task when the Ada tasking run-time
+   --  is not used. It relies on the default initialization of NT_TSD. It is
+   --  placed here and not the body to ensure the default initialization does
+   --  not clobber the secondary stack initialization that occurs as part of
+   --  System.Soft_Links.Initialization.
 end System.Soft_Links;

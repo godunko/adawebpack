@@ -20,6 +20,7 @@ s-htable.adb \
 s-htable.ads \
 s-imgint.adb \
 s-imgint.ads \
+s-parame.adb \
 s-stoele.adb \
 s-stoele.ads \
 s-strhas.adb \
@@ -121,7 +122,6 @@ a-uncdea.ads \
 interfac.ads \
 system.ads   \
 s-except.ads \
-s-parame.ads \
 s-unstyp.ads \
 unchconv.ads \
 
@@ -176,7 +176,9 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(ZFPINCLUDE)/s-memory.ads
 	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-parame__zfp.ads $(ZFPINCLUDE)/s-parame.ads
+	cp -p $(ARBW_SRC)/rtl/s-parame__wasm.ads $(ZFPINCLUDE)/s-parame.ads
+	cp -p $(ARBW_SRC)/rtl/s-soflin_wasm.adb $(ZFPINCLUDE)/s-soflin.adb
+	cp -p $(ARBW_SRC)/rtl/s-soflin_wasm.ads $(ZFPINCLUDE)/s-soflin.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
@@ -185,8 +187,6 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
 #	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
-	cp -p $(ARBW_SRC)/rtl/s-soflin.ads $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-soflin.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \

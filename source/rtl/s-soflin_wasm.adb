@@ -29,6 +29,8 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+--  This is the WASM version of this package
+
 pragma Compiler_Unit_Warning;
 pragma Style_Checks (Off);
 
@@ -194,16 +196,16 @@ package body System.Soft_Links is
 --   begin
 --      return Get_Jmpbuf_Address.all;
 --   end Get_Jmpbuf_Address_Soft;
---
---   ----------------------
---   -- Get_Sec_Stack_NT --
---   ----------------------
---
---   function Get_Sec_Stack_NT return SST.SS_Stack_Ptr is
---   begin
---      return NT_TSD.Sec_Stack_Ptr;
---   end Get_Sec_Stack_NT;
---
+
+   ----------------------
+   -- Get_Sec_Stack_NT --
+   ----------------------
+
+   function Get_Sec_Stack_NT return SST.SS_Stack_Ptr is
+   begin
+      return NT_TSD.Sec_Stack_Ptr;
+   end Get_Sec_Stack_NT;
+
 --   -----------------------------
 --   -- Get_Sec_Stack_Soft --
 --   -----------------------------
@@ -343,9 +345,9 @@ package body System.Soft_Links is
 --
 --package body System.Soft_Links is
 
-   NT_TSD : aliased TSD;
-   --  The task specific data for the main task when the Ada tasking run-time
-   --  is not used. It relies on the default initialization of NT_TSD.
+--   NT_TSD : aliased TSD;
+--   --  The task specific data for the main task when the Ada tasking run-time
+--   --  is not used. It relies on the default initialization of NT_TSD.
 
 --   NT_Sec_Stack_Ptr : SST.SS_Stack_Ptr := null;
 --   pragma Export (Ada, NT_Sec_Stack_Ptr, "__gnat_main_sec_stack");
