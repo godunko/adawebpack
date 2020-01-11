@@ -12,17 +12,27 @@ a-tags.ads   \
 a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
+s-addima.adb \
+s-addima.ads \
 s-casuti.adb \
 s-casuti.ads \
+s-finmas.ads \
 s-finroo.adb \
 s-finroo.ads \
 s-htable.adb \
 s-htable.ads \
+s-imgboo.adb \
+s-imgboo.ads \
 s-imgint.adb \
 s-imgint.ads \
+s-io.ads     \
 s-parame.adb \
+s-pooglo.adb \
+s-pooglo.ads \
 s-stoele.adb \
 s-stoele.ads \
+s-stopoo.adb \
+s-stopoo.ads \
 s-strhas.adb \
 s-strhas.ads \
 s-traent.adb \
@@ -40,7 +50,7 @@ s-wchjis.adb \
 s-wchjis.ads \
 s-wchstw.adb \
 s-wchstw.ads \
-unchconv.ads \
+unchconv.ads
 
 #a-assert.adb \
 a-assert.ads \
@@ -74,8 +84,6 @@ s-fore.ads   \
 s-fore.adb   \
 s-imenne.adb \
 s-imenne.ads \
-s-imgboo.adb \
-s-imgboo.ads \
 s-imgcha.adb \
 s-imgcha.ads \
 s-imgenu.adb \
@@ -167,6 +175,8 @@ wasm: build
 #	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(ZFPINCLUDE)/s-assert.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
 	cp -p $(GNAT_SRC)/hie/s-except__cert.ads $(ZFPINCLUDE)/s-except.ads
+	cp -p $(ARBW_SRC)/rtl/s-finmas__wasm.adb $(ZFPINCLUDE)/s-finmas.adb
+	cp -p $(ARBW_SRC)/rtl/s-io__wasm.adb $(ZFPINCLUDE)/s-io.adb
 	cp -p $(ARBW_SRC)/rtl/s-init.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(ZFPINCLUDE)/
