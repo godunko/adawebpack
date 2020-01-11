@@ -2,29 +2,56 @@
 
 COMMON_ZFP_SRCS= \
 ada.ads      \
-a-assert.adb \
-a-assert.ads \
 a-elchha.ads \
 a-exctra.adb \
 a-exctra.ads \
 a-finali.adb \
 a-finali.ads \
-a-tags.ads   \
 a-tags.adb   \
+a-tags.ads   \
 a-unccon.ads \
 a-uncdea.ads \
+interfac.ads \
+s-casuti.adb \
+s-casuti.ads \
+s-finroo.adb \
+s-finroo.ads \
+s-htable.adb \
+s-htable.ads \
+s-imgint.adb \
+s-imgint.ads \
+s-stoele.adb \
+s-stoele.ads \
+s-strhas.adb \
+s-strhas.ads \
+s-traent.adb \
+s-traent.ads \
+s-unstyp.ads \
+s-valuns.adb \
+s-valuns.ads \
+s-valuti.adb \
+s-valuti.ads \
+s-wchcon.adb \
+s-wchcon.ads \
+s-wchcnv.adb \
+s-wchcnv.ads \
+s-wchjis.adb \
+s-wchjis.ads \
+s-wchstw.adb \
+s-wchstw.ads \
+unchconv.ads \
+
+#a-assert.adb \
+a-assert.ads \
 gnat.ads     \
 g-souinf.ads \
 i-cexten.ads \
-interfac.ads \
 s-addope.ads \
 s-addope.adb \
 s-atacco.adb \
 s-atacco.ads \
 s-arit64.ads \
 s-arit64.adb \
-s-casuti.ads \
-s-casuti.adb \
 s-exnint.ads \
 s-exnint.adb \
 s-exnllf.ads \
@@ -41,13 +68,9 @@ s-fatgen.adb \
 s-fatgen.ads \
 s-fatsfl.ads \
 s-fatlfl.ads \
-s-finroo.adb \
-s-finroo.ads \
 s-flocon.ads \
 s-fore.ads   \
 s-fore.adb   \
-s-htable.adb \
-s-htable.ads \
 s-imenne.adb \
 s-imenne.ads \
 s-imgboo.adb \
@@ -56,8 +79,6 @@ s-imgcha.adb \
 s-imgcha.ads \
 s-imgenu.adb \
 s-imgenu.ads \
-s-imgint.adb \
-s-imgint.ads \
 s-imglli.adb \
 s-imglli.ads \
 s-imgllu.adb \
@@ -66,13 +87,6 @@ s-imguns.adb \
 s-imguns.ads \
 s-maccod.ads \
 s-powtab.ads \
-s-stoele.adb \
-s-stoele.ads \
-s-strhas.adb \
-s-strhas.ads \
-s-traent.adb \
-s-traent.ads \
-s-unstyp.ads \
 s-valboo.adb \
 s-valboo.ads \
 s-valcha.adb \
@@ -85,21 +99,8 @@ s-vallli.adb \
 s-vallli.ads \
 s-valllu.adb \
 s-valllu.ads \
-s-valuti.adb \
-s-valuti.ads \
-s-valuns.adb \
-s-valuns.ads \
-s-wchcnv.adb \
-s-wchcnv.ads \
-s-wchcon.adb \
-s-wchcon.ads \
-s-wchjis.adb \
-s-wchjis.ads \
-s-wchstw.adb \
-s-wchstw.ads \
 machcode.ads \
 text_io.ads  \
-unchconv.ads \
 unchdeal.ads \
 \
 a-contai.ads \
@@ -117,11 +118,17 @@ COMPILABLE_ZFP_SPECS= \
 ada.ads      \
 a-unccon.ads \
 a-uncdea.ads \
-gnat.ads     \
+interfac.ads \
+system.ads   \
+s-except.ads \
+s-parame.ads \
+s-unstyp.ads \
+unchconv.ads \
+
+#gnat.ads     \
 g-souinf.ads \
 i-c.ads      \
 i-cexten.ads \
-interfac.ads \
 s-atacco.ads \
 s-fatflt.ads \
 s-fatllf.ads \
@@ -129,16 +136,11 @@ s-fatlfl.ads \
 s-fatsfl.ads \
 s-maccod.ads \
 s-powtab.ads \
-s-unstyp.ads \
-s-parame.ads \
-system.ads   \
 machcode.ads \
 text_io.ads  \
-unchconv.ads \
 unchdeal.ads \
 \
 a-contai.ads \
-s-except.ads \
 
 NOTWASM_COMPILABLE_ZFP_SPECS= \
 
@@ -154,40 +156,39 @@ wasm: build
 	for f in $(COMMON_ZFP_SRCS); do \
 	  cp -p $(GNAT_SRC)/libgnat/$$f $(ZFPINCLUDE); \
 	done
+	cp -p $(ARBW_SRC)/rtl/a-elchha.adb $(ZFPINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/a-excach__cert.adb $(ZFPINCLUDE)/a-excach.adb
 	cp -p $(GNAT_SRC)/hie/a-except__cert.adb $(ZFPINCLUDE)/a-except.adb
 	cp -p $(GNAT_SRC)/hie/a-except__cert.ads $(ZFPINCLUDE)/a-except.ads
-	cp -p $(GNAT_SRC)/hie/a-excach__cert.adb $(ZFPINCLUDE)/a-excach.adb
-	cp -p $(GNAT_SRC)/hie/a-textio__c.adb $(ZFPINCLUDE)/a-textio.adb
-	cp -p $(GNAT_SRC)/hie/a-textio__c.ads $(ZFPINCLUDE)/a-textio.ads
-	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(ZFPINCLUDE)/i-c.ads
-	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(ZFPINCLUDE)/s-assert.ads
-	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
+#	cp -p $(GNAT_SRC)/hie/a-textio__c.adb $(ZFPINCLUDE)/a-textio.adb
+#	cp -p $(GNAT_SRC)/hie/a-textio__c.ads $(ZFPINCLUDE)/a-textio.ads
+#	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(ZFPINCLUDE)/i-c.ads
+	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
+#	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(ZFPINCLUDE)/s-assert.ads
+#	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
 	cp -p $(GNAT_SRC)/hie/s-except__cert.ads $(ZFPINCLUDE)/s-except.ads
-	cp -p $(GNAT_SRC)/hie/s-bb.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-init.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
-	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
-	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(ZFPINCLUDE)/s-memory.ads
-	cp -p $(ARBW_SRC)/rtl/s-memory__wasm.adb $(ZFPINCLUDE)/s-memory.adb
 	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-memory__wasm.adb $(ZFPINCLUDE)/s-memory.adb
+	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(ZFPINCLUDE)/s-memory.ads
 	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-parame__zfp.ads $(ZFPINCLUDE)/s-parame.ads
-	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
+	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.adb $(ZFPINCLUDE)/s-secsta.adb
+	cp -p $(GNAT_SRC)/hie/s-secsta__zfp.ads $(ZFPINCLUDE)/s-secsta.ads
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(ZFPINCLUDE)/s-stalib.adb
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(ZFPINCLUDE)/s-stalib.ads
-	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
-	cp -p $(ARBW_SRC)/rtl/a-elchha.adb $(ZFPINCLUDE)/
+	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
+#	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
 	cp -p $(ARBW_SRC)/rtl/s-soflin.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-soflin.adb $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
 	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
