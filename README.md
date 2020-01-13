@@ -12,3 +12,16 @@ Create symbolic link for Makefile.wasm
 Add "include Makefile.wasm" to Makefile.
 
 Use "make wasm" to build compiler and RTL
+
+## Supported and unsupported features
+
+ - only local exceptions propagation (restriction No_Exception_Propagation)
+   and last chance handler is supported
+
+ - tagged types are supported
+
+ - secondary stack are supported
+
+ - memory pools are supported
+
+ - protected objects and tasks are not supported
