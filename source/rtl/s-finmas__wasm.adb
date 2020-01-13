@@ -30,11 +30,12 @@
 ------------------------------------------------------------------------------
 
 --  This is the WASM version of this package
---  XXX Note, it is added as workaround of indirect call bug of access to
---  subprogram variable in System.Soft_Links. This package should be removed
---  after fix of the bug in the compiler.
+--  XXX Workaround of indirect call bug of access to subprogram variable in
+--  System.Soft_Links is added.
+--  XXX Some code are commented out to allow to use this package with
+--  No_Exception_Propagation restriction.
 
-with Ada.Exceptions; use Ada.Exceptions;
+--  with Ada.Exceptions; use Ada.Exceptions;
 
 with System.Address_Image;
 with System.HTable;           use System.HTable;
@@ -159,9 +160,9 @@ package body System.Finalization_Masters is
    overriding procedure Finalize (Master : in out Finalization_Master) is
       Cleanup  : Finalize_Address_Ptr;
       Curr_Ptr : FM_Node_Ptr;
-      Ex_Occur : Exception_Occurrence;
+--      Ex_Occur : Exception_Occurrence;
       Obj_Addr : Address;
-      Raised   : Boolean := False;
+--      Raised   : Boolean := False;
 
       function Is_Empty_List (L : not null FM_Node_Ptr) return Boolean;
       --  Determine whether a list contains only one element, the dummy head
@@ -244,12 +245,13 @@ package body System.Finalization_Masters is
 
          begin
             Cleanup (Obj_Addr);
-         exception
-            when Fin_Occur : others =>
-               if not Raised then
-                  Raised := True;
-                  Save_Occurrence (Ex_Occur, Fin_Occur);
-               end if;
+--  XXX No_Exception_Propagation
+--         exception
+--            when Fin_Occur : others =>
+--               if not Raised then
+--                  Raised := True;
+--                  Save_Occurrence (Ex_Occur, Fin_Occur);
+--               end if;
          end;
 
          --  When the master is a heterogeneous collection, destroy the object
@@ -274,9 +276,9 @@ package body System.Finalization_Masters is
       --  If the finalization of a particular object failed or Finalize_Address
       --  was not set, reraise the exception now.
 
-      if Raised then
-         Reraise_Occurrence (Ex_Occur);
-      end if;
+--      if Raised then
+--         Reraise_Occurrence (Ex_Occur);
+--      end if;
    end Finalize;
 
    ----------------------

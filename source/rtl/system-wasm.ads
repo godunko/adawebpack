@@ -37,6 +37,9 @@
 --  This version of System is a generic version suitable for use with an LLVM
 --  compiler on a WASM target.
 
+pragma Restrictions (No_Exception_Propagation);
+--  Only local exception handling is supported in this profile
+
 pragma Restrictions (No_Exception_Registration);
 --  Disable exception name registration. This capability is not used because
 --  it is only required by exception stream attributes which are not supported
@@ -150,7 +153,7 @@ private
    Configurable_Run_Time     : constant Boolean := True;
    Denorm                    : constant Boolean := True;
    Duration_32_Bits          : constant Boolean := True;
-   Exit_Status_Supported     : constant Boolean := True;
+   Exit_Status_Supported     : constant Boolean := False;
    Fractional_Fixed_Ops      : constant Boolean := False;
    Frontend_Layout           : constant Boolean := False;
    Machine_Overflows         : constant Boolean := False;
@@ -167,7 +170,7 @@ private
    Always_Compatible_Rep     : constant Boolean := True;
    Suppress_Standard_Library : constant Boolean := False;
    Use_Ada_Main_Program_Name : constant Boolean := False;
-   Frontend_Exceptions       : constant Boolean := False;
-   ZCX_By_Default            : constant Boolean := True;
+   Frontend_Exceptions       : constant Boolean := True;
+   ZCX_By_Default            : constant Boolean := False;
 
 end System;
