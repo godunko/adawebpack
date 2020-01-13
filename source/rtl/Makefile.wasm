@@ -2,9 +2,6 @@
 
 COMMON_ZFP_SRCS= \
 ada.ads      \
-a-elchha.ads \
-a-exctra.adb \
-a-exctra.ads \
 a-finali.adb \
 a-finali.ads \
 a-tags.adb   \
@@ -130,7 +127,6 @@ a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
 system.ads   \
-s-except.ads \
 s-unstyp.ads \
 unchconv.ads \
 
@@ -165,17 +161,14 @@ wasm: build
 	for f in $(COMMON_ZFP_SRCS); do \
 	  cp -p $(GNAT_SRC)/libgnat/$$f $(ZFPINCLUDE); \
 	done
-	cp -p $(ARBW_SRC)/rtl/a-elchha.adb $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/a-excach__cert.adb $(ZFPINCLUDE)/a-excach.adb
-	cp -p $(GNAT_SRC)/hie/a-except__cert.adb $(ZFPINCLUDE)/a-except.adb
-	cp -p $(GNAT_SRC)/hie/a-except__cert.ads $(ZFPINCLUDE)/a-except.ads
-#	cp -p $(GNAT_SRC)/hie/a-textio__c.adb $(ZFPINCLUDE)/a-textio.adb
-#	cp -p $(GNAT_SRC)/hie/a-textio__c.ads $(ZFPINCLUDE)/a-textio.ads
+	cp -p $(ARBW_SRC)/rtl/a-elchha__wasm.adb $(ZFPINCLUDE)/a-elchha.adb
+	cp -p $(GNAT_SRC)/hie/a-elchha__zfp.ads $(ZFPINCLUDE)/a-elchha.ads
+	cp -p $(GNAT_SRC)/hie/a-except__zfp.adb $(ZFPINCLUDE)/a-except.adb
+	cp -p $(GNAT_SRC)/hie/a-except__zfp.ads $(ZFPINCLUDE)/a-except.ads
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(ZFPINCLUDE)/i-c.ads
 	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(ZFPINCLUDE)/s-assert.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
-	cp -p $(GNAT_SRC)/hie/s-except__cert.ads $(ZFPINCLUDE)/s-except.ads
 	cp -p $(ARBW_SRC)/rtl/s-finmas__wasm.adb $(ZFPINCLUDE)/s-finmas.adb
 	cp -p $(ARBW_SRC)/rtl/s-io__wasm.adb $(ZFPINCLUDE)/s-io.adb
 	cp -p $(ARBW_SRC)/rtl/s-init.ads $(ZFPINCLUDE)/
@@ -194,11 +187,7 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/s-secsta__wasm.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(ZFPINCLUDE)/s-stalib.adb
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(ZFPINCLUDE)/s-stalib.ads
-	cp -p $(ARBW_SRC)/rtl/s-traceb.adb $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-traceb__cert.ads $(ZFPINCLUDE)/s-traceb.ads
 #	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
-	cp -p $(ARBW_SRC)/rtl/s-excmac.ads $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-excmac.adb $(ZFPINCLUDE)/
 	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
