@@ -1,0 +1,24 @@
+diff --git llvm-interface/gnatllvm-subprograms.adb llvm-interface/gnatllvm-subprograms.adb
+index 2d220d1..6afd1c9 100644
+--- llvm-interface/gnatllvm-subprograms.adb
++++ llvm-interface/gnatllvm-subprograms.adb
+@@ -664,7 +664,8 @@ package body GNATLLVM.Subprograms is
+       Foreign         : constant Boolean     :=
+         Has_Foreign_Convention (Def_Ident);
+       Adds_S_Link     : constant Boolean     :=
+-        Is_Type (Def_Ident) and then not Foreign;
++        Is_Type (Def_Ident) and then not Foreign
++          and then not Restrictions_On_Target.Set (No_Implicit_Dynamic_Code);
+       LLVM_Ret_Typ    : Type_T               :=
+         (if    RK in None | Return_By_Parameter then Void_Type
+          elsif RK = RK_By_Reference then Create_Access_Type_To (Return_GT)
+@@ -1779,7 +1780,8 @@ package body GNATLLVM.Subprograms is
+       Foreign          : constant Boolean     :=
+         Has_Foreign_Convention (Subp_Typ);
+       This_Adds_S_Link : constant Boolean     :=
+-        not Direct_Call and not Foreign;
++        not Direct_Call and not Foreign
++          and not Restrictions_On_Target.Set (No_Implicit_Dynamic_Code);
+       Arg_Count        : constant Nat         :=
+         Orig_Arg_Count + (if This_Adds_S_Link then 1 else 0) +
+           (if RK = Return_By_Parameter then 1 else 0);
