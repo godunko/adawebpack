@@ -26,6 +26,7 @@ s-io.ads     \
 s-parame.adb \
 s-pooglo.adb \
 s-pooglo.ads \
+s-secsta.adb \
 s-secsta.ads \
 s-stoele.adb \
 s-stoele.ads \
@@ -184,7 +185,6 @@ wasm: build
 	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.adb $(ZFPINCLUDE)/s-soflin.adb
 	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.ads $(ZFPINCLUDE)/s-soflin.ads
 	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-secsta__wasm.adb $(ZFPINCLUDE)/s-secsta.adb
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(ZFPINCLUDE)/s-stalib.adb
 	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(ZFPINCLUDE)/s-stalib.ads
 #	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb

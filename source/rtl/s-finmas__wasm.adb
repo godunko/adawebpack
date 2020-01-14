@@ -30,8 +30,6 @@
 ------------------------------------------------------------------------------
 
 --  This is the WASM version of this package
---  XXX Workaround of indirect call bug of access to subprogram variable in
---  System.Soft_Links is added.
 --  XXX Some code are commented out to allow to use this package with
 --  No_Exception_Propagation restriction.
 
@@ -40,7 +38,7 @@
 with System.Address_Image;
 with System.HTable;           use System.HTable;
 with System.IO;               use System.IO;
---  with System.Soft_Links;       use System.Soft_Links;
+with System.Soft_Links;       use System.Soft_Links;
 with System.Storage_Elements; use System.Storage_Elements;
 
 package body System.Finalization_Masters is
@@ -82,9 +80,9 @@ package body System.Finalization_Masters is
 
    procedure Attach (N : not null FM_Node_Ptr; L : not null FM_Node_Ptr) is
    begin
---      Lock_Task.all;
+      Lock_Task.all;
       Attach_Unprotected (N, L);
---      Unlock_Task.all;
+      Unlock_Task.all;
 
       --  Note: No need to unlock in case of an exception because the above
       --  code can never raise one.
@@ -131,9 +129,9 @@ package body System.Finalization_Masters is
 
    procedure Detach (N : not null FM_Node_Ptr) is
    begin
---      Lock_Task.all;
+      Lock_Task.all;
       Detach_Unprotected (N);
---      Unlock_Task.all;
+      Unlock_Task.all;
 
       --  Note: No need to unlock in case of an exception because the above
       --  code can never raise one.
@@ -179,14 +177,14 @@ package body System.Finalization_Masters is
    --  Start of processing for Finalize
 
    begin
---      Lock_Task.all;
+      Lock_Task.all;
 
       --  Synchronization:
       --    Read  - allocation, finalization
       --    Write - finalization
 
       if Master.Finalization_Started then
---         Unlock_Task.all;
+         Unlock_Task.all;
 
          --  Double finalization may occur during the handling of stand alone
          --  libraries or the finalization of a pool with subpools. Due to the
@@ -271,7 +269,7 @@ package body System.Finalization_Masters is
          end if;
       end loop;
 
---      Unlock_Task.all;
+      Unlock_Task.all;
 
       --  If the finalization of a particular object failed or Finalize_Address
       --  was not set, reraise the exception now.
@@ -512,9 +510,9 @@ package body System.Finalization_Masters is
       --    Read  - finalization
       --    Write - allocation, outside
 
---      Lock_Task.all;
+      Lock_Task.all;
       Set_Finalize_Address_Unprotected (Master, Fin_Addr_Ptr);
---      Unlock_Task.all;
+      Unlock_Task.all;
    end Set_Finalize_Address;
 
    --------------------------------------
@@ -553,9 +551,9 @@ package body System.Finalization_Masters is
       --    Read  - finalization
       --    Write - outside
 
---      Lock_Task.all;
+      Lock_Task.all;
       Master.Is_Homogeneous := False;
---      Unlock_Task.all;
+      Unlock_Task.all;
    end Set_Is_Heterogeneous;
 
 end System.Finalization_Masters;
