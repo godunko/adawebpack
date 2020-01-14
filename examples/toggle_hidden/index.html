@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='../../source/adawebpack.js'></script>
+    <script>
+      var instance;
+      var local_functions = {};
+      var imports = {
+        env: Object.assign({}, local_functions, adawebpack)
+      };
+      fetch(".objs/main.wasm")
+        .then(response => response.arrayBuffer())
+        .then(bytes => WebAssembly.instantiate(bytes, imports))
+        .then(obj => {
+          instance = obj.instance;
+          obj.instance.exports.adainit();
+        })
+    </script>
+  </head>
+  <body>
+    <p id='toggle_label'>Hello, World!</p>
+    <button id='toggle_button'>Flip Ada</button>
+  </body>
+</html>
