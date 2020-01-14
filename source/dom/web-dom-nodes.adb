@@ -12,7 +12,7 @@ package body Web.DOM.Nodes is
     (Callback   : System.Address;
      Identifier : WASM.Objects.Object_Identifier)
       with Export    => True,
-           Link_Name => "__adawebpack__dom__node__dispatch_event";
+           Link_Name => "__adawebpack__dom__Node__dispatch_event";
 
    ------------------------
    -- Add_Event_Listener --
@@ -31,7 +31,7 @@ package body Web.DOM.Nodes is
         Callback     : System.Address;
         Capture      : Interfaces.Unsigned_32)
           with Import    => True,
-               Link_Name => "__adawebpack__dom__node__addEventListener";
+               Link_Name => "__adawebpack__dom__Node__addEventListener";
 
       A : System.Address;
       S : Interfaces.Unsigned_32;
