@@ -156,4 +156,19 @@ package body System.Memory is
       null;
    end Free;
 
+   -------------
+   -- Realloc --
+   -------------
+
+   function Realloc
+     (Ptr  : System.Address;
+      Size : size_t) return System.Address
+   is
+      pragma Unreferenced (Ptr);
+      pragma Unreferenced (Size);
+
+   begin
+      return System.Null_Address;
+   end Realloc;
+
 end System.Memory;

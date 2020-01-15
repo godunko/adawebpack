@@ -23,6 +23,7 @@ s-imgboo.ads \
 s-imgint.adb \
 s-imgint.ads \
 s-io.ads     \
+s-memory.ads \
 s-parame.adb \
 s-pooglo.adb \
 s-pooglo.ads \
@@ -174,7 +175,6 @@ wasm: build
 	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(WASMINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-memory__wasm.adb $(WASMINCLUDE)/s-memory.adb
-	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(WASMINCLUDE)/s-memory.ads
 	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(WASMINCLUDE)/
 	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-parame__wasm.ads $(WASMINCLUDE)/s-parame.ads
