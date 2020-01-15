@@ -5,7 +5,7 @@ Ada WASM Runtime and Bindings for Web API
 
 Setup GNAT Community 2019 for ARM to default location.
 
-Setup GNAT-LLVM developmemnt environment, see
+Setup GNAT-LLVM development environment, see
 [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm).
 
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
