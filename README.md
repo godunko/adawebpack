@@ -3,7 +3,8 @@ Ada WASM Runtime and Bindngs for Web API
 
 ## How to build
 
-Setup GNAT-LLVM developmemnt environment.
+Setup GNAT-LLVM developmemnt environment, see
+[GNAT-LLVM](https://github.com/AdaCore/gnat-llvm).
 
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
 `adawebpack_src` and create link for Makefile.wasm.
