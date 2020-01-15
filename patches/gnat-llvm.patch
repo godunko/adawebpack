@@ -1,3 +1,12 @@
+diff --git a/llvm-interface/Makefile b/llvm-interface/Makefile
+index 373837a..1ab327c 100644
+--- a/llvm-interface/Makefile
++++ b/llvm-interface/Makefile
+@@ -271,3 +271,4 @@ g-debpoo.o: g-debpoo.adb g-debpoo.ads
+ # Optionally include sub makefile
+ 
+ -include Makefile.zfp
++-include Makefile.wasm
 diff --git llvm-interface/gnatllvm-subprograms.adb llvm-interface/gnatllvm-subprograms.adb
 index 2d220d1..6afd1c9 100644
 --- llvm-interface/gnatllvm-subprograms.adb
