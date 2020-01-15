@@ -1,27 +1,33 @@
-# arbw
-Ada Runtime and Bindngs for WASM
+# AdaWebPack
+Ada WASM Runtime and Bindngs for Web API
 
 ## How to build
 
 Setup GNAT-LLVM developmemnt environment.
 
-Checkout ARBW repository into gnat-llvm/llvm-interface as arbw_src.
+Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
+`adawebpack_src` and create link for Makefile.wasm.
 
-Create symbolic link for Makefile.wasm
+```
+cd gnat-llvm/llvm-interface
+git clone git@github.com:godunko/adawebpack.git adawebpack_src
+ln -s adawebpack_src/source/rtl/Makefile.wasm
+```
 
-Add "include Makefile.wasm" to Makefile.
+Apply patch in patches directory to gnat-llvm.
 
-Use "make wasm" to build compiler and RTL
+```
+cd gnat-llvm/llvm-interface
+patch -p0 < adawebpack_src/patches/gnat-llvm.patch
+```
 
-## Supported and unsupported features
+Use `make wasm` to build compiler and Run Time Library
 
- - only local exceptions propagation (restriction No_Exception_Propagation)
-   and last chance handler is supported
+## Unsupported features
 
- - tagged types are supported
+ - nested subprograms are not supported
 
- - secondary stack are supported
-
- - memory pools are supported
+ - exceptions support is limited to local exceptions propagation and last
+   chance handler
 
  - protected objects and tasks are not supported
