@@ -29,6 +29,8 @@ s-pooglo.adb \
 s-pooglo.ads \
 s-secsta.adb \
 s-secsta.ads \
+s-stalib.adb \
+s-stalib.ads \
 s-stoele.adb \
 s-stoele.ads \
 s-stopoo.adb \
@@ -149,6 +151,7 @@ a-contai.ads \
 
 COMPILE+=--target=wasm32 -gnateT=../../../adawebpack_src/source/rtl/wasm32.atp
 AWP_SRC=adawebpack_src/source
+RTS_SRC=rts-sources
 
 WASMINCLUDE=lib/rts-native/adainclude
 WASMLIB=lib/rts-native/adalib
@@ -160,9 +163,8 @@ wasm: build
 	  cp -p $(GNAT_SRC)/libgnat/$$f $(WASMINCLUDE); \
 	done
 	cp -p $(AWP_SRC)/rtl/a-elchha__wasm.adb $(WASMINCLUDE)/a-elchha.adb
-	cp -p $(GNAT_SRC)/hie/a-elchha__zfp.ads $(WASMINCLUDE)/a-elchha.ads
-	cp -p $(GNAT_SRC)/hie/a-except__zfp.adb $(WASMINCLUDE)/a-except.adb
-	cp -p $(GNAT_SRC)/hie/a-except__zfp.ads $(WASMINCLUDE)/a-except.ads
+	cp -p $(RTS_SRC)/zfp/a-elchha.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/zfp/a-except.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
 	cp -p $(AWP_SRC)/rtl/system-wasm.ads $(WASMINCLUDE)/system.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(WASMINCLUDE)/s-assert.ads
@@ -171,18 +173,16 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-io__wasm.adb $(WASMINCLUDE)/s-io.adb
 	cp -p $(AWP_SRC)/rtl/s-init.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-init.adb $(WASMINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(WASMINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(WASMINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memcom.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memcop.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memmov.ad[sb] $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-memory__wasm.adb $(WASMINCLUDE)/s-memory.adb
-	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(WASMINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memset.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memtyp.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-parame__wasm.ads $(WASMINCLUDE)/s-parame.ads
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.adb $(WASMINCLUDE)/s-soflin.adb
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
-	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(WASMINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(WASMINCLUDE)/s-stalib.adb
-	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(WASMINCLUDE)/s-stalib.ads
+	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
 	cd $(WASMLIB) && for f in $(COMPILABLE_WASM_SPECS); do \
 	  echo ">>> Compile $$f"; \

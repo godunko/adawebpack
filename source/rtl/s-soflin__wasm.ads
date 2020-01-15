@@ -150,10 +150,10 @@ package System.Soft_Links is
 --
 --   procedure Abort_Defer_NT;
 --   --  Defer task abort (non-tasking case, does nothing)
---
---   procedure Abort_Undefer_NT;
---   --  Undefer task abort (non-tasking case, does nothing)
---
+
+   procedure Abort_Undefer_NT;
+   --  Undefer task abort (non-tasking case, does nothing)
+
 --   procedure Abort_Handler_NT;
 --   --  Handle task abort (non-tasking case, does nothing). Currently, no port
 --   --  makes use of this, but we retain the interface for possible future use.
@@ -178,11 +178,11 @@ package System.Soft_Links is
 --   Abort_Defer : No_Param_Proc := Abort_Defer_NT'Access;
 --   pragma Suppress (Access_Check, Abort_Defer);
 --   --  Defer task abort (task/non-task case as appropriate)
---
---   Abort_Undefer : No_Param_Proc := Abort_Undefer_NT'Access;
---   pragma Suppress (Access_Check, Abort_Undefer);
---   --  Undefer task abort (task/non-task case as appropriate)
---
+
+   Abort_Undefer : No_Param_Proc := Abort_Undefer_NT'Access;
+   pragma Suppress (Access_Check, Abort_Undefer);
+   --  Undefer task abort (task/non-task case as appropriate)
+
 --   Abort_Handler : No_Param_Proc := Abort_Handler_NT'Access;
 --   --  Handle task abort (task/non-task case as appropriate)
 --

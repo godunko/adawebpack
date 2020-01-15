@@ -69,15 +69,15 @@ package body System.Soft_Links is
 --   begin
 --      null;
 --   end Abort_Handler_NT;
---
---   ----------------------
---   -- Abort_Undefer_NT --
---   ----------------------
---
---   procedure Abort_Undefer_NT is
---   begin
---      null;
---   end Abort_Undefer_NT;
+
+   ----------------------
+   -- Abort_Undefer_NT --
+   ----------------------
+
+   procedure Abort_Undefer_NT is
+   begin
+      null;
+   end Abort_Undefer_NT;
 
    -----------------
    -- Adafinal_NT --
