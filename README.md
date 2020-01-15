@@ -3,6 +3,8 @@ Ada WASM Runtime and Bindngs for Web API
 
 ## How to build
 
+Setup GNAT Community 2019 for ARM to default location.
+
 Setup GNAT-LLVM developmemnt environment, see
 [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm).
 
@@ -20,6 +22,12 @@ Apply patch in patches directory to gnat-llvm.
 ```
 cd gnat-llvm/llvm-interface
 patch -p0 < adawebpack_src/patches/gnat-llvm.patch
+```
+
+Create link to RTS source code
+
+```
+ln -s ~/opt/GNAT/2019-arm-elf/arm-eabi/include/rts-sources/
 ```
 
 Use `make wasm` to build compiler and Run Time Library
