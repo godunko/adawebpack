@@ -1,6 +1,6 @@
 # WASM runtime
 
-COMMON_ZFP_SRCS= \
+COMMON_WASM_SRCS= \
 ada.ads      \
 a-finali.adb \
 a-finali.ads \
@@ -120,9 +120,7 @@ s-atocou.adb \
 #s-soliin.ads \
 #s-soliin.adb \
 
-NOTWASM_ZFP_SRCS = \
-
-COMPILABLE_ZFP_SPECS= \
+COMPILABLE_WASM_SPECS= \
 ada.ads      \
 a-unccon.ads \
 a-uncdea.ads \
@@ -148,53 +146,51 @@ unchdeal.ads \
 \
 a-contai.ads \
 
-NOTWASM_COMPILABLE_ZFP_SPECS= \
+COMPILE+=--target=wasm32 -gnateT=../../../adawebpack_src/source/rtl/wasm32.atp
+AWP_SRC=adawebpack_src/source
 
-COMPILE+=--target=wasm32 -gnateT=../../../arbw_src/source/rtl/wasm32.atp
-ARBW_SRC=arbw_src/source
-
-ZFPINCLUDE=lib/rts-native/adainclude
-ZFPLIB=lib/rts-native/adalib
+WASMINCLUDE=lib/rts-native/adainclude
+WASMLIB=lib/rts-native/adalib
 
 wasm: build
-	$(RMDIR) $(ZFPINCLUDE) $(ZFPLIB)
-	$(MKDIR) $(ZFPINCLUDE) $(ZFPLIB)
-	for f in $(COMMON_ZFP_SRCS); do \
-	  cp -p $(GNAT_SRC)/libgnat/$$f $(ZFPINCLUDE); \
+	$(RMDIR) $(WASMINCLUDE) $(WASMLIB)
+	$(MKDIR) $(WASMINCLUDE) $(WASMLIB)
+	for f in $(COMMON_WASM_SRCS); do \
+	  cp -p $(GNAT_SRC)/libgnat/$$f $(WASMINCLUDE); \
 	done
-	cp -p $(ARBW_SRC)/rtl/a-elchha__wasm.adb $(ZFPINCLUDE)/a-elchha.adb
-	cp -p $(GNAT_SRC)/hie/a-elchha__zfp.ads $(ZFPINCLUDE)/a-elchha.ads
-	cp -p $(GNAT_SRC)/hie/a-except__zfp.adb $(ZFPINCLUDE)/a-except.adb
-	cp -p $(GNAT_SRC)/hie/a-except__zfp.ads $(ZFPINCLUDE)/a-except.ads
-#	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(ZFPINCLUDE)/i-c.ads
-	cp -p $(ARBW_SRC)/rtl/system-wasm.ads $(ZFPINCLUDE)/system.ads
-#	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(ZFPINCLUDE)/s-assert.ads
-#	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(ZFPINCLUDE)/s-assert.adb
-	cp -p $(ARBW_SRC)/rtl/s-finmas__wasm.adb $(ZFPINCLUDE)/s-finmas.adb
-	cp -p $(ARBW_SRC)/rtl/s-io__wasm.adb $(ZFPINCLUDE)/s-io.adb
-	cp -p $(ARBW_SRC)/rtl/s-init.ads $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-init.adb $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-memory__wasm.adb $(ZFPINCLUDE)/s-memory.adb
-	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(ZFPINCLUDE)/s-memory.ads
-	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(ARBW_SRC)/rtl/s-parame__wasm.ads $(ZFPINCLUDE)/s-parame.ads
-	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.adb $(ZFPINCLUDE)/s-soflin.adb
-	cp -p $(ARBW_SRC)/rtl/s-soflin__wasm.ads $(ZFPINCLUDE)/s-soflin.ads
-	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(ZFPINCLUDE)/
-	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(ZFPINCLUDE)/s-stalib.adb
-	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(ZFPINCLUDE)/s-stalib.ads
-#	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(ZFPINCLUDE)/s-flocon.adb
-	cd $(ZFPLIB) && for f in $(COMPILABLE_ZFP_SPECS); do \
+	cp -p $(AWP_SRC)/rtl/a-elchha__wasm.adb $(WASMINCLUDE)/a-elchha.adb
+	cp -p $(GNAT_SRC)/hie/a-elchha__zfp.ads $(WASMINCLUDE)/a-elchha.ads
+	cp -p $(GNAT_SRC)/hie/a-except__zfp.adb $(WASMINCLUDE)/a-except.adb
+	cp -p $(GNAT_SRC)/hie/a-except__zfp.ads $(WASMINCLUDE)/a-except.ads
+#	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
+	cp -p $(AWP_SRC)/rtl/system-wasm.ads $(WASMINCLUDE)/system.ads
+#	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(WASMINCLUDE)/s-assert.ads
+#	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(WASMINCLUDE)/s-assert.adb
+	cp -p $(AWP_SRC)/rtl/s-finmas__wasm.adb $(WASMINCLUDE)/s-finmas.adb
+	cp -p $(AWP_SRC)/rtl/s-io__wasm.adb $(WASMINCLUDE)/s-io.adb
+	cp -p $(AWP_SRC)/rtl/s-init.ads $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-init.adb $(WASMINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-memcom.ad[sb] $(WASMINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-memcop.ad[sb] $(WASMINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-memmov.ad[sb] $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-memory__wasm.adb $(WASMINCLUDE)/s-memory.adb
+	cp -p $(GNAT_SRC)/hie/s-memory__cert.ads $(WASMINCLUDE)/s-memory.ads
+	cp -p $(GNAT_SRC)/hie/s-memset.ad[sb] $(WASMINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-memtyp.ad[sb] $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-parame__wasm.ads $(WASMINCLUDE)/s-parame.ads
+	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.adb $(WASMINCLUDE)/s-soflin.adb
+	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
+	cp -p $(GNAT_SRC)/hie/s-sssita.ad[sb] $(WASMINCLUDE)/
+	cp -p $(GNAT_SRC)/hie/s-stalib__raven.adb $(WASMINCLUDE)/s-stalib.adb
+	cp -p $(GNAT_SRC)/hie/s-stalib__raven.ads $(WASMINCLUDE)/s-stalib.ads
+#	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
+	cd $(WASMLIB) && for f in $(COMPILABLE_WASM_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
 	done
-	cd $(ZFPLIB) && for f in ../adainclude/*.adb; do \
+	cd $(WASMLIB) && for f in ../adainclude/*.adb; do \
 	  echo "<<< Compile $$f"; \
 	  if [ $$f != '../adainclude/a-excach.adb' ]; then $(COMPILE) $$f || exit 1; fi \
 	done
-	cd $(ZFPLIB) && $(CHMOD) a-wx *.ali && $(AR) libgnat.a *.o && llvm-ranlib libgnat.a && $(RM) *.o
+	cd $(WASMLIB) && $(CHMOD) a-wx *.ali && $(AR) libgnat.a *.o && llvm-ranlib libgnat.a && $(RM) *.o
 
