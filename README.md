@@ -1,5 +1,5 @@
 # AdaWebPack
-Ada WASM Runtime and Bindngs for Web API
+Ada WASM Runtime and Bindings for Web API
 
 ## How to build
 
