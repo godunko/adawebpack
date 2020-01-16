@@ -40,3 +40,9 @@ Use `make wasm` to build compiler and Run Time Library
    chance handler
 
  - protected objects and tasks are not supported
+
+## License
+
+Web API bindings is licensed under BSD3 license.
+
+GNAT Runtime Library is licensed under GPL3 license.
