@@ -6,7 +6,9 @@ package body WASM.Objects is
    use type Interfaces.Unsigned_32;
 
    procedure Release (Identifier : Object_Identifier)
-     with Import => True, Link_Name => "__adawebpack__wasm__object_release";
+     with Import     => True,
+          Convention => C,
+          Link_Name  => "__adawebpack__wasm__object_release";
 
    ------------
    -- Adjust --

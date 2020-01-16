@@ -21,7 +21,8 @@ package body Web.DOM.Documents is
         Length     : Interfaces.Unsigned_32)
           return WASM.Objects.Object_Identifier
             with Import     => True,
-                 Link_Name => "__adawebpack__dom__Document__getElementById";
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Document__getElementById";
 
       A : System.Address;
       S : Interfaces.Unsigned_32;

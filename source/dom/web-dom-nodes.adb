@@ -11,8 +11,9 @@ package body Web.DOM.Nodes is
    procedure Dispatch_Event
     (Callback   : System.Address;
      Identifier : WASM.Objects.Object_Identifier)
-      with Export    => True,
-           Link_Name => "__adawebpack__dom__Node__dispatch_event";
+      with Export     => True,
+           Convention => C,
+           Link_Name  => "__adawebpack__dom__Node__dispatch_event";
 
    ------------------------
    -- Add_Event_Listener --
@@ -30,8 +31,9 @@ package body Web.DOM.Nodes is
         Name_Size    : Interfaces.Unsigned_32;
         Callback     : System.Address;
         Capture      : Interfaces.Unsigned_32)
-          with Import    => True,
-               Link_Name => "__adawebpack__dom__Node__addEventListener";
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__dom__Node__addEventListener";
 
       A : System.Address;
       S : Interfaces.Unsigned_32;
