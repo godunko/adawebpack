@@ -26,6 +26,14 @@ adawebpack = {
       capture !== 0);
   },
 
+  __adawebpack__html__Button__disabled_setter: function(identifier,to) {
+    from_wasm_object_identifier (identifier).disabled = (to !== 0);
+  },
+
+  __adawebpack__html__Button__disabled_getter: function(identifier) {
+    return +from_wasm_object_identifier(identifier).disabled;
+  },
+
   __adawebpack__html__Element__hidden_setter: function(identifier,to) {
     from_wasm_object_identifier (identifier).hidden = (to !== 0);
   },

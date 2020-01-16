@@ -3,7 +3,19 @@ with Interfaces;
 
 with WASM.Objects;
 
+with Web.HTML.Buttons;
+
 package body Web.HTML.Elements is
+
+   --------------------
+   -- As_HTML_Button --
+   --------------------
+
+   function As_HTML_Button
+    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button is
+   begin
+      return Web.HTML.Buttons.Instantiate (Self.Identifier);
+   end As_HTML_Button;
 
    ----------------
    -- Get_Hidden --
