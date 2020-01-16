@@ -1,6 +1,7 @@
 
 with Web.DOM.Event_Listeners;
 with Web.DOM.Events;
+with Web.HTML.Buttons;
 with Web.HTML.Elements;
 with Web.Strings;
 with Web.Window;
@@ -39,11 +40,13 @@ package body Demo is
    ---------------------
 
    procedure Initialize_Demo is
-      E : Web.HTML.Elements.HTML_Element
-        := Web.Window.Document.Get_Element_By_Id (+"toggle_button");
+      B : Web.HTML.Buttons.HTML_Button
+        := Web.Window.Document.Get_Element_By_Id
+            (+"toggle_button").As_HTML_Button;
 
    begin
-      E.Add_Event_Listener (+"click", L'Access);
+      B.Add_Event_Listener (+"click", L'Access);
+      B.Set_Disabled (False);
    end Initialize_Demo;
 
 begin
