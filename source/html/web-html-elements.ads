@@ -45,6 +45,6 @@ package Web.HTML.Elements is
    procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
 
    function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button;
+    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
 
 end Web.HTML.Elements;

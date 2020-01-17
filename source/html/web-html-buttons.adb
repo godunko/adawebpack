@@ -44,7 +44,7 @@ package body Web.HTML.Buttons is
    -- Get_Disabled --
    ------------------
 
-   function Get_Disabled (Self : HTML_Button'Class) return Boolean is
+   function Get_Disabled (Self : HTML_Button_Element'Class) return Boolean is
       use type Interfaces.Unsigned_32;
 
       function Imported
@@ -61,7 +61,9 @@ package body Web.HTML.Buttons is
    -- Set_Disabled --
    ------------------
 
-   procedure Set_Disabled (Self : in out HTML_Button'Class; To : Boolean) is
+   procedure Set_Disabled
+    (Self : in out HTML_Button_Element'Class; To : Boolean)
+   is
       procedure Imported
        (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
           with Import     => True,

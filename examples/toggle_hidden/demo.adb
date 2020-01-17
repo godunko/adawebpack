@@ -40,7 +40,7 @@ package body Demo is
    ---------------------
 
    procedure Initialize_Demo is
-      B : Web.HTML.Buttons.HTML_Button
+      B : Web.HTML.Buttons.HTML_Button_Element
         := Web.Window.Document.Get_Element_By_Id
             (+"toggle_button").As_HTML_Button;
 

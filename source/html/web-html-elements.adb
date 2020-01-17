@@ -47,7 +47,7 @@ package body Web.HTML.Elements is
    --------------------
 
    function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button is
+    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element is
    begin
       return Web.HTML.Buttons.Instantiate (Self.Identifier);
    end As_HTML_Button;
