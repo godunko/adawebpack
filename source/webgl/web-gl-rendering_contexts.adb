@@ -204,6 +204,38 @@ package body Web.GL.Rendering_Contexts is
         GLint (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
    end Get_Attrib_Location;
 
+   --------------------------
+   -- Get_Uniform_Location --
+   --------------------------
+
+   function Get_Uniform_Location
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Name    : Web.Strings.Web_String)
+       return Web.GL.Uniform_Locations.WebGL_Uniform_Location
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier;
+        Name_Address       : System.Address;
+        Name_Size          : Interfaces.Unsigned_32)
+          return WASM.Objects.Object_Identifier
+              with Import     => True,
+                   Convention => C,
+                   Link_Name  =>
+                     "__adawebpack__webgl__RenderingContext__getUniformLocation";
+
+      Name_A : System.Address;
+      Name_S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Name, Name_A, Name_S);
+
+      return
+        Web.GL.Uniform_Locations.Instantiate
+         (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
+   end Get_Uniform_Location;
+
    ------------------
    -- Link_Program --
    ------------------

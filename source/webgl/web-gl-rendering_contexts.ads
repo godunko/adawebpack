@@ -42,12 +42,12 @@
 --  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Renderbuffers;
 --  with WebAPI.WebGL.Textures;
---  with WebAPI.WebGL.Uniform_Locations;
 
 with WASM.Objects;
 
 with Web.GL.Programs;
 with Web.GL.Shaders;
+with Web.GL.Uniform_Locations;
 with Web.Strings;
 
 package Web.GL.Rendering_Contexts is
@@ -887,17 +887,13 @@ package Web.GL.Rendering_Contexts is
 ----    any getTexParameter(GLenum target, GLenum pname);
 ----
 ----    any getUniform(WebGLProgram? program, WebGLUniformLocation? location);
---
---   not overriding function Get_Uniform_Location
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class;
---     Name    : League.Strings.Universal_String)
---       return WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access
---         is abstract
---           with Import     => True,
---                Convention => JavaScript_Method,
---                Link_Name  => "getUniformLocation";
---
+
+   function Get_Uniform_Location
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Name    : Web.Strings.Web_String)
+       return Web.GL.Uniform_Locations.WebGL_Uniform_Location;
+
 ----    any getVertexAttrib(GLuint index, GLenum pname);
 ----
 ----    [WebGLHandlesContextLoss] GLintptr getVertexAttribOffset(GLuint index, GLenum pname);

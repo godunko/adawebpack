@@ -79,6 +79,10 @@ adawebpack = {
     return from_wasm_object_identifier(context_identifier).getAttribLocation(from_wasm_object_identifier(program_identifier), string_to_js(name_address, name_size));
   },
 
+  __adawebpack__webgl__RenderingContext__getUniformLocation: function(context_identifier,program_identifier,name_address,name_size) {
+    return to_wasm_object_identifier(from_wasm_object_identifier(context_identifier).getUniformLocation(from_wasm_object_identifier(program_identifier),string_to_js(name_address,name_size)));
+  },
+
   __adawebpack__webgl__RenderingContext__linkProgram: function(context_identifier,program_identifier) {
     from_wasm_object_identifier(context_identifier).linkProgram(from_wasm_object_identifier(program_identifier));
   },
