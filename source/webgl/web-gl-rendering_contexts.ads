@@ -914,14 +914,11 @@ package Web.GL.Rendering_Contexts is
 ----    [WebGLHandlesContextLoss] GLboolean isShader(WebGLShader? shader);
 ----    [WebGLHandlesContextLoss] GLboolean isTexture(WebGLTexture? texture);
 ----    void lineWidth(GLfloat width);
---
---   not overriding procedure Link_Program
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "linkProgram";
---
+
+   procedure Link_Program
+    (Self    : in out WebGL_Rendering_Context'Class;
+     Program : in out Web.GL.Programs.WebGL_Program'Class);
+
 ----    void pixelStorei(GLenum pname, GLint param);
 ----    void polygonOffset(GLfloat factor, GLfloat units);
 --
