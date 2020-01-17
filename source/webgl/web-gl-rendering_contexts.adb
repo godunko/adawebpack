@@ -174,6 +174,36 @@ package body Web.GL.Rendering_Contexts is
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
 
+   -------------------------
+   -- Get_Attrib_Location --
+   -------------------------
+
+   function Get_Attrib_Location
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Name    : Web.Strings.Web_String) return GLint
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier;
+        Name_Address       : System.Address;
+        Name_Size          : Interfaces.Unsigned_32)
+          return Interfaces.Integer_32
+         with Import     => True,
+              Convention => C,
+              Link_Name  =>
+                "__adawebpack__webgl__RenderingContext__getAttribLocation";
+
+      Name_A : System.Address;
+      Name_S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Name, Name_A, Name_S);
+
+      return
+        GLint (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
+   end Get_Attrib_Location;
+
    ------------------
    -- Link_Program --
    ------------------

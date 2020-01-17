@@ -826,15 +826,12 @@ package Web.GL.Rendering_Contexts is
 ----    WebGLActiveInfo? getActiveAttrib(WebGLProgram? program, GLuint index);
 ----    WebGLActiveInfo? getActiveUniform(WebGLProgram? program, GLuint index);
 ----    sequence<WebGLShader>? getAttachedShaders(WebGLProgram? program);
---
---   not overriding function Get_Attrib_Location
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class;
---     Name    : League.Strings.Universal_String) return GLint is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "getAttribLocation";
---
+
+   function Get_Attrib_Location
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Name    : Web.Strings.Web_String) return GLint;
+
 ----    any getBufferParameter(GLenum target, GLenum pname);
 ----    any getParameter(GLenum pname);
 ----
