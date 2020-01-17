@@ -38,13 +38,13 @@
 --  with WebAPI.HTML.Canvas_Elements;
 --  with WebAPI.HTML.Rendering_Contexts;
 --  
---  with WebAPI.WebGL.Buffers;
 --  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Renderbuffers;
 --  with WebAPI.WebGL.Textures;
 
 with WASM.Objects;
 
+with Web.GL.Buffers;
 with Web.GL.Programs;
 with Web.GL.Shaders;
 with Web.GL.Uniform_Locations;
@@ -651,14 +651,11 @@ package Web.GL.Rendering_Contexts is
 ----                        GLint border);
 ----    void copyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset,
 ----                           GLint x, GLint y, GLsizei width, GLsizei height);
---
---   not overriding function Create_Buffer
---    (Self : not null access WebGL_Rendering_Context)
---       return WebAPI.WebGL.Buffers.WebGL_Buffer_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createBuffer";
---
+
+   function Create_Buffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Buffers.WebGL_Buffer;
+
 --   not overriding function Create_Framebuffer
 --    (Self : not null access WebGL_Rendering_Context)
 --       return WebAPI.WebGL.Framebuffers.WebGL_Framebuffer_Access is abstract

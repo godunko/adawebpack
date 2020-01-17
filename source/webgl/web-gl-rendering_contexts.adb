@@ -131,6 +131,26 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Shader.Identifier);
    end Compile_Shader;
 
+   -------------------
+   -- Create_Buffer --
+   -------------------
+
+   function Create_Buffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Buffers.WebGL_Buffer
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__webgl__RenderingContext__createBuffer";
+
+   begin
+      return Web.GL.Buffers.Instantiate (Imported (Self.Identifier));
+   end Create_Buffer;
+
    --------------------
    -- Create_Program --
    --------------------
