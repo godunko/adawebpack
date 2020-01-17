@@ -34,23 +34,42 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.DOM.Elements;
-limited with Web.HTML.Buttons;
-limited with Web.HTML.Canvases;
+with Interfaces;
+with System;
 
-package Web.HTML.Elements is
+with WASM.Objects;
 
-   pragma Preelaborate;
+with Web.Strings.WASM_Helpers;
 
-   type HTML_Element is new Web.DOM.Elements.Element with null record;
+package body Web.HTML.Canvases is
 
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean;
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
+   -----------------
+   -- Get_Context --
+   -----------------
 
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
+   function Get_Context
+    (Self       : HTML_Canvas_Element'Class;
+     Context_Id : Web.Strings.Web_String)
+       return Web.GL.Rendering_Contexts.WebGL_Rendering_Context
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Canvas__getContext";
 
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
 
-end Web.HTML.Elements;
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Context_Id, A, S);
+
+      return
+        Web.GL.Rendering_Contexts.Instantiate
+         (Imported (Self.Identifier, A, S));
+   end Get_Context;
+
+end Web.HTML.Canvases;

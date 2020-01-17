@@ -39,6 +39,7 @@ with Interfaces;
 with WASM.Objects;
 
 with Web.HTML.Buttons;
+with Web.HTML.Canvases;
 with Web.Strings;
 with Web.Utilities;
 
@@ -63,6 +64,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Buttons.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Button;
+
+   --------------------
+   -- As_HTML_Canvas --
+   --------------------
+
+   function As_HTML_Canvas
+    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLCanvasElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Canvases.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Canvas;
 
    ----------------
    -- Get_Hidden --

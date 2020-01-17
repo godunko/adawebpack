@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2014-2020, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -33,24 +33,43 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
+--  This is root package to expose WebGL API to Ada applications.
+------------------------------------------------------------------------------
 
-with Web.DOM.Elements;
-limited with Web.HTML.Buttons;
-limited with Web.HTML.Canvases;
+with Interfaces;
 
-package Web.HTML.Elements is
+package Web.GL is
 
    pragma Preelaborate;
 
-   type HTML_Element is new Web.DOM.Elements.Element with null record;
+   type GLboolean is new Interfaces.Unsigned_8;
 
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean;
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
+   type GLenum is new Interfaces.Unsigned_32;
 
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
+   type GLbitfield is new Interfaces.Unsigned_32;
 
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
+   type GLint is new Interfaces.Integer_32;
+   subtype GLsizei is GLint range 0 .. GLint'Last;
 
-end Web.HTML.Elements;
+   type GLuint is new Interfaces.Unsigned_32;
+
+   type GLfloat is new Interfaces.IEEE_Float_32;
+   subtype GLclampf is GLfloat range 0.0 .. 1.0;
+
+--   type GLintptr is new Interfaces.Integer_64;
+
+   type GLfloat_Vector_2 is array (Positive range 1 .. 2) of GLfloat;
+   type GLfloat_Vector_3 is array (Positive range 1 .. 3) of GLfloat;
+   type GLfloat_Vector_4 is array (Positive range 1 .. 4) of GLfloat;
+
+   type GLfloat_Matrix_2x2 is
+     array (Positive range 1 .. 2, Positive range 1 .. 2) of GLfloat
+       with Convention => Fortran;
+   type GLfloat_Matrix_3x3 is
+     array (Positive range 1 .. 3, Positive range 1 .. 3) of GLfloat
+       with Convention => Fortran;
+   type GLfloat_Matrix_4x4 is
+     array (Positive range 1 .. 4, Positive range 1 .. 4) of GLfloat
+       with Convention => Fortran;
+
+end Web.GL;

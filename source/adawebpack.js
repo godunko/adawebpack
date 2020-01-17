@@ -39,6 +39,10 @@ adawebpack = {
     return +from_wasm_object_identifier(identifier).disabled;
   },
 
+  __adawebpack__html__Canvas__getContext: function(identifier,address,size) {
+    return to_wasm_object_identifier(from_wasm_object_identifier(identifier).getContext(string_to_js(address,size)));
+  },
+
   __adawebpack__html__Element__hidden_setter: function(identifier,to) {
     from_wasm_object_identifier (identifier).hidden = (to !== 0);
   },
