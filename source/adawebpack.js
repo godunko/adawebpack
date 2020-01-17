@@ -55,6 +55,10 @@ adawebpack = {
     from_wasm_object_identifier(context_identifier).attachShader(from_wasm_object_identifier(program_identifier), from_wasm_object_identifier(shader_identifier));
   },
 
+  __adawebpack__webgl__RenderingContext__bindBuffer: function(context_identifier,target,buffer_identifier) {
+    from_wasm_object_identifier(context_identifier).bindBuffer(target, from_wasm_object_identifier(buffer_identifier));
+  },
+
   __adawebpack__webgl__RenderingContext__clear: function(identifier,mask) {
     from_wasm_object_identifier(identifier).clear(mask);
   },

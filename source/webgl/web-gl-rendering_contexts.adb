@@ -62,6 +62,29 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Program.Identifier, Shader.Identifier);
    end Attach_Shader;
 
+   -----------------
+   -- Bind_Buffer --
+   -----------------
+
+   procedure Bind_Buffer
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : GLenum;
+     Buffer : Web.GL.Buffers.WebGL_Buffer'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Target             : Interfaces.Unsigned_32;
+        Buffer_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__bindBuffer";
+
+   begin
+      Imported
+       (Self.Identifier, Interfaces.Unsigned_32 (Target), Buffer.Identifier);
+   end Bind_Buffer;
+
    -----------
    -- Clear --
    -----------

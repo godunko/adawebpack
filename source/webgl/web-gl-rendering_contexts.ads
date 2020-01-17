@@ -128,16 +128,16 @@ package Web.GL.Rendering_Contexts is
 --   CONSTANT_ALPHA           : constant := 16#8003#;
 --   ONE_MINUS_CONSTANT_ALPHA : constant := 16#8004#;
 ----    const GLenum BLEND_COLOR                    = 0x8005;
---
---   --------------------
---   -- Buffer Objects --
---   --------------------
---
---   ARRAY_BUFFER         : constant := 16#8892#;
---   ELEMENT_ARRAY_BUFFER : constant := 16#8893#;
-----    const GLenum ARRAY_BUFFER_BINDING           = 0x8894;
-----    const GLenum ELEMENT_ARRAY_BUFFER_BINDING   = 0x8895;
---
+
+   --------------------
+   -- Buffer Objects --
+   --------------------
+
+   ARRAY_BUFFER         : constant := 16#8892#;
+   ELEMENT_ARRAY_BUFFER : constant := 16#8893#;
+--    const GLenum ARRAY_BUFFER_BINDING           = 0x8894;
+--    const GLenum ELEMENT_ARRAY_BUFFER_BINDING   = 0x8895;
+
 --   STREAM_DRAW          : constant := 16#88E0#;
 --   STATIC_DRAW          : constant := 16#88E4#;
 --   DYNAMIC_DRAW         : constant := 16#88E8#;
@@ -546,17 +546,14 @@ package Web.GL.Rendering_Contexts is
      Program : in out Web.GL.Programs.WebGL_Program'Class;
      Shader  : in out Web.GL.Shaders.WebGL_Shader'Class);
 
-----    void bindAttribLocation(WebGLProgram? program, GLuint index, DOMString name);
---
---   not overriding procedure Bind_Buffer
---    (Self   : not null access WebGL_Rendering_Context;
---     Target : GLenum;
---     Buffer : access WebAPI.WebGL.Buffers.WebGL_Buffer'Class) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "bindBuffer";
-----            Pre'Class  => Target in ARRAY_BUFFER | ELEMENT_ARRAY_BUFFER;
---
+--    void bindAttribLocation(WebGLProgram? program, GLuint index, DOMString name);
+
+   procedure Bind_Buffer
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : GLenum;
+     Buffer : Web.GL.Buffers.WebGL_Buffer'Class);
+--            Pre'Class  => Target in ARRAY_BUFFER | ELEMENT_ARRAY_BUFFER;
+
 --   not overriding procedure Bind_Framebuffer
 --    (Self        : not null access WebGL_Rendering_Context;
 --     Target      : GLenum;
