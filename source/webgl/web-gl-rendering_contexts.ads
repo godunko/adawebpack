@@ -48,6 +48,7 @@
 with WASM.Objects;
 
 with Web.GL.Shaders;
+with Web.Strings;
 
 package Web.GL.Rendering_Contexts is
 
@@ -958,15 +959,12 @@ package Web.GL.Rendering_Contexts is
 --
 ----    void sampleCoverage(GLclampf value, GLboolean invert);
 ----    void scissor(GLint x, GLint y, GLsizei width, GLsizei height);
---
---   not overriding procedure Shader_Source
---    (Self   : not null access WebGL_Rendering_Context;
---     Shader : access WebAPI.WebGL.Shaders.WebGL_Shader'Class;
---     Source : League.Strings.Universal_String) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "shaderSource";
---
+
+   procedure Shader_Source
+    (Self   : in out WebGL_Rendering_Context;
+     Shader : in out Web.GL.Shaders.WebGL_Shader'Class;
+     Source : Web.Strings.Web_String);
+
 ----    void stencilFunc(GLenum func, GLint ref, GLuint mask);
 ----    void stencilFuncSeparate(GLenum face, GLenum func, GLint ref, GLuint mask);
 ----    void stencilMask(GLuint mask);

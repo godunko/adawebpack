@@ -34,6 +34,10 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
+with Web.Strings.WASM_Helpers;
+
 package body Web.GL.Rendering_Contexts is
 
    -----------
@@ -107,5 +111,32 @@ package body Web.GL.Rendering_Contexts is
         Web.GL.Shaders.Instantiate
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
+
+   -------------------
+   -- Shader_Source --
+   -------------------
+
+   procedure Shader_Source
+    (Self   : in out WebGL_Rendering_Context;
+     Shader : in out Web.GL.Shaders.WebGL_Shader'Class;
+     Source : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier;
+        Source_Address     : System.Address;
+        Source_Size        : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__shaderSource";
+
+      Source_A : System.Address;
+      Source_S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Source, Source_A, Source_S);
+      Imported (Self.Identifier, Shader.Identifier, Source_A, Source_S);
+   end Shader_Source;
 
 end Web.GL.Rendering_Contexts;

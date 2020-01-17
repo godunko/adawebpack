@@ -61,6 +61,10 @@ adawebpack = {
 
   __adawebpack__webgl__RenderingContext__createShader: function(identifier,type) {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).createShader(type));
+  },
+
+  __adawebpack__webgl__RenderingContext__shaderSource: function(context_identifier,shader_identifier,source_address,source_size) {
+    from_wasm_object_identifier(context_identifier).shaderSource(from_wasm_object_identifier(shader_identifier),string_to_js(source_address,source_size));
   }
 
 };
