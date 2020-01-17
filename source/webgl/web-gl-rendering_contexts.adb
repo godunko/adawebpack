@@ -89,6 +89,26 @@ package body Web.GL.Rendering_Contexts is
         Interfaces.IEEE_Float_32 (Alpha));
    end Clear_Color;
 
+   --------------------
+   -- Compile_Shader --
+   --------------------
+
+   procedure Compile_Shader
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Shader : in out Web.GL.Shaders.WebGL_Shader'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__compileShader";
+
+   begin
+      Imported (Self.Identifier, Shader.Identifier);
+   end Compile_Shader;
+
    -------------------
    -- Create_Shader --
    -------------------

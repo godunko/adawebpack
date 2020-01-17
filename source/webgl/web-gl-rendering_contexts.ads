@@ -636,14 +636,11 @@ package Web.GL.Rendering_Contexts is
 ----    void clearDepth(GLclampf depth);
 ----    void clearStencil(GLint s);
 ----    void colorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
---
---   not overriding procedure Compile_Shader
---    (Self   : not null access WebGL_Rendering_Context;
---     Shader : access WebAPI.WebGL.Shaders.WebGL_Shader'Class) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "compileShader";
---
+
+   procedure Compile_Shader
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Shader : in out Web.GL.Shaders.WebGL_Shader'Class);
+
 ----    void compressedTexImage2D(GLenum target, GLint level, GLenum internalformat,
 ----                              GLsizei width, GLsizei height, GLint border,
 ----                              ArrayBufferView data);

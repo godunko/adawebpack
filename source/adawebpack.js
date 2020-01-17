@@ -59,6 +59,10 @@ adawebpack = {
     from_wasm_object_identifier(identifier).clearColor(red,green,blue,alpha);
   },
 
+  __adawebpack__webgl__RenderingContext__compileShader: function(context_identifier,shader_identifier) {
+    from_wasm_object_identifier(context_identifier).compileShader(from_wasm_object_identifier(shader_identifier));
+  },
+
   __adawebpack__webgl__RenderingContext__createShader: function(identifier,type) {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).createShader(type));
   },
