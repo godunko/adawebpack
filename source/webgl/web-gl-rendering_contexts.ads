@@ -540,15 +540,12 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "activeTexture";
---
---   not overriding procedure Attach_Shader
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class;
---     Shader  : access WebAPI.WebGL.Shaders.WebGL_Shader'Class) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "attachShader";
---
+
+   procedure Attach_Shader
+    (Self    : in out WebGL_Rendering_Context'Class;
+     Program : in out Web.GL.Programs.WebGL_Program'Class;
+     Shader  : in out Web.GL.Shaders.WebGL_Shader'Class);
+
 ----    void bindAttribLocation(WebGLProgram? program, GLuint index, DOMString name);
 --
 --   not overriding procedure Bind_Buffer

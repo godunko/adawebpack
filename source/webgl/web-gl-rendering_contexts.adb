@@ -40,6 +40,28 @@ with Web.Strings.WASM_Helpers;
 
 package body Web.GL.Rendering_Contexts is
 
+   -------------------
+   -- Attach_Shader --
+   -------------------
+
+   procedure Attach_Shader
+    (Self    : in out WebGL_Rendering_Context'Class;
+     Program : in out Web.GL.Programs.WebGL_Program'Class;
+     Shader  : in out Web.GL.Shaders.WebGL_Shader'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__attachShader";
+
+   begin
+      Imported (Self.Identifier, Program.Identifier, Shader.Identifier);
+   end Attach_Shader;
+
    -----------
    -- Clear --
    -----------
