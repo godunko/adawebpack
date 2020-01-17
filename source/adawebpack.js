@@ -63,6 +63,10 @@ adawebpack = {
     from_wasm_object_identifier(context_identifier).compileShader(from_wasm_object_identifier(shader_identifier));
   },
 
+  __adawebpack__webgl__RenderingContext__createProgram: function(identifier) {
+    return to_wasm_object_identifier(from_wasm_object_identifier(identifier).createProgram());
+  },
+
   __adawebpack__webgl__RenderingContext__createShader: function(identifier,type) {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).createShader(type));
   },

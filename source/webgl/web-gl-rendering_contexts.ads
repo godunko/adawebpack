@@ -40,13 +40,13 @@
 --  
 --  with WebAPI.WebGL.Buffers;
 --  with WebAPI.WebGL.Framebuffers;
---  with WebAPI.WebGL.Programs;
 --  with WebAPI.WebGL.Renderbuffers;
 --  with WebAPI.WebGL.Textures;
 --  with WebAPI.WebGL.Uniform_Locations;
 
 with WASM.Objects;
 
+with Web.GL.Programs;
 with Web.GL.Shaders;
 with Web.Strings;
 
@@ -668,14 +668,11 @@ package Web.GL.Rendering_Contexts is
 --         with Import     => True,
 --              Convention => JavaScript_Method,
 --              Link_Name  => "createFramebuffer";
---
---   not overriding function Create_Program
---    (Self : not null access WebGL_Rendering_Context)
---       return WebAPI.WebGL.Programs.WebGL_Program_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createProgram";
---
+
+   function Create_Program
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Programs.WebGL_Program;
+
 --   not overriding function Create_Renderbuffer
 --    (Self : not null access WebGL_Rendering_Context)
 --       return WebAPI.WebGL.Renderbuffers.WebGL_Renderbuffer_Access is abstract
