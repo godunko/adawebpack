@@ -39,6 +39,8 @@ limited with Web.HTML.Buttons;
 
 package Web.HTML.Elements is
 
+   pragma Preelaborate;
+
    type HTML_Element is new Web.DOM.Elements.Element with null record;
 
    function Get_Hidden (Self : HTML_Element'Class) return Boolean;

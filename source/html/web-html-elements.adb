@@ -39,8 +39,13 @@ with Interfaces;
 with WASM.Objects;
 
 with Web.HTML.Buttons;
+with Web.Strings;
+with Web.Utilities;
 
 package body Web.HTML.Elements is
+
+   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
+     renames Web.Strings.To_Web_String;
 
    --------------------
    -- As_HTML_Button --
@@ -49,7 +54,14 @@ package body Web.HTML.Elements is
    function As_HTML_Button
     (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element is
    begin
-      return Web.HTML.Buttons.Instantiate (Self.Identifier);
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLButtonElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Buttons.Instantiate (Self.Identifier);
+      end if;
    end As_HTML_Button;
 
    ----------------

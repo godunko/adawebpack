@@ -4,6 +4,11 @@ adawebpack = {
   __gnat_put_int: function (item) { console.log(item); },
   __gnat_put_char: function (item) { console.log(String.fromCharCode(item)); },
 
+  __adawebpack__is_instance_of: function(identifier, address, size)
+  {
+    return from_wasm_object_identifier(identifier) instanceof window[string_to_js(address, size)];
+  },
+
   __adawebpack__wasm__object_release: function (identifier)
   { console.log('Object released ' + identifier);
   },
@@ -66,7 +71,7 @@ function from_wasm_object_identifier(identifier)
   return id2obj.get(identifier);
 }
 
-function string_to_js(address, length)
+function string_to_js(address, size)
 {
-  return String.fromCharCode.apply(null, new Uint16Array(instance.exports.memory.buffer, address, length));
+  return String.fromCharCode.apply(null, new Uint16Array(instance.exports.memory.buffer, address, size));
 }

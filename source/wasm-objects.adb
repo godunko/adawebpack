@@ -85,7 +85,7 @@ package body WASM.Objects is
      (Self : Object_Reference'Class) return Object_Identifier is
    begin
       if Self.Shared = null then
-         return 0;
+         return Null_Object_Identifier;
 
       else
          return Self.Shared.Identifier;
@@ -104,5 +104,14 @@ package body WASM.Objects is
           with Shared =>
             new Shared_Data'(Counter => <>, Identifier => Identifier));
    end Instantiate;
+
+   -------------
+   -- Is_Null --
+   -------------
+
+   function Is_Null (Self : Object_Reference'Class) return Boolean is
+   begin
+      return Self.Identifier = Null_Object_Identifier;
+   end Is_Null;
 
 end WASM.Objects;

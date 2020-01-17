@@ -38,6 +38,8 @@ with Web.HTML.Elements;
 
 package Web.HTML.Buttons is
 
+   pragma Preelaborate;
+
    type HTML_Button_Element is
      new Web.HTML.Elements.HTML_Element with null record;
 
