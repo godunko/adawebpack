@@ -2,6 +2,8 @@
 
 COMMON_WASM_SRCS= \
 ada.ads      \
+a-charac.ads \
+a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
 a-tags.adb   \
@@ -125,6 +127,8 @@ s-atocou.adb \
 
 COMPILABLE_WASM_SPECS= \
 ada.ads      \
+a-charac.ads \
+a-chzla1.ads \
 a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
