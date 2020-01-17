@@ -42,11 +42,12 @@
 --  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Programs;
 --  with WebAPI.WebGL.Renderbuffers;
---  with WebAPI.WebGL.Shaders;
 --  with WebAPI.WebGL.Textures;
 --  with WebAPI.WebGL.Uniform_Locations;
 
 with WASM.Objects;
+
+with Web.GL.Shaders;
 
 package Web.GL.Rendering_Contexts is
 
@@ -273,13 +274,13 @@ package Web.GL.Rendering_Contexts is
 --   UNSIGNED_SHORT_4_4_4_4 : constant := 16#8033#;
 --   UNSIGNED_SHORT_5_5_5_1 : constant := 16#8034#;
 --   UNSIGNED_SHORT_5_6_5   : constant := 16#8363#;
---
---   -------------
---   -- Shaders --
---   -------------
---
---   FRAGMENT_SHADER   : constant := 16#8B30#;
---   VERTEX_SHADER     : constant := 16#8B31#;
+
+   -------------
+   -- Shaders --
+   -------------
+
+   FRAGMENT_SHADER   : constant := 16#8B30#;
+   VERTEX_SHADER     : constant := 16#8B31#;
 ----    const GLenum MAX_VERTEX_ATTRIBS               = 0x8869;
 ----    const GLenum MAX_VERTEX_UNIFORM_VECTORS       = 0x8DFB;
 ----    const GLenum MAX_VARYING_VECTORS              = 0x8DFC;
@@ -683,14 +684,10 @@ package Web.GL.Rendering_Contexts is
 --         with Import     => True,
 --              Convention => JavaScript_Method,
 --              Link_Name  => "createRenderbuffer";
---
---   not overriding function Create_Shader
---    (Self     : not null access WebGL_Rendering_Context;
---     The_Type : GLenum)
---       return WebAPI.WebGL.Shaders.WebGL_Shader_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createShader";
+
+   function Create_Shader
+    (Self     : in out WebGL_Rendering_Context'Class;
+     The_Type : GLenum) return Web.GL.Shaders.WebGL_Shader;
 --
 --   not overriding function Create_Texture
 --    (Self : not null access WebGL_Rendering_Context)

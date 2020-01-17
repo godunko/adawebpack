@@ -34,78 +34,12 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-package body Web.GL.Rendering_Contexts is
+with WASM.Objects;
 
-   -----------
-   -- Clear --
-   -----------
+package Web.GL.Objects is
 
-   procedure Clear
-    (Self : in out WebGL_Rendering_Context'Class;
-     Mask : GLbitfield)
-   is
-      procedure Imported
-       (Identifier : WASM.Objects.Object_Identifier;
-        Mask       : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__webgl__RenderingContext__clear";
+   pragma Preelaborate;
 
-   begin
-      Imported (Self.Identifier, Interfaces.Unsigned_32 (Mask));
-   end Clear;
+   type WebGL_Object is new WASM.Objects.Object_Reference with null record;
 
-   -----------------
-   -- Clear_Color --
-   -----------------
-
-   procedure Clear_Color
-    (Self  : in out WebGL_Rendering_Context'Class;
-     Red   : GLclampf;
-     Green : GLclampf;
-     Blue  : GLclampf;
-     Alpha : GLclampf)
-   is
-      procedure Imported
-       (Identifier : WASM.Objects.Object_Identifier;
-        Red        : Interfaces.IEEE_Float_32;
-        Green      : Interfaces.IEEE_Float_32;
-        Blue       : Interfaces.IEEE_Float_32;
-        Alpha      : Interfaces.IEEE_Float_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  =>
-                 "__adawebpack__webgl__RenderingContext__clearColor";
-   begin
-      Imported
-       (Self.Identifier,
-        Interfaces.IEEE_Float_32 (Red),
-        Interfaces.IEEE_Float_32 (Green),
-        Interfaces.IEEE_Float_32 (Blue),
-        Interfaces.IEEE_Float_32 (Alpha));
-   end Clear_Color;
-
-   -------------------
-   -- Create_Shader --
-   -------------------
-
-   function Create_Shader
-    (Self     : in out WebGL_Rendering_Context'Class;
-     The_Type : GLenum) return Web.GL.Shaders.WebGL_Shader
-   is
-      function Imported
-       (Identifier : WASM.Objects.Object_Identifier;
-        The_Type   : Interfaces.Unsigned_32)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__webgl__RenderingContext__createShader";
-
-   begin
-      return
-        Web.GL.Shaders.Instantiate
-         (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
-   end Create_Shader;
-
-end Web.GL.Rendering_Contexts;
+end Web.GL.Objects;
