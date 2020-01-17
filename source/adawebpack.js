@@ -49,6 +49,14 @@ adawebpack = {
 
   __adawebpack__html__Element__hidden_getter: function(identifier) {
     return +from_wasm_object_identifier(identifier).hidden;
+  },
+
+  __adawebpack__webgl__RenderingContext__clear: function(identifier,mask) {
+    from_wasm_object_identifier(identifier).clear(mask);
+  },
+
+  __adawebpack__webgl__RenderingContext__clearColor: function(identifier,red,green,blue,alpha) {
+    from_wasm_object_identifier(identifier).clearColor(red,green,blue,alpha);
   }
 
 };

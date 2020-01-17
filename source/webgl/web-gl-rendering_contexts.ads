@@ -55,14 +55,14 @@ package Web.GL.Rendering_Contexts is
    type WebGL_Rendering_Context is
      new WASM.Objects.Object_Reference with null record;
 
---   ---------------------
---   -- ClearBufferMask --
---   ---------------------
---
---   DEPTH_BUFFER_BIT   : constant := 16#00000100#;
---   STENCIL_BUFFER_BIT : constant := 16#00000400#;
---   COLOR_BUFFER_BIT   : constant := 16#00004000#;
---
+   ---------------------
+   -- ClearBufferMask --
+   ---------------------
+
+   DEPTH_BUFFER_BIT   : constant := 16#00000100#;
+   STENCIL_BUFFER_BIT : constant := 16#00000400#;
+   COLOR_BUFFER_BIT   : constant := 16#00004000#;
+
 --   ---------------
 --   -- BeginMode --
 --   ---------------
@@ -619,24 +619,18 @@ package Web.GL.Rendering_Contexts is
 ----    void bufferSubData(GLenum target, GLintptr offset, BufferDataSource? data);
 ----
 ----    [WebGLHandlesContextLoss] GLenum checkFramebufferStatus(GLenum target);
---
---   not overriding procedure Clear
---    (Self : not null access WebGL_Rendering_Context;
---     Mask : GLbitfield) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "clear";
---
---   not overriding procedure Clear_Color
---    (Self  : not null access WebGL_Rendering_Context;
---     Red   : GLclampf;
---     Green : GLclampf;
---     Blue  : GLclampf;
---     Alpha : GLclampf) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "clearColor";
---
+
+   procedure Clear
+    (Self : in out WebGL_Rendering_Context'Class;
+     Mask : GLbitfield);
+
+   procedure Clear_Color
+    (Self  : in out WebGL_Rendering_Context'Class;
+     Red   : GLclampf;
+     Green : GLclampf;
+     Blue  : GLclampf;
+     Alpha : GLclampf);
+
 ----    void clearDepth(GLclampf depth);
 ----    void clearStencil(GLint s);
 ----    void colorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
