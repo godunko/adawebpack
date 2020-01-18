@@ -42,21 +42,35 @@ package Web.GL is
 
    pragma Preelaborate;
 
-   type GLboolean is new Interfaces.Unsigned_8;
-
    type GLenum is new Interfaces.Unsigned_32;
+
+   type GLboolean is new Interfaces.Unsigned_8;
 
    type GLbitfield is new Interfaces.Unsigned_32;
 
+   --  typedef byte           GLbyte;         /* 'byte' should be a signed 8 bit type. */
+
+   --  typedef short          GLshort;
+
    type GLint is new Interfaces.Integer_32;
    subtype GLsizei is GLint range 0 .. GLint'Last;
+
+   --  type GLintptr is new Interfaces.Integer_32;
+
+   type GLsizeiptr is new Interfaces.Integer_32;
+   --  type GLsizeiptr is new Interfaces.Integer_64;
+   --  XXX i64 can't be passed to/from JavaScript, replace this type by i32
+   --  which should be sufficient for WASM32.
+
+   --  // Ideally the typedef below would use 'unsigned byte', but that doesn't currently exist in Web IDL.
+   --  typedef octet          GLubyte;        /* 'octet' should be an unsigned 8 bit type. */
+
+   --  typedef unsigned short GLushort;
 
    type GLuint is new Interfaces.Unsigned_32;
 
    type GLfloat is new Interfaces.IEEE_Float_32;
    subtype GLclampf is GLfloat range 0.0 .. 1.0;
-
---   type GLintptr is new Interfaces.Integer_64;
 
    type GLfloat_Vector_2 is array (Positive range 1 .. 2) of GLfloat;
    type GLfloat_Vector_3 is array (Positive range 1 .. 3) of GLfloat;
@@ -71,5 +85,28 @@ package Web.GL is
    type GLfloat_Matrix_4x4 is
      array (Positive range 1 .. 4, Positive range 1 .. 4) of GLfloat
        with Convention => Fortran;
+
+private
+
+   --  Some types has representation compatible with i32/f32/f64 data
+   --  types of WebAssembly and may be used directly:
+   --
+   --   - GLbitfield
+   --   - GLclampf (validity should be checked)
+   --   - GLenum
+   --   - GLfloat
+   --   - GLint
+   --   - GLintptr
+   --   - GLsizei
+   --   - GLsizeiptr
+   --   - GLuint
+   --
+   --  While others requires type conversions:
+   --
+   --   - GLboolean
+   --   - GLbyte
+   --   - GLshort
+   --   - GLubyte
+   --   - GLushort
 
 end Web.GL;
