@@ -91,6 +91,10 @@ adawebpack = {
     from_wasm_object_identifier(identifier).drawArrays(mode,first,count);
   },
 
+  __adawebpack__webgl__RenderingContext__enableVertexAttribArray: function(context_identifier,index) {
+    from_wasm_object_identifier(context_identifier).enableVertexAttribArray(index);
+  },
+
   __adawebpack__webgl__RenderingContext__getAttribLocation: function(context_identifier,program_identifier,name_address,name_size) {
     return from_wasm_object_identifier(context_identifier).getAttribLocation(from_wasm_object_identifier(program_identifier), string_to_js(name_address, name_size));
   },

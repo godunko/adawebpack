@@ -767,14 +767,11 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "enable";
---
---   not overriding procedure Enable_Vertex_Attrib_Array
---    (Self  : not null access WebGL_Rendering_Context;
---     Index : GLuint) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "enableVertexAttribArray";
---
+
+   procedure Enable_Vertex_Attrib_Array
+    (Self  : in out WebGL_Rendering_Context;
+     Index : GLuint);
+
 --   not overriding procedure Finish
 --    (Self : not null access WebGL_Rendering_Context) is abstract
 --       with Import     => True,

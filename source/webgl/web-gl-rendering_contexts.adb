@@ -264,6 +264,26 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Mode, First, Count);
    end Draw_Arrays;
 
+   --------------------------------
+   -- Enable_Vertex_Attrib_Array --
+   --------------------------------
+
+   procedure Enable_Vertex_Attrib_Array
+    (Self  : in out WebGL_Rendering_Context;
+     Index : GLuint)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Index      : GLuint)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__enableVertexAttribArray";
+
+   begin
+      Imported (Self.Identifier, Index);
+   end Enable_Vertex_Attrib_Array;
+
    -------------------------
    -- Get_Attrib_Location --
    -------------------------
