@@ -34,102 +34,13 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Interfaces;
+with Web.HTML.Elements;
 
-with WASM.Objects;
+package Web.HTML.Scripts is
 
-with Web.HTML.Buttons;
-with Web.HTML.Canvases;
-with Web.HTML.Scripts;
-with Web.Strings;
-with Web.Utilities;
+   pragma Preelaborate;
 
-package body Web.HTML.Elements is
+   type HTML_Script_Element is
+     new Web.HTML.Elements.HTML_Element with null record;
 
-   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
-     renames Web.Strings.To_Web_String;
-
-   --------------------
-   -- As_HTML_Button --
-   --------------------
-
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element is
-   begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLButtonElement")
-      then
-         raise Constraint_Error;
-
-      else
-         return Web.HTML.Buttons.Instantiate (Self.Identifier);
-      end if;
-   end As_HTML_Button;
-
-   --------------------
-   -- As_HTML_Canvas --
-   --------------------
-
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element is
-   begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLCanvasElement")
-      then
-         raise Constraint_Error;
-
-      else
-         return Web.HTML.Canvases.Instantiate (Self.Identifier);
-      end if;
-   end As_HTML_Canvas;
-
-   --------------------
-   -- As_HTML_Script --
-   --------------------
-
-   function As_HTML_Script
-    (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element is
-   begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLScriptElement")
-      then
-         raise Constraint_Error;
-
-      else
-         return Web.HTML.Scripts.Instantiate (Self.Identifier);
-      end if;
-   end As_HTML_Script;
-
-   ----------------
-   -- Get_Hidden --
-   ----------------
-
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean is
-      use type Interfaces.Unsigned_32;
-
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Element__hidden_getter";
-   begin
-      return Imported (Self.Identifier) /= 0;
-   end Get_Hidden;
-
-   ----------------
-   -- Set_Hidden --
-   ----------------
-
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean) is
-      procedure Imported
-       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Element__hidden_setter";
-
-   begin
-      Imported (Self.Identifier, Boolean'Pos (To));
-   end Set_Hidden;
-
-end Web.HTML.Elements;
+end Web.HTML.Scripts;

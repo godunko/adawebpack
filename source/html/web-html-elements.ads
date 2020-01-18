@@ -37,6 +37,7 @@
 with Web.DOM.Elements;
 limited with Web.HTML.Buttons;
 limited with Web.HTML.Canvases;
+limited with Web.HTML.Scripts;
 
 package Web.HTML.Elements is
 
@@ -52,5 +53,8 @@ package Web.HTML.Elements is
 
    function As_HTML_Canvas
     (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
+
+   function As_HTML_Script
+    (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
 
 end Web.HTML.Elements;
