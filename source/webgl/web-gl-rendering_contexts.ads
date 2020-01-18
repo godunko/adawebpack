@@ -66,28 +66,28 @@ package Web.GL.Rendering_Contexts is
    STENCIL_BUFFER_BIT : constant := 16#00000400#;
    COLOR_BUFFER_BIT   : constant := 16#00004000#;
 
---   ---------------
---   -- BeginMode --
---   ---------------
---
---   POINTS         : constant := 16#0000#;
---   LINES          : constant := 16#0001#;
---   LINE_LOOP      : constant := 16#0002#;
---   LINE_STRIP     : constant := 16#0003#;
---   TRIANGLES      : constant := 16#0004#;
---   TRIANGLE_STRIP : constant := 16#0005#;
---   TRIANGLE_FAN   : constant := 16#0006#;
---
-----    /* AlphaFunction (not supported in ES20) */
-----    /*      NEVER */
-----    /*      LESS */
-----    /*      EQUAL */
-----    /*      LEQUAL */
-----    /*      GREATER */
-----    /*      NOTEQUAL */
-----    /*      GEQUAL */
-----    /*      ALWAYS */
---
+   ---------------
+   -- BeginMode --
+   ---------------
+
+   POINTS         : constant := 16#0000#;
+   LINES          : constant := 16#0001#;
+   LINE_LOOP      : constant := 16#0002#;
+   LINE_STRIP     : constant := 16#0003#;
+   TRIANGLES      : constant := 16#0004#;
+   TRIANGLE_STRIP : constant := 16#0005#;
+   TRIANGLE_FAN   : constant := 16#0006#;
+
+--    /* AlphaFunction (not supported in ES20) */
+--    /*      NEVER */
+--    /*      LESS */
+--    /*      EQUAL */
+--    /*      LEQUAL */
+--    /*      GREATER */
+--    /*      NOTEQUAL */
+--    /*      GEQUAL */
+--    /*      ALWAYS */
+
 --   ------------------------
 --   -- BlendingFactorDest --
 --   ------------------------
@@ -752,16 +752,13 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "disableVertexAttribArray";
---
---   not overriding procedure Draw_Arrays
---    (Self  : not null access WebGL_Rendering_Context;
---     Mode  : GLenum;
---     First : GLint;
---     Count : GLsizei) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "drawArrays";
---
+
+   procedure Draw_Arrays
+    (Self  : WebGL_Rendering_Context'Class;
+     Mode  : GLenum;
+     First : GLint;
+     Count : GLsizei);
+
 ----    void drawElements(GLenum mode, GLsizei count, GLenum type, GLintptr offset);
 --
 --   not overriding procedure Enable
