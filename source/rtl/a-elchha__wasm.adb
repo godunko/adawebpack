@@ -34,6 +34,7 @@
 with Ada.Unchecked_Conversion;
 
 with System.IO; use System.IO;
+with System.Machine_Code;
 
 procedure Ada.Exceptions.Last_Chance_Handler
   (Msg : System.Address; Line : Integer)
@@ -51,12 +52,16 @@ is
         (System.Address, C_String_Ptr);
 
       Msg_Str : constant C_String_Ptr := To_C_String_Ptr (Str);
+      Msg_Len : Natural := 0;
 
    begin
       for J in Msg_Str'Range loop
          exit when Msg_Str (J) = Character'Val (0);
-         Put (Msg_Str (J));
+
+         Msg_Len := Msg_Len + 1;
       end loop;
+
+      Put (Msg_Str (1 .. Msg_Len));
    end Put;
 
 begin
@@ -76,8 +81,9 @@ begin
 
    --  Stop the program
 
-   loop
-      null;
-   end loop;
---   System.Machine_Reset.Stop;
+   System.Machine_Code.Asm ("unreachable", Volatile => True);
+   --  Execution of "unreachable" aborts execution unconditionally. Raise
+   --  statement below present just to prevent compiler's error.
+
+   raise Program_Error;
 end Ada.Exceptions.Last_Chance_Handler;

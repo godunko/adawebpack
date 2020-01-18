@@ -31,6 +31,8 @@
 
 --  This is the WASM version of this package
 
+with Interfaces;
+
 package body System.IO is
 
    Current_Out : File_Type := Stdout;
@@ -75,10 +77,11 @@ package body System.IO is
    end Put;
 
    procedure Put (S : String) is
+      procedure Put_String (S : System.Address; Size : Interfaces.Unsigned_32);
+      pragma Import (C, Put_String, "__gnat_put_string");
+
    begin
-      for J in S'Range loop
-         Put (S (J));
-      end loop;
+      Put_String (S (S'First)'Address, S'Length);
    end Put;
 
    --------------

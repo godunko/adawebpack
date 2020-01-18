@@ -25,6 +25,7 @@ s-imgboo.ads \
 s-imgint.adb \
 s-imgint.ads \
 s-io.ads     \
+s-maccod.ads \
 s-memory.ads \
 s-parame.adb \
 s-pooglo.adb \
@@ -133,6 +134,7 @@ a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
 system.ads   \
+s-maccod.ads \
 s-unstyp.ads \
 unchconv.ads \
 
