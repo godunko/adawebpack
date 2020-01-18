@@ -59,6 +59,10 @@ adawebpack = {
     from_wasm_object_identifier(context_identifier).bindBuffer(target, from_wasm_object_identifier(buffer_identifier));
   },
 
+  __adawebpack__webgl__RenderingContext__bufferData: function(context_identifier,target,size,data,usage) {
+    from_wasm_object_identifier(context_identifier).bufferData(target, new Uint8Array(instance.exports.memory.buffer,data,size), usage);
+  },
+
   __adawebpack__webgl__RenderingContext__clear: function(identifier,mask) {
     from_wasm_object_identifier(identifier).clear(mask);
   },

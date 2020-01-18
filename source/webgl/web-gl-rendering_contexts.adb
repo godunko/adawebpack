@@ -34,8 +34,6 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with System;
-
 with Web.Strings.WASM_Helpers;
 
 package body Web.GL.Rendering_Contexts is
@@ -84,6 +82,31 @@ package body Web.GL.Rendering_Contexts is
       Imported
        (Self.Identifier, Interfaces.Unsigned_32 (Target), Buffer.Identifier);
    end Bind_Buffer;
+
+   -----------------
+   -- Buffer_Data --
+   -----------------
+
+   procedure Buffer_Data
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Size   : Web.GL.GLsizeiptr;
+     Data   : System.Address;
+     Usage  : Web.GL.GLenum)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Target     : Web.GL.GLenum;
+        Size       : Web.GL.GLsizeiptr;
+        Data       : System.Address;
+        Usage      : Web.GL.GLenum)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__webgl__RenderingContext__bufferData";
+
+   begin
+      Imported (Self.Identifier, Target, Size, Data, Usage);
+   end Buffer_Data;
 
    -----------
    -- Clear --

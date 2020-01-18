@@ -33,7 +33,6 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  with System;
 --  
 --  with WebAPI.HTML.Canvas_Elements;
 --  with WebAPI.HTML.Rendering_Contexts;
@@ -41,6 +40,8 @@
 --  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Renderbuffers;
 --  with WebAPI.WebGL.Textures;
+
+with System;
 
 with WASM.Objects;
 
@@ -139,7 +140,7 @@ package Web.GL.Rendering_Contexts is
 --    const GLenum ELEMENT_ARRAY_BUFFER_BINDING   = 0x8895;
 
 --   STREAM_DRAW          : constant := 16#88E0#;
---   STATIC_DRAW          : constant := 16#88E4#;
+   STATIC_DRAW          : constant := 16#88E4#;
 --   DYNAMIC_DRAW         : constant := 16#88E8#;
 --
 ----    const GLenum BUFFER_SIZE                    = 0x8764;
@@ -599,19 +600,17 @@ package Web.GL.Rendering_Contexts is
 --
 ----    void blendFuncSeparate(GLenum srcRGB, GLenum dstRGB,
 ----                           GLenum srcAlpha, GLenum dstAlpha);
-----
-----    typedef (ArrayBuffer or ArrayBufferView) BufferDataSource;
-----    void bufferData(GLenum target, GLsizeiptr size, GLenum usage);
-----    void bufferData(GLenum target, BufferDataSource? data, GLenum usage);
---   not overriding procedure Buffer_Data
---    (Self   : not null access WebGL_Rendering_Context;
---     Target : WebAPI.WebGL.GLenum;
---     Data   : System.Address;
---     Usage  : WebAPI.WebGL.GLenum) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "bufferData";
---
+
+--    typedef (ArrayBuffer or ArrayBufferView) BufferDataSource;
+--    void bufferData(GLenum target, GLsizeiptr size, GLenum usage);
+--    void bufferData(GLenum target, BufferDataSource? data, GLenum usage);
+   procedure Buffer_Data
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Size   : Web.GL.GLsizeiptr;
+     Data   : System.Address;
+     Usage  : Web.GL.GLenum);
+
 ----    void bufferSubData(GLenum target, GLintptr offset, BufferDataSource? data);
 ----
 ----    [WebGLHandlesContextLoss] GLenum checkFramebufferStatus(GLenum target);
