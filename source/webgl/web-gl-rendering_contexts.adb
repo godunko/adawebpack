@@ -393,6 +393,34 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Shader.Identifier, Source_A, Source_S);
    end Shader_Source;
 
+   ------------------------
+   -- Uniform_Matrix_4fv --
+   ------------------------
+
+   procedure Uniform_Matrix_4fv
+    (Self      : in out WebGL_Rendering_Context'Class;
+     Location  : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     Transpose : Boolean;
+     Value     : GLfloat_Matrix_4x4)
+   is
+      procedure Imported
+       (Context_Identifier  : WASM.Objects.Object_Identifier;
+        Location_Identifier : WASM.Objects.Object_Identifier;
+        Transpose           : Interfaces.Unsigned_32;
+        Value_Address       : System.Address)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__uniformMatrix4fv";
+
+   begin
+      Imported
+       (Self.Identifier,
+        Location.Identifier,
+        Boolean'Pos (Transpose),
+        Value (Value'First (1), Value'First (2))'Address);
+   end Uniform_Matrix_4fv;
+
    -----------------
    -- Use_Program --
    -----------------
