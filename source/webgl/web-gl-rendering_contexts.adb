@@ -393,4 +393,41 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Program.Identifier);
    end Use_Program;
 
+   ---------------------------
+   -- Vertex_Attrib_Pointer --
+   ---------------------------
+
+   procedure Vertex_Attrib_Pointer
+    (Self       : in out WebGL_Rendering_Context'Class;
+     Index      : GLuint;
+     Size       : GLint;
+     Data_Type  : GLenum;
+     Normalized : Boolean;
+     Stride     : GLsizei;
+     Offset     : GLintptr)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Index      : GLuint;
+        Size       : GLint;
+        Data_Type  : GLenum;
+        Normalized : Interfaces.Unsigned_32;
+        Stride     : GLsizei;
+        Offset     : GLintptr)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__vertexAttribPointer";
+
+   begin
+      Imported
+       (Self.Identifier,
+        Index,
+        Size,
+        Data_Type,
+        Boolean'Pos (Normalized),
+        Stride,
+        Offset);
+   end Vertex_Attrib_Pointer;
+
 end Web.GL.Rendering_Contexts;

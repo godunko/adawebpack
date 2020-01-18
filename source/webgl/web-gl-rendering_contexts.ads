@@ -244,19 +244,19 @@ package Web.GL.Rendering_Contexts is
 ----
 ----    /* HintTarget */
 ----    const GLenum GENERATE_MIPMAP_HINT            = 0x8192;
---
---   --------------
---   -- DataType --
---   --------------
---
-----    const GLenum INT                            = 0x1404;
-----    const GLenum UNSIGNED_INT                   = 0x1405;
---   BYTE           : constant := 16#1400#;
---   UNSIGNED_BYTE  : constant := 16#1401#;
---   SHORT          : constant := 16#1402#;
---   UNSIGNED_SHORT : constant := 16#1403#;
---   FLOAT          : constant := 16#1406#;
---
+
+   --------------
+   -- DataType --
+   --------------
+
+--    const GLenum INT                            = 0x1404;
+--    const GLenum UNSIGNED_INT                   = 0x1405;
+   BYTE           : constant := 16#1400#;
+   UNSIGNED_BYTE  : constant := 16#1401#;
+   SHORT          : constant := 16#1402#;
+   UNSIGNED_SHORT : constant := 16#1403#;
+   FLOAT          : constant := 16#1406#;
+
 --   -----------------
 --   -- PixelFormat --
 --   -----------------
@@ -1193,19 +1193,16 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "vertexAttrib4fv";
---
---   not overriding procedure Vertex_Attrib_Pointer
---    (Self       : not null access WebGL_Rendering_Context;
---     Index      : GLuint;
---     Size       : GLint;
---     Data_Type  : GLenum;
---     Normalized : Boolean;
---     Stride     : GLsizei;
---     Offset     : GLintptr) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "vertexAttribPointer";
---
+
+   procedure Vertex_Attrib_Pointer
+    (Self       : in out WebGL_Rendering_Context'Class;
+     Index      : GLuint;
+     Size       : GLint;
+     Data_Type  : GLenum;
+     Normalized : Boolean;
+     Stride     : GLsizei;
+     Offset     : GLintptr);
+
 --   not overriding procedure Viewport
 --    (Self   : not null access WebGL_Rendering_Context;
 --     X      : GLint;

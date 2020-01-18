@@ -109,6 +109,10 @@ adawebpack = {
 
   __adawebpack__webgl__RenderingContext__useProgram: function(context_identifier,program_identifier) {
     from_wasm_object_identifier(context_identifier).useProgram(from_wasm_object_identifier(program_identifier));
+  },
+
+  __adawebpack__webgl__RenderingContext__vertexAttribPointer(context_identifier,index,size,type,normalized,stride,offset) {
+    from_wasm_object_identifier(context_identifier).vertexAttribPointer(index,size,type,normalized !== 0,stride,offset);
   }
 
 };

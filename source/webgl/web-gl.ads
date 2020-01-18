@@ -55,7 +55,10 @@ package Web.GL is
    type GLint is new Interfaces.Integer_32;
    subtype GLsizei is GLint range 0 .. GLint'Last;
 
-   --  type GLintptr is new Interfaces.Integer_32;
+   type GLintptr is new Interfaces.Integer_32;
+   --  type GLintptr is new Interfaces.Integer_64;
+   --  XXX i64 can't be passed to/from JavaScript, replace this type by i32
+   --  which should be sufficient for WASM32.
 
    type GLsizeiptr is new Interfaces.Integer_32;
    --  type GLsizeiptr is new Interfaces.Integer_64;
