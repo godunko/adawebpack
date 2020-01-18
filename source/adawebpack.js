@@ -4,6 +4,14 @@ adawebpack = {
   __gnat_put_int: function (item) { console.log(item); },
   __gnat_put_char: function (item) { console.log(String.fromCharCode(item)); },
   __gnat_put_string: function (address,size) { console.log(String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size))); },
+  __gnat_put_exception: function (address,size,line) {
+     msg = String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size));
+     if (line !== 0) {
+        console.error("Predefined exception raised at %s:%i", msg, line);
+     } else {
+        console.error("User defined exception, message: %s", msg);
+     }
+  },
 
   __adawebpack__is_instance_of: function(identifier, address, size)
   {

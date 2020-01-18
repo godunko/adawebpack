@@ -32,27 +32,32 @@
 --  Default last chance handler for no propagation runtimes
 
 with Ada.Unchecked_Conversion;
+with Interfaces;
 
-with System.IO; use System.IO;
 with System.Machine_Code;
 
 procedure Ada.Exceptions.Last_Chance_Handler
   (Msg : System.Address; Line : Integer)
 is
-   procedure Put (Str : System.Address);
-   --  Put for a nul-terminated string (a C string)
 
-   ---------
-   -- Put --
-   ---------
+   function Strlen (Str : System.Address) return Interfaces.Unsigned_32;
+   --  Return length of the nul-terminated string.
 
-   procedure Put (Str : System.Address) is
+   ------------
+   -- Strlen --
+   ------------
+
+   function Strlen (Str : System.Address) return Interfaces.Unsigned_32 is
+
+      use type Interfaces.Unsigned_32;
+
       type C_String_Ptr is access String (1 .. Positive'Last);
+
       function To_C_String_Ptr is new Ada.Unchecked_Conversion
         (System.Address, C_String_Ptr);
 
       Msg_Str : constant C_String_Ptr := To_C_String_Ptr (Str);
-      Msg_Len : Natural := 0;
+      Msg_Len : Interfaces.Unsigned_32 := 0;
 
    begin
       for J in Msg_Str'Range loop
@@ -61,23 +66,19 @@ is
          Msg_Len := Msg_Len + 1;
       end loop;
 
-      Put (Msg_Str (1 .. Msg_Len));
-   end Put;
+      return Msg_Len;
+   end Strlen;
+
+   procedure Put_Exception
+     (Address : System.Address;
+      Size    : Interfaces.Unsigned_32;
+      Line    : Interfaces.Unsigned_32)
+        with Import     => True,
+             Convention => C,
+             Link_Name  => "__gnat_put_exception";
 
 begin
-   Put_Line ("In last chance handler");
-
-   if Line /= 0 then
-      Put ("Predefined exception raised at ");
-      Put (Msg);
-      Put (':');
-      Put (Line);
-   else
-      Put ("User defined exception, message: ");
-      Put (Msg);
-   end if;
-
-   New_Line;
+   Put_Exception (Msg, Strlen (Msg), Interfaces.Unsigned_32 (Line));
 
    --  Stop the program
 
