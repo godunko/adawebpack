@@ -1117,14 +1117,11 @@ package Web.GL.Rendering_Contexts is
 --
 ----    void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose,
 ----                          sequence<GLfloat> value);
---
---   not overriding procedure Use_Program
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "useProgram";
---
+
+   procedure Use_Program
+    (Self    : in out WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class);
+
 --   not overriding procedure Validate_Program
 --    (Self    : not null access WebGL_Rendering_Context;
 --     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class) is abstract

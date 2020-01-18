@@ -105,6 +105,10 @@ adawebpack = {
 
   __adawebpack__webgl__RenderingContext__shaderSource: function(context_identifier,shader_identifier,source_address,source_size) {
     from_wasm_object_identifier(context_identifier).shaderSource(from_wasm_object_identifier(shader_identifier),string_to_js(source_address,source_size));
+  },
+
+  __adawebpack__webgl__RenderingContext__useProgram: function(context_identifier,program_identifier) {
+    from_wasm_object_identifier(context_identifier).useProgram(from_wasm_object_identifier(program_identifier));
   }
 
 };

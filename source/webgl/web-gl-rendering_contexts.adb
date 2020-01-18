@@ -373,4 +373,24 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Shader.Identifier, Source_A, Source_S);
    end Shader_Source;
 
+   -----------------
+   -- Use_Program --
+   -----------------
+
+   procedure Use_Program
+    (Self    : in out WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__useProgram";
+
+   begin
+      Imported (Self.Identifier, Program.Identifier);
+   end Use_Program;
+
 end Web.GL.Rendering_Contexts;
