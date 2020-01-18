@@ -50,4 +50,7 @@ package Web.Strings.WASM_Helpers is
    --  Returns address and size of the string data for given string object.
    --  Address is valid till string object exists and immutable.
 
+   function To_Ada (Item : System.Address) return Web.Strings.Web_String;
+   --  Validate and wrap given by address shared data object.
+
 end Web.Strings.WASM_Helpers;

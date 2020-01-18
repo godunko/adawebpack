@@ -34,77 +34,54 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Ada.Unchecked_Conversion;
-with System.Storage_Elements;
+with Interfaces;
+with System;
 
-package body Web.Strings.WASM_Helpers is
+with WASM.Objects;
+with Web.Strings.WASM_Helpers;
 
-   function To_Data is
-     new Ada.Unchecked_Conversion (System.Address, String_Data_Access);
+package body Web.HTML.Scripts is
 
-   function Allocate_String
-    (Size : Interfaces.Unsigned_32) return System.Address
-       with Export     => True,
-            Convention => C,
-            Link_Name  => "__adawebpack__core__allocate_string";
+   --------------
+   -- Get_Text --
+   --------------
 
-   Dummy : String_Data (1);
-
-   ---------------------
-   -- Allocate_String --
-   ---------------------
-
-   function Allocate_String
-    (Size : Interfaces.Unsigned_32) return System.Address
+   function Get_Text
+    (Self : HTML_Script_Element'Class) return Web.Strings.Web_String
    is
-      Aux : constant String_Data_Access := new String_Data (Size);
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Script__text_getter";
 
    begin
-      Aux.Size   := Size;
-      Aux.Length := Integer (Size);
+      return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
+   end Get_Text;
 
-      return Aux.all.Data'Address;
-   end Allocate_String;
+   --------------
+   -- Set_Text --
+   --------------
 
-   ------------
-   -- To_Ada --
-   ------------
+   procedure Set_Text
+    (Self : in out HTML_Script_Element'Class;
+     To   : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Script__text_setter";
 
-   function To_Ada (Item : System.Address) return Web.Strings.Web_String is
-      use type System.Address;
-      use type System.Storage_Elements.Storage_Offset;
-
-      Aux : String_Data_Access := null;
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
 
    begin
-      if Item /= System.Null_Address then
-         Aux := To_Data (Item - Dummy.Data'Position);
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, A, S);
+   end Set_Text;
 
-         --  XXX Validation and length recomputation are not implemented.
-
-         Aux.Length := Integer (Aux.Size);
-      end if;
-
-      return (Ada.Finalization.Controlled with Data => Aux);
-   end To_Ada;
-
-   -----------
-   -- To_JS --
-   -----------
-
-   procedure To_JS
-    (Item    : Web_String;
-     Address : out System.Address;
-     Size    : out Interfaces.Unsigned_32) is
-   begin
-      if Item.Data = null then
-         Address := System.Null_Address;
-         Size    := 0;
-
-      else
-         Address := Item.Data.Data (Item.Data.Data'First)'Address;
-         Size    := Item.Data.Size;
-      end if;
-   end To_JS;
-
-end Web.Strings.WASM_Helpers;
+end Web.HTML.Scripts;

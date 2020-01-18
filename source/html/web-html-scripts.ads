@@ -35,6 +35,7 @@
 ------------------------------------------------------------------------------
 
 with Web.HTML.Elements;
+with Web.Strings;
 
 package Web.HTML.Scripts is
 
@@ -42,5 +43,11 @@ package Web.HTML.Scripts is
 
    type HTML_Script_Element is
      new Web.HTML.Elements.HTML_Element with null record;
+
+   function Get_Text
+    (Self : HTML_Script_Element'Class) return Web.Strings.Web_String;
+   procedure Set_Text
+    (Self : in out HTML_Script_Element'Class;
+     To   : Web.Strings.Web_String);
 
 end Web.HTML.Scripts;

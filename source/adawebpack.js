@@ -51,6 +51,14 @@ adawebpack = {
     return +from_wasm_object_identifier(identifier).hidden;
   },
 
+  __adawebpack__html__Script__text_getter: function(identifier) {
+    return string_to_wasm(from_wasm_object_identifier(identifier).text);
+  },
+
+  __adawebpack__html__Script__text_setter: function(identifier,address,size) {
+    from_wasm_object_identifier(identifier).text = string_to_js(address,size);
+  },
+
   __adawebpack__webgl__RenderingContext__attachShader: function(context_identifier,program_identifier,shader_identifier) {
     from_wasm_object_identifier(context_identifier).attachShader(from_wasm_object_identifier(program_identifier), from_wasm_object_identifier(shader_identifier));
   },
@@ -150,4 +158,14 @@ function from_wasm_object_identifier(identifier)
 function string_to_js(address, size)
 {
   return String.fromCharCode.apply(null, new Uint16Array(instance.exports.memory.buffer, address, size));
+}
+
+function string_to_wasm(item)
+{
+  s = instance.exports.__adawebpack__core__allocate_string(item.length);
+  a = new Uint16Array(instance.exports.memory.buffer, s, item.length);
+  for(var i=0, l=item.length; i < l; i++) {
+    a[i] = item.charCodeAt(i);
+  }
+  return s;
 }
