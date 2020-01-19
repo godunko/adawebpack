@@ -1065,19 +1065,16 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "uniform4f";
---
---   not overriding procedure Uniform_4fv
---    (Self     : not null access WebGL_Rendering_Context;
---     Location : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;
---     Value    : GLfloat_Vector_4) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "uniform4fv";
---
-----    void uniform4fv(WebGLUniformLocation? location, sequence<GLfloat> v);
-----    void uniform4i(WebGLUniformLocation? location, GLint x, GLint y, GLint z, GLint w);
-----    void uniform4iv(WebGLUniformLocation? location, Int32Array v);
-----    void uniform4iv(WebGLUniformLocation? location, sequence<long> v);
+
+   procedure Uniform_4fv
+    (Self     : in out WebGL_Rendering_Context'Class;
+     Location : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     Value    : GLfloat_Vector_4);
+
+--    void uniform4fv(WebGLUniformLocation? location, sequence<GLfloat> v);
+--    void uniform4i(WebGLUniformLocation? location, GLint x, GLint y, GLint z, GLint w);
+--    void uniform4iv(WebGLUniformLocation? location, Int32Array v);
+--    void uniform4iv(WebGLUniformLocation? location, sequence<long> v);
 
    procedure Uniform_Matrix_2fv
     (Self      : in out WebGL_Rendering_Context'Class;
