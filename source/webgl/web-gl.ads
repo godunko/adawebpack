@@ -75,18 +75,18 @@ package Web.GL is
    type GLfloat is new Interfaces.IEEE_Float_32;
    subtype GLclampf is GLfloat range 0.0 .. 1.0;
 
-   type GLfloat_Vector_2 is array (Positive range 1 .. 2) of GLfloat;
-   type GLfloat_Vector_3 is array (Positive range 1 .. 3) of GLfloat;
-   type GLfloat_Vector_4 is array (Positive range 1 .. 4) of GLfloat;
+   type GLfloat_Vector_2 is array (Positive range 1 .. 2) of aliased GLfloat;
+   type GLfloat_Vector_3 is array (Positive range 1 .. 3) of aliased GLfloat;
+   type GLfloat_Vector_4 is array (Positive range 1 .. 4) of aliased GLfloat;
 
    type GLfloat_Matrix_2x2 is
-     array (Positive range 1 .. 2, Positive range 1 .. 2) of GLfloat
+     array (Positive range 1 .. 2, Positive range 1 .. 2) of aliased GLfloat
        with Convention => Fortran;
    type GLfloat_Matrix_3x3 is
-     array (Positive range 1 .. 3, Positive range 1 .. 3) of GLfloat
+     array (Positive range 1 .. 3, Positive range 1 .. 3) of aliased GLfloat
        with Convention => Fortran;
    type GLfloat_Matrix_4x4 is
-     array (Positive range 1 .. 4, Positive range 1 .. 4) of GLfloat
+     array (Positive range 1 .. 4, Positive range 1 .. 4) of aliased GLfloat
        with Convention => Fortran;
 
 private
