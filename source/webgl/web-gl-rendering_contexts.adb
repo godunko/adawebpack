@@ -394,6 +394,29 @@ package body Web.GL.Rendering_Contexts is
    end Shader_Source;
 
    -----------------
+   -- Uniform_2fv --
+   -----------------
+
+   procedure Uniform_2fv
+    (Self     : in out WebGL_Rendering_Context'Class;
+     Location : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     Value    : GLfloat_Vector_2)
+   is
+      procedure Imported
+       (Context_Identifier  : WASM.Objects.Object_Identifier;
+        Location_Identifier : WASM.Objects.Object_Identifier;
+        Value_Address       : System.Address)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__uniform2fv";
+
+   begin
+      Imported
+       (Self.Identifier, Location.Identifier, Value (Value'First)'Address);
+   end Uniform_2fv;
+
+   -----------------
    -- Uniform_3fv --
    -----------------
 
