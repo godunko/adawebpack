@@ -394,6 +394,34 @@ package body Web.GL.Rendering_Contexts is
    end Shader_Source;
 
    ------------------------
+   -- Uniform_Matrix_2fv --
+   ------------------------
+
+   procedure Uniform_Matrix_2fv
+    (Self      : in out WebGL_Rendering_Context'Class;
+     Location  : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     Transpose : Boolean;
+     Value     : GLfloat_Matrix_2x2)
+   is
+      procedure Imported
+       (Context_Identifier  : WASM.Objects.Object_Identifier;
+        Location_Identifier : WASM.Objects.Object_Identifier;
+        Transpose           : Interfaces.Unsigned_32;
+        Value_Address       : System.Address)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__uniformMatrix2fv";
+
+   begin
+      Imported
+       (Self.Identifier,
+        Location.Identifier,
+        Boolean'Pos (Transpose),
+        Value (Value'First (1), Value'First (2))'Address);
+   end Uniform_Matrix_2fv;
+
+   ------------------------
    -- Uniform_Matrix_3fv --
    ------------------------
 
