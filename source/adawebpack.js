@@ -128,8 +128,12 @@ adawebpack = {
     from_wasm_object_identifier(context_identifier).shaderSource(from_wasm_object_identifier(shader_identifier),string_to_js(source_address,source_size));
   },
 
+  __adawebpack__webgl__RenderingContext__uniform1i: function(context_identifier,location_identifier,x) {
+    from_wasm_object_identifier(context_identifier).uniform1i(from_wasm_object_identifier(location_identifier),x);
+  },
+
   __adawebpack__webgl__RenderingContext__uniform1f: function(context_identifier,location_identifier,x) {
-    from_wasm_object_identifier(context_identifier).uniform2fv(from_wasm_object_identifier(location_identifier),x);
+    from_wasm_object_identifier(context_identifier).uniform1f(from_wasm_object_identifier(location_identifier),x);
   },
 
   __adawebpack__webgl__RenderingContext__uniform2fv: function(context_identifier,location_identifier,value_address) {
