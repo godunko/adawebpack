@@ -987,18 +987,15 @@ package Web.GL.Rendering_Contexts is
 ----                       GLenum format, GLenum type, ArrayBufferView? pixels);
 ----    void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset,
 ----                       GLenum format, GLenum type, TexImageSource? source); // May throw DOMException
---
---   not overriding procedure Uniform_1f
---    (Self     : not null access WebGL_Rendering_Context;
---     Location : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;
---     X        : GLfloat) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "uniform1f";
---
-----    void uniform1fv(WebGLUniformLocation? location, Float32Array v);
-----    void uniform1fv(WebGLUniformLocation? location, sequence<GLfloat> v);
---
+
+   procedure Uniform_1f
+    (Self     : in out WebGL_Rendering_Context'Class;
+     Location : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     X        : GLfloat);
+
+--    void uniform1fv(WebGLUniformLocation? location, Float32Array v);
+--    void uniform1fv(WebGLUniformLocation? location, sequence<GLfloat> v);
+
 --   not overriding procedure Uniform_1i
 --    (Self     : not null access WebGL_Rendering_Context;
 --     Location : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;

@@ -393,6 +393,28 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Shader.Identifier, Source_A, Source_S);
    end Shader_Source;
 
+   ----------------
+   -- Uniform_1f --
+   ----------------
+
+   procedure Uniform_1f
+    (Self     : in out WebGL_Rendering_Context'Class;
+     Location : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     X        : GLfloat)
+   is
+      procedure Imported
+       (Context_Identifier  : WASM.Objects.Object_Identifier;
+        Location_Identifier : WASM.Objects.Object_Identifier;
+        Value               : GLfloat)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__uniform1f";
+
+   begin
+      Imported (Self.Identifier, Location.Identifier, X);
+   end Uniform_1f;
+
    -----------------
    -- Uniform_2fv --
    -----------------
