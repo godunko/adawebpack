@@ -1090,18 +1090,15 @@ package Web.GL.Rendering_Contexts is
 --
 ----    void uniformMatrix2fv(WebGLUniformLocation? location, GLboolean transpose,
 ----                          sequence<GLfloat> value);
---
---   not overriding procedure Uniform_Matrix_3fv
---    (Self      : not null access WebGL_Rendering_Context;
---     Location  : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;
---     Transpose : Boolean;
---     Value     : GLfloat_Matrix_3x3) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "uniformMatrix3fv";
---
-----    void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose,
-----                          sequence<GLfloat> value);
+
+   procedure Uniform_Matrix_3fv
+    (Self      : in out WebGL_Rendering_Context'Class;
+     Location  : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     Transpose : Boolean;
+     Value     : GLfloat_Matrix_3x3);
+
+--    void uniformMatrix3fv(WebGLUniformLocation? location, GLboolean transpose,
+--                          sequence<GLfloat> value);
 
    procedure Uniform_Matrix_4fv
     (Self      : in out WebGL_Rendering_Context'Class;
@@ -1109,8 +1106,8 @@ package Web.GL.Rendering_Contexts is
      Transpose : Boolean;
      Value     : GLfloat_Matrix_4x4);
 
-----    void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose,
-----                          sequence<GLfloat> value);
+--    void uniformMatrix4fv(WebGLUniformLocation? location, GLboolean transpose,
+--                          sequence<GLfloat> value);
 
    procedure Use_Program
     (Self    : in out WebGL_Rendering_Context'Class;
