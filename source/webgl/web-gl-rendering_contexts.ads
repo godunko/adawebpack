@@ -996,17 +996,14 @@ package Web.GL.Rendering_Contexts is
 --    void uniform1fv(WebGLUniformLocation? location, Float32Array v);
 --    void uniform1fv(WebGLUniformLocation? location, sequence<GLfloat> v);
 
---   not overriding procedure Uniform_1i
---    (Self     : not null access WebGL_Rendering_Context;
---     Location : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;
---     X        : GLint) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "uniform1i";
---
-----    void uniform1iv(WebGLUniformLocation? location, Int32Array v);
-----    void uniform1iv(WebGLUniformLocation? location, sequence<long> v);
---
+   procedure Uniform_1i
+    (Self     : in out WebGL_Rendering_Context'Class;
+     Location : Web.GL.Uniform_Locations.WebGL_Uniform_Location'Class;
+     X        : GLint);
+
+--    void uniform1iv(WebGLUniformLocation? location, Int32Array v);
+--    void uniform1iv(WebGLUniformLocation? location, sequence<long> v);
+
 --   not overriding procedure Uniform_2f
 --    (Self     : not null access WebGL_Rendering_Context;
 --     Location : WebAPI.WebGL.Uniform_Locations.WebGL_Uniform_Location_Access;
