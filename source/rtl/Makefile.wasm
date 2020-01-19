@@ -38,6 +38,9 @@ s-stoele.adb \
 s-stoele.ads \
 s-stopoo.adb \
 s-stopoo.ads \
+s-stposu.ads \
+s-spsufi.adb \
+s-spsufi.ads \
 s-strhas.adb \
 s-strhas.ads \
 s-traent.adb \
@@ -188,6 +191,7 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-parame__wasm.ads $(WASMINCLUDE)/s-parame.ads
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.adb $(WASMINCLUDE)/s-soflin.adb
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
+	cp -p $(AWP_SRC)/rtl/s-stposu__wasm.adb $(WASMINCLUDE)/s-stposu.adb
 	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
 	cd $(WASMLIB) && for f in $(COMPILABLE_WASM_SPECS); do \
