@@ -39,7 +39,7 @@ abstract project AdaWebPack_Config is
    for Object_Dir use "../.objs/";
 
    package Compiler is
-      for Switches ("Ada") use ("--target=wasm32");
+      for Switches ("Ada") use ("--target=wasm32", "-O1");
    end Compiler;
 
 end AdaWebPack_Config;
