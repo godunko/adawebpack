@@ -3,14 +3,14 @@
   <head>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css"/>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/buttons-min.css"/>
-    <script src='../../source/adawebpack.js'></script>
+    <script src='adawebpack.js'></script>
     <script>
       var instance;
       var local_functions = {};
       var imports = {
         env: Object.assign({}, local_functions, adawebpack)
       };
-      fetch(".objs/main.wasm")
+      fetch("main.wasm")
         .then(response => response.arrayBuffer())
         .then(bytes => WebAssembly.instantiate(bytes, imports))
         .then(obj => {
