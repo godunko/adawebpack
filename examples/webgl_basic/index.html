@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/buttons-min.css"/>
+    <script id="vertex-shader" type="not-javascript">
+      attribute vec4 aVertexPosition;
+      uniform mat4 uModelViewMatrix;
+      uniform mat4 uProjectionMatrix;
+
+      void main() {
+        gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+      }
+    </script>
+    <script id="fragment-shader" type="not-javascript">
+      void main() {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+      }
+    </script>
+    <script src='adawebpack.js'></script>
+    <script>
+      var instance;
+      var local_functions = {};
+      var imports = {
+        env: Object.assign({}, local_functions, adawebpack)
+      };
+      fetch("main.wasm")
+        .then(response => response.arrayBuffer())
+        .then(bytes => WebAssembly.instantiate(bytes, imports))
+        .then(obj => {
+          instance = obj.instance;
+          obj.instance.exports.adainit();
+        })
+    </script>
+  </head>
+  <body style='margin: auto; text-align: center; width: 400px;'>
+    <canvas id='glcanvas'></canvas>
+  </body>
+</html>
