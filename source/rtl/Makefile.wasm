@@ -103,7 +103,6 @@ s-imgllu.adb \
 s-imgllu.ads \
 s-imguns.adb \
 s-imguns.ads \
-s-maccod.ads \
 s-powtab.ads \
 s-valboo.adb \
 s-valboo.ads \
@@ -156,7 +155,6 @@ i-cexten.ads \
 s-atacco.ads \
 s-fatllf.ads \
 s-fatsfl.ads \
-s-maccod.ads \
 s-powtab.ads \
 machcode.ads \
 text_io.ads  \
