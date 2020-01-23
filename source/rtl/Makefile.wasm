@@ -6,6 +6,7 @@ a-charac.ads \
 a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
+a-numeri.ads \
 a-tags.adb   \
 a-tags.ads   \
 a-unccon.ads \
@@ -15,6 +16,10 @@ s-addima.adb \
 s-addima.ads \
 s-casuti.adb \
 s-casuti.ads \
+s-fatgen.adb \
+s-fatgen.ads \
+s-fatflt.ads \
+s-fatlfl.ads \
 s-finmas.ads \
 s-finroo.adb \
 s-finroo.ads \
@@ -81,12 +86,8 @@ s-explli.ads \
 s-explli.adb \
 s-expuns.ads \
 s-expuns.adb \
-s-fatflt.ads \
 s-fatllf.ads \
-s-fatgen.adb \
-s-fatgen.ads \
 s-fatsfl.ads \
-s-fatlfl.ads \
 s-flocon.ads \
 s-fore.ads   \
 s-fore.adb   \
@@ -133,10 +134,17 @@ COMPILABLE_WASM_SPECS= \
 ada.ads      \
 a-charac.ads \
 a-chzla1.ads \
+a-nlelfu.ads \
+a-nllefu.ads \
+a-nuelfu.ads \
+a-numeri.ads \
 a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
 system.ads   \
+s-fatflt.ads \
+s-fatlfl.ads \
+s-libpre.ads \
 s-maccod.ads \
 s-unstyp.ads \
 unchconv.ads \
@@ -146,9 +154,7 @@ g-souinf.ads \
 i-c.ads      \
 i-cexten.ads \
 s-atacco.ads \
-s-fatflt.ads \
 s-fatllf.ads \
-s-fatlfl.ads \
 s-fatsfl.ads \
 s-maccod.ads \
 s-powtab.ads \
@@ -175,13 +181,26 @@ wasm: build
 	cp -p $(RTS_SRC)/zfp/a-elchha.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/zfp/a-except.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
+	cp -p $(RTS_SRC)/math/a-ngelfu.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/a-nlelfu.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/a-nllefu.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/a-nuelfu.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/system-wasm.ads $(WASMINCLUDE)/system.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(WASMINCLUDE)/s-assert.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(WASMINCLUDE)/s-assert.adb
 	cp -p $(AWP_SRC)/rtl/s-finmas__wasm.adb $(WASMINCLUDE)/s-finmas.adb
+	cp -p $(RTS_SRC)/math/s-gcmain.ad[sb] $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-init.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-init.adb $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-io__wasm.adb $(WASMINCLUDE)/s-io.adb
+	cp -p $(RTS_SRC)/math/harddp/s-lidosq.adb $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-lidosq.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-libdou.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-libm.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-libpre.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-libsin.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/hardsp/s-lisisq.adb $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/math/s-lisisq.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memcom.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memcop.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memmov.ad[sb] $(WASMINCLUDE)/
