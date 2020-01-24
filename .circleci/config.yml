@@ -1,0 +1,9 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: reznik/gnat:gnat-wasm
+     steps:
+       - run: cd /gnat-llvm ; git pull; cd /gnat-llvm/llvm-interface/adawebpack_src; git pull
+       - run: svn up /gnat-llvm/llvm-interface/gnat_src/
+       - run: make wasm -C  /gnat-llvm/llvm-interface/
