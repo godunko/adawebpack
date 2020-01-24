@@ -4,6 +4,8 @@ adawebpack = {
   __gnat_put_int: function (item) { console.log(item); },
   __gnat_put_char: function (item) { console.log(String.fromCharCode(item)); },
   __gnat_put_string: function (address,size) { console.log(String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size))); },
+  __gnat_put_f32: function (item) { console.log(item); },
+  __gnat_put_f64: function (item) { console.log(item); },
   __gnat_put_exception: function (address,size,line) {
      msg = String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size));
      if (line !== 0) {
