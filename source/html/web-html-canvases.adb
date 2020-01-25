@@ -72,6 +72,24 @@ package body Web.HTML.Canvases is
          (Imported (Self.Identifier, A, S));
    end Get_Context;
 
+   ----------------
+   -- Get_Height --
+   ----------------
+
+   function Get_Height
+    (Self : HTML_Canvas_Element'Class) return Web.DOM_Unsigned_Long
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Canvas__height_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Get_Height;
+
    ---------------
    -- Get_Width --
    ---------------

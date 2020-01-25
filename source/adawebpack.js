@@ -62,6 +62,10 @@ adawebpack = {
     return +from_wasm_object_identifier(identifier).disabled;
   },
 
+  __adawebpack__html__Canvas__height_getter: function(identifier) {
+    return from_wasm_object_identifier(identifier).height;
+  },
+
   __adawebpack__html__Canvas__getContext: function(identifier,address,size) {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).getContext(string_to_js(address,size)));
   },

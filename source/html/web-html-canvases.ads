@@ -64,13 +64,9 @@ package Web.HTML.Canvases is
 --  );
 --  };
 
---   not overriding function Get_Height
---    (Self : not null access constant HTML_Canvas_Element)
---       return WebAPI.DOM_Unsigned_Long is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "height";
---
+   function Get_Height
+    (Self : HTML_Canvas_Element'Class) return Web.DOM_Unsigned_Long;
+
 --   not overriding procedure Set_Height
 --    (Self : not null access HTML_Canvas_Element;
 --     To   : WebAPI.DOM_Unsigned_Long) is abstract
