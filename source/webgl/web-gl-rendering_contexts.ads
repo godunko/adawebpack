@@ -777,13 +777,9 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "finish";
---
---   not overriding procedure Flush
---    (Self : not null access WebGL_Rendering_Context) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "flush";
---
+
+   procedure Flush (Self : in out WebGL_Rendering_Context);
+
 --   not overriding procedure Framebuffer_Renderbuffer
 --    (Self                : not null access WebGL_Rendering_Context;
 --     Target              : WebAPI.WebGL.GLenum;
