@@ -70,6 +70,10 @@ adawebpack = {
     from_wasm_object_identifier(identifier).text = string_to_js(address,size);
   },
 
+  __adawebpack__html__Window__requestAnimationFrame: function(address) {
+    return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
+  },
+
   __adawebpack__webgl__RenderingContext__attachShader: function(context_identifier,program_identifier,shader_identifier) {
     from_wasm_object_identifier(context_identifier).attachShader(from_wasm_object_identifier(program_identifier), from_wasm_object_identifier(shader_identifier));
   },

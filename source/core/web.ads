@@ -34,8 +34,20 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with Interfaces;
+
 package Web is
 
    pragma Pure;
+
+   subtype DOM_Unsigned_Long is Interfaces.Unsigned_32;
+
+   subtype DOM_Double is Interfaces.IEEE_Float_64;
+
+   ----------------------------------
+   -- High Resolution Time Level 2 --
+   ----------------------------------
+
+   type DOM_High_Res_Time_Stamp is new DOM_Double;
 
 end Web;

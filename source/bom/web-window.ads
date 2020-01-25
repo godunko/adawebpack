@@ -40,6 +40,13 @@ with Web.HTML.Documents;
 
 package Web.Window is
 
+   type Frame_Request_Callback is
+     access procedure (Time : Web.DOM_High_Res_Time_Stamp)
+       with Convention => C;
+
    function Document return Web.HTML.Documents.Document;
+
+   function Request_Animation_Frame
+    (Callback : not null Frame_Request_Callback) return Web.DOM_Unsigned_Long;
 
 end Web.Window;

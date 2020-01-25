@@ -34,9 +34,34 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
 with WASM.Objects;
 
 package body Web.Window is
+
+   procedure Dispatch_Animation_Frame
+    (Callback : System.Address;
+     Time     : Web.DOM_High_Res_Time_Stamp)
+       with Export     => True,
+            Convention => C,
+            Link_Name  =>
+              "__adawebpack__html__Window__dispatch_animation_frame";
+
+   ------------------------------
+   -- Dispatch_Animation_Frame --
+   ------------------------------
+
+   procedure Dispatch_Animation_Frame
+    (Callback : System.Address;
+     Time     : Web.DOM_High_Res_Time_Stamp)
+   is
+      procedure C (Time : Web.DOM_High_Res_Time_Stamp)
+        with Import, Convention => C, Address => Callback;
+
+   begin
+      C (Time);
+   end Dispatch_Animation_Frame;
 
    --------------
    -- Document --
@@ -51,5 +76,23 @@ package body Web.Window is
    begin
       return Web.HTML.Documents.Instantiate (Internal);
    end Document;
+
+   -----------------------------
+   -- Request_Animation_Frame --
+   -----------------------------
+
+   function Request_Animation_Frame
+    (Callback : not null Frame_Request_Callback) return Web.DOM_Unsigned_Long
+   is
+      function Imported
+       (Callback : System.Address) return Web.DOM_Unsigned_Long
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__html__Window__requestAnimationFrame";
+
+   begin
+      return Imported (Callback.all'Address);
+   end Request_Animation_Frame;
 
 end Web.Window;
