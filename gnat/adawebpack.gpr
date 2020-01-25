@@ -39,6 +39,8 @@ with "adawebpack_config.gpr";
 
 project AdaWebPack is
 
+   for Target use "llvm";
+
 --   for Library_Name use "AdaWebPack";
 --   for Library_Dir use "../.libs";
 --   for Library_ALI_Dir use "../.libs/alis";
