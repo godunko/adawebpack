@@ -53,14 +53,11 @@ package Web.HTML.Canvases is
 --         with Import     => True,
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "width";
---
---   not overriding procedure Set_Width
---    (Self : not null access HTML_Canvas_Element;
---     To   : WebAPI.DOM_Unsigned_Long) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "width";
---
+
+   procedure Set_Width
+    (Self : in out HTML_Canvas_Element'Class;
+     To   : Web.DOM_Unsigned_Long);
+
 --   not overriding function Get_Height
 --    (Self : not null access constant HTML_Canvas_Element)
 --       return WebAPI.DOM_Unsigned_Long is abstract
