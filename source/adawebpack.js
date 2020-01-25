@@ -198,8 +198,12 @@ adawebpack = {
     from_wasm_object_identifier(context_identifier).useProgram(from_wasm_object_identifier(program_identifier));
   },
 
-  __adawebpack__webgl__RenderingContext__vertexAttribPointer(context_identifier,index,size,type,normalized,stride,offset) {
+  __adawebpack__webgl__RenderingContext__vertexAttribPointer: function(context_identifier,index,size,type,normalized,stride,offset) {
     from_wasm_object_identifier(context_identifier).vertexAttribPointer(index,size,type,normalized !== 0,stride,offset);
+  },
+
+  __adawebpack__webgl__RenderingContext__viewport: function(context_identifier,x,y,width,height) {
+    from_wasm_object_identifier(context_identifier).viewport(x,y,width,height);
   }
 
 };

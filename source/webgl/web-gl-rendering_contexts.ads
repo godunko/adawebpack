@@ -1176,14 +1176,11 @@ package Web.GL.Rendering_Contexts is
      Stride     : GLsizei;
      Offset     : GLintptr);
 
---   not overriding procedure Viewport
---    (Self   : not null access WebGL_Rendering_Context;
---     X      : GLint;
---     Y      : GLint;
---     Width  : GLsizei;
---     Height : GLsizei) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "viewport";
+   procedure Viewport
+    (Self   : in out WebGL_Rendering_Context'Class;
+     X      : GLint;
+     Y      : GLint;
+     Width  : GLsizei;
+     Height : GLsizei);
 
 end Web.GL.Rendering_Contexts;

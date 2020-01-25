@@ -647,4 +647,29 @@ package body Web.GL.Rendering_Contexts is
         Offset);
    end Vertex_Attrib_Pointer;
 
+   --------------
+   -- Viewport --
+   --------------
+
+   procedure Viewport
+    (Self   : in out WebGL_Rendering_Context'Class;
+     X      : GLint;
+     Y      : GLint;
+     Width  : GLsizei;
+     Height : GLsizei)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        X      : GLint;
+        Y      : GLint;
+        Width  : GLsizei;
+        Height : GLsizei)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__webgl__RenderingContext__viewport";
+
+   begin
+      Imported (Self.Identifier, X, Y, Width, Height);
+   end Viewport;
+
 end Web.GL.Rendering_Contexts;
