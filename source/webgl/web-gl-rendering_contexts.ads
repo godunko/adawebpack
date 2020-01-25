@@ -772,11 +772,7 @@ package Web.GL.Rendering_Contexts is
     (Self  : in out WebGL_Rendering_Context;
      Index : GLuint);
 
---   not overriding procedure Finish
---    (Self : not null access WebGL_Rendering_Context) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "finish";
+   procedure Finish (Self : in out WebGL_Rendering_Context);
 
    procedure Flush (Self : in out WebGL_Rendering_Context);
 

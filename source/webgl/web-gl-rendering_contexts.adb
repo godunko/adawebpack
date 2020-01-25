@@ -279,6 +279,20 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Index);
    end Enable_Vertex_Attrib_Array;
 
+   ------------
+   -- Finish --
+   ------------
+
+   procedure Finish (Self : in out WebGL_Rendering_Context) is
+      procedure Imported (Identifier : WASM.Objects.Object_Identifier)
+        with Import     => True,
+             Convention => C,
+             Link_Name  => "__adawebpack__webgl__RenderingContext__finish";
+
+   begin
+      Imported (Self.Identifier);
+   end Finish;
+
    -----------
    -- Flush --
    -----------
