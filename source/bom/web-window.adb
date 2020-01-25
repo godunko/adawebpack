@@ -77,6 +77,21 @@ package body Web.Window is
       return Web.HTML.Documents.Instantiate (Internal);
    end Document;
 
+   ----------------------------
+   -- Get_Device_Pixel_Ratio --
+   ----------------------------
+
+   function Get_Device_Pixel_Ratio return Web.DOM_Double is
+      function Imported return Interfaces.IEEE_Float_64
+        with Import     => True,
+             Convention => C,
+             Link_Name  =>
+               "__adawebpack__cssom__Window__devicePixelRatio_getter";
+
+   begin
+      return Imported;
+   end Get_Device_Pixel_Ratio;
+
    -----------------------------
    -- Request_Animation_Frame --
    -----------------------------

@@ -49,4 +49,60 @@ package Web.Window is
    function Request_Animation_Frame
     (Callback : not null Frame_Request_Callback) return Web.DOM_Unsigned_Long;
 
+   -----------------------
+   -- CSSOM View Module --
+   -----------------------
+
+--  partial interface Window {
+--      [NewObject] MediaQueryList matchMedia(DOMString query
+--  );
+--      [SameObject, Replaceable] readonly attribute Screen screen;
+--
+--      // browsing context
+--      void moveTo(long x
+--  , long y
+--  );
+--      void moveBy(long x
+--  , long y
+--  );
+--      void resizeTo(long x
+--  , long y
+--  );
+--      void resizeBy(long x
+--  , long y
+--  );
+--
+--      // viewport
+--      [Replaceable] readonly attribute long innerWidth;
+--      [Replaceable] readonly attribute long innerHeight;
+--
+--      // viewport scrolling
+--      [Replaceable] readonly attribute double scrollX;
+--      [Replaceable] readonly attribute double pageXOffset;
+--      [Replaceable] readonly attribute double scrollY;
+--      [Replaceable] readonly attribute double pageYOffset;
+--      void scroll(optional ScrollToOptions options
+--  );
+--      void scroll(unrestricted double x
+--  , unrestricted double y
+--  );
+--      void scrollTo(optional ScrollToOptions options
+--  );
+--      void scrollTo(unrestricted double x
+--  , unrestricted double y
+--  );
+--      void scrollBy(optional ScrollToOptions options
+--  );
+--      void scrollBy(unrestricted double x
+--  , unrestricted double y
+--  );
+--
+--      // client
+--      [Replaceable] readonly attribute long screenX;
+--      [Replaceable] readonly attribute long screenY;
+--      [Replaceable] readonly attribute long outerWidth;
+--      [Replaceable] readonly attribute long outerHeight;
+
+   function Get_Device_Pixel_Ratio return Web.DOM_Double;
+
 end Web.Window;

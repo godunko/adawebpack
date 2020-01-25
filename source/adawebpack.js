@@ -29,6 +29,10 @@ adawebpack = {
     return to_wasm_object_identifier(window.document);
   },
 
+  __adawebpack__cssom__Window__devicePixelRatio_getter: function() {
+    return window.devicePixelRatio;
+  },
+
   __adawebpack__dom__Document__getElementById: function (identifier, address, length)
   {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).getElementById(string_to_js(address, length)));
