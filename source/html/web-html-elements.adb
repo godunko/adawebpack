@@ -100,6 +100,23 @@ package body Web.HTML.Elements is
       end if;
    end As_HTML_Script;
 
+   ----------------------
+   -- Get_Client_Width --
+   ----------------------
+
+   function Get_Client_Width (Self : HTML_Element'Class) return Web.DOM_Long is
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Integer_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__cssom__Element__clientWidth_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Get_Client_Width;
+
    ----------------
    -- Get_Hidden --
    ----------------

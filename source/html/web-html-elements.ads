@@ -57,4 +57,10 @@ package Web.HTML.Elements is
    function As_HTML_Script
     (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
 
+   -----------------------
+   -- CSSOM View Module --
+   -----------------------
+
+   function Get_Client_Width (Self : HTML_Element'Class) return Web.DOM_Long;
+
 end Web.HTML.Elements;

@@ -40,6 +40,8 @@ package Web is
 
    pragma Pure;
 
+   subtype DOM_Long is Interfaces.Integer_32;
+
    subtype DOM_Unsigned_Long is Interfaces.Unsigned_32;
 
    subtype DOM_Double is Interfaces.IEEE_Float_64;
