@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/godunko/adawebpack.svg?style=svg)](https://circleci.com/gh/godunko/adawebpack)
+
 # AdaWebPack
 Ada WASM Runtime and Bindings for Web API
 
