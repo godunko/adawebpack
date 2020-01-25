@@ -108,6 +108,25 @@ package body Web.HTML.Canvases is
       return Imported (Self.Identifier);
    end Get_Width;
 
+   ----------------
+   -- Set_Height --
+   ----------------
+
+   procedure Set_Height
+    (Self : in out HTML_Canvas_Element'Class;
+     To   : Web.DOM_Unsigned_Long)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        To         : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Canvas__height_setter";
+
+   begin
+      Imported (Self.Identifier, To);
+   end Set_Height;
+
    ---------------
    -- Set_Width --
    ---------------

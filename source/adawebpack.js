@@ -54,16 +54,20 @@ adawebpack = {
       capture !== 0);
   },
 
-  __adawebpack__html__Button__disabled_setter: function(identifier,to) {
-    from_wasm_object_identifier (identifier).disabled = (to !== 0);
-  },
-
   __adawebpack__html__Button__disabled_getter: function(identifier) {
     return +from_wasm_object_identifier(identifier).disabled;
   },
 
+  __adawebpack__html__Button__disabled_setter: function(identifier,to) {
+    from_wasm_object_identifier (identifier).disabled = (to !== 0);
+  },
+
   __adawebpack__html__Canvas__height_getter: function(identifier) {
     return from_wasm_object_identifier(identifier).height;
+  },
+
+  __adawebpack__html__Canvas__height_setter: function(identifier,to) {
+    from_wasm_object_identifier(identifier).height = to;
   },
 
   __adawebpack__html__Canvas__getContext: function(identifier,address,size) {

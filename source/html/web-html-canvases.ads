@@ -48,8 +48,6 @@ package Web.HTML.Canvases is
      new Web.HTML.Elements.HTML_Element with null record;
 
 --  interface HTMLCanvasElement : HTMLElement {
---    attribute unsigned long height;
---
 --    boolean probablySupportsContext
 --  (DOMString contextId
 --  , any... arguments
@@ -67,12 +65,9 @@ package Web.HTML.Canvases is
    function Get_Height
     (Self : HTML_Canvas_Element'Class) return Web.DOM_Unsigned_Long;
 
---   not overriding procedure Set_Height
---    (Self : not null access HTML_Canvas_Element;
---     To   : WebAPI.DOM_Unsigned_Long) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "height";
+   procedure Set_Height
+    (Self : in out HTML_Canvas_Element'Class;
+     To   : Web.DOM_Unsigned_Long);
 
    function Get_Width
     (Self : HTML_Canvas_Element'Class) return Web.DOM_Unsigned_Long;
