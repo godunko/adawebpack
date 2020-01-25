@@ -101,6 +101,23 @@ package body Web.HTML.Elements is
    end As_HTML_Script;
 
    ----------------------
+   -- Get_Client_Height --
+   ----------------------
+
+   function Get_Client_Height (Self : HTML_Element'Class) return Web.DOM_Long is
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Integer_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__cssom__Element__clientHeight_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Get_Client_Height;
+
+   ----------------------
    -- Get_Client_Width --
    ----------------------
 

@@ -61,6 +61,36 @@ package Web.HTML.Elements is
    -- CSSOM View Module --
    -----------------------
 
+--  partial interface Element {
+--    sequence<DOMRect> getClientRects();
+--    [NewObject] DOMRect getBoundingClientRect();
+--    void scrollIntoView();
+--    void scrollIntoView((boolean or object) arg
+--  );
+--    void scroll(optional ScrollToOptions options
+--  );
+--    void scroll(unrestricted double x
+--  , unrestricted double y
+--  );
+--    void scrollTo(optional ScrollToOptions options
+--  );
+--    void scrollTo(unrestricted double x
+--  , unrestricted double y
+--  );
+--    void scrollBy(optional ScrollToOptions options
+--  );
+--    void scrollBy(unrestricted double x
+--  , unrestricted double y
+--  );
+--    attribute unrestricted double scrollTop;
+--    attribute unrestricted double scrollLeft;
+--    readonly attribute long scrollWidth;
+--    readonly attribute long scrollHeight;
+--    readonly attribute long clientTop;
+--    readonly attribute long clientLeft;
+
+   function Get_Client_Height (Self : HTML_Element'Class) return Web.DOM_Long;
+
    function Get_Client_Width (Self : HTML_Element'Class) return Web.DOM_Long;
 
 end Web.HTML.Elements;

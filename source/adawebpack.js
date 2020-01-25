@@ -29,6 +29,10 @@ adawebpack = {
     return to_wasm_object_identifier(window.document);
   },
 
+  __adawebpack__cssom__Element__clientHeight_getter: function(identifier) {
+    return from_wasm_object_identifier(identifier).clientHeight;
+  },
+
   __adawebpack__cssom__Element__clientWidth_getter: function(identifier) {
     return from_wasm_object_identifier(identifier).clientWidth;
   },
