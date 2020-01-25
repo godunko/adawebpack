@@ -34,14 +34,12 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with WASM.Objects;
+
 package Web.DOM.Events is
 
    pragma Preelaborate;
 
-   type Event is tagged limited private;
-
-private
-
-   type Event is tagged limited null record;
+   type Event is new WASM.Objects.Object_Reference with null record;
 
 end Web.DOM.Events;
