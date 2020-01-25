@@ -140,21 +140,16 @@ package body Web.GL.Rendering_Contexts is
    is
       procedure Imported
        (Identifier : WASM.Objects.Object_Identifier;
-        Red        : Interfaces.IEEE_Float_32;
-        Green      : Interfaces.IEEE_Float_32;
-        Blue       : Interfaces.IEEE_Float_32;
-        Alpha      : Interfaces.IEEE_Float_32)
+        Red        : GLclampf;
+        Green      : GLclampf;
+        Blue       : GLclampf;
+        Alpha      : GLclampf)
           with Import     => True,
                Convention => C,
                Link_Name  =>
                  "__adawebpack__webgl__RenderingContext__clearColor";
    begin
-      Imported
-       (Self.Identifier,
-        Interfaces.IEEE_Float_32 (Red),
-        Interfaces.IEEE_Float_32 (Green),
-        Interfaces.IEEE_Float_32 (Blue),
-        Interfaces.IEEE_Float_32 (Alpha));
+      Imported (Self.Identifier, Red, Green, Blue, Alpha);
    end Clear_Color;
 
    --------------------
