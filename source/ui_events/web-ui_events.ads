@@ -33,32 +33,11 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  Project file to AdaWebPack library.
+--  Root package for API defined by "UI Events" specification.
 ------------------------------------------------------------------------------
-with "adawebpack_config.gpr";
 
-project AdaWebPack is
+package Web.UI_Events is
 
-   for Target use "llvm";
+   pragma Preelaborate;
 
---   for Library_Name use "AdaWebPack";
---   for Library_Dir use "../.libs";
---   for Library_ALI_Dir use "../.libs/alis";
---  XXX In the better world this project should be library project, or even
---  shared library project, but right now, shared libraries are not supported
---  by WebAssembly, and gprbuild can't know that llvm-ranlib should be run
---  to index static archive, so ordinary project is used.
-
-   for Source_Dirs use
-    ("../source",
-     "../source/bom",
-     "../source/core",
-     "../source/dom",
-     "../source/html",
-     "../source/ui_events",
-     "../source/webgl");
-   for Object_Dir use AdaWebPack_Config'Object_Dir & "adawebpack";
-
-   package Compiler renames AdaWebPack_Config.Compiler;
-
-end AdaWebPack;
+end Web.UI_Events;
