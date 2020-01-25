@@ -34,17 +34,30 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with WASM.Objects;
+with Web.Strings;
+with Web.Utilities;
+with Web.UI_Events.Mouse_Events;
 
-limited with Web.UI_Events.Mouse_Events;
+package body Web.DOM.Events is
 
-package Web.DOM.Events is
+   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
+     renames Web.Strings.To_Web_String;
 
-   pragma Preelaborate;
-
-   type Event is new WASM.Objects.Object_Reference with null record;
+   --------------------
+   -- As_Mouse_Event --
+   --------------------
 
    function As_Mouse_Event
-    (Self : Event'Class) return Web.UI_Events.Mouse_Events.Mouse_Event;
+    (Self : Event'Class) return Web.UI_Events.Mouse_Events.Mouse_Event is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"MouseEvent")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.UI_Events.Mouse_Events.Instantiate (Self.Identifier);
+      end if;
+   end As_Mouse_Event;
 
 end Web.DOM.Events;
