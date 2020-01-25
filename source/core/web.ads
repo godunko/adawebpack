@@ -52,4 +52,12 @@ package Web is
 
    type DOM_High_Res_Time_Stamp is new DOM_Double;
 
+private
+
+   use type DOM_Long;
+   use type DOM_Unsigned_Long;
+   use type DOM_Double;
+   --  Use all subtypes to provide default operators in all children
+   --  packages.
+
 end Web;
