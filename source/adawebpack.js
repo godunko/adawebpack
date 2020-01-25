@@ -66,6 +66,10 @@ adawebpack = {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).getContext(string_to_js(address,size)));
   },
 
+  __adawebpack__html__Canvas__width_getter: function(identifier) {
+    return from_wasm_object_identifier(identifier).width;
+  },
+
   __adawebpack__html__Canvas__width_setter: function(identifier,to) {
     from_wasm_object_identifier(identifier).width = to;
   },

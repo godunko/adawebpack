@@ -47,16 +47,22 @@ package Web.HTML.Canvases is
    type HTML_Canvas_Element is
      new Web.HTML.Elements.HTML_Element with null record;
 
---   not overriding function Get_Width
---    (Self : not null access constant HTML_Canvas_Element)
---       return WebAPI.DOM_Unsigned_Long is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "width";
-
-   procedure Set_Width
-    (Self : in out HTML_Canvas_Element'Class;
-     To   : Web.DOM_Unsigned_Long);
+--  interface HTMLCanvasElement : HTMLElement {
+--    attribute unsigned long height;
+--
+--    boolean probablySupportsContext
+--  (DOMString contextId
+--  , any... arguments
+--  );
+--
+--    DOMString toDataURL(optional DOMString type
+--  , any... arguments
+--  );
+--    void toBlob(BlobCallback _callback
+--  , optional DOMString type
+--  , any... arguments
+--  );
+--  };
 
 --   not overriding function Get_Height
 --    (Self : not null access constant HTML_Canvas_Element)
@@ -71,6 +77,13 @@ package Web.HTML.Canvases is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "height";
+
+   function Get_Width
+    (Self : HTML_Canvas_Element'Class) return Web.DOM_Unsigned_Long;
+
+   procedure Set_Width
+    (Self : in out HTML_Canvas_Element'Class;
+     To   : Web.DOM_Unsigned_Long);
 
    function Get_Context
     (Self       : HTML_Canvas_Element'Class;
@@ -87,20 +100,6 @@ package Web.HTML.Canvases is
    --  has already been initialized with some other (incompatible) context type
    --  (e.g., trying to get a "2d" context after getting a "webgl" context).
 
---   --  Returns an object that exposes an API for drawing on the canvas. The
---   --  first argument specifies the desired API, either "2d" or "webgl".
---   --  Subsequent arguments are handled by that API.
---   --
---   --  This specification defines the "2d" context below. There is also a
---   --  specification that defines a "webgl" context. [WEBGL]
---   --
---   --  Returns null if the given context ID is not supported, if the canvas has
---   --  already been initialised with the other context type (e.g.  trying to
---   --  get a "2d" context after getting a "webgl" context).
---   --
---   --  Throws an InvalidStateError exception if the setContext() or
---   --  transferControlToProxy() methods have been used.
---
 --   not overriding function Probably_Supports_Context
 --    (Self       : not null access HTML_Canvas_Element;
 --     Context_Id : WebAPI.DOM_String) return Boolean is abstract
