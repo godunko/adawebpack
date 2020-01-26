@@ -34,27 +34,42 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.DOM.Elements;
-limited with Web.HTML.Buttons;
-limited with Web.HTML.Canvases;
-limited with Web.HTML.Scripts;
+with WASM.Objects;
 
-package Web.HTML.Elements is
+package body Web.DOM.Elements is
 
-   pragma Preelaborate;
+   ----------------------
+   -- Get_Client_Height --
+   ----------------------
 
-   type HTML_Element is new Web.DOM.Elements.Element with null record;
+   function Get_Client_Height (Self : Element'Class) return Web.DOM_Long is
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Integer_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__cssom__Element__clientHeight_getter";
 
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean;
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
+   begin
+      return Imported (Self.Identifier);
+   end Get_Client_Height;
 
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
+   ----------------------
+   -- Get_Client_Width --
+   ----------------------
 
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
+   function Get_Client_Width (Self : Element'Class) return Web.DOM_Long is
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Integer_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__cssom__Element__clientWidth_getter";
 
-   function As_HTML_Script
-    (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
+   begin
+      return Imported (Self.Identifier);
+   end Get_Client_Width;
 
-end Web.HTML.Elements;
+end Web.DOM.Elements;
