@@ -730,14 +730,11 @@ package Web.GL.Rendering_Contexts is
 --         with Import     => True,
 --              Convention => JavaScript_Method,
 --              Link_Name  => "deleteTexture";
---
---   not overriding procedure Depth_Func
---    (Self : not null access WebGL_Rendering_Context;
---     Func : GLenum) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "depthFunc";
---
+
+   procedure Depth_Func
+    (Self : in out WebGL_Rendering_Context'Class;
+     Func : GLenum);
+
 ----    void depthMask(GLboolean flag);
 ----    void depthRange(GLclampf zNear, GLclampf zFar);
 ----    void detachShader(WebGLProgram? program, WebGLShader? shader);

@@ -254,6 +254,26 @@ package body Web.GL.Rendering_Contexts is
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
 
+   ----------------
+   -- Depth_Func --
+   ----------------
+
+   procedure Depth_Func
+    (Self : in out WebGL_Rendering_Context'Class;
+     Func : GLenum)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Func       : GLenum)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__depthFunc";
+
+   begin
+      Imported (Self.Identifier, Func);
+   end Depth_Func;
+
    -----------------
    -- Draw_Arrays --
    -----------------

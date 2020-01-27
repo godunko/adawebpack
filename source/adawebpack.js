@@ -142,6 +142,10 @@ adawebpack = {
     return to_wasm_object_identifier(from_wasm_object_identifier(identifier).createShader(type));
   },
 
+  __adawebpack__webgl__RenderingContext__depthFunc: function(identifier,func) {
+    from_wasm_object_identifier(identifier).depthFunc(func);
+  },
+
   __adawebpack__webgl__RenderingContext__drawArrays: function(identifier,mode,first,count) {
     from_wasm_object_identifier(identifier).drawArrays(mode,first,count);
   },
