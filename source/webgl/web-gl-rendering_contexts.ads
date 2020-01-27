@@ -766,12 +766,9 @@ package Web.GL.Rendering_Contexts is
      Data_Type : GLenum;
      Offset    : GLintptr);
 
---   not overriding procedure Enable
---    (Self       : not null access WebGL_Rendering_Context;
---     Capability : GLenum) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "enable";
+   procedure Enable
+    (Self       : in out WebGL_Rendering_Context'Class;
+     Capability : GLenum);
 
    procedure Enable_Vertex_Attrib_Array
     (Self  : in out WebGL_Rendering_Context;

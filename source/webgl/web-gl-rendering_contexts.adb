@@ -324,6 +324,25 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Mode, Count, Data_Type, Offset);
    end Draw_Elements;
 
+   ------------
+   -- Enable --
+   ------------
+
+   procedure Enable
+    (Self       : in out WebGL_Rendering_Context'Class;
+     Capability : GLenum)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Capability : GLenum)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__webgl__RenderingContext__enable";
+
+   begin
+      Imported (Self.Identifier, Capability);
+   end Enable;
+
    --------------------------------
    -- Enable_Vertex_Attrib_Array --
    --------------------------------
