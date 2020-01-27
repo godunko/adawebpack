@@ -8,7 +8,13 @@ Ada WASM Runtime and Bindings for Web API
 Setup GNAT Community 2019 for ARM to default location.
 
 Setup GNAT-LLVM development environment, see
-[GNAT-LLVM](https://github.com/AdaCore/gnat-llvm).
+[GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Note, you need to use
+externally build LLVM with enabled 'lld' project and 'WebAssembly' target,
+so, cmake command line should contain among other switches:
+
+```
+cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
+```
 
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
 `adawebpack_src` and create link for Makefile.target.
