@@ -259,6 +259,32 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Mode, First, Count);
    end Draw_Arrays;
 
+   -------------------
+   -- Draw_Elements --
+   -------------------
+
+   procedure Draw_Elements
+    (Self      : WebGL_Rendering_Context'Class;
+     Mode      : GLenum;
+     Count     : GLsizei;
+     Data_Type : GLenum;
+     Offset    : GLintptr)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Mode       : GLenum;
+        Count      : GLsizei;
+        Data_Type  : GLenum;
+        Offset     : GLintptr)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__drawElements";
+
+   begin
+      Imported (Self.Identifier, Mode, Count, Data_Type, Offset);
+   end Draw_Elements;
+
    --------------------------------
    -- Enable_Vertex_Attrib_Array --
    --------------------------------

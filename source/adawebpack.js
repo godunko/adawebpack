@@ -142,6 +142,10 @@ adawebpack = {
     from_wasm_object_identifier(identifier).drawArrays(mode,first,count);
   },
 
+  __adawebpack__webgl__RenderingContext__drawElements: function(identifier,mode,count,type,offset) {
+    from_wasm_object_identifier(identifier).drawElements(mode,count,type,offset);
+  },
+
   __adawebpack__webgl__RenderingContext__enableVertexAttribArray: function(context_identifier,index) {
     from_wasm_object_identifier(context_identifier).enableVertexAttribArray(index);
   },

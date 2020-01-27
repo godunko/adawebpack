@@ -759,8 +759,13 @@ package Web.GL.Rendering_Contexts is
      First : GLint;
      Count : GLsizei);
 
-----    void drawElements(GLenum mode, GLsizei count, GLenum type, GLintptr offset);
---
+   procedure Draw_Elements
+    (Self      : WebGL_Rendering_Context'Class;
+     Mode      : GLenum;
+     Count     : GLsizei;
+     Data_Type : GLenum;
+     Offset    : GLintptr);
+
 --   not overriding procedure Enable
 --    (Self       : not null access WebGL_Rendering_Context;
 --     Capability : GLenum) is abstract
