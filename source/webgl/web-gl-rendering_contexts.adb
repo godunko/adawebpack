@@ -152,6 +152,25 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Red, Green, Blue, Alpha);
    end Clear_Color;
 
+   -----------------
+   -- Clear_Depth --
+   -----------------
+
+   procedure Clear_Depth
+    (Self  : in out WebGL_Rendering_Context'Class;
+     Depth : GLclampf)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Depth      : GLclampf)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__clearDepth";
+   begin
+      Imported (Self.Identifier, Depth);
+   end Clear_Depth;
+
    --------------------
    -- Compile_Shader --
    --------------------

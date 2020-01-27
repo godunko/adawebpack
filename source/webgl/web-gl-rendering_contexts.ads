@@ -626,7 +626,10 @@ package Web.GL.Rendering_Contexts is
      Blue  : GLclampf;
      Alpha : GLclampf);
 
-----    void clearDepth(GLclampf depth);
+   procedure Clear_Depth
+    (Self  : in out WebGL_Rendering_Context'Class;
+     Depth : GLclampf);
+
 ----    void clearStencil(GLint s);
 ----    void colorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
 

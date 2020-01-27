@@ -122,6 +122,10 @@ adawebpack = {
     from_wasm_object_identifier(identifier).clearColor(red,green,blue,alpha);
   },
 
+  __adawebpack__webgl__RenderingContext__clearDepth: function(identifier,depth) {
+    from_wasm_object_identifier(identifier).clearDepth(depth);
+  },
+
   __adawebpack__webgl__RenderingContext__compileShader: function(context_identifier,shader_identifier) {
     from_wasm_object_identifier(context_identifier).compileShader(from_wasm_object_identifier(shader_identifier));
   },
