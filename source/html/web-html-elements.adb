@@ -40,6 +40,7 @@ with WASM.Objects;
 
 with Web.HTML.Buttons;
 with Web.HTML.Canvases;
+with Web.HTML.Images;
 with Web.HTML.Scripts;
 with Web.Strings;
 with Web.Utilities;
@@ -82,6 +83,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Canvases.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Canvas;
+
+   --------------------
+   -- As_HTML_Image --
+   --------------------
+
+   function As_HTML_Image
+    (Self : HTML_Element'Class) return Web.HTML.Images.HTML_Image_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLImageElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Images.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Image;
 
    --------------------
    -- As_HTML_Script --
