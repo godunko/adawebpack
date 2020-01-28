@@ -74,8 +74,6 @@ g-souinf.ads \
 i-cexten.ads \
 s-addope.ads \
 s-addope.adb \
-s-atacco.adb \
-s-atacco.ads \
 s-arit64.ads \
 s-arit64.adb \
 s-exnint.ads \
@@ -154,7 +152,6 @@ unchconv.ads \
 g-souinf.ads \
 i-c.ads      \
 i-cexten.ads \
-s-atacco.ads \
 s-fatllf.ads \
 s-fatsfl.ads \
 s-powtab.ads \
