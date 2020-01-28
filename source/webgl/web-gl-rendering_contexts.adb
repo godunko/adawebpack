@@ -433,6 +433,26 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier);
    end Flush;
 
+   ---------------------
+   -- Generate_Mipmap --
+   ---------------------
+
+   procedure Generate_Mipmap
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Target             : Web.GL.GLenum)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__generateMipmap";
+
+   begin
+      Imported (Self.Identifier, Target);
+   end Generate_Mipmap;
+
    -------------------------
    -- Get_Attrib_Location --
    -------------------------

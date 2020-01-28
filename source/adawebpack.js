@@ -182,6 +182,10 @@ adawebpack = {
     __adawebpack_o2i.too(context_identifier).flush();
   },
 
+  __adawebpack__webgl__RenderingContext__generateMipmap: function(context_identifier, target) {
+    __adawebpack_o2i.too(context_identifier).generateMipmap(target);
+  },
+
   __adawebpack__webgl__RenderingContext__getAttribLocation: function(context_identifier,program_identifier,name_address,name_size) {
     return __adawebpack_o2i.too(context_identifier).getAttribLocation(__adawebpack_o2i.too(program_identifier), string_to_js(name_address, name_size));
   },

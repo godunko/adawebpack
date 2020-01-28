@@ -795,9 +795,11 @@ package Web.GL.Rendering_Contexts is
 --            Link_Name  => "framebufferTexture2D";
 --
 ----    void frontFace(GLenum mode);
-----
-----    void generateMipmap(GLenum target);
-----
+
+   procedure Generate_Mipmap
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum);
+
 ----    WebGLActiveInfo? getActiveAttrib(WebGLProgram? program, GLuint index);
 ----    WebGLActiveInfo? getActiveUniform(WebGLProgram? program, GLuint index);
 ----    sequence<WebGLShader>? getAttachedShaders(WebGLProgram? program);
