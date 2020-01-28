@@ -14,6 +14,8 @@ a-uncdea.ads \
 interfac.ads \
 s-addima.adb \
 s-addima.ads \
+s-atacco.adb \
+s-atacco.ads \
 s-casuti.adb \
 s-casuti.ads \
 s-fatgen.adb \
