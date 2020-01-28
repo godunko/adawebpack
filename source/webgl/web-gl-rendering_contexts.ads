@@ -354,24 +354,24 @@ package Web.GL.Rendering_Contexts is
 --   TEXTURE_MIN_FILTER : constant := 16#2801#;
 --   TEXTURE_WRAP_S     : constant := 16#2802#;
 --   TEXTURE_WRAP_T     : constant := 16#2803#;
---
---   -------------------
---   -- TextureTarget --
---   -------------------
---
---   TEXTURE_2D                  : constant := 16#0DE1#;
-----    const GLenum TEXTURE                        = 0x1702;
---
---   TEXTURE_CUBE_MAP            : constant := 16#8513#;
-----    const GLenum TEXTURE_BINDING_CUBE_MAP       = 0x8514;
---   TEXTURE_CUBE_MAP_POSITIVE_X : constant := 16#8515#;
---   TEXTURE_CUBE_MAP_NEGATIVE_X : constant := 16#8516#;
---   TEXTURE_CUBE_MAP_POSITIVE_Y : constant := 16#8517#;
---   TEXTURE_CUBE_MAP_NEGATIVE_Y : constant := 16#8518#;
---   TEXTURE_CUBE_MAP_POSITIVE_Z : constant := 16#8519#;
---   TEXTURE_CUBE_MAP_NEGATIVE_Z : constant := 16#851A#;
-----    const GLenum MAX_CUBE_MAP_TEXTURE_SIZE      = 0x851C;
---
+
+   -------------------
+   -- TextureTarget --
+   -------------------
+
+   TEXTURE_2D                  : constant := 16#0DE1#;
+--    const GLenum TEXTURE                        = 0x1702;
+
+   TEXTURE_CUBE_MAP            : constant := 16#8513#;
+--    const GLenum TEXTURE_BINDING_CUBE_MAP       = 0x8514;
+   TEXTURE_CUBE_MAP_POSITIVE_X : constant := 16#8515#;
+   TEXTURE_CUBE_MAP_NEGATIVE_X : constant := 16#8516#;
+   TEXTURE_CUBE_MAP_POSITIVE_Y : constant := 16#8517#;
+   TEXTURE_CUBE_MAP_NEGATIVE_Y : constant := 16#8518#;
+   TEXTURE_CUBE_MAP_POSITIVE_Z : constant := 16#8519#;
+   TEXTURE_CUBE_MAP_NEGATIVE_Z : constant := 16#851A#;
+--    const GLenum MAX_CUBE_MAP_TEXTURE_SIZE      = 0x851C;
+
 --   -----------------
 --   -- TextureUnit --
 --   -----------------
@@ -574,17 +574,13 @@ package Web.GL.Rendering_Contexts is
 --              Convention => JavaScript_Method,
 --              Link_Name  => "bindRenderbuffer";
 ----              Pre'Class  => Target in RENDERBUFFER;
---
---   not overriding procedure Bind_Texture
---    (Self    : not null access WebGL_Rendering_Context;
---     Target  : GLenum;
---     Texture : access WebAPI.WebGL.Textures.WebGL_Texture'Class)
---       is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "bindTexture";
-----              Pre'Class  => Target in TEXTURE_2D | TEXTURE_CUBE_MAP;
---
+
+   procedure Bind_Texture
+    (Self    : in out WebGL_Rendering_Context;
+     Target  : GLenum;
+     Texture : Web.GL.Textures.WebGL_Texture'Class);
+--              Pre'Class  => Target in TEXTURE_2D | TEXTURE_CUBE_MAP;
+
 ----    void blendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
 ----    void blendEquation(GLenum mode);
 ----    void blendEquationSeparate(GLenum modeRGB, GLenum modeAlpha);

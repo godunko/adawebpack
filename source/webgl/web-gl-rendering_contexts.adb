@@ -83,6 +83,28 @@ package body Web.GL.Rendering_Contexts is
        (Self.Identifier, Interfaces.Unsigned_32 (Target), Buffer.Identifier);
    end Bind_Buffer;
 
+   ------------------
+   -- Bind_Texture --
+   ------------------
+
+   procedure Bind_Texture
+    (Self    : in out WebGL_Rendering_Context;
+     Target  : GLenum;
+     Texture : Web.GL.Textures.WebGL_Texture'Class)
+   is
+      procedure Imported
+       (Context_Identifier  : WASM.Objects.Object_Identifier;
+        Target              : GLenum;
+        Texture_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__bindTexture";
+
+   begin
+      Imported (Self.Identifier, Target, Texture.Identifier);
+   end Bind_Texture;
+
    -----------------
    -- Buffer_Data --
    -----------------

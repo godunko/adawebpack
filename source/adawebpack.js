@@ -114,6 +114,10 @@ adawebpack = {
     __adawebpack_o2i.too(context_identifier).bindBuffer(target, __adawebpack_o2i.too(buffer_identifier));
   },
 
+  __adawebpack__webgl__RenderingContext__bindTexture: function(context_identifier,target,texture_identifier) {
+    __adawebpack_o2i.too(context_identifier).bindTexture(target, __adawebpack_o2i.too(texture_identifier));
+  },
+
   __adawebpack__webgl__RenderingContext__bufferData: function(context_identifier,target,size,data,usage) {
     __adawebpack_o2i.too(context_identifier).bufferData(target, new Uint8Array(instance.exports.memory.buffer,data,size), usage);
   },
