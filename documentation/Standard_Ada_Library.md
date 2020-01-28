@@ -1,4 +1,4 @@
-= Supported packages of the standard Ada library
+# Supported packages of the standard Ada library
 
  * Ada
    * Characters
