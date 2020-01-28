@@ -198,6 +198,10 @@ adawebpack = {
     __adawebpack_o2i.too(context_identifier).shaderSource(__adawebpack_o2i.too(shader_identifier),string_to_js(source_address,source_size));
   },
 
+  __adawebpack__webgl__RenderingContext__texImage2D: function(context_identifier, target, level, internalformat, format, type, source_identifier) {
+    __adawebpack_o2i.too(context_identifier).texImage2D(target, level, internalformat, format, type, __adawebpack_o2i.too(source_identifier));
+  },
+
   __adawebpack__webgl__RenderingContext__uniform1i: function(context_identifier,location_identifier,x) {
     __adawebpack_o2i.too(context_identifier).uniform1i(__adawebpack_o2i.too(location_identifier),x);
   },

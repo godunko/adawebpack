@@ -542,6 +542,43 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Shader.Identifier, Source_A, Source_S);
    end Shader_Source;
 
+   ------------------
+   -- Tex_Image_2D --
+   ------------------
+
+   procedure Tex_Image_2D
+    (Self            : in out WebGL_Rendering_Context'Class;
+     Target          : Web.GL.GLenum;
+     Level           : Web.GL.GLint;
+     Internal_Format : Web.GL.GLint;
+     Format          : Web.GL.GLenum;
+     Data_Type       : Web.GL.GLenum;
+     Source          : Web.HTML.Images.HTML_Image_Element'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Target             : Web.GL.GLenum;
+        Level              : Web.GL.GLint;
+        Internal_Format    : Web.GL.GLint;
+        Format             : Web.GL.GLenum;
+        Data_Type          : Web.GL.GLenum;
+        Source_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__texImage2D";
+
+   begin
+      Imported
+       (Self.Identifier,
+        Target,
+        Level,
+        Internal_Format,
+        Format,
+        Data_Type,
+        Source.Identifier);
+   end Tex_Image_2D;
+
    ----------------
    -- Uniform_1f --
    ----------------

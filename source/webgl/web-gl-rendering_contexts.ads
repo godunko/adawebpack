@@ -49,6 +49,7 @@ with Web.GL.Programs;
 with Web.GL.Shaders;
 with Web.GL.Textures;
 with Web.GL.Uniform_Locations;
+with Web.HTML.Images;
 with Web.Strings;
 
 package Web.GL.Rendering_Contexts is
@@ -257,17 +258,17 @@ package Web.GL.Rendering_Contexts is
    UNSIGNED_SHORT : constant := 16#1403#;
    FLOAT          : constant := 16#1406#;
 
---   -----------------
---   -- PixelFormat --
---   -----------------
---
---   ALPHA           : constant := 16#1906#;
---   RGB             : constant := 16#1907#;
---   RGBA            : constant := 16#1908#;
---   LUMINANCE       : constant := 16#1909#;
---   LUMINANCE_ALPHA : constant := 16#190A#;
-----    const GLenum DEPTH_COMPONENT                = 0x1902;
---
+   -----------------
+   -- PixelFormat --
+   -----------------
+
+   ALPHA           : constant := 16#1906#;
+   RGB             : constant := 16#1907#;
+   RGBA            : constant := 16#1908#;
+   LUMINANCE       : constant := 16#1909#;
+   LUMINANCE_ALPHA : constant := 16#190A#;
+--    const GLenum DEPTH_COMPONENT                = 0x1902;
+
 --   ---------------
 --   -- PixelType --
 --   ---------------
@@ -947,10 +948,18 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "texImage2D";
---
-----    void texImage2D(GLenum target, GLint level, GLint internalformat,
-----                    GLenum format, GLenum type, TexImageSource? source); // May throw DOMException
---
+
+   procedure Tex_Image_2D
+    (Self            : in out WebGL_Rendering_Context'Class;
+     Target          : Web.GL.GLenum;
+     Level           : Web.GL.GLint;
+     Internal_Format : Web.GL.GLint;
+     Format          : Web.GL.GLenum;
+     Data_Type       : Web.GL.GLenum;
+     Source          : Web.HTML.Images.HTML_Image_Element'Class);
+--    void texImage2D(GLenum target, GLint level, GLint internalformat,
+--                    GLenum format, GLenum type, TexImageSource? source); // May throw DOMException
+
 --   not overriding procedure Tex_Parameterf
 --    (Self   : not null access WebGL_Rendering_Context;
 --     Target : WebAPI.WebGL.GLenum;
