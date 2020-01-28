@@ -79,9 +79,6 @@ package body Web.DOM.Nodes is
        (Self.Identifier, A, S, Callback.all'Address, (if Capture then 1 else 0));
    end Add_Event_Listener;
 
-   function To_Object is
-     new Ada.Unchecked_Conversion (System.Address, Web.DOM.Event_Listeners.Event_Listener_Access);
-
    --------------------
    -- Dispatch_Event --
    --------------------
@@ -90,13 +87,13 @@ package body Web.DOM.Nodes is
     (Callback   : System.Address;
      Identifier : WASM.Objects.Object_Identifier)
    is
-      E : Web.DOM.Events.Event;
---      C : Web.DOM.Event_Listeners.Event_Listener
---        with Import => True;
--- , Address => Callback;
+      function To_Object is
+        new Ada.Unchecked_Conversion
+             (System.Address, Web.DOM.Event_Listeners.Event_Listener_Access);
+
+      E : Web.DOM.Events.Event := Web.DOM.Events.Instantiate (Identifier);
 
    begin
---      Web.DOM.Event_Listeners.Event_Listener'Class (C).Handle_Event (E);
       To_Object (Callback).Handle_Event (E);
    end Dispatch_Event;
 
