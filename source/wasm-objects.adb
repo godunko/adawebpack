@@ -40,6 +40,11 @@ package body WASM.Objects is
 
    use type Interfaces.Unsigned_32;
 
+   procedure Seize (Identifier : Object_Identifier)
+     with Import     => True,
+          Convention => C,
+          Link_Name  => "__adawebpack__wasm__object_seize";
+
    procedure Release (Identifier : Object_Identifier)
      with Import     => True,
           Convention => C,
@@ -99,6 +104,8 @@ package body WASM.Objects is
    function Instantiate
      (Identifier : Object_Identifier) return Object_Reference is
    begin
+      Seize (Identifier);
+
       return
        (Ada.Finalization.Controlled
           with Shared =>
