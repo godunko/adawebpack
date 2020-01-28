@@ -39,7 +39,6 @@
 --  
 --  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Renderbuffers;
---  with WebAPI.WebGL.Textures;
 
 with System;
 
@@ -48,6 +47,7 @@ with WASM.Objects;
 with Web.GL.Buffers;
 with Web.GL.Programs;
 with Web.GL.Shaders;
+with Web.GL.Textures;
 with Web.GL.Uniform_Locations;
 with Web.Strings;
 
@@ -676,14 +676,11 @@ package Web.GL.Rendering_Contexts is
    function Create_Shader
     (Self     : in out WebGL_Rendering_Context'Class;
      The_Type : GLenum) return Web.GL.Shaders.WebGL_Shader;
---
---   not overriding function Create_Texture
---    (Self : not null access WebGL_Rendering_Context)
---       return WebAPI.WebGL.Textures.WebGL_Texture_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createTexture";
---
+
+   function Create_Texture
+    (Self : in out WebGL_Rendering_Context)
+       return Web.GL.Textures.WebGL_Texture;
+
 ----    void cullFace(GLenum mode);
 --
 --   not overriding procedure Delete_Buffer

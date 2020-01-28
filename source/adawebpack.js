@@ -142,6 +142,10 @@ adawebpack = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createProgram());
   },
 
+  __adawebpack__webgl__RenderingContext__createTexture: function(identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createTexture());
+  },
+
   __adawebpack__webgl__RenderingContext__createShader: function(identifier,type) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createShader(type));
   },
