@@ -65,8 +65,7 @@ package Web.GL is
    --  XXX i64 can't be passed to/from JavaScript, replace this type by i32
    --  which should be sufficient for WASM32.
 
-   --  // Ideally the typedef below would use 'unsigned byte', but that doesn't currently exist in Web IDL.
-   --  typedef octet          GLubyte;        /* 'octet' should be an unsigned 8 bit type. */
+   type GLubyte is new Interfaces.Unsigned_8;
 
    --  typedef unsigned short GLushort;
 
@@ -74,6 +73,10 @@ package Web.GL is
 
    type GLfloat is new Interfaces.IEEE_Float_32;
    subtype GLclampf is GLfloat range 0.0 .. 1.0;
+
+   type GLubyte_Vector_2 is array (Positive range 1 .. 2) of GLubyte;
+   type GLubyte_Vector_3 is array (Positive range 1 .. 3) of GLubyte;
+   type GLubyte_Vector_4 is array (Positive range 1 .. 4) of GLubyte;
 
    type GLfloat_Vector_2 is array (Positive range 1 .. 2) of aliased GLfloat;
    type GLfloat_Vector_3 is array (Positive range 1 .. 3) of aliased GLfloat;
