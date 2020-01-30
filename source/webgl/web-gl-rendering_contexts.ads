@@ -716,14 +716,10 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "deleteShader";
---
---   not overriding procedure Delete_Texture
---    (Self    : not null access WebGL_Rendering_Context;
---     Texture : access WebAPI.WebGL.Textures.WebGL_Texture'Class)
---       is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "deleteTexture";
+
+   procedure Delete_Texture
+    (Self    : in out WebGL_Rendering_Context;
+     Texture : in out Web.GL.Textures.WebGL_Texture'Class);
 
    procedure Depth_Func
     (Self : in out WebGL_Rendering_Context'Class;

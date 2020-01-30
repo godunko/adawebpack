@@ -154,6 +154,10 @@ adawebpack = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createShader(type));
   },
 
+  __adawebpack__webgl__RenderingContext__deleteTexture: function(context_identifier, texture_identifier) {
+    __adawebpack_o2i.too(context_identifier).deleteTexture(__adawebpack_o2i.too(texture_identifier));
+  },
+
   __adawebpack__webgl__RenderingContext__depthFunc: function(identifier,func) {
     __adawebpack_o2i.too(identifier).depthFunc(func);
   },

@@ -296,6 +296,26 @@ package body Web.GL.Rendering_Contexts is
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
 
+   --------------------
+   -- Delete_Texture --
+   --------------------
+
+   procedure Delete_Texture
+    (Self    : in out WebGL_Rendering_Context;
+     Texture : in out Web.GL.Textures.WebGL_Texture'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Texture_Identifier : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__deleteTexture";
+
+   begin
+      Imported (Self.Identifier, Texture.Identifier);
+   end Delete_Texture;
+
    ----------------
    -- Depth_Func --
    ----------------
