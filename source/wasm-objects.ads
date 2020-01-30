@@ -64,6 +64,9 @@ package WASM.Objects is
    --  Create and initialize instance of object reference for the object
    --  with given identifier.
 
+   procedure Set_Null (Self : in out Object_Reference'Class);
+   --  Sets reference to point to 'null' object.
+
 private
 
    type Object_Identifier is new Interfaces.Unsigned_32;

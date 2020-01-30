@@ -50,6 +50,10 @@ package body WASM.Objects is
           Convention => C,
           Link_Name  => "__adawebpack__wasm__object_release";
 
+   procedure Unreference (Self : in out Shared_Data_Access);
+   --  Decrement reference counter and release object when reference counter
+   --  is zero. Parameter sets to null on exit.
+
    ------------
    -- Adjust --
    ------------
@@ -66,20 +70,8 @@ package body WASM.Objects is
    --------------
 
    overriding procedure Finalize (Self : in out Object_Reference) is
-      procedure Free is
-        new Ada.Unchecked_Deallocation (Shared_Data, Shared_Data_Access);
-
    begin
-      if Self.Shared /= null then
-         Self.Shared.Counter := Self.Shared.Counter - 1;
-
-         if Self.Shared.Counter = 0 then
-            Release (Self.Shared.Identifier);
-            Free (Self.Shared);
-         end if;
-
-         Self.Shared := null;
-      end if;
+      Unreference (Self.Shared);
    end Finalize;
 
    ----------------
@@ -120,5 +112,36 @@ package body WASM.Objects is
    begin
       return Self.Identifier = Null_Object_Identifier;
    end Is_Null;
+
+   --------------
+   -- Set_Null --
+   --------------
+
+   procedure Set_Null (Self : in out Object_Reference'Class) is
+   begin
+      Unreference (Self.Shared);
+   end Set_Null;
+
+   -----------------
+   -- Unreference --
+   -----------------
+
+   procedure Unreference (Self : in out Shared_Data_Access) is
+      procedure Free is
+        new Ada.Unchecked_Deallocation (Shared_Data, Shared_Data_Access);
+
+   begin
+      if Self /= null then
+         Self.Counter := Self.Counter - 1;
+
+         if Self.Counter = 0 then
+            Release (Self.Identifier);
+            Free (Self);
+
+         else
+            Self := null;
+         end if;
+      end if;
+   end Unreference;
 
 end WASM.Objects;
