@@ -291,8 +291,8 @@ package Web.GL.Rendering_Contexts is
 ----    const GLenum MAX_VERTEX_TEXTURE_IMAGE_UNITS   = 0x8B4C;
 ----    const GLenum MAX_TEXTURE_IMAGE_UNITS          = 0x8872;
 ----    const GLenum MAX_FRAGMENT_UNIFORM_VECTORS     = 0x8DFD;
---   SHADER_TYPE       : constant := 16#8B4F#;
---   DELETE_STATUS     : constant := 16#8B80#;
+   SHADER_TYPE       : constant := 16#8B4F#;
+   DELETE_STATUS     : constant := 16#8B80#;
 --   LINK_STATUS       : constant := 16#8B82#;
 --   VALIDATE_STATUS   : constant := 16#8B83#;
 --   ATTACHED_SHADERS  : constant := 16#8B85#;
@@ -448,13 +448,13 @@ package Web.GL.Rendering_Contexts is
 ----    /* Read Format */
 ----    const GLenum IMPLEMENTATION_COLOR_READ_TYPE   = 0x8B9A;
 ----    const GLenum IMPLEMENTATION_COLOR_READ_FORMAT = 0x8B9B;
---
---   -------------------
---   -- Shader Source --
---   -------------------
---
---   COMPILE_STATUS : constant := 16#8B81#;
---
+
+   -------------------
+   -- Shader Source --
+   -------------------
+
+   COMPILE_STATUS : constant := 16#8B81#;
+
 ----    /* Shader Precision-Specified Types */
 ----    const GLenum LOW_FLOAT                      = 0x8DF0;
 ----    const GLenum MEDIUM_FLOAT                   = 0x8DF1;
@@ -834,24 +834,19 @@ package Web.GL.Rendering_Contexts is
 --
 ----    DOMString? getProgramInfoLog(WebGLProgram? program);
 ----    any getRenderbufferParameter(GLenum target, GLenum pname);
---
---   not overriding function Get_Shader_Parameter
---    (Self   : not null access WebGL_Rendering_Context;
---     Shader : access WebAPI.WebGL.Shaders.WebGL_Shader'Class;
---     Pname  : GLenum) return GLenum is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "getShaderParameter";
-----            Pre'Class  => Pname = SHADER_TYPE;
---   not overriding function Get_Shader_Parameter
---    (Self   : not null access WebGL_Rendering_Context;
---     Shader : access WebAPI.WebGL.Shaders.WebGL_Shader'Class;
---     Pname  : GLenum) return Boolean is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "getShaderParameter";
-----            Pre'Class  => Pname in DELETE_STATUS | COMPILE_STATUS;
---
+
+   function Get_Shader_Parameter
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class;
+     Pname  : GLenum) return GLenum
+       with Pre => Pname = SHADER_TYPE;
+
+   function Get_Shader_Parameter
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class;
+     Pname  : GLenum) return Boolean
+       with Pre => Pname in DELETE_STATUS | COMPILE_STATUS;
+
 ----    WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
 ----    DOMString? getShaderInfoLog(WebGLShader? shader);
 ----

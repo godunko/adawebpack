@@ -504,6 +504,50 @@ package body Web.GL.Rendering_Contexts is
    end Get_Attrib_Location;
 
    --------------------------
+   -- Get_Shader_Parameter --
+   --------------------------
+
+   function Get_Shader_Parameter
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class;
+     Pname  : GLenum) return Boolean
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier;
+        Pname              : GLenum) return Interfaces.Unsigned_32
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__getShaderParameter";
+
+   begin
+      return Imported (Self.Identifier, Shader.Identifier, Pname) /= 0;
+   end Get_Shader_Parameter;
+
+   --------------------------
+   -- Get_Shader_Parameter --
+   --------------------------
+
+   function Get_Shader_Parameter
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class;
+     Pname  : GLenum) return GLenum
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier;
+        Pname              : GLenum) return Interfaces.Unsigned_32
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__getShaderParameter";
+
+   begin
+      return GLenum (Imported (Self.Identifier, Shader.Identifier, Pname));
+   end Get_Shader_Parameter;
+
+   --------------------------
    -- Get_Uniform_Location --
    --------------------------
 

@@ -59,7 +59,7 @@ adawebpack = {
   },
 
   __adawebpack__html__Button__disabled_getter: function(identifier) {
-    return +__adawebpack_o2i.too(identifier).disabled;
+    return +(__adawebpack_o2i.too(identifier).disabled);
   },
 
   __adawebpack__html__Button__disabled_setter: function(identifier,to) {
@@ -91,7 +91,7 @@ adawebpack = {
   },
 
   __adawebpack__html__Element__hidden_getter: function(identifier) {
-    return +__adawebpack_o2i.too(identifier).hidden;
+    return +(__adawebpack_o2i.too(identifier).hidden);
   },
 
   __adawebpack__html__Script__text_getter: function(identifier) {
@@ -192,6 +192,10 @@ adawebpack = {
 
   __adawebpack__webgl__RenderingContext__getAttribLocation: function(context_identifier,program_identifier,name_address,name_size) {
     return __adawebpack_o2i.too(context_identifier).getAttribLocation(__adawebpack_o2i.too(program_identifier), string_to_js(name_address, name_size));
+  },
+
+  __adawebpack__webgl__RenderingContext__getShaderParameter: function(context_identifier,shader_identifier,pname) {
+    return +(__adawebpack_o2i.too(context_identifier).getShaderParameter(__adawebpack_o2i.too(shader_identifier), pname));
   },
 
   __adawebpack__webgl__RenderingContext__getUniformLocation: function(context_identifier,program_identifier,name_address,name_size) {
