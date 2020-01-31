@@ -296,6 +296,26 @@ package body Web.GL.Rendering_Contexts is
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
 
+   -------------------
+   -- Delete_Shader --
+   -------------------
+
+   procedure Delete_Shader
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Shader : in out Web.GL.Shaders.WebGL_Shader'Class)
+   is
+      procedure Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__deleteShader";
+
+   begin
+      Imported (Self.Identifier, Shader.Identifier);
+   end Delete_Shader;
+
    --------------------
    -- Delete_Texture --
    --------------------
