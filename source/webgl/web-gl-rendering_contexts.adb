@@ -503,6 +503,30 @@ package body Web.GL.Rendering_Contexts is
         GLint (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
    end Get_Attrib_Location;
 
+   -------------------------
+   -- Get_Shader_Info_Log --
+   -------------------------
+
+   function Get_Shader_Info_Log
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class)
+       return Web.Strings.Web_String
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__webgl__RenderingContext__getShaderInfoLog";
+
+   begin
+      return
+        Web.Strings.WASM_Helpers.To_Ada
+         (Imported (Self.Identifier, Shader.Identifier));
+   end Get_Shader_Info_Log;
+
    --------------------------
    -- Get_Shader_Parameter --
    --------------------------

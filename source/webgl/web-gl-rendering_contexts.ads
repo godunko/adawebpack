@@ -848,8 +848,12 @@ package Web.GL.Rendering_Contexts is
        with Pre => Pname in DELETE_STATUS | COMPILE_STATUS;
 
 ----    WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
-----    DOMString? getShaderInfoLog(WebGLShader? shader);
-----
+
+   function Get_Shader_Info_Log
+    (Self   : WebGL_Rendering_Context'Class;
+     Shader : Web.GL.Shaders.WebGL_Shader'Class)
+       return Web.Strings.Web_String;
+
 ----    DOMString? getShaderSource(WebGLShader? shader);
 ----
 ----    any getTexParameter(GLenum target, GLenum pname);
