@@ -198,6 +198,10 @@ adawebpack = {
     return __adawebpack_o2i.too(context_identifier).getAttribLocation(__adawebpack_o2i.too(program_identifier), string_to_js(name_address, name_size));
   },
 
+  __adawebpack__webgl__RenderingContext__getProgramParameter: function(context_identifier,program_identifier,pname) {
+    return +(__adawebpack_o2i.too(context_identifier).getProgramParameter(__adawebpack_o2i.too(program_identifier), pname));
+  },
+
   __adawebpack__webgl__RenderingContext__getShaderInfoLog: function(context_identifier,shader_identifier) {
     return string_to_wasm(__adawebpack_o2i.too(context_identifier).getShaderInfoLog(__adawebpack_o2i.too(shader_identifier)));
   },

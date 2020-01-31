@@ -508,10 +508,10 @@ package body Web.GL.Rendering_Contexts is
         Name_Address       : System.Address;
         Name_Size          : Interfaces.Unsigned_32)
           return Interfaces.Integer_32
-         with Import     => True,
-              Convention => C,
-              Link_Name  =>
-                "__adawebpack__webgl__RenderingContext__getAttribLocation";
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__webgl__RenderingContext__getAttribLocation";
 
       Name_A : System.Address;
       Name_S : Interfaces.Unsigned_32;
@@ -522,6 +522,50 @@ package body Web.GL.Rendering_Contexts is
       return
         GLint (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
    end Get_Attrib_Location;
+
+   ---------------------------
+   -- Get_Program_Parameter --
+   ---------------------------
+
+   function Get_Program_Parameter
+    (Self    : WebGL_Rendering_Context;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Pname   : GLenum) return Boolean
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier;
+        Pname              : GLenum) return Interfaces.Unsigned_32
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__getProgramParameter";
+
+   begin
+      return Imported (Self.Identifier, Program.Identifier, Pname) /= 0;
+   end Get_Program_Parameter;
+
+   ---------------------------
+   -- Get_Program_Parameter --
+   ---------------------------
+
+   function Get_Program_Parameter
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Pname   : GLenum) return GLint
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Program_Identifier : WASM.Objects.Object_Identifier;
+        Pname              : GLenum) return Interfaces.Unsigned_32
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__getProgramParameter";
+
+   begin
+      return GLint (Imported (Self.Identifier, Program.Identifier, Pname));
+   end Get_Program_Parameter;
 
    -------------------------
    -- Get_Shader_Info_Log --

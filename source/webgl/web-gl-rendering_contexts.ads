@@ -284,23 +284,23 @@ package Web.GL.Rendering_Contexts is
 
    FRAGMENT_SHADER   : constant := 16#8B30#;
    VERTEX_SHADER     : constant := 16#8B31#;
-----    const GLenum MAX_VERTEX_ATTRIBS               = 0x8869;
-----    const GLenum MAX_VERTEX_UNIFORM_VECTORS       = 0x8DFB;
-----    const GLenum MAX_VARYING_VECTORS              = 0x8DFC;
-----    const GLenum MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8B4D;
-----    const GLenum MAX_VERTEX_TEXTURE_IMAGE_UNITS   = 0x8B4C;
-----    const GLenum MAX_TEXTURE_IMAGE_UNITS          = 0x8872;
-----    const GLenum MAX_FRAGMENT_UNIFORM_VECTORS     = 0x8DFD;
+--    const GLenum MAX_VERTEX_ATTRIBS               = 0x8869;
+--    const GLenum MAX_VERTEX_UNIFORM_VECTORS       = 0x8DFB;
+--    const GLenum MAX_VARYING_VECTORS              = 0x8DFC;
+--    const GLenum MAX_COMBINED_TEXTURE_IMAGE_UNITS = 0x8B4D;
+--    const GLenum MAX_VERTEX_TEXTURE_IMAGE_UNITS   = 0x8B4C;
+--    const GLenum MAX_TEXTURE_IMAGE_UNITS          = 0x8872;
+--    const GLenum MAX_FRAGMENT_UNIFORM_VECTORS     = 0x8DFD;
    SHADER_TYPE       : constant := 16#8B4F#;
    DELETE_STATUS     : constant := 16#8B80#;
---   LINK_STATUS       : constant := 16#8B82#;
---   VALIDATE_STATUS   : constant := 16#8B83#;
---   ATTACHED_SHADERS  : constant := 16#8B85#;
---   ACTIVE_UNIFORMS   : constant := 16#8B86#;
---   ACTIVE_ATTRIBUTES : constant := 16#8B89#;
-----    const GLenum SHADING_LANGUAGE_VERSION         = 0x8B8C;
-----    const GLenum CURRENT_PROGRAM                  = 0x8B8D;
---
+   LINK_STATUS       : constant := 16#8B82#;
+   VALIDATE_STATUS   : constant := 16#8B83#;
+   ATTACHED_SHADERS  : constant := 16#8B85#;
+   ACTIVE_UNIFORMS   : constant := 16#8B86#;
+   ACTIVE_ATTRIBUTES : constant := 16#8B89#;
+--    const GLenum SHADING_LANGUAGE_VERSION         = 0x8B8C;
+--    const GLenum CURRENT_PROGRAM                  = 0x8B8D;
+
 --   -------------------------------------
 --   -- StencilFunction / DepthFunction --
 --   -------------------------------------
@@ -809,26 +809,21 @@ package Web.GL.Rendering_Contexts is
 ----
 ----    any getFramebufferAttachmentParameter(GLenum target, GLenum attachment,
 ----                                          GLenum pname);
---
---   not overriding function Get_Program_Parameter
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class;
---     Pname   : GLenum) return GLint is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "getProgramParameter";
-----            Pre'Class  => Pname in ATTACHED_SHADERS | ACTIVE_ATTRIBUTES
-----                                    | ACTIVE_UNIFORMS;
---   not overriding function Get_Program_Parameter
---    (Self    : not null access WebGL_Rendering_Context;
---     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class;
---     Pname   : GLenum) return Boolean is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "getProgramParameter";
-----            Pre'Class  => Pname in DELETE_STATUS | LINK_STATUS
-----                                    | VALIDATE_STATUS;
---
+
+   function Get_Program_Parameter
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Pname   : GLenum) return GLint
+       with Pre => Pname in ATTACHED_SHADERS | ACTIVE_ATTRIBUTES
+                              | ACTIVE_UNIFORMS;
+
+   function Get_Program_Parameter
+    (Self    : WebGL_Rendering_Context;
+     Program : Web.GL.Programs.WebGL_Program'Class;
+     Pname   : GLenum) return Boolean
+       with Pre => Pname in DELETE_STATUS | LINK_STATUS
+                              | VALIDATE_STATUS;
+
 ----    DOMString? getProgramInfoLog(WebGLProgram? program);
 ----    any getRenderbufferParameter(GLenum target, GLenum pname);
 
