@@ -63,6 +63,8 @@ package body Web.Strings is
    --               ^^^^^^^^^^^^^^^^^^^^
    --  This constant represents constant part of the expression.
 
+   procedure Release (Item : in out String_Data_Access);
+
    ------------
    -- Adjust --
    ------------
@@ -74,25 +76,44 @@ package body Web.Strings is
       end if;
    end Adjust;
 
+   -----------
+   -- Clear --
+   -----------
+
+   procedure Clear (Self : in out Web_String'Class) is
+   begin
+      Release (Self.Data);
+   end Clear;
+
    --------------
    -- Finalize --
    --------------
 
    overriding procedure Finalize (Self : in out Web_String) is
+   begin
+      Release (Self.Data);
+   end Finalize;
+
+   -------------
+   -- Release --
+   -------------
+
+   procedure Release (Item : in out String_Data_Access) is
       procedure Free is
         new Ada.Unchecked_Deallocation (String_Data, String_Data_Access);
 
    begin
-      if Self.Data /= null then
-         Self.Data.Counter := Self.Data.Counter - 1;
+      if Item /= null then
+         Item.Counter := Item.Counter - 1;
 
-         if Self.Data.Counter = 0 then
-            Free (Self.Data);
+         if Item.Counter = 0 then
+            Free (Item);
+
+         else
+            Item := null;
          end if;
-
-         Self.Data := null;
       end if;
-   end Finalize;
+   end Release;
 
    -------------------
    -- To_Web_String --

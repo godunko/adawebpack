@@ -49,6 +49,9 @@ package Web.Strings is
 
    function To_Web_String (Item : Wide_Wide_String) return Web_String;
 
+   procedure Clear (Self : in out Web_String'Class);
+   --  Clears the contents of the string and makes it null.
+
 private
 
    type String_Data (Capacity : Interfaces.Unsigned_32) is record
