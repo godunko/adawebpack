@@ -818,14 +818,18 @@ package Web.GL.Rendering_Contexts is
                               | ACTIVE_UNIFORMS;
 
    function Get_Program_Parameter
-    (Self    : WebGL_Rendering_Context;
+    (Self    : WebGL_Rendering_Context'Class;
      Program : Web.GL.Programs.WebGL_Program'Class;
      Pname   : GLenum) return Boolean
        with Pre => Pname in DELETE_STATUS | LINK_STATUS
                               | VALIDATE_STATUS;
 
-----    DOMString? getProgramInfoLog(WebGLProgram? program);
-----    any getRenderbufferParameter(GLenum target, GLenum pname);
+   function Get_Program_Info_Log
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class)
+       return Web.Strings.Web_String;
+
+--    any getRenderbufferParameter(GLenum target, GLenum pname);
 
    function Get_Shader_Parameter
     (Self   : WebGL_Rendering_Context'Class;
@@ -839,7 +843,7 @@ package Web.GL.Rendering_Contexts is
      Pname  : GLenum) return Boolean
        with Pre => Pname in DELETE_STATUS | COMPILE_STATUS;
 
-----    WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
+--    WebGLShaderPrecisionFormat? getShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype);
 
    function Get_Shader_Info_Log
     (Self   : WebGL_Rendering_Context'Class;

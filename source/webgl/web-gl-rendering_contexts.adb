@@ -523,12 +523,36 @@ package body Web.GL.Rendering_Contexts is
         GLint (Imported (Self.Identifier, Program.Identifier, Name_A, Name_S));
    end Get_Attrib_Location;
 
+   --------------------------
+   -- Get_Program_Info_Log --
+   --------------------------
+
+   function Get_Program_Info_Log
+    (Self    : WebGL_Rendering_Context'Class;
+     Program : Web.GL.Programs.WebGL_Program'Class)
+       return Web.Strings.Web_String
+   is
+      function Imported
+       (Context_Identifier : WASM.Objects.Object_Identifier;
+        Shader_Identifier  : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__webgl__RenderingContext__getProgramInfoLog";
+
+   begin
+      return
+        Web.Strings.WASM_Helpers.To_Ada
+         (Imported (Self.Identifier, Program.Identifier));
+   end Get_Program_Info_Log;
+
    ---------------------------
    -- Get_Program_Parameter --
    ---------------------------
 
    function Get_Program_Parameter
-    (Self    : WebGL_Rendering_Context;
+    (Self    : WebGL_Rendering_Context'Class;
      Program : Web.GL.Programs.WebGL_Program'Class;
      Pname   : GLenum) return Boolean
    is
