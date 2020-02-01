@@ -53,8 +53,6 @@ package Web.UI_Events.Mouse_Events is
 --    readonly attribute double clientY;
 --    readonly attribute double x;
 --    readonly attribute double y;
---    readonly attribute double offsetX;
---    readonly attribute double offsetY;
 --  };
 
    function Page_X (Self : Mouse_Event) return DOM_Double;
@@ -62,5 +60,7 @@ package Web.UI_Events.Mouse_Events is
    function Page_Y (Self : Mouse_Event) return DOM_Double;
 
    function Offset_X (Self : Mouse_Event) return DOM_Double;
+
+   function Offset_Y (Self : Mouse_Event) return DOM_Double;
 
 end Web.UI_Events.Mouse_Events;

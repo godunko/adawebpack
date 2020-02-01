@@ -110,6 +110,10 @@ adawebpack = {
     return __adawebpack_o2i.too(identifier).offsetX;
   },
 
+  __adawebpack__uievents__MouseEvent__offsetY_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).offsetY;
+  },
+
   __adawebpack__uievents__MouseEvent__pageX_getter: function(identifier) {
     return __adawebpack_o2i.too(identifier).pageX;
   },

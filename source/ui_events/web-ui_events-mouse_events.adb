@@ -54,6 +54,22 @@ package body Web.UI_Events.Mouse_Events is
       return Imported (Self.Identifier);
    end Offset_X;
 
+   --------------
+   -- Offset_Y --
+   --------------
+
+   function Offset_Y (Self : Mouse_Event) return DOM_Double is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier) return DOM_Double
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__uievents__MouseEvent__offsetY_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Offset_Y;
+
    ------------
    -- Page_X --
    ------------
