@@ -106,6 +106,10 @@ adawebpack = {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
 
+  __adawebpack__uievents__MouseEvent__pageX_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).pageX;
+  },
+
   __adawebpack__webgl__RenderingContext__attachShader: function(context_identifier,program_identifier,shader_identifier) {
     __adawebpack_o2i.too(context_identifier).attachShader(__adawebpack_o2i.too(program_identifier), __adawebpack_o2i.too(shader_identifier));
   },

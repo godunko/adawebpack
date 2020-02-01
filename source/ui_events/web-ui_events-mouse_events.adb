@@ -34,30 +34,24 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.UI_Events.UI_Events;
+with WASM.Objects;
 
-package Web.UI_Events.Mouse_Events is
+package body Web.UI_Events.Mouse_Events is
 
-   pragma Preelaborate;
+   ------------
+   -- Page_X --
+   ------------
 
-   type Mouse_Event is new Web.UI_Events.UI_Events.UI_Event with null record;
+   function Page_X (Self : Mouse_Event) return DOM_Double is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier) return DOM_Double
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__uievents__MouseEvent__pageX_getter";
 
-   -----------------------
-   -- CSSOM View Module --
-   -----------------------
-
---  partial interface MouseEvent {
---    readonly attribute double screenX;
---    readonly attribute double screenY;
---    readonly attribute double pageY;
---    readonly attribute double clientX;
---    readonly attribute double clientY;
---    readonly attribute double x;
---    readonly attribute double y;
---    readonly attribute double offsetX;
---    readonly attribute double offsetY;
---  };
-
-   function Page_X (Self : Mouse_Event) return DOM_Double;
+   begin
+      return Imported (Self.Identifier);
+   end Page_X;
 
 end Web.UI_Events.Mouse_Events;
