@@ -106,6 +106,10 @@ adawebpack = {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
 
+  __adawebpack__uievents__MouseEvent__offsetX_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).offsetX;
+  },
+
   __adawebpack__uievents__MouseEvent__pageX_getter: function(identifier) {
     return __adawebpack_o2i.too(identifier).pageX;
   },

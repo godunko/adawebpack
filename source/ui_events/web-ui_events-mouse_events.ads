@@ -61,4 +61,6 @@ package Web.UI_Events.Mouse_Events is
 
    function Page_Y (Self : Mouse_Event) return DOM_Double;
 
+   function Offset_X (Self : Mouse_Event) return DOM_Double;
+
 end Web.UI_Events.Mouse_Events;

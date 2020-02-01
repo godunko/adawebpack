@@ -38,6 +38,22 @@ with WASM.Objects;
 
 package body Web.UI_Events.Mouse_Events is
 
+   --------------
+   -- Offset_X --
+   --------------
+
+   function Offset_X (Self : Mouse_Event) return DOM_Double is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier) return DOM_Double
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__uievents__MouseEvent__offsetX_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Offset_X;
+
    ------------
    -- Page_X --
    ------------
