@@ -49,7 +49,6 @@ package Web.UI_Events.Mouse_Events is
 --  partial interface MouseEvent {
 --    readonly attribute double screenX;
 --    readonly attribute double screenY;
---    readonly attribute double pageY;
 --    readonly attribute double clientX;
 --    readonly attribute double clientY;
 --    readonly attribute double x;
@@ -59,5 +58,7 @@ package Web.UI_Events.Mouse_Events is
 --  };
 
    function Page_X (Self : Mouse_Event) return DOM_Double;
+
+   function Page_Y (Self : Mouse_Event) return DOM_Double;
 
 end Web.UI_Events.Mouse_Events;

@@ -54,4 +54,20 @@ package body Web.UI_Events.Mouse_Events is
       return Imported (Self.Identifier);
    end Page_X;
 
+   ------------
+   -- Page_Y --
+   ------------
+
+   function Page_Y (Self : Mouse_Event) return DOM_Double is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier) return DOM_Double
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__uievents__MouseEvent__pageY_getter";
+
+   begin
+      return Imported (Self.Identifier);
+   end Page_Y;
+
 end Web.UI_Events.Mouse_Events;

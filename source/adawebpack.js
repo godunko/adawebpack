@@ -110,6 +110,10 @@ adawebpack = {
     return __adawebpack_o2i.too(identifier).pageX;
   },
 
+  __adawebpack__uievents__MouseEvent__pageY_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).pageY;
+  },
+
   __adawebpack__webgl__RenderingContext__attachShader: function(context_identifier,program_identifier,shader_identifier) {
     __adawebpack_o2i.too(context_identifier).attachShader(__adawebpack_o2i.too(program_identifier), __adawebpack_o2i.too(shader_identifier));
   },
