@@ -189,7 +189,7 @@ wasm: build
 	cp -p $(RTS_SRC)/math/a-nlelfu.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nllefu.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nuelfu.ads $(WASMINCLUDE)/
-	cp -p $(AWP_SRC)/rtl/system-wasm.ads $(WASMINCLUDE)/system.ads
+	cp -p $(AWP_SRC)/rtl/system.ads $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(WASMINCLUDE)/s-assert.ads
 #	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(WASMINCLUDE)/s-assert.adb
 	cp -p $(AWP_SRC)/rtl/s-builti.ad[sb] $(WASMINCLUDE)
