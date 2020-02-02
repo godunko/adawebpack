@@ -59,9 +59,6 @@ pragma Restrictions (No_Abort_Statements);
 pragma Restrictions (Max_Asynchronous_Select_Nesting => 0);
 --  Disable abort deferral
 
-pragma Restrictions (No_Streams);
---  Streams are not supported
-
 pragma Restrictions (No_Initialize_Scalars);
 --  To simplify the generated code
 

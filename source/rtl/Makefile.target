@@ -6,7 +6,10 @@ a-charac.ads \
 a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
+a-ioexce.ads \
 a-numeri.ads \
+a-stream.adb \
+a-stream.ads \
 a-tags.adb   \
 a-tags.ads   \
 a-unccon.ads \
@@ -46,6 +49,8 @@ s-stoele.ads \
 s-stopoo.adb \
 s-stopoo.ads \
 s-stposu.ads \
+s-stratt.adb \
+s-stratt.ads \
 s-spsufi.adb \
 s-spsufi.ads \
 s-strhas.adb \
@@ -133,6 +138,7 @@ COMPILABLE_WASM_SPECS= \
 ada.ads      \
 a-charac.ads \
 a-chzla1.ads \
+a-ioexce.ads \
 a-nlelfu.ads \
 a-nllefu.ads \
 a-nuelfu.ads \
