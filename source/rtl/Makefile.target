@@ -34,6 +34,8 @@ s-imgboo.adb \
 s-imgboo.ads \
 s-imgint.adb \
 s-imgint.ads \
+s-imglli.adb \
+s-imglli.ads \
 s-io.ads     \
 s-maccod.ads \
 s-memory.ads \
@@ -102,8 +104,6 @@ s-imgcha.adb \
 s-imgcha.ads \
 s-imgenu.adb \
 s-imgenu.ads \
-s-imglli.adb \
-s-imglli.ads \
 s-imgllu.adb \
 s-imgllu.ads \
 s-imguns.adb \
