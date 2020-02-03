@@ -32,6 +32,8 @@ s-finroo.ads \
 s-flocon.ads \
 s-htable.adb \
 s-htable.ads \
+s-imenne.adb \
+s-imenne.ads \
 s-imgboo.adb \
 s-imgboo.ads \
 s-imgint.adb \
@@ -107,8 +109,6 @@ s-expuns.adb \
 s-fatsfl.ads \
 s-fore.ads   \
 s-fore.adb   \
-s-imenne.adb \
-s-imenne.ads \
 s-imgcha.adb \
 s-imgcha.ads \
 s-imgenu.adb \
