@@ -73,6 +73,8 @@ s-valuns.adb \
 s-valuns.ads \
 s-valuti.adb \
 s-valuti.ads \
+s-vercon.adb \
+s-vercon.ads \
 s-wchcon.adb \
 s-wchcon.ads \
 s-wchcnv.adb \
