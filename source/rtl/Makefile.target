@@ -25,9 +25,11 @@ s-fatgen.adb \
 s-fatgen.ads \
 s-fatflt.ads \
 s-fatlfl.ads \
+s-fatllf.ads \
 s-finmas.ads \
 s-finroo.adb \
 s-finroo.ads \
+s-flocon.ads \
 s-htable.adb \
 s-htable.ads \
 s-imgboo.adb \
@@ -36,12 +38,19 @@ s-imgint.adb \
 s-imgint.ads \
 s-imglli.adb \
 s-imglli.ads \
+s-imgllu.adb \
+s-imgllu.ads \
+s-imgrea.adb \
+s-imgrea.ads \
+s-imguns.adb \
+s-imguns.ads \
 s-io.ads     \
 s-maccod.ads \
 s-memory.ads \
 s-parame.adb \
 s-pooglo.adb \
 s-pooglo.ads \
+s-powtab.ads \
 s-secsta.adb \
 s-secsta.ads \
 s-stalib.adb \
@@ -93,9 +102,7 @@ s-explli.ads \
 s-explli.adb \
 s-expuns.ads \
 s-expuns.adb \
-s-fatllf.ads \
 s-fatsfl.ads \
-s-flocon.ads \
 s-fore.ads   \
 s-fore.adb   \
 s-imenne.adb \
@@ -104,11 +111,6 @@ s-imgcha.adb \
 s-imgcha.ads \
 s-imgenu.adb \
 s-imgenu.ads \
-s-imgllu.adb \
-s-imgllu.ads \
-s-imguns.adb \
-s-imguns.ads \
-s-powtab.ads \
 s-valboo.adb \
 s-valboo.ads \
 s-valcha.adb \
@@ -149,8 +151,10 @@ interfac.ads \
 system.ads   \
 s-fatflt.ads \
 s-fatlfl.ads \
+s-fatllf.ads \
 s-libpre.ads \
 s-maccod.ads \
+s-powtab.ads \
 s-unstyp.ads \
 unchconv.ads \
 
@@ -158,9 +162,7 @@ unchconv.ads \
 g-souinf.ads \
 i-c.ads      \
 i-cexten.ads \
-s-fatllf.ads \
 s-fatsfl.ads \
-s-powtab.ads \
 machcode.ads \
 text_io.ads  \
 unchdeal.ads \
@@ -217,7 +219,7 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
 	cp -p $(AWP_SRC)/rtl/s-stposu__wasm.adb $(WASMINCLUDE)/s-stposu.adb
 	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
-#	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
+	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
 	cd $(WASMLIB) && for f in $(COMPILABLE_WASM_SPECS); do \
 	  echo ">>> Compile $$f"; \
 	  $(COMPILE) ../adainclude/$$f || exit 1; \
