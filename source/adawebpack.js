@@ -288,6 +288,50 @@ adawebpack = {
 
   __adawebpack__webgl__RenderingContext__viewport: function(context_identifier,x,y,width,height) {
     __adawebpack_o2i.too(context_identifier).viewport(x,y,width,height);
+  },
+
+  __adawebpack__sockets__WebSocket__create: function (address, length) {
+    return __adawebpack_o2i.toi(new WebSocket(string_to_js(address, length)));
+  },
+
+  __adawebpack__sockets__WebSocket__get_bin_type: function (identifier) {
+    return __adawebpack_o2i.too(identifier).binaryType == "blob" ? 0 : 1;
+  },
+
+  __adawebpack__sockets__WebSocket__set_bin_type: function (identifier, value) {
+    __adawebpack_o2i.too(identifier).binaryType = value ? "arraybuffer" : "blob";
+  },
+
+  __adawebpack__sockets__WebSocket__buf_amount: function (identifier) {
+    return __adawebpack_o2i.too(identifier).bufferedAmount;
+  },
+
+  __adawebpack__sockets__WebSocket__get_ext: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).extensions);
+  },
+
+  __adawebpack__sockets__WebSocket__get_proto: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).protocol);
+  },
+
+  __adawebpack__sockets__WebSocket__get_state: function (identifier) {
+    return __adawebpack_o2i.too(identifier).readyState;
+  },
+
+  __adawebpack__sockets__WebSocket__get_url: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).url);
+  },
+
+  __adawebpack__sockets__WebSocket__send_str: function(identifier, address, length) {
+    __adawebpack_o2i.too(identifier).send(string_to_js(address, length));
+  },
+
+  __adawebpack__sockets__WebSocket__send_bin: function(identifier, address, length) {
+    __adawebpack_o2i.too(identifier).send(new Uint8Array(instance.exports.memory.buffer, address, length));
+  },
+
+  __adawebpack__sockets__WebSocket__close: function(identifier) {
+    __adawebpack_o2i.too(identifier).close();
   }
 
 };
