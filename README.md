@@ -28,10 +28,16 @@ ln -s adawebpack_src/source/rtl/Makefile.target
 Create link to RTS source code
 
 ```
+cd gnat-llvm/llvm-interface
 ln -s ~/opt/GNAT/2019-arm-elf/arm-eabi/include/rts-sources/
 ```
 
 Use `make wasm` to build compiler and Run Time Library
+
+```
+cd gnat-llvm/llvm-interface
+make wasm
+```
 
 ## Unsupported features
 
