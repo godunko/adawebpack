@@ -1,6 +1,7 @@
 # Supported packages of the standard Ada library
 
  * Ada
+   * Assertions
    * Characters
      * Wide_Wide_Latin_1
    * Exceptions

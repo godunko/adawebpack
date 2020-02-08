@@ -2,6 +2,8 @@
 
 COMMON_WASM_SRCS= \
 ada.ads      \
+a-assert.adb \
+a-assert.ads \
 a-charac.ads \
 a-chzla1.ads \
 a-finali.adb \
@@ -17,6 +19,7 @@ a-uncdea.ads \
 interfac.ads \
 s-addima.adb \
 s-addima.ads \
+s-assert.ads \
 s-atacco.adb \
 s-atacco.ads \
 s-casuti.adb \
@@ -91,9 +94,7 @@ s-wchwts.adb \
 s-wchwts.ads \
 unchconv.ads
 
-#a-assert.adb \
-a-assert.ads \
-gnat.ads     \
+#gnat.ads     \
 g-souinf.ads \
 i-cexten.ads \
 s-addope.ads \
@@ -196,8 +197,7 @@ wasm: build
 	cp -p $(RTS_SRC)/math/a-nllefu.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nuelfu.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/system.ads $(WASMINCLUDE)/
-#	cp -p $(GNAT_SRC)/hie/s-assert__c.ads $(WASMINCLUDE)/s-assert.ads
-#	cp -p $(GNAT_SRC)/hie/s-assert__xi.adb $(WASMINCLUDE)/s-assert.adb
+	cp -p $(RTS_SRC)/zfp/s-assert.adb $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-builti.ad[sb] $(WASMINCLUDE)
 	cp -p $(AWP_SRC)/rtl/s-finmas__wasm.adb $(WASMINCLUDE)/s-finmas.adb
 	cp -p $(RTS_SRC)/math/s-gcmain.ad[sb] $(WASMINCLUDE)/
