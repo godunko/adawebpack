@@ -71,6 +71,8 @@ s-strhas.ads \
 s-traent.adb \
 s-traent.ads \
 s-unstyp.ads \
+s-valenu.adb \
+s-valenu.ads \
 s-valuns.adb \
 s-valuns.ads \
 s-valuti.adb \
@@ -85,6 +87,8 @@ s-wchjis.adb \
 s-wchjis.ads \
 s-wchstw.adb \
 s-wchstw.ads \
+s-wchwts.adb \
+s-wchwts.ads \
 unchconv.ads
 
 #a-assert.adb \
@@ -117,8 +121,6 @@ s-valboo.adb \
 s-valboo.ads \
 s-valcha.adb \
 s-valcha.ads \
-s-valenu.adb \
-s-valenu.ads \
 s-valint.adb \
 s-valint.ads \
 s-vallli.adb \
