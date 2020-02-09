@@ -94,6 +94,15 @@ package body Web.Strings is
       Release (Self.Data);
    end Finalize;
 
+   --------------
+   -- Is_Empty --
+   --------------
+
+   function Is_Empty (Self : Web_String'Class) return Boolean is
+   begin
+      return Self.Data = null or else Self.Data.Length = 0;
+   end Is_Empty;
+
    -------------
    -- Release --
    -------------

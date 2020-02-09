@@ -47,10 +47,12 @@ package Web.Strings is
 
    type Web_String is tagged private;
 
-   function To_Web_String (Item : Wide_Wide_String) return Web_String;
+   function Is_Empty (Self : Web_String'Class) return Boolean;
 
    procedure Clear (Self : in out Web_String'Class);
    --  Clears the contents of the string and makes it null.
+
+   function To_Web_String (Item : Wide_Wide_String) return Web_String;
 
 private
 
