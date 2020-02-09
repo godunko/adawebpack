@@ -63,6 +63,21 @@ package body Web.Strings is
    --               ^^^^^^^^^^^^^^^^^^^^
    --  This constant represents constant part of the expression.
 
+   Surrogate_Kind_Mask   : constant := 16#FC00#;
+   Masked_High_Surrogate : constant := 16#D800#;
+
+   UCS4_Fixup : constant
+     := High_Surrogate_First * 16#400# + Low_Surrogate_First - 16#1_0000#;
+   --  When code point is encoded as pair of surrogates its value computed as:
+   --
+   --    C := (S (J) - HB) << 10 + S (J + 1) - LB + 0x10000
+   --
+   --  to optimize number of computations this expression is transformed to
+   --
+   --    C := S (J) << 10 + S (J + 1) - (HB << 10 + LB - 0x10000)
+   --                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+   --  This constant represents constant part of the expression.
+
    procedure Release (Item : in out String_Data_Access);
 
    ------------
@@ -168,5 +183,34 @@ package body Web.Strings is
          end loop;
       end return;
    end To_Web_String;
+
+   -------------------------
+   -- To_Wide_Wide_String --
+   -------------------------
+
+   function To_Wide_Wide_String (Self : Web_String) return Wide_Wide_String is
+      use type Web.Unicode.Unicode_Code_Point;
+
+      Code  : Web.Unicode.Unicode_Code_Point;
+      Index : Interfaces.Unsigned_32 := 0;
+
+   begin
+      return Result : Wide_Wide_String (1 .. Self.Length) do
+         for J in Result'Range loop
+            Code := Web.Unicode.Unicode_Code_Point (Self.Data.Data (Index));
+            Index := Index + 1;
+
+            if (Code and Surrogate_Kind_Mask) = Masked_High_Surrogate then
+               Code :=
+                 Code * 16#400#
+                   + Web.Unicode.Unicode_Code_Point (Self.Data.Data (Index))
+                   - UCS4_Fixup;
+               Index := Index + 1;
+            end if;
+
+            Result (J) := Wide_Wide_Character'Val (Code);
+         end loop;
+      end return;
+   end To_Wide_Wide_String;
 
 end Web.Strings;
