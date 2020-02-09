@@ -34,7 +34,10 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
 with WASM.Objects;
+with Web.Strings.WASM_Helpers;
 
 package body Web.HTML.Selects is
 
@@ -52,6 +55,24 @@ package body Web.HTML.Selects is
    begin
       return Imported (Self.Identifier) /= 0;
    end Get_Disabled;
+
+   ---------------
+   -- Get_Value --
+   ---------------
+
+   function Get_Value
+    (Self : HTML_Select_Element'Class) return Web.Strings.Web_String
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Select__value_getter";
+
+   begin
+      return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
+   end Get_Value;
 
    ------------------
    -- Set_Disabled --
@@ -71,5 +92,29 @@ package body Web.HTML.Selects is
    begin
       Imported (Self.Identifier, (if To then 1 else 0));
    end Set_Disabled;
+
+   ---------------
+   -- Set_Value --
+   ---------------
+
+   procedure Set_Value
+    (Self : in out HTML_Select_Element'Class;
+     To   : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Select__value_setter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, A, S);
+   end Set_Value;
 
 end Web.HTML.Selects;

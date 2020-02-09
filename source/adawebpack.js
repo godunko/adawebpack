@@ -110,6 +110,14 @@ adawebpack = {
     __adawebpack_o2i.too(identifier).disabled = (to !== 0);
   },
 
+  __adawebpack__html__Select__value_getter: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).value);
+  },
+
+  __adawebpack__html__Select__value_setter: function(identifier,address,size) {
+    __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
+  },
+
   __adawebpack__html__Window__requestAnimationFrame: function(address) {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
