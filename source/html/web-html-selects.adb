@@ -34,35 +34,42 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.DOM.Elements;
-limited with Web.HTML.Buttons;
-limited with Web.HTML.Canvases;
-limited with Web.HTML.Images;
-limited with Web.HTML.Scripts;
-limited with Web.HTML.Selects;
+with WASM.Objects;
 
-package Web.HTML.Elements is
+package body Web.HTML.Selects is
 
-   pragma Preelaborate;
+   ------------------
+   -- Get_Disabled --
+   ------------------
 
-   type HTML_Element is new Web.DOM.Elements.Element with null record;
+   function Get_Disabled (Self : HTML_Select_Element'Class) return Boolean is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Select__disabled_getter";
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Disabled;
 
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean;
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
+   ------------------
+   -- Set_Disabled --
+   ------------------
 
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
+   procedure Set_Disabled
+    (Self : in out HTML_Select_Element;
+     To   : Boolean)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        To         : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Select__disabled_setter";
 
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
+   begin
+      Imported (Self.Identifier, (if To then 1 else 0));
+   end Set_Disabled;
 
-   function As_HTML_Image
-    (Self : HTML_Element'Class) return Web.HTML.Images.HTML_Image_Element;
-
-   function As_HTML_Script
-    (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
-
-   function As_HTML_Select
-    (Self : HTML_Element'Class) return Web.HTML.Selects.HTML_Select_Element;
-
-end Web.HTML.Elements;
+end Web.HTML.Selects;

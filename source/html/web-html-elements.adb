@@ -42,6 +42,7 @@ with Web.HTML.Buttons;
 with Web.HTML.Canvases;
 with Web.HTML.Images;
 with Web.HTML.Scripts;
+with Web.HTML.Selects;
 with Web.Strings;
 with Web.Utilities;
 
@@ -117,6 +118,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Scripts.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Script;
+
+   --------------------
+   -- As_HTML_Select --
+   --------------------
+
+   function As_HTML_Select
+    (Self : HTML_Element'Class) return Web.HTML.Selects.HTML_Select_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLSelectElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Selects.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Select;
 
    ----------------------
    -- Get_Client_Height --

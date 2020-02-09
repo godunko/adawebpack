@@ -102,6 +102,14 @@ adawebpack = {
     __adawebpack_o2i.too(identifier).text = string_to_js(address,size);
   },
 
+  __adawebpack__html__Select__disabled_getter: function(identifier) {
+    return +(__adawebpack_o2i.too(identifier).disabled);
+  },
+
+  __adawebpack__html__Select__disabled_setter: function(identifier,to) {
+    __adawebpack_o2i.too(identifier).disabled = (to !== 0);
+  },
+
   __adawebpack__html__Window__requestAnimationFrame: function(address) {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
