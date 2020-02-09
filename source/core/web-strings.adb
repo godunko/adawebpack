@@ -103,6 +103,15 @@ package body Web.Strings is
       return Self.Data = null or else Self.Data.Length = 0;
    end Is_Empty;
 
+   ------------
+   -- Length --
+   ------------
+
+   function Length (Self : Web_String'Class) return Natural is
+   begin
+      return (if Self.Data = null then 0 else Self.Data.Length);
+   end Length;
+
    -------------
    -- Release --
    -------------

@@ -49,6 +49,8 @@ package Web.Strings is
 
    function Is_Empty (Self : Web_String'Class) return Boolean;
 
+   function Length (Self : Web_String'Class) return Natural;
+
    procedure Clear (Self : in out Web_String'Class);
    --  Clears the contents of the string and makes it null.
 
