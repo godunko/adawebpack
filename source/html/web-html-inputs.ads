@@ -43,7 +43,7 @@
 ------------------------------------------------------------------------------
 
 with Web.HTML.Elements;
---with WebAPI.HTML.Validity_States;
+with Web.HTML.Validity_States;
 
 package Web.HTML.Inputs is
 
@@ -100,7 +100,6 @@ package Web.HTML.Inputs is
 --   = 1);
 --
 --    readonly attribute boolean willValidate;
---    readonly attribute ValidityState validity;
 --    readonly attribute DOMString validationMessage;
 --    boolean checkValidity();
 --    boolean reportValidity();
@@ -518,17 +517,11 @@ package Web.HTML.Inputs is
 --         with Import     => True,
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "willValidate";
---
---   --    readonly attribute ValidityState validity;
---
---   not overriding function Get_Validity
---    (Self : not null access constant HTML_Input_Element)
---       return not null access WebAPI.HTML.Validity_States.Validity_State'Class
---         is abstract
---           with Import     => True,
---                Convention => JavaScript_Property_Getter,
---                Link_Name  => "validity";
---
+
+   function Get_Validity
+    (Self : HTML_Input_Element'Class)
+       return Web.HTML.Validity_States.Validity_State;
+
 --   not overriding function Get_Validation_Message
 --    (Self : not null access constant HTML_Input_Element)
 --       return WebAPI.DOM_String is abstract
