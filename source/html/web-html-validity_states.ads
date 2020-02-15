@@ -133,12 +133,7 @@ package Web.HTML.Validity_States is
 --         with Import     => True,
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "customError";
---
---   not overriding function Get_Valid
---    (Self : not null access constant Validity_State)
---       return WebAPI.DOM_Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "valid";
+
+   function Get_Valid (Self : Validity_State'Class) return Boolean;
 
 end Web.HTML.Validity_States;
