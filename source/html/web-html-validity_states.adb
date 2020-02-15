@@ -112,4 +112,21 @@ package body Web.HTML.Validity_States is
       return Imported (Self.Identifier) /= 0;
    end Get_Valid;
 
+   -----------------------
+   -- Get_Value_Missing --
+   -----------------------
+
+   function Get_Value_Missing (Self : Validity_State'Class) return Boolean is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__html__ValidityState__valueMissing_getter";
+
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Value_Missing;
+
 end Web.HTML.Validity_States;

@@ -51,7 +51,6 @@ package Web.HTML.Validity_States is
    type Validity_State is new WASM.Objects.Object_Reference with null record;
 
 --  interface ValidityState {
---    readonly attribute boolean valueMissing;
 --    readonly attribute boolean typeMismatch;
 --    readonly attribute boolean patternMismatch;
 --    readonly attribute boolean tooLong;
@@ -60,13 +59,8 @@ package Web.HTML.Validity_States is
 --    readonly attribute boolean customError;
 --  };
 
---   not overriding function Get_Value_Missing
---    (Self : not null access constant Validity_State)
---       return WebAPI.DOM_Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "valueMissing";
---
+   function Get_Value_Missing (Self : Validity_State'Class) return Boolean;
+
 --   not overriding function Get_Type_Mismatch
 --    (Self : not null access constant Validity_State)
 --       return WebAPI.DOM_Boolean is abstract

@@ -178,6 +178,10 @@ export let imports = {
     return +(__adawebpack_o2i.too(identifier).valid);
   },
 
+  __adawebpack__html__ValidityState__valueMissing_getter: function(identifier) {
+    return +(__adawebpack_o2i.too(identifier).valueMissing);
+  },
+
   __adawebpack__html__Window__requestAnimationFrame: function(address) {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
