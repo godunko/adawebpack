@@ -48,7 +48,7 @@ package body Web.HTML.Validity_States is
    -- Get_Bad_Input --
    -------------------
 
-   function Get_Bad_Input (Self : Validity_State) return Boolean is
+   function Get_Bad_Input (Self : Validity_State'Class) return Boolean is
       function Imported
        (Identifier : WASM.Objects.Object_Identifier)
           return Interfaces.Unsigned_32
@@ -60,6 +60,23 @@ package body Web.HTML.Validity_States is
    begin
       return Imported (Self.Identifier) /= 0;
    end Get_Bad_Input;
+
+   ------------------------
+   -- Get_Range_Overflow --
+   ------------------------
+
+   function Get_Range_Overflow (Self : Validity_State'Class) return Boolean is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__html__ValidityState__rangeOverflow_getter";
+
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Range_Overflow;
 
    ---------------
    -- Get_Valid --
