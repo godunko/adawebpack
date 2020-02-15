@@ -56,7 +56,6 @@ package Web.HTML.Validity_States is
 --    readonly attribute boolean patternMismatch;
 --    readonly attribute boolean tooLong;
 --    readonly attribute boolean tooShort;
---    readonly attribute boolean rangeUnderflow;
 --    readonly attribute boolean stepMismatch;
 --    readonly attribute boolean customError;
 --  };
@@ -95,13 +94,8 @@ package Web.HTML.Validity_States is
 --         with Import     => True,
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "tooShort";
---
---   not overriding function Get_Range_Underflow
---    (Self : not null access constant Validity_State)
---       return WebAPI.DOM_Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "rangeUnderflow";
+
+   function Get_Range_Underflow (Self : Validity_State'Class) return Boolean;
 
    function Get_Range_Overflow (Self : Validity_State'Class) return Boolean;
 

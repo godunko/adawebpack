@@ -170,6 +170,10 @@ export let imports = {
     return +(__adawebpack_o2i.too(identifier).rangeOverflow);
   },
 
+  __adawebpack__html__ValidityState__rangeUnderflow_getter: function(identifier) {
+    return +(__adawebpack_o2i.too(identifier).rangeUnderflow);
+  },
+
   __adawebpack__html__ValidityState__valid_getter: function(identifier) {
     return +(__adawebpack_o2i.too(identifier).valid);
   },

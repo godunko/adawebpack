@@ -78,6 +78,23 @@ package body Web.HTML.Validity_States is
       return Imported (Self.Identifier) /= 0;
    end Get_Range_Overflow;
 
+   -------------------------
+   -- Get_Range_Underflow --
+   -------------------------
+
+   function Get_Range_Underflow (Self : Validity_State'Class) return Boolean is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__html__ValidityState__rangeUnderflow_getter";
+
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Range_Underflow;
+
    ---------------
    -- Get_Valid --
    ---------------
