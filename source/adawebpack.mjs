@@ -1,5 +1,12 @@
 
-adawebpack = {
+let instance = {};
+
+export function initialize(i) {
+  instance = i;
+  instance.exports.adainit();
+}
+
+export let imports = {
 
   __gnat_put_int: function (item) { console.log(item); },
   __gnat_put_char: function (item) { console.log(String.fromCharCode(item)); },
@@ -7,7 +14,7 @@ adawebpack = {
   __gnat_put_f32: function (item) { console.log(item); },
   __gnat_put_f64: function (item) { console.log(item); },
   __gnat_put_exception: function (address,size,line) {
-     msg = String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size));
+     let msg = String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size));
      if (line !== 0) {
         console.error("Predefined exception raised at %s:%i", msg, line);
      } else {
@@ -352,7 +359,7 @@ adawebpack = {
 
 };
 
-__adawebpack_o2i = {
+let __adawebpack_o2i = {
   o2r : new Map(),
   i2r : new Map(),
   last: 0,
@@ -363,7 +370,7 @@ __adawebpack_o2i = {
       return __adawebpack_o2i.o2r.get(o).i;
     } else {
       __adawebpack_o2i.last++;
-      r = {c: 0, i: __adawebpack_o2i.last, o: o};
+      let r = {c: 0, i: __adawebpack_o2i.last, o: o};
       __adawebpack_o2i.o2r.set(o, r);
       __adawebpack_o2i.i2r.set(__adawebpack_o2i.last, r);
       return __adawebpack_o2i.last;
@@ -393,9 +400,9 @@ function string_to_js(address, size)
 
 function string_to_wasm(item)
 {
-  s = instance.exports.__adawebpack__core__allocate_string(item.length);
-  a = new Uint16Array(instance.exports.memory.buffer, s, item.length);
-  for(var i=0, l=item.length; i < l; i++) {
+  let s = instance.exports.__adawebpack__core__allocate_string(item.length);
+  let a = new Uint16Array(instance.exports.memory.buffer, s, item.length);
+  for(let i=0, l=item.length; i < l; i++) {
     a[i] = item.charCodeAt(i);
   }
   return s;
