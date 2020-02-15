@@ -44,6 +44,23 @@
 
 package body Web.HTML.Validity_States is
 
+   -------------------
+   -- Get_Bad_Input --
+   -------------------
+
+   function Get_Bad_Input (Self : Validity_State) return Boolean is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__html__ValidityState__badInput_getter";
+
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Bad_Input;
+
    ---------------
    -- Get_Valid --
    ---------------

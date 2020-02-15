@@ -59,9 +59,7 @@ package Web.HTML.Validity_States is
 --    readonly attribute boolean rangeUnderflow;
 --    readonly attribute boolean rangeOverflow;
 --    readonly attribute boolean stepMismatch;
---    readonly attribute boolean badInput;
 --    readonly attribute boolean customError;
---    readonly attribute boolean valid;
 --  };
 
 --   not overriding function Get_Value_Missing
@@ -119,14 +117,9 @@ package Web.HTML.Validity_States is
 --         with Import     => True,
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "stepMismatch";
---
---   not overriding function Get_Bad_Input
---    (Self : not null access constant Validity_State)
---       return WebAPI.DOM_Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "badInput";
---
+
+   function Get_Bad_Input (Self : Validity_State) return Boolean;
+
 --   not overriding function Get_Custom_Error
 --    (Self : not null access constant Validity_State)
 --       return WebAPI.DOM_Boolean is abstract

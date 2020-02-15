@@ -138,6 +138,10 @@ export let imports = {
     __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
   },
 
+  __adawebpack__html__ValidityState__badInput_getter: function(identifier) {
+    return +(__adawebpack_o2i.too(identifier).badInput);
+  },
+
   __adawebpack__html__ValidityState__valid_getter: function(identifier) {
     return +(__adawebpack_o2i.too(identifier).valid);
   },
