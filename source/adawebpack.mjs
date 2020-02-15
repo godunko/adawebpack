@@ -3,6 +3,7 @@ let instance = {};
 
 export function initialize(i) {
   instance = i;
+  instance.exports.__gnat_initialize(0);
   instance.exports.adainit();
 }
 
