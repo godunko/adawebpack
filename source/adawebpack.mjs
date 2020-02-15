@@ -114,6 +114,14 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).validity);
   },
 
+  __adawebpack__html__Input__value_getter: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).value);
+  },
+
+  __adawebpack__html__Input__value_setter: function(identifier,address,size) {
+    __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
+  },
+
   __adawebpack__html__Script__text_getter: function(identifier) {
     return string_to_wasm(__adawebpack_o2i.too(identifier).text);
   },

@@ -86,6 +86,24 @@ package body Web.HTML.Inputs is
       return Web.HTML.Validity_States.Instantiate (Imported (Self.Identifier));
    end Get_Validity;
 
+   ---------------
+   -- Get_Value --
+   ---------------
+
+   function Get_Value
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String
+   is
+      function Imported
+       (Self : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Input__value_getter";
+
+   begin
+      return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
+   end Get_Value;
+
    -------------
    -- Set_Min --
    -------------
@@ -109,5 +127,29 @@ package body Web.HTML.Inputs is
       Web.Strings.WASM_Helpers.To_JS (To, A, S);
       Imported (Self.Identifier, A, S);
    end Set_Min;
+
+   ---------------
+   -- Set_Value --
+   ---------------
+
+   procedure Set_Value
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Input__value_setter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, A, S);
+   end Set_Value;
 
 end Web.HTML.Inputs;

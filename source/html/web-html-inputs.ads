@@ -496,7 +496,14 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "defaultValue";
---
+
+   function Get_Value
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String;
+
+   procedure Set_Value
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String);
+
 --   --             attribute Date? valueAsDate;
 --   --             attribute unrestricted double valueAsNumber;
 --   --             attribute unsigned long width;
@@ -559,19 +566,5 @@ package Web.HTML.Inputs is
 --   --    void setRangeText(DOMString replacement);
 --   --    void setRangeText(DOMString replacement, unsigned long start, unsigned long end, optional SelectionMode selectionMode = "preserve");
 --   --    void setSelectionRange(unsigned long start, unsigned long end, optional DOMString direction);
---
---   not overriding function Get_Value
---    (Self : not null access constant HTML_Input_Element)
---       return WebAPI.DOM_String is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "value";
---
---   not overriding procedure Set_Value
---    (Self : not null access constant HTML_Input_Element;
---     To   : WebAPI.DOM_String) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "value";
 
 end Web.HTML.Inputs;
