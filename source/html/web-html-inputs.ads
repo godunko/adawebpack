@@ -44,6 +44,7 @@
 
 with Web.HTML.Elements;
 with Web.HTML.Validity_States;
+with Web.Strings;
 
 package Web.HTML.Inputs is
 
@@ -76,7 +77,6 @@ package Web.HTML.Inputs is
 --    readonly attribute HTMLElement? list;
 --    attribute DOMString max;
 --    attribute long maxLength;
---    attribute DOMString min;
 --    attribute long minLength;
 --    attribute boolean multiple;
 --    attribute DOMString name;
@@ -345,21 +345,14 @@ package Web.HTML.Inputs is
 --            Link_Name  => "max";
 --
 --   --             attribute long maxLength;
---
---   not overriding function Get_Min
---    (Self : not null access constant HTML_Input_Element)
---       return WebAPI.DOM_String is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "min";
---
---   not overriding procedure Set_Min
---    (Self : not null access constant HTML_Input_Element;
---     To   : WebAPI.DOM_String) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "min";
---
+
+   function Get_Min
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String;
+
+   procedure Set_Min
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String);
+
 --   --             attribute long minLength;
 --
 --   not overriding function Get_Multiple

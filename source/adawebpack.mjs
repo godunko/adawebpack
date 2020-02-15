@@ -102,6 +102,14 @@ export let imports = {
     return +(__adawebpack_o2i.too(identifier).hidden);
   },
 
+  __adawebpack__html__Input__min_getter: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).min);
+  },
+
+  __adawebpack__html__Input__min_setter: function(identifier,address,size) {
+    __adawebpack_o2i.too(identifier).min = string_to_js(address,size);
+  },
+
   __adawebpack__html__Input__validity_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).validity);
   },

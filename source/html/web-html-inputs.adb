@@ -42,9 +42,30 @@
 --  $Revision: 5732 $ $Date: 2017-01-28 14:52:41 +0300 (Sat, 28 Jan 2017) $
 ------------------------------------------------------------------------------
 
+with System;
+
 with WASM.Objects;
+with Web.Strings.WASM_Helpers;
 
 package body Web.HTML.Inputs is
+
+   -------------
+   -- Get_Min --
+   -------------
+
+   function Get_Min
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String
+   is
+      function Imported
+       (Self : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Input__min_getter";
+
+   begin
+      return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
+   end Get_Min;
 
    ------------------
    -- Get_Validity --
@@ -64,5 +85,29 @@ package body Web.HTML.Inputs is
    begin
       return Web.HTML.Validity_States.Instantiate (Imported (Self.Identifier));
    end Get_Validity;
+
+   -------------
+   -- Set_Min --
+   -------------
+
+   procedure Set_Min
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Input__min_setter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, A, S);
+   end Set_Min;
 
 end Web.HTML.Inputs;
