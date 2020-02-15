@@ -117,6 +117,14 @@ export let imports = {
     __adawebpack_o2i.too(identifier).disabled = (to !== 0);
   },
 
+  __adawebpack__html__Select__selectedIndex_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).selectedIndex;
+  },
+
+  __adawebpack__html__Select__selectedIndex_setter: function(identifier,to) {
+    __adawebpack_o2i.too(identifier).selectedIndex = to;
+  },
+
   __adawebpack__html__Select__value_getter: function(identifier) {
     return string_to_wasm(__adawebpack_o2i.too(identifier).value);
   },

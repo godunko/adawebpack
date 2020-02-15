@@ -72,7 +72,6 @@ package Web.HTML.Selects is
 --  );
 --  
 --    [SameObject] readonly attribute HTMLCollection selectedOptions;
---    attribute long selectedIndex;
 --  
 --    readonly attribute boolean willValidate;
 --    readonly attribute ValidityState validity;
@@ -169,20 +168,13 @@ package Web.HTML.Selects is
 --   --    setter creator void (unsigned long index, HTMLOptionElement? option);
 --   --  
 --   --    readonly attribute HTMLCollection selectedOptions;
---
---   not overriding function Get_Selected_Index
---    (Self : not null access constant HTML_Select_Element)
---       return WebAPI.DOM_Long is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "selectedIndex";
---
---   not overriding procedure Set_Selected_Index
---    (Self : not null access constant HTML_Select_Element;
---     To   : WebAPI.DOM_Long) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "selectedIndex";
+
+   function Get_Selected_Index
+    (Self : HTML_Select_Element'Class) return Web.DOM_Long;
+
+   procedure Set_Selected_Index
+    (Self : in out HTML_Select_Element'Class;
+     To   : Web.DOM_Long);
 
    function Get_Value
     (Self : HTML_Select_Element'Class) return Web.Strings.Web_String;

@@ -56,6 +56,23 @@ package body Web.HTML.Selects is
       return Imported (Self.Identifier) /= 0;
    end Get_Disabled;
 
+   ------------------------
+   -- Get_Selected_Index --
+   ------------------------
+
+   function Get_Selected_Index
+    (Self : HTML_Select_Element'Class) return Web.DOM_Long
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Integer_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Select__selectedIndex_getter";
+   begin
+      return Imported (Self.Identifier);
+   end Get_Selected_Index;
+
    ---------------
    -- Get_Value --
    ---------------
@@ -92,6 +109,26 @@ package body Web.HTML.Selects is
    begin
       Imported (Self.Identifier, (if To then 1 else 0));
    end Set_Disabled;
+
+   ------------------------
+   -- Set_Selected_Index --
+   ------------------------
+
+   procedure Set_Selected_Index
+    (Self : in out HTML_Select_Element'Class;
+     To   : Web.DOM_Long)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        To         : Interfaces.Integer_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__html__Select__selectedIndex_setter";
+
+   begin
+      Imported (Self.Identifier, To);
+   end Set_Selected_Index;
 
    ---------------
    -- Set_Value --
