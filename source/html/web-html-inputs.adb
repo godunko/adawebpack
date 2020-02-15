@@ -50,6 +50,24 @@ with Web.Strings.WASM_Helpers;
 package body Web.HTML.Inputs is
 
    -------------
+   -- Get_Max --
+   -------------
+
+   function Get_Max
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String
+   is
+      function Imported
+       (Self : WASM.Objects.Object_Identifier)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Input__max_getter";
+
+   begin
+      return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
+   end Get_Max;
+
+   -------------
    -- Get_Min --
    -------------
 
@@ -103,6 +121,30 @@ package body Web.HTML.Inputs is
    begin
       return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
    end Get_Value;
+
+   -------------
+   -- Set_Max --
+   -------------
+
+   procedure Set_Max
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Input__max_setter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, A, S);
+   end Set_Max;
 
    -------------
    -- Set_Min --
