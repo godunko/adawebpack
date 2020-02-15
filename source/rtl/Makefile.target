@@ -24,6 +24,8 @@ s-atacco.adb \
 s-atacco.ads \
 s-casuti.adb \
 s-casuti.ads \
+s-exnllf.ads \
+s-exnllf.adb \
 s-fatgen.adb \
 s-fatgen.ads \
 s-fatflt.ads \
@@ -76,6 +78,8 @@ s-traent.ads \
 s-unstyp.ads \
 s-valenu.adb \
 s-valenu.ads \
+s-valrea.adb \
+s-valrea.ads \
 s-valuns.adb \
 s-valuns.ads \
 s-valuti.adb \
@@ -103,8 +107,6 @@ s-arit64.ads \
 s-arit64.adb \
 s-exnint.ads \
 s-exnint.adb \
-s-exnllf.ads \
-s-exnllf.adb \
 s-expint.ads \
 s-expint.adb \
 s-explli.ads \
