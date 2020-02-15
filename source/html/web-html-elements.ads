@@ -38,6 +38,7 @@ with Web.DOM.Elements;
 limited with Web.HTML.Buttons;
 limited with Web.HTML.Canvases;
 limited with Web.HTML.Images;
+limited with Web.HTML.Inputs;
 limited with Web.HTML.Scripts;
 limited with Web.HTML.Selects;
 
@@ -58,6 +59,9 @@ package Web.HTML.Elements is
 
    function As_HTML_Image
     (Self : HTML_Element'Class) return Web.HTML.Images.HTML_Image_Element;
+
+   function As_HTML_Input
+    (Self : HTML_Element'Class) return Web.HTML.Inputs.HTML_Input_Element;
 
    function As_HTML_Script
     (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;

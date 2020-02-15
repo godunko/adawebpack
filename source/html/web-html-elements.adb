@@ -41,6 +41,7 @@ with WASM.Objects;
 with Web.HTML.Buttons;
 with Web.HTML.Canvases;
 with Web.HTML.Images;
+with Web.HTML.Inputs;
 with Web.HTML.Scripts;
 with Web.HTML.Selects;
 with Web.Strings;
@@ -101,6 +102,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Images.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Image;
+
+   -------------------
+   -- As_HTML_Input --
+   -------------------
+
+   function As_HTML_Input
+    (Self : HTML_Element'Class) return Web.HTML.Inputs.HTML_Input_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLInputElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Inputs.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Input;
 
    --------------------
    -- As_HTML_Script --
