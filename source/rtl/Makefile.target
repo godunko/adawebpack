@@ -79,6 +79,8 @@ s-traent.ads \
 s-unstyp.ads \
 s-valenu.adb \
 s-valenu.ads \
+s-valint.adb \
+s-valint.ads \
 s-valrea.adb \
 s-valrea.ads \
 s-valuns.adb \
@@ -125,8 +127,6 @@ s-valboo.adb \
 s-valboo.ads \
 s-valcha.adb \
 s-valcha.ads \
-s-valint.adb \
-s-valint.ads \
 s-vallli.adb \
 s-vallli.ads \
 s-valllu.adb \
