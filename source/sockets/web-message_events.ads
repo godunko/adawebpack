@@ -34,48 +34,31 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.Strings;
-with Web.Utilities;
-with Web.Message_Events;
-with Web.UI_Events.Mouse_Events;
+with Ada.Streams;
 
-package body Web.DOM.Events is
+with Web.DOM.Events;
 
-   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
-     renames Web.Strings.To_Web_String;
+package Web.Message_Events is
 
-   ----------------------
-   -- As_Message_Event --
-   ----------------------
+   pragma Preelaborate;
 
-   function As_Message_Event
-    (Self : Event'Class) return Web.Message_Events.Message_Event is
-   begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"MessageEvent")
-      then
-         raise Constraint_Error;
+   type Message_Event is new Web.DOM.Events.Event with null record;
+   --  Messages in server-sent events, Web sockets, cross-document messaging,
+   --  channel messaging, and broadcast channels use the MessageEvent interface
+   --  for their message events.
 
-      else
-         return Web.Message_Events.Instantiate (Self.Identifier);
-      end if;
-   end As_Message_Event;
+   --  readonly attribute any data;
 
-   --------------------
-   -- As_Mouse_Event --
-   --------------------
+   function Data_Byte_Length
+    (Self : Message_Event) return Ada.Streams.Stream_Element_Count;
+   --  If `data` is an ArrayBuffer then return its length in bytes, like
+   --  Event.data.byteLength
 
-   function As_Mouse_Event
-    (Self : Event'Class) return Web.UI_Events.Mouse_Events.Mouse_Event is
-   begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"MouseEvent")
-      then
-         raise Constraint_Error;
+   procedure Read
+    (Self   : Message_Event;
+     Data   : out Ada.Streams.Stream_Element_Array;
+     Offset : Ada.Streams.Stream_Element_Offset := 0);
+   --  If `data` is an ArrayBuffer then return slice of data. Use Offset to
+   --  read data starting from an arbitrary index.
 
-      else
-         return Web.UI_Events.Mouse_Events.Instantiate (Self.Identifier);
-      end if;
-   end As_Mouse_Event;
-
-end Web.DOM.Events;
+end Web.Message_Events;

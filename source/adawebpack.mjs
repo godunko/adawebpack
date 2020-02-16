@@ -420,6 +420,16 @@ export let imports = {
 
   __adawebpack__sockets__WebSocket__close: function(identifier) {
     __adawebpack_o2i.too(identifier).close();
+  },
+
+  __adawebpack__messageevents__MessageEvent__byteLength: function(identifier) {
+    return __adawebpack_o2i.too(identifier).data.byteLength;
+  },
+
+  __adawebpack__messageevents__MessageEvent__read: function(identifier, address, length, offset) {
+    let d = new Uint8Array(instance.exports.memory.buffer, address, length);
+    let s = new Uint8Array(__adawebpack_o2i.too(identifier).data, offset, length);
+    d.set(s);
   }
 
 };

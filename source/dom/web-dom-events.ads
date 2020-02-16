@@ -36,6 +36,7 @@
 
 with WASM.Objects;
 
+limited with Web.Message_Events;
 limited with Web.UI_Events.Mouse_Events;
 
 package Web.DOM.Events is
@@ -46,5 +47,8 @@ package Web.DOM.Events is
 
    function As_Mouse_Event
     (Self : Event'Class) return Web.UI_Events.Mouse_Events.Mouse_Event;
+
+   function As_Message_Event
+    (Self : Event'Class) return Web.Message_Events.Message_Event;
 
 end Web.DOM.Events;

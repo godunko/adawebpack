@@ -71,17 +71,17 @@ package Web.Sockets is
      (CONNECTING,  --  The connection has not yet been established.
 
       OPEN,        --  The WebSocket connection is established and
-                   --  communication is possible.
+      --  communication is possible.
 
       CLOSING,     --  The connection is going through the closing handshake,
-                   --  or the close () method has been invoked.
+      --  or the close () method has been invoked.
 
       CLOSED);     --  The connection has been closed or could not be opened.
    for State use (CONNECTING => 0, OPEN => 1, CLOSING => 2, CLOSED => 3);
 
    function Get_Ready_State (Self : Web_Socket'Class) return State;
-   -- Returns the state of the WebSocket object's connection. It can have the
-   -- values described below.
+   --  Returns the state of the WebSocket object's connection. It can have the
+   --  values described below.
 
    function Get_Buffered_Amount
     (Self : Web_Socket'Class) return Ada.Streams.Stream_Element_Count;

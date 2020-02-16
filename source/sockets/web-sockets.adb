@@ -38,6 +38,9 @@ with System;
 
 with Web.Strings.WASM_Helpers;
 
+with Web.DOM.Nodes;
+pragma Unreferenced (Web.DOM.Nodes);
+
 package body Web.Sockets is
 
    ------------------------
