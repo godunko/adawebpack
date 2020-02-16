@@ -192,8 +192,7 @@ wasm: build
 	done
 	cp -p $(AWP_SRC)/rtl/a-elchha__wasm.adb $(WASMINCLUDE)/a-elchha.adb
 	cp -p $(RTS_SRC)/zfp/a-elchha.ads $(WASMINCLUDE)/
-	cp -p $(RTS_SRC)/zfp/a-except.adb $(WASMINCLUDE)/
-	cp -p $(AWP_SRC)/rtl/a-except.ads $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/a-except.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
 	cp -p $(RTS_SRC)/math/a-ngelfu.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nlelfu.ads $(WASMINCLUDE)/
