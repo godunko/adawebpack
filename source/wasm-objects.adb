@@ -96,12 +96,17 @@ package body WASM.Objects is
    function Instantiate
      (Identifier : Object_Identifier) return Object_Reference is
    begin
-      Seize (Identifier);
+      if Identifier = Null_Object_Identifier then
+         return (Ada.Finalization.Controlled with Shared => null);
 
-      return
-       (Ada.Finalization.Controlled
-          with Shared =>
-            new Shared_Data'(Counter => <>, Identifier => Identifier));
+      else
+         Seize (Identifier);
+
+         return
+          (Ada.Finalization.Controlled
+             with Shared =>
+               new Shared_Data'(Counter => <>, Identifier => Identifier));
+      end if;
    end Instantiate;
 
    -------------

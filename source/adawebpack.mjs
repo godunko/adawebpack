@@ -448,20 +448,30 @@ let __adawebpack_o2i = {
   last: 0,
 
   toi: function(o) {
-    if (__adawebpack_o2i.o2r.has(o))
+    if (o == null)
     {
-      return __adawebpack_o2i.o2r.get(o).i;
+      return 0;
     } else {
-      __adawebpack_o2i.last++;
-      let r = {c: 0, i: __adawebpack_o2i.last, o: o};
-      __adawebpack_o2i.o2r.set(o, r);
-      __adawebpack_o2i.i2r.set(__adawebpack_o2i.last, r);
-      return __adawebpack_o2i.last;
+      if (__adawebpack_o2i.o2r.has(o))
+      {
+        return __adawebpack_o2i.o2r.get(o).i;
+      } else {
+        __adawebpack_o2i.last++;
+        let r = {c: 0, i: __adawebpack_o2i.last, o: o};
+        __adawebpack_o2i.o2r.set(o, r);
+        __adawebpack_o2i.i2r.set(__adawebpack_o2i.last, r);
+        return __adawebpack_o2i.last;
+      }
     }
   },
 
   too: function(i) {
-    return __adawebpack_o2i.i2r.get(i).o;
+    if (i == 0)
+    {
+      return null;
+    } else {
+      return __adawebpack_o2i.i2r.get(i).o;
+    }
   },
 
   sei: function(i) {
