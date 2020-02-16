@@ -40,7 +40,7 @@
 pragma Restrictions (No_Exception_Propagation);
 --  Only local exception handling is supported in this profile
 
-pragma Restrictions (No_Exception_Registration);
+--  pragma Restrictions (No_Exception_Registration);
 --  Disable exception name registration. This capability is not used because
 --  it is only required by exception stream attributes which are not supported
 --  in this run time.
