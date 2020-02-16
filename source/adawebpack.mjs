@@ -58,16 +58,20 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).getElementById(string_to_js(address, length)));
   },
 
-  __adawebpack__dom__Node__firstChild_getter: function(identifier) {
-    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier));
-  },
-
   __adawebpack__dom__Node__addEventListener: function (identifier, type_address, type_size, callback, capture)
   {
     __adawebpack_o2i.too(identifier).addEventListener
      (string_to_js(type_address, type_size),
       function(e) { instance.exports.__adawebpack__dom__Node__dispatch_event (callback,__adawebpack_o2i.toi(e)); },
       capture !== 0);
+  },
+
+  __adawebpack__dom__Node__firstChild_getter: function(identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).firstChild);
+  },
+
+  __adawebpack__dom__Node__removeChild: function(identifier, node_identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).removeChild(__adawebpack_o2i.too(node_identifier)));
   },
 
   __adawebpack__html__Button__disabled_getter: function(identifier) {

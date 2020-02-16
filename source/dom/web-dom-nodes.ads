@@ -486,14 +486,15 @@ package Web.DOM.Nodes is
 --   --  The replaceChild(node, child) method must return the result of replacing
 --   --  child with node within the context object.
 
---   function Remove_Child
---    (Self : in out Node'Class;
---     Node : Web.DOM.Nodes.Node'Class) return Web.DOM.Nodes.Node;
---   procedure Remove_Child
---    (Self : in out Node'Class;
---     Node : Web.DOM.Nodes.Node'Class);
---   --  The removeChild(child) method must return the result of pre-removing
---   --  child from the context object.
+   function Remove_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class) return Web.DOM.Nodes.Node;
+   --  The removeChild(child) method must return the result of pre-removing
+   --  child from the context object.
+
+   procedure Remove_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class);
 
    overriding procedure Add_Event_Listener
     (Self     : in out Node;

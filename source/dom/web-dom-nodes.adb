@@ -111,6 +111,42 @@ package body Web.DOM.Nodes is
 
    begin
       return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
-   return Get_First_Child;
+   end Get_First_Child;
+
+   ------------------
+   -- Remove_Child --
+   ------------------
+
+   function Remove_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class) return Web.DOM.Nodes.Node
+   is
+      function Imported
+       (Identifier      : WASM.Objects.Object_Identifier;
+        Node_Identifier : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Node__removeChild";
+
+   begin
+      return
+        Web.DOM.Nodes.Instantiate
+         (Imported (Self.Identifier, Node.Identifier));
+   end Remove_Child;
+
+   ------------------
+   -- Remove_Child --
+   ------------------
+
+   procedure Remove_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class)
+   is
+      Dummy : Web.DOM.Nodes.Node;
+
+   begin
+      Dummy := Self.Remove_Child (Node);
+   end Remove_Child;
 
 end Web.DOM.Nodes;
