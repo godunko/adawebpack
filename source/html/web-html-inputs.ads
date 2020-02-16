@@ -62,7 +62,6 @@ package Web.HTML.Inputs is
 --    attribute DOMString autocomplete;
 --    attribute boolean autofocus;
 --    attribute boolean defaultChecked;
---    attribute boolean checked;
 --    attribute DOMString dirName;
 --    attribute boolean disabled;
 --    readonly attribute HTMLFormElement? form;
@@ -193,21 +192,14 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "defaultChecked";
---
---   not overriding function Get_Checked
---    (Self : not null access constant HTML_Input_Element)
---       return Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "checked";
---
---   not overriding procedure Set_Checked
---    (Self : not null access constant HTML_Input_Element;
---     To   : Boolean) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "checked";
---
+
+   function Get_Checked
+    (Self : HTML_Input_Element'Class) return Boolean;
+
+   procedure Set_Checked
+    (Self : in out HTML_Input_Element'Class;
+     To   : Boolean);
+
 --   not overriding function Get_Dir_Name
 --    (Self : not null access constant HTML_Input_Element)
 --       return WebAPI.DOM_String is abstract
