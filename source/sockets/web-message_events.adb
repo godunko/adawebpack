@@ -34,48 +34,56 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.Strings;
-with Web.Utilities;
-with Web.Message_Events;
-with Web.UI_Events.Mouse_Events;
+with System;
 
-package body Web.DOM.Events is
+with WASM.Objects;
 
-   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
-     renames Web.Strings.To_Web_String;
+package body Web.Message_Events is
 
    ----------------------
-   -- As_Message_Event --
+   -- Data_Byte_Length --
    ----------------------
 
-   function As_Message_Event
-    (Self : Event'Class) return Web.Message_Events.Message_Event is
+   function Data_Byte_Length
+    (Self : Message_Event) return Ada.Streams.Stream_Element_Count
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+         return Interfaces.Unsigned_32
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__messageevents__MessageEvent__byteLength";
+
    begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"MessageEvent")
-      then
-         raise Constraint_Error;
+      return Ada.Streams.Stream_Element_Count (Imported (Self.Identifier));
+   end Data_Byte_Length;
 
-      else
-         return Web.Message_Events.Instantiate (Self.Identifier);
-      end if;
-   end As_Message_Event;
+   ----------
+   -- Read --
+   ----------
 
-   --------------------
-   -- As_Mouse_Event --
-   --------------------
+   procedure Read
+    (Self   : Message_Event;
+     Data   : out Ada.Streams.Stream_Element_Array;
+     Offset : Ada.Streams.Stream_Element_Offset := 0)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32;
+        Offset     : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__messageevents__MessageEvent__read";
 
-   function As_Mouse_Event
-    (Self : Event'Class) return Web.UI_Events.Mouse_Events.Mouse_Event is
    begin
-      if not Self.Is_Null
-        and then not Web.Utilities.Is_Instance_Of (Self, +"MouseEvent")
-      then
-         raise Constraint_Error;
+      Imported
+        (Identifier => Self.Identifier,
+         Address    => Data'Address,
+         Size       => Data'Length,
+         Offset     => Interfaces.Unsigned_32 (Offset));
+   end Read;
 
-      else
-         return Web.UI_Events.Mouse_Events.Instantiate (Self.Identifier);
-      end if;
-   end As_Mouse_Event;
-
-end Web.DOM.Events;
+end Web.Message_Events;
