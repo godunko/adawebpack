@@ -3,37 +3,16 @@
 --                         GNAT RUN-TIME COMPONENTS                         --
 --                                                                          --
 --                       A D A . E X C E P T I O N S                        --
---       (Version for No Exception Handlers/No_Exception_Propagation)       --
 --                                                                          --
 --                                 S p e c                                  --
 --                                                                          --
---          Copyright (C) 1992-2019, Free Software Foundation, Inc.         --
---                                                                          --
 -- This specification is derived from the Ada Reference Manual for use with --
--- GNAT. The copyright notice above, and the license provisions that follow --
--- apply solely to the  contents of the part following the private keyword. --
---                                                                          --
--- GNAT is free software;  you can  redistribute it  and/or modify it under --
--- terms of the  GNU General Public License as published  by the Free Soft- --
--- ware  Foundation;  either version 3,  or (at your option) any later ver- --
--- sion.  GNAT is distributed in the hope that it will be useful, but WITH- --
--- OUT ANY WARRANTY;  without even the  implied warranty of MERCHANTABILITY --
--- or FITNESS FOR A PARTICULAR PURPOSE.                                     --
---                                                                          --
---                                                                          --
---                                                                          --
---                                                                          --
---                                                                          --
--- You should have received a copy of the GNU General Public License and    --
--- a copy of the GCC Runtime Library Exception along with this program;     --
--- see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see    --
--- <http://www.gnu.org/licenses/>.                                          --
---                                                                          --
--- GNAT was originally developed  by the GNAT team at  New York University. --
--- Extensive contributions were provided by Ada Core Technologies Inc.      --
+-- GNAT.  In accordance with the copyright of that document, you can freely --
+-- copy and modify this specification,  provided that if you redistribute a --
+-- modified version,  any changes that you have made are clearly indicated. --
 --                                                                          --
 ------------------------------------------------------------------------------
-
+--
 --  Version is for use when there are no handlers in the partition (i.e. either
 --  of Restriction No_Exception_Handlers or No_Exception_Propagation is set).
 
@@ -41,6 +20,7 @@
 --  XXX GNATLLVM: Raise_Exception is incorrectly inlined in s-fatflt.ads
 
 with System;
+with Ada.Streams;
 
 package Ada.Exceptions is
    pragma Preelaborate;
@@ -60,6 +40,12 @@ package Ada.Exceptions is
    --  we avoid introducing Raise_Exception_Always and we also avoid the if
    --  test in Raise_Exception).
 
+   type Exception_Occurrence is limited private;
+   pragma Preelaborable_Initialization (Exception_Occurrence);
+
+   procedure Reraise_Occurrence (X : Exception_Occurrence);
+   Null_Occurrence : constant Exception_Occurrence;
+
 private
 
    ------------------
@@ -71,4 +57,18 @@ private
 
 --   pragma Inline_Always (Raise_Exception);
 
+   type Exception_Occurrence is access String;
+
+   procedure Read_Exception_Occurrence
+     (Stream : not null access Ada.Streams.Root_Stream_Type'Class;
+      Item   : out Exception_Occurrence);
+
+   procedure Write_Exception_Occurrence
+     (Stream : not null access Ada.Streams.Root_Stream_Type'Class;
+      Item   : Exception_Occurrence);
+
+   for Exception_Occurrence'Read use Read_Exception_Occurrence;
+   for Exception_Occurrence'Write use Write_Exception_Occurrence;
+
+   Null_Occurrence : constant Exception_Occurrence := null;
 end Ada.Exceptions;
