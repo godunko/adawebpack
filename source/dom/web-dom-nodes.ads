@@ -46,6 +46,7 @@
 
 with WASM.Objects;
 
+limited with Web.DOM.Documents;
 with Web.DOM.Event_Listeners;
 with Web.DOM.Event_Targets;
 with Web.Strings;
@@ -75,7 +76,6 @@ package Web.DOM.Nodes is
 --
 --    readonly attribute DOMString? baseURI;
 --
---    readonly attribute Document? ownerDocument;
 --    readonly attribute Node? parentNode;
 --    readonly attribute Element? parentElement;
 --    boolean hasChildNodes();
@@ -167,17 +167,13 @@ package Web.DOM.Nodes is
 --            Convention => JavaScript_Property_Getter,
 --            Link_Name  => "baseURI";
 --   --  Returns the base URL.
---
---   not overriding function Get_Owner_Document
---    (Self : not null access constant Node)
---       return WebAPI.DOM.Documents.Document_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "ownerDocument";
---   --  Returns the node document.
---   --
---   --  Returns null for documents. 
---
+
+   function Get_Owner_Document
+    (Self : Node'Class) return Web.DOM.Documents.Document;
+   --  Returns the node document.
+   --
+   --  Returns null for documents.
+
 --   not overriding function Get_Parent_Node
 --    (Self : not null access constant Node)
 --       return WebAPI.DOM.Nodes.Node_Access is abstract

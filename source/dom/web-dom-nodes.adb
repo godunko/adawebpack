@@ -38,6 +38,7 @@ with Ada.Unchecked_Conversion;
 with Interfaces;
 with System;
 
+with Web.DOM.Documents;
 with Web.DOM.Events;
 with Web.Strings.WASM_Helpers;
 
@@ -112,6 +113,23 @@ package body Web.DOM.Nodes is
    begin
       return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
    end Get_First_Child;
+
+   ------------------------
+   -- Get_Owner_Document --
+   ------------------------
+
+   function Get_Owner_Document
+    (Self : Node'Class) return Web.DOM.Documents.Document
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Node__ownerDocument_getter";
+   begin
+      return Web.DOM.Documents.Instantiate (Imported (Self.Identifier));
+   end Get_Owner_Document;
 
    ------------------
    -- Remove_Child --
