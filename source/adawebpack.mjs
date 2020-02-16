@@ -58,6 +58,10 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).getElementById(string_to_js(address, length)));
   },
 
+  __adawebpack__dom__Node__firstChild_getter: function(identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier));
+  },
+
   __adawebpack__dom__Node__addEventListener: function (identifier, type_address, type_size, callback, capture)
   {
     __adawebpack_o2i.too(identifier).addEventListener
