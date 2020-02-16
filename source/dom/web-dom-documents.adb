@@ -42,6 +42,32 @@ with Web.Strings.WASM_Helpers;
 
 package body Web.DOM.Documents is
 
+   ----------------------
+   -- Create_Text_Node --
+   ----------------------
+
+   function Create_Text_Node
+    (Self : in out Document'Class;
+     Data : Web.Strings.Web_String) return Web.DOM.Texts.Text
+   is
+      function Internal
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Document__createTextNode";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Data, A, S);
+
+      return Web.DOM.Texts.Instantiate (Internal (Self.Identifier, A, S));
+   end Create_Text_Node;
+
    -----------------------
    -- Get_Element_By_Id --
    -----------------------

@@ -53,9 +53,14 @@ export let imports = {
     return window.devicePixelRatio;
   },
 
-  __adawebpack__dom__Document__getElementById: function (identifier, address, length)
+  __adawebpack__dom__Document__createTextNode: function (identifier, address, size)
   {
-    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).getElementById(string_to_js(address, length)));
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createTextNode(string_to_js(address, size)));
+  },
+
+  __adawebpack__dom__Document__getElementById: function (identifier, address, size)
+  {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).getElementById(string_to_js(address, size)));
   },
 
   __adawebpack__dom__Node__addEventListener: function (identifier, type_address, type_size, callback, capture)
