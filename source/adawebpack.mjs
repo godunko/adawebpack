@@ -71,6 +71,10 @@ export let imports = {
       capture !== 0);
   },
 
+  __adawebpack__dom__Node__appendChild: function(identifier, node_identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).appendChild(__adawebpack_o2i.too(node_identifier)));
+  },
+
   __adawebpack__dom__Node__firstChild_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).firstChild);
   },

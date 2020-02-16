@@ -105,9 +105,7 @@ package Web.DOM.Nodes is
 --    boolean isDefaultNamespace(DOMString? namespace);
 --
 --    Node insertBefore(Node node, Node? child);
---    Node appendChild(Node node);
 --    Node replaceChild(Node node, Node child);
---    Node removeChild(Node child);
 --  };
 --limited with WebAPI.DOM.Documents;
 --limited with WebAPI.DOM.Elements;
@@ -447,23 +445,17 @@ package Web.DOM.Nodes is
 --            Link_Name  => "insertBefore";
 --   --  The insertBefore(node, child) method must return the result of
 --   --  pre-inserting node into the context object before child.
---
---   not overriding function Append_Child
---    (Self : not null access Node;
---     Node : not null access WebAPI.DOM.Nodes.Node'Class)
---       return Node_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "appendChild";
---   procedure Append_Child
---    (Self : not null access Node'Class;
---     Node : not null access WebAPI.DOM.Nodes.Node'Class)
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "appendChild";
---   --  The appendChild(node) method must return the result of appending node to
---   --  the context object.
---
+
+   function Append_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class) return Web.DOM.Nodes.Node;
+   --  The appendChild(node) method must return the result of appending node to
+   --  the context object.
+
+   procedure Append_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class);
+
 --   not overriding function Replace_Child
 --    (Self  : not null access Node;
 --     Node  : not null access WebAPI.DOM.Nodes.Node'Class;

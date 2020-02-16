@@ -80,6 +80,42 @@ package body Web.DOM.Nodes is
        (Self.Identifier, A, S, Callback.all'Address, (if Capture then 1 else 0));
    end Add_Event_Listener;
 
+   ------------------
+   -- Append_Child --
+   ------------------
+
+   function Append_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class) return Web.DOM.Nodes.Node
+   is
+      function Imported
+       (Identifier      : WASM.Objects.Object_Identifier;
+        Node_Identifier : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Node__appendChild";
+
+   begin
+      return
+        Web.DOM.Nodes.Instantiate
+         (Imported (Self.Identifier, Node.Identifier));
+   end Append_Child;
+
+   ------------------
+   -- Append_Child --
+   ------------------
+
+   procedure Append_Child
+    (Self : in out Node'Class;
+     Node : Web.DOM.Nodes.Node'Class)
+   is
+      Dummy : Web.DOM.Nodes.Node;
+
+   begin
+      Dummy := Self.Append_Child (Node);
+   end Append_Child;
+
    --------------------
    -- Dispatch_Event --
    --------------------
