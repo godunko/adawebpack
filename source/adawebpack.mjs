@@ -16,7 +16,9 @@ export let imports = {
   __gnat_put_f64: function (item) { console.log(item); },
   __gnat_put_exception: function (address,size,line) {
      let msg = String.fromCharCode.apply(null, new Uint8Array(instance.exports.memory.buffer, address, size));
-     if (line !== 0) {
+     if (msg == "do silent abort") {
+        throw new Error(msg);
+     }else if (line !== 0) {
         console.error("Predefined exception raised at %s:%i", msg, line);
      } else {
         console.error("User defined exception, message: %s", msg);
@@ -67,7 +69,13 @@ export let imports = {
   {
     __adawebpack_o2i.too(identifier).addEventListener
      (string_to_js(type_address, type_size),
-      function(e) { instance.exports.__adawebpack__dom__Node__dispatch_event (callback,__adawebpack_o2i.toi(e)); },
+      function(e) {
+        try {
+          instance.exports.__adawebpack__dom__Node__dispatch_event (callback,__adawebpack_o2i.toi(e));
+        } catch (e) {
+          if (e.message != "do silent abort") throw e;
+        }
+      },
       capture !== 0);
   },
 
