@@ -65,6 +65,22 @@ package body Web.HTML.Inputs is
       return Imported (Self.Identifier) /= 0;
    end Get_Checked;
 
+   ------------------
+   -- Get_Disabled --
+   ------------------
+
+   function Get_Disabled (Self : HTML_Input_Element'Class) return Boolean is
+      function Imported
+       (Self : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Input__disabled_getter";
+
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Disabled;
+
    -------------
    -- Get_Max --
    -------------
@@ -156,6 +172,25 @@ package body Web.HTML.Inputs is
    begin
       Imported (Self.Identifier, (if To then 1 else 0));
    end Set_Checked;
+
+   ------------------
+   -- Set_Disabled --
+   ------------------
+
+   procedure Set_Disabled
+    (Self : in out HTML_Input_Element'Class;
+     To   : Boolean)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        To         : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Input__disabled_setter";
+
+   begin
+      Imported (Self.Identifier, (if To then 1 else 0));
+   end Set_Disabled;
 
    -------------
    -- Set_Max --

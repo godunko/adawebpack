@@ -63,7 +63,6 @@ package Web.HTML.Inputs is
 --    attribute boolean autofocus;
 --    attribute boolean defaultChecked;
 --    attribute DOMString dirName;
---    attribute boolean disabled;
 --    readonly attribute HTMLFormElement? form;
 --    readonly attribute FileList? files;
 --    attribute DOMString formAction;
@@ -213,21 +212,13 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "dirName";
---
---   not overriding function Get_Disabled
---    (Self : not null access constant HTML_Input_Element)
---       return Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "disabled";
---
---   not overriding procedure Set_Disabled
---    (Self : not null access constant HTML_Input_Element;
---     To   : Boolean) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "disabled";
---
+
+   function Get_Disabled (Self : HTML_Input_Element'Class) return Boolean;
+
+   procedure Set_Disabled
+    (Self : in out HTML_Input_Element'Class;
+     To   : Boolean);
+
 --   not overriding function Get_Form_Action
 --    (Self : not null access constant HTML_Input_Element)
 --       return WebAPI.DOM_String is abstract
