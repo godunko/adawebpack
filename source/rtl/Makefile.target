@@ -9,6 +9,7 @@ a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
 a-ioexce.ads \
+a-nllefu.ads \
 a-numeri.ads \
 a-stream.adb \
 a-stream.ads \
@@ -196,7 +197,6 @@ wasm: build
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
 	cp -p $(RTS_SRC)/math/a-ngelfu.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nlelfu.ads $(WASMINCLUDE)/
-	cp -p $(RTS_SRC)/math/a-nllefu.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nuelfu.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/system.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/zfp/s-assert.adb $(WASMINCLUDE)/

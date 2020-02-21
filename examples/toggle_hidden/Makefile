@@ -1,6 +1,6 @@
 
 all: adawebpack.js
-	gprbuild -p -P test.gpr
+	gprbuild $(GPRBUILD_FLAGS) -p -P test.gpr
 
 adawebpack.js:
 	ln -s ../../source/adawebpack.js

@@ -8,3 +8,26 @@ jobs:
        - run: svn up /gnat-llvm/llvm-interface/gnat_src/
        - run: make wasm -C  /gnat-llvm/llvm-interface/
        - run: make -C /gnat-llvm/llvm-interface/adawebpack_src
+   rpm:
+     docker:
+       - image: reznik/gnat:adawebpack
+     steps:
+       - checkout:
+           path: adawebpack
+       - run: rpmdev-setuptree; cp adawebpack/packages/Fedora/adawebpack.spec ~/rpmbuild/SPECS/adawebpack.spec
+       - run: tar czf ~/rpmbuild/SOURCES/adawebpack.tar.gz --exclude-vcs adawebpack
+       - run: git clone --depth=1 https://github.com/AdaCore/gnat-llvm.git gnat-llvm
+       - run: tar czf ~/rpmbuild/SOURCES/gnat-llvm.tar.gz --exclude-vcs gnat-llvm
+       - run: svn export --force svn://gcc.gnu.org/svn/gcc/trunk/gcc/ada gnat_src
+       - run: tar czf ~/rpmbuild/SOURCES/gnat_src.tar.gz --exclude-vcs gnat_src
+       - run: curl -L -o ~/rpmbuild/SOURCES/gnat-2019-20190517-18C94-src.tar.gz https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
+       - run: rpmbuild -ba ~/rpmbuild/SPECS/adawebpack.spec
+       - run: curl -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc31.x86_64.rpm -ureznikmm:$API_KEY https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/adawebpack-0.1.0-git.fc31.x86_64.rpm
+       - run: curl -v --data '{}' -ureznikmm:$API_KEY https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/publish
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
+      - rpm

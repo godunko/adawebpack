@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<gprconfig>
+
+  <!--  Generic GNAT LLVM Target -->
+
+  <compiler_description>
+    <name>GNAT_LLVM</name>
+    <executable prefix="1">(llvm-)gnatls</executable>
+    <version>
+      <external>${PREFIX}gnatls -v</external>
+      <grep regexp="^GNATLS.+?(\d+(\.\d+)?)" group="1"></grep>
+    </version>
+    <languages>Ada</languages>
+    <variable name="gcc_version">
+      <external>${PREFIX}gcc -v</external>
+      <grep regexp="^[-\w]*gcc \S+ (\S+)" group="1"></grep>
+    </variable>
+    <runtimes default="default,native">
+       <directory group="default" >\.\./lib/rts-native/adalib/</directory>
+    </runtimes>
+    <target>llvm</target>
+  </compiler_description>
+
+   <!--  Set prefix of gnatbind -->
+   <configuration>
+     <compilers>
+       <compiler name="^GNAT_LLVM$" />
+     </compilers>
+     <config>
+   package Binder is
+      for Required_Switches ("Ada") use
+          Binder'Required_Switches ("Ada") &amp;
+          ("gnatbind_prefix=${PREFIX(ada)}");
+   end Binder;
+     </config>
+   </configuration>
+
+  <!-- GNAT -->
+  <configuration>
+   <compilers>
+     <compiler name="^GNAT_LLVM$" />
+   </compilers>
+   <config>
+   package Compiler is
+      for Driver                   ("Ada") use "${PATH(ada)}${PREFIX(ada)}gcc";
+      for Language_Kind            ("Ada") use "unit_based";
+      for Dependency_Kind          ("Ada") use "ALI_File";
+      for Leading_Required_Switches        ("Ada") use
+	  ("-c", "-x", "ada", "-gnatA")
+             &amp; Compiler'Leading_Required_Switches ("Ada");
+      for Mapping_File_Switches    ("Ada") use ("-gnatem=");
+      for Mapping_Spec_Suffix      ("Ada") use "%s";
+      for Mapping_Body_Suffix      ("Ada") use "%b";
+      for Config_File_Switches     ("Ada") use ("-gnatec=");
+      for Include_Path_File     ("Ada") use "ADA_PRJ_INCLUDE_FILE";
+   end Compiler;
+
+   package Binder is
+      for Objects_Path_File     ("Ada") use "ADA_PRJ_OBJECTS_FILE";
+      for Driver         ("Ada") use
+          "${GPRCONFIG_PREFIX}libexec/gprbuild/gprbind";
+   end Binder;
+
+   for Toolchain_Version ("Ada") use "GNAT ${VERSION(ada)}";
+   for Runtime_Dir       ("Ada") use "${RUNTIME_DIR(ada)}";
+   </config>
+  </configuration>
+
+
+  <configuration>
+   <compilers>
+     <compiler name="^GNAT_LLVM$" />
+   </compilers>
+   <compilers negate="true">
+     <compiler version="3.16" />
+     <compiler version="5.00" />
+     <compiler version="5.01" />
+     <compiler version="5.02" />
+   </compilers>
+   <config>
+   package Compiler is
+      for Multi_Unit_Switches ("Ada") use ("-gnateI");
+      for Multi_Unit_Object_Separator ("Ada") use "~";
+      for Config_Body_File_Name ("Ada") use
+           "pragma Source_File_Name_Project (%u, Body_File_Name => ""%f"");";
+      for Config_Spec_File_Name ("Ada") use
+           "pragma Source_File_Name_Project (%u, Spec_File_Name => ""%f"");";
+      for Config_Body_File_Name_Index ("Ada") use
+           "pragma Source_File_Name_Project (%u, Body_File_Name => ""%f"", Index => %i);";
+      for Config_Spec_File_Name_Index ("Ada") use
+           "pragma Source_File_Name_Project (%u, Spec_File_Name => ""%f"", Index => %i);";
+      for Config_Body_File_Name_Pattern ("Ada") use
+           "pragma Source_File_Name_Project " &amp;
+           "  (Body_File_Name  => ""*%b""," &amp;
+           "   Casing          => %c," &amp;
+           "   Dot_Replacement => ""%d"");";
+      for Config_Spec_File_Name_Pattern ("Ada") use
+           "pragma Source_File_Name_Project " &amp;
+           "  (Spec_File_Name  => ""*%s""," &amp;
+           "   Casing          => %c," &amp;
+           "   Dot_Replacement => ""%d"");";
+      for Config_File_Unique    ("Ada") use "False";
+   end Compiler;
+   </config>
+  </configuration>
+
+  <!--  Whether -fPIC is needed -->
+  <configuration>
+   <compilers>
+     <compiler name="^GNAT_LLVM$" />
+   </compilers>
+   <targets negate="true">
+      <target name="^.*lynxos.*$" />
+      <target name="^.*mingw.*$" />
+      <target name="^.*dec-osf.*$" />
+      <target name="^.*vms.*$" />
+      <target name="^.*dotnet.*$" />
+   </targets>
+   <config>
+   package Compiler is
+      for PIC_Option      ("Ada") use ("-fPIC");
+   end Compiler;
+   </config>
+  </configuration>
+
+  <!--  Whether encapsulated library is supported -->
+  <configuration>
+   <compilers>
+     <compiler name="^GNAT_LLVM$" />
+   </compilers>
+   <targets>
+      <target name="^.*mingw.*$" />
+      <target name="^.*linux.*$" />
+      <target name="^.*sunos.*$" />
+      <target name="^sparc-.*solaris.*$"/>
+      <target name="^i.86-.*-solaris.*$"/>
+      <target name="^i.86-.*darwin.*$" />
+      <target name="^powerpc-.*darwin.*$" />
+      <target name="^x86_64-.*darwin.*$" />
+      <target name="^.*android.*$" />
+      <target name="^.*-qnx[0-9]*$" />
+   </targets>
+   <config>
+      for Library_Encapsulated_Supported use "true";
+   </config>
+  </configuration>
+
+  <!-- add switch __RTS= to the compiler and binder for GNAT, if not default -->
+  <configuration>
+   <compilers>
+     <compiler name="^GNAT_LLVM$" />
+   </compilers>
+   <compilers negate="true">
+     <compiler runtime="default" />
+   </compilers>
+   <config>
+   package Compiler is
+      for Leading_Required_Switches ("Ada") use
+        Compiler'Leading_Required_Switches ("Ada") &amp; ("--RTS=${RUNTIME_DIR(ada)}");
+   end Compiler;
+
+   package Binder is
+      for Required_Switches ("Ada") use
+        Binder'Required_Switches ("Ada") &amp; ("--RTS=${RUNTIME_DIR(ada)}");
+   end Binder;
+   </config>
+  </configuration>
+
+<!--  Systems with no support for shared libraries, but with static libraries -->
+  <configuration>
+    <targets>
+       <target name="^llvm$" />
+    </targets>
+    <config>
+   for Library_Support  use "static_only";
+   for Library_Builder  use "${GPRCONFIG_PREFIX}libexec/gprbuild/gprlib";
+    </config>
+  </configuration>
+
+</gprconfig>

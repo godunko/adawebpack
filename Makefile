@@ -1,8 +1,9 @@
+GPRBUILD_FLAGS ?=
 
 all: build build_examples
 
 build:
-	gprbuild -p -P gnat/adawebpack.gpr
+	gprbuild $(GPRBUILD_FLAGS) -p -P gnat/adawebpack.gpr
 
 build_examples:
 	make -C examples
