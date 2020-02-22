@@ -3,6 +3,11 @@
 # AdaWebPack
 Ada WASM Runtime and Bindings for Web API
 
+## How to install
+
+Prebuild package is available for Fedora Linux, see https://bintray.com/reznikmm/matreshka/adawebpack/
+It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and AdaWebPack bindings for Web API.
+
 ## How to build
 
 Setup GNAT Community 2019 for ARM to default location.
