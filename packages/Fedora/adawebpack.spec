@@ -18,6 +18,7 @@ Source1:    gnat-llvm.tar.gz
 Source2:    gnat_src.tar.gz
 # https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
 Source3:    gnat-2019-20190517-18C94-src.tar.gz
+Patch0:     gnat-adafinal_conv.patch
 BuildRequires:   gcc-gnat
 BuildRequires:   fedora-gnat-project-common  >= 3 
 BuildRequires:   gprbuild
@@ -36,7 +37,8 @@ Ada WASM Runtime and Bindings for Web API
 
 %prep
 %setup -q -b 1 -b 2 -b 3 -n gnat-llvm
-mv ../gnat_src   llvm-interface/
+mv ../gnat_src llvm-interface/
+%patch0 -p0
 mv ../adawebpack llvm-interface/adawebpack_src
 mv ../gnat-2019-20190517-18C94-src/src/ada/hie llvm-interface/rts-sources
 ln -s adawebpack_src/source/rtl/Makefile.target llvm-interface/
