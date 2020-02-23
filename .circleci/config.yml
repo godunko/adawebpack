@@ -32,9 +32,9 @@ jobs:
        - run: |
           echo CIRCLE_BRANCH=$CIRCLE_BRANCH CIRCLE_PULL_REQUEST=$CIRCLE_PULL_REQUEST
           if [ "$CIRCLE_BRANCH" = "master" -a -z "$CIRCLE_PULL_REQUEST" ]; then
-            curl -v -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc31.x86_64.rpm \
-              -ureznikmm:$API_KEY \
-              'https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/adawebpack-0.1.0-git.fc31.x86_64.rpm?publish=1&override=1'
+            curl -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc31.x86_64.rpm \
+              -ureznikmm:$API_KEY -H "X-Bintray-Publish: 1" -H "X-Bintray-Override: 1" \
+              https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/
           fi
 
 workflows:
