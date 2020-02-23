@@ -13,7 +13,7 @@ Group:      Development/Libraries
 License:    MIT
 URL:        https://github.com/godunko/adawebpack
 ### Direct download is not availeble
-Source0:    adawebpack.tar.gz
+Source0:    %{name}.tar.gz
 Source1:    gnat-llvm.tar.gz
 Source2:    gnat_src.tar.gz
 # https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
@@ -39,9 +39,9 @@ Ada WASM Runtime and Bindings for Web API
 %setup -q -b 1 -b 2 -b 3 -n gnat-llvm
 mv ../gnat_src llvm-interface/
 %patch0 -p0
-mv ../adawebpack llvm-interface/adawebpack_src
+mv ../%{name} llvm-interface/%{name}_src
 mv ../gnat-2019-20190517-18C94-src/src/ada/hie llvm-interface/rts-sources
-ln -s adawebpack_src/source/rtl/Makefile.target llvm-interface/
+ln -s %{name}_src/source/rtl/Makefile.target llvm-interface/
 cd llvm-interface/rts-sources
 mkdir {math,mem,zfp,math/hardsp,math/harddp}
 mv a-elchha__zfp.ads zfp/a-elchha.ads
@@ -55,22 +55,25 @@ mv -v s-memcom.ad[sb] s-memcop.ad[sb] s-memmov.ad[sb] s-memset.ad[sb] s-memtyp.a
 
 %build
 make -C llvm-interface/ wasm
-PATH=$PATH:`pwd`/llvm-interface/bin make -C llvm-interface/adawebpack_src  GPRBUILD_FLAGS=--db\ `pwd`/llvm-interface/adawebpack_src/packages/Fedora
+PATH=$PATH:`pwd`/llvm-interface/bin make -C llvm-interface/%{name}_src GPRBUILD_FLAGS=--db\ `pwd`/llvm-interface/%{name}_src/packages/Fedora
 
 %install
 cd llvm-interface
 chrpath -d bin/*
 mkdir -p %{buildroot}/usr/share/gprconfig
 mkdir -p %{buildroot}/usr/lib/gnat
-cp adawebpack_src/packages/Fedora/llvm.xml  %{buildroot}/usr/share/gprconfig/
-cp adawebpack_src/gnat/adawebpack_config.gpr %{buildroot}/usr/lib/gnat/
+mkdir -p %{buildroot}/usr/share/%{name}
+cp %{name}_src/packages/Fedora/llvm.xml %{buildroot}/usr/share/gprconfig/
+cp %{name}_src/gnat/%{name}_config.gpr %{buildroot}/usr/lib/gnat/
 cp -r bin lib %{buildroot}/usr
-PATH=$PATH:`pwd`/bin gprconfig --batch -o /tmp/llvm.cgpr --db `pwd`/adawebpack_src/packages/Fedora --target=llvm --config=ada,,
-PATH=$PATH:`pwd`/bin gprinstall --target=llvm --prefix=%{buildroot}/usr --project-subdir=%{buildroot}/usr/lib/gnat -P adawebpack_src/gnat/adawebpack.gpr -p --config=/tmp/llvm.cgpr
+cp -v %{name}_src/source/%{name}.mjs %{buildroot}/usr/share/%{name}/
+PATH=$PATH:`pwd`/bin gprconfig --batch -o /tmp/llvm.cgpr --db `pwd`/%{name}_src/packages/Fedora --target=llvm --config=ada,,
+PATH=$PATH:`pwd`/bin gprinstall --target=llvm --prefix=%{buildroot}/usr --project-subdir=%{buildroot}/usr/lib/gnat -P %{name}_src/gnat/%{name}.gpr -p --config=/tmp/llvm.cgpr
 
 %files
 %dir /usr/include/%{name}
 %dir /usr/lib/%{name}
+%dir /usr/share/%{name}
 %dir /usr/lib/rts-native
 %dir /usr/lib/gnat
 /usr/bin/llvm-*
@@ -79,9 +82,10 @@ PATH=$PATH:`pwd`/bin gprinstall --target=llvm --prefix=%{buildroot}/usr --projec
 /usr/lib/rts-native/adainclude/*.ad[sb]
 /usr/lib/rts-native/adalib/*.ali
 /usr/lib/rts-native/adalib/libgnat.a
-/usr/lib/gnat/adawebpack*.gpr
-/usr/lib/gnat/manifests/adawebpack
+/usr/lib/gnat/%{name}*.gpr
+/usr/lib/gnat/manifests/%{name}
 /usr/share/gprconfig/llvm.xml
+/usr/share/%{name}/%{name}.mjs
 
 %changelog
 * Fri Feb 21 2020 Maxim Reznik <reznikmm@gmail.com> - 0.1.0-git
