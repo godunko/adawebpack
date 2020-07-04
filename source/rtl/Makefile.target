@@ -32,6 +32,7 @@ s-fatgen.ads \
 s-fatflt.ads \
 s-fatlfl.ads \
 s-fatllf.ads \
+s-fatsfl.ads \
 s-finmas.ads \
 s-finroo.adb \
 s-finroo.ads \
@@ -63,6 +64,8 @@ s-secsta.adb \
 s-secsta.ads \
 s-stalib.adb \
 s-stalib.ads \
+s-statxd.adb \
+s-statxd.ads \
 s-stoele.adb \
 s-stoele.ads \
 s-stopoo.adb \
@@ -116,7 +119,6 @@ s-explli.ads \
 s-explli.adb \
 s-expuns.ads \
 s-expuns.adb \
-s-fatsfl.ads \
 s-fore.ads   \
 s-fore.adb   \
 s-imgcha.adb \
@@ -160,6 +162,7 @@ system.ads   \
 s-fatflt.ads \
 s-fatlfl.ads \
 s-fatllf.ads \
+s-fatsfl.ads \
 s-libpre.ads \
 s-maccod.ads \
 s-powtab.ads \
@@ -170,13 +173,13 @@ unchconv.ads \
 g-souinf.ads \
 i-c.ads      \
 i-cexten.ads \
-s-fatsfl.ads \
 machcode.ads \
 text_io.ads  \
 unchdeal.ads \
 \
 a-contai.ads \
 
+COMPILE=$(ADAC) -c -gnatpg -nostdinc -I../adainclude
 COMPILE+=--target=wasm32 -gnateT=../../../adawebpack_src/source/rtl/wasm32.atp
 AWP_SRC=adawebpack_src/source
 RTS_SRC=rts-sources
@@ -202,7 +205,7 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-builti.ad[sb] $(WASMINCLUDE)
 	cp -p $(AWP_SRC)/rtl/s-finmas__wasm.adb $(WASMINCLUDE)/s-finmas.adb
 	cp -p $(RTS_SRC)/math/s-gcmain.ad[sb] $(WASMINCLUDE)/
-	cp -p $(AWP_SRC)/rtl/s-init.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/full/s-init.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-init.adb $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-io__wasm.adb $(WASMINCLUDE)/s-io.adb
 	cp -p $(RTS_SRC)/math/harddp/s-lidosq.adb $(WASMINCLUDE)/
