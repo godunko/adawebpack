@@ -10,7 +10,7 @@ It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and
 
 ## How to build
 
-Setup GNAT Community 2019 for ARM to default location.
+Setup GNAT Community 2020 for ARM to default location.
 
 Setup GNAT-LLVM development environment, see
 [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Note, you need to use
@@ -34,7 +34,7 @@ Create link to RTS source code
 
 ```
 cd gnat-llvm/llvm-interface
-ln -s ~/opt/GNAT/2019-arm-elf/arm-eabi/include/rts-sources/
+ln -s ~/opt/GNAT/2020-arm-elf/arm-eabi/include/rts-sources/
 ```
 
 Use `make wasm` to build compiler and Run Time Library
