@@ -7,7 +7,7 @@ jobs:
        - run: rm -rf /gnat-llvm/llvm-interface/adawebpack_src
        - checkout:
            path: /gnat-llvm/llvm-interface/adawebpack_src
-       - run: cd /gnat-llvm ; git pull
+       - run: cd /gnat-llvm ; echo git pull # gnat-llvm HEAD doesn't work
        - run: svn up /gnat-llvm/llvm-interface/gnat_src/
        - run: cd /gnat-llvm ; patch -p0 < llvm-interface/adawebpack_src/packages/Fedora/gnat-adafinal_conv.patch
        - run: make wasm -C /gnat-llvm/llvm-interface/
@@ -23,16 +23,17 @@ jobs:
           cp adawebpack/packages/Fedora/adawebpack.spec ~/rpmbuild/SPECS/
           cp adawebpack/packages/Fedora/gnat-adafinal_conv.patch ~/rpmbuild/SOURCES/
           tar czf ~/rpmbuild/SOURCES/adawebpack.tar.gz --exclude-vcs adawebpack
-          git clone --depth=1 https://github.com/AdaCore/gnat-llvm.git gnat-llvm
+          git clone https://github.com/AdaCore/gnat-llvm.git gnat-llvm
+          pushd gnat-llvm; git checkout 5db6ab8; popd
           tar czf ~/rpmbuild/SOURCES/gnat-llvm.tar.gz --exclude-vcs gnat-llvm
           svn export --force svn://gcc.gnu.org/svn/gcc/trunk/gcc/ada gnat_src
           tar czf ~/rpmbuild/SOURCES/gnat_src.tar.gz --exclude-vcs gnat_src
-          curl -L -o ~/rpmbuild/SOURCES/gnat-2019-20190517-18C94-src.tar.gz https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
+          curl -L -o ~/rpmbuild/SOURCES/gnat-2020-20200429-19B04-src.tar.gz https://community.download.adacore.com/v1/649a561ec6de9e476c54b02715b79f7503600ce5?filename=gnat-2020-20200429-19B04-src.tar.gz
           rpmbuild -ba ~/rpmbuild/SPECS/adawebpack.spec
        - run: |
           echo CIRCLE_BRANCH=$CIRCLE_BRANCH CIRCLE_PULL_REQUEST=$CIRCLE_PULL_REQUEST
           if [ "$CIRCLE_BRANCH" = "master" -a -z "$CIRCLE_PULL_REQUEST" ]; then
-            curl -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc31.x86_64.rpm \
+            curl -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc*.x86_64.rpm \
               -ureznikmm:$API_KEY -H "X-Bintray-Publish: 1" -H "X-Bintray-Override: 1" \
               https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/
           fi

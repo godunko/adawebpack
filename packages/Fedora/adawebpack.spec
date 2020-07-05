@@ -17,7 +17,7 @@ Source0:    %{name}.tar.gz
 Source1:    gnat-llvm.tar.gz
 Source2:    gnat_src.tar.gz
 # https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
-Source3:    gnat-2019-20190517-18C94-src.tar.gz
+Source3:    gnat-2020-20200429-19B04-src.tar.gz
 Patch0:     gnat-adafinal_conv.patch
 BuildRequires:   gcc-gnat
 BuildRequires:   fedora-gnat-project-common  >= 3 
@@ -40,13 +40,15 @@ Ada WASM Runtime and Bindings for Web API
 mv ../gnat_src llvm-interface/
 %patch0 -p0
 mv ../%{name} llvm-interface/%{name}_src
-mv ../gnat-2019-20190517-18C94-src/src/ada/hie llvm-interface/rts-sources
+mv ../gnat-2020-20200429-19B04-src/src/ada/hie llvm-interface/rts-sources
+cp -v  ../gnat-2020-20200429-19B04-src/src/ada/libgnat/s-{stratt,statxd}.ad[sb] llvm-interface/gnat_src/libgnat/
 ln -s %{name}_src/source/rtl/Makefile.target llvm-interface/
 cd llvm-interface/rts-sources
-mkdir {math,mem,zfp,math/hardsp,math/harddp}
+mkdir {math,mem,zfp,full,math/hardsp,math/harddp}
 mv a-elchha__zfp.ads zfp/a-elchha.ads
 mv s-assert__xi.adb zfp/s-assert.adb
 mv s-sssita.ad[sb] zfp/
+mv s-init.ads full/
 for J in a-ngelfu a-nlelfu a-nllefu a-nuelfu s-gcmain s-lidosq s-libdou s-libm s-libpre s-libsin s-lisisq ; do mv -v ${J}__ada.ads math/$J.ads; done
 for J in s-gcmain s-libdou s-libm s-libsin a-ngelfu; do mv -v ${J}__ada.adb math/$J.adb; done
 mv -v s-lisisq__fpu.adb math/hardsp/s-lisisq.adb
