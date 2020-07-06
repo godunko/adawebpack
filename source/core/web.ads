@@ -42,6 +42,8 @@ package Web is
 
    subtype DOM_Long is Interfaces.Integer_32;
 
+   subtype DOM_Unsigned_Short is Interfaces.Unsigned_16;
+
    subtype DOM_Unsigned_Long is Interfaces.Unsigned_32;
 
    subtype DOM_Double is Interfaces.IEEE_Float_64;
@@ -56,6 +58,7 @@ private
 
    use type DOM_Long;
    use type DOM_Unsigned_Long;
+   use type DOM_Unsigned_Short;
    use type DOM_Double;
    --  Use all subtypes to provide default operators in all children
    --  packages.
