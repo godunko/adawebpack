@@ -161,14 +161,17 @@ package body Web.Strings is
       return Result : Web_String
         := (Ada.Finalization.Controlled with
               Data => new String_Data (Item'Length))
+        --  XXX size of the data may be up to 2 times large than 'Length.
       do
          Result.Data.Size := 0;
+         Result.Data.Length := Item'Length;
 
          for C of Item loop
             Code := Wide_Wide_Character'Pos (C);
 
             if Code <= 16#FFFF# then
-               Result.Data.Data (Result.Data.Size) := Web.Unicode.UTF16_Code_Unit (Code);
+               Result.Data.Data (Result.Data.Size) :=
+                 Web.Unicode.UTF16_Code_Unit (Code);
                Result.Data.Size := Result.Data.Size + 1;
 
             else
