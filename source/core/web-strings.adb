@@ -80,6 +80,27 @@ package body Web.Strings is
 
    procedure Release (Item : in out String_Data_Access);
 
+   ---------
+   -- "=" --
+   ---------
+
+   function "=" (Left : Web_String; Right : Web_String) return Boolean is
+      use type Web.Unicode.UTF16_Code_Unit_Array;
+
+   begin
+      if Left.Is_Empty and Right.Is_Empty then
+         return True;
+
+      elsif Left.Length /= Right.Length then
+         return False;
+
+      else
+         return
+           Left.Data.Data (0 .. Left.Data.Size - 1)
+             = Right.Data.Data (0 .. Right.Data.Size - 1);
+      end if;
+   end "=";
+
    ------------
    -- Adjust --
    ------------

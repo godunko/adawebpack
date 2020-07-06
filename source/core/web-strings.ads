@@ -60,6 +60,8 @@ package Web.Strings is
 
    function To_Wide_Wide_String (Self : Web_String) return Wide_Wide_String;
 
+   function "=" (Left : Web_String; Right : Web_String) return Boolean;
+
 private
 
    type String_Data (Capacity : Interfaces.Unsigned_32) is record
