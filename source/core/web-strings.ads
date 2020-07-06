@@ -47,6 +47,8 @@ package Web.Strings is
 
    type Web_String is tagged private;
 
+   Empty_Web_String : constant Web_String;
+
    function Is_Empty (Self : Web_String'Class) return Boolean;
 
    function Length (Self : Web_String'Class) return Natural;
@@ -75,5 +77,8 @@ private
 
    overriding procedure Adjust (Self : in out Web_String);
    overriding procedure Finalize (Self : in out Web_String);
+
+   Empty_Web_String : constant Web_String
+     := (Ada.Finalization.Controlled with Data => null);
 
 end Web.Strings;
