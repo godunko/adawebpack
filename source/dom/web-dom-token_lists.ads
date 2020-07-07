@@ -48,13 +48,17 @@ package Web.DOM.Token_Lists is
    --    readonly attribute unsigned long length;
    --    getter DOMString? item(unsigned long index);
    --    boolean contains(DOMString token);
-   --    [CEReactions] void add(DOMString... tokens);
    --    [CEReactions] boolean toggle(DOMString token, optional boolean force);
    --    [CEReactions] boolean replace(DOMString token, DOMString newToken);
    --    boolean supports(DOMString token);
    --    [CEReactions] stringifier attribute DOMString value;
    --    iterable<DOMString>;
    --  };
+
+   procedure Add
+    (Self  : DOM_Token_List'Class;
+     Token : Web.Strings.Web_String);
+   --  Adds all arguments passed, except those already present.
 
    procedure Remove
     (Self  : DOM_Token_List'Class;

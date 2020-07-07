@@ -41,6 +41,30 @@ with Web.Strings.WASM_Helpers;
 
 package body Web.DOM.Token_Lists is
 
+   ---------
+   -- Add --
+   ---------
+
+   procedure Add
+    (Self  : DOM_Token_List'Class;
+     Token : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__dom__TokenList__add";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Token, A, S);
+      Imported (Self.Identifier, A, S);
+   end Add;
+
    ------------
    -- Remove --
    ------------
