@@ -99,6 +99,10 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).removeChild(__adawebpack_o2i.too(node_identifier)));
   },
 
+  __adawebpack__dom__TokenList__remove: function(identifier, address, size) {
+    __adawebpack_o2i.too(identifier).remove(string_to_js(address, size));
+  },
+
   __adawebpack__html__Button__disabled_getter: function(identifier) {
     return +(__adawebpack_o2i.too(identifier).disabled);
   },

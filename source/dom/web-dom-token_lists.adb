@@ -34,31 +34,35 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.DOM.Nodes;
-with Web.Strings;
+with System;
 
-package Web.DOM.Token_Lists is
+with WASM.Objects;
+with Web.Strings.WASM_Helpers;
 
-   pragma Preelaborate;
+package body Web.DOM.Token_Lists is
 
-   type DOM_Token_List is new Web.DOM.Nodes.Node with null record;
-
-   --  [Exposed=Window]
-   --  interface DOMTokenList {
-   --    readonly attribute unsigned long length;
-   --    getter DOMString? item(unsigned long index);
-   --    boolean contains(DOMString token);
-   --    [CEReactions] void add(DOMString... tokens);
-   --    [CEReactions] boolean toggle(DOMString token, optional boolean force);
-   --    [CEReactions] boolean replace(DOMString token, DOMString newToken);
-   --    boolean supports(DOMString token);
-   --    [CEReactions] stringifier attribute DOMString value;
-   --    iterable<DOMString>;
-   --  };
+   ------------
+   -- Remove --
+   ------------
 
    procedure Remove
     (Self  : DOM_Token_List'Class;
-     Token : Web.Strings.Web_String);
-   --  Removes arguments passed, if they are present.
+     Token : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__dom__TokenList__remove";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Token, A, S);
+      Imported (Self.Identifier, A, S);
+   end Remove;
 
 end Web.DOM.Token_Lists;
