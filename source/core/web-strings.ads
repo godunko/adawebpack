@@ -62,6 +62,8 @@ package Web.Strings is
 
    function "=" (Left : Web_String; Right : Web_String) return Boolean;
 
+   function "&" (Left : Web_String; Right : Web_String) return Web_String;
+
 private
 
    type String_Data (Capacity : Interfaces.Unsigned_32) is record

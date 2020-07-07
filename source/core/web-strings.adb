@@ -81,6 +81,34 @@ package body Web.Strings is
    procedure Release (Item : in out String_Data_Access);
 
    ---------
+   -- "&" --
+   ---------
+
+   function "&" (Left : Web_String; Right : Web_String) return Web_String is
+   begin
+      if Left.Is_Empty then
+         return Right;
+
+      elsif Right.Is_Empty then
+         return Left;
+
+      else
+         return Result : Web_String
+           := (Ada.Finalization.Controlled
+                 with Data =>
+                   new String_Data (Left.Data.Size + Right.Data.Size))
+         do
+            Result.Data.Size := Left.Data.Size + Right.Data.Size;
+            Result.Data.Length := Left.Data.Length + Right.Data.Length;
+            Result.Data.Data (0 .. Left.Data.Size - 1) :=
+              Left.Data.Data (0 .. Left.Data.Size - 1);
+            Result.Data.Data (Left.Data.Size .. Result.Data.Size - 1) :=
+              Right.Data.Data (0 .. Right.Data.Size - 1);
+         end return;
+      end if;
+   end "&";
+
+   ---------
    -- "=" --
    ---------
 
