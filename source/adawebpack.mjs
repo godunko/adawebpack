@@ -55,6 +55,10 @@ export let imports = {
     return window.devicePixelRatio;
   },
 
+  __adawebpack__dom__Element__classList_getter: function(identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).classList);
+  },
+
   __adawebpack__dom__Document__createTextNode: function (identifier, address, size)
   {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createTextNode(string_to_js(address, size)));

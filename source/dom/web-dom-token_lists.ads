@@ -34,61 +34,26 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with WASM.Objects;
+with Web.DOM.Nodes;
 
-package body Web.DOM.Elements is
+package Web.DOM.Token_Lists is
 
-   --------------------
-   -- Get_Class_List --
-   --------------------
+   pragma Preelaborate;
 
-   function Get_Class_List
-    (Self : Element'Class) return Web.DOM.Token_Lists.DOM_Token_List
-   is
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__dom__Element__classList_getter";
+   type DOM_Token_List is new Web.DOM.Nodes.Node with null record;
 
-   begin
-      return Web.DOM.Token_Lists.Instantiate (Imported (Self.Identifier));
-   end Get_Class_List;
+   --  [Exposed=Window]
+   --  interface DOMTokenList {
+   --    readonly attribute unsigned long length;
+   --    getter DOMString? item(unsigned long index);
+   --    boolean contains(DOMString token);
+   --    [CEReactions] void add(DOMString... tokens);
+   --    [CEReactions] void remove(DOMString... tokens);
+   --    [CEReactions] boolean toggle(DOMString token, optional boolean force);
+   --    [CEReactions] boolean replace(DOMString token, DOMString newToken);
+   --    boolean supports(DOMString token);
+   --    [CEReactions] stringifier attribute DOMString value;
+   --    iterable<DOMString>;
+   --  };
 
-   ----------------------
-   -- Get_Client_Height --
-   ----------------------
-
-   function Get_Client_Height (Self : Element'Class) return Web.DOM_Long is
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Integer_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__cssom__Element__clientHeight_getter";
-
-   begin
-      return Imported (Self.Identifier);
-   end Get_Client_Height;
-
-   ----------------------
-   -- Get_Client_Width --
-   ----------------------
-
-   function Get_Client_Width (Self : Element'Class) return Web.DOM_Long is
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Integer_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__cssom__Element__clientWidth_getter";
-
-   begin
-      return Imported (Self.Identifier);
-   end Get_Client_Width;
-
-end Web.DOM.Elements;
+end Web.DOM.Token_Lists;

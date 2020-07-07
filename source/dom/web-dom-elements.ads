@@ -35,12 +35,62 @@
 ------------------------------------------------------------------------------
 
 with Web.DOM.Nodes;
+with Web.DOM.Token_Lists;
 
 package Web.DOM.Elements is
 
    pragma Preelaborate;
 
    type Element is new Web.DOM.Nodes.Node with null record;
+
+   --  interface Element : Node {
+   --    readonly attribute DOMString? namespaceURI;
+   --    readonly attribute DOMString? prefix;
+   --    readonly attribute DOMString localName;
+   --    readonly attribute DOMString tagName;
+   --
+   --    [CEReactions] attribute DOMString id;
+   --    [CEReactions] attribute DOMString className;
+   --    [CEReactions, Unscopable] attribute DOMString slot;
+   --
+   --    boolean hasAttributes();
+   --    [SameObject] readonly attribute NamedNodeMap attributes;
+   --    sequence<DOMString> getAttributeNames();
+   --    DOMString? getAttribute(DOMString qualifiedName);
+   --    DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
+   --    [CEReactions] void setAttribute(DOMString qualifiedName, DOMString value);
+   --    [CEReactions] void setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
+   --    [CEReactions] void removeAttribute(DOMString qualifiedName);
+   --    [CEReactions] void removeAttributeNS(DOMString? namespace, DOMString localName);
+   --    [CEReactions] boolean toggleAttribute(DOMString qualifiedName, optional boolean force);
+   --    boolean hasAttribute(DOMString qualifiedName);
+   --    boolean hasAttributeNS(DOMString? namespace, DOMString localName);
+   --
+   --    Attr? getAttributeNode(DOMString qualifiedName);
+   --    Attr? getAttributeNodeNS(DOMString? namespace, DOMString localName);
+   --    [CEReactions] Attr? setAttributeNode(Attr attr);
+   --    [CEReactions] Attr? setAttributeNodeNS(Attr attr);
+   --    [CEReactions] Attr removeAttributeNode(Attr attr);
+   --
+   --    ShadowRoot attachShadow(ShadowRootInit init);
+   --    readonly attribute ShadowRoot? shadowRoot;
+   --
+   --    Element? closest(DOMString selectors);
+   --    boolean matches(DOMString selectors);
+   --    boolean webkitMatchesSelector(DOMString selectors); // historical alias of .matches
+   --
+   --    HTMLCollection getElementsByTagName(DOMString qualifiedName);
+   --    HTMLCollection getElementsByTagNameNS(DOMString? namespace, DOMString localName);
+   --    HTMLCollection getElementsByClassName(DOMString classNames);
+   --
+   --    [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // historical
+   --    void insertAdjacentText(DOMString where, DOMString data); // historical
+   --  };
+
+   function Get_Class_List
+    (Self : Element'Class) return Web.DOM.Token_Lists.DOM_Token_List;
+   --  Allows for manipulation of element’s class content attribute as a set
+   --  of whitespace-separated tokens through a DOMTokenList object.
 
    -----------------------
    -- CSSOM View Module --
