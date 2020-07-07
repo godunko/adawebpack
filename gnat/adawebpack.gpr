@@ -57,7 +57,8 @@ project AdaWebPack is
      "../source/html",
      "../source/ui_events",
      "../source/sockets",
-     "../source/webgl");
+     "../source/webgl",
+     "../source/xhr");
    for Object_Dir use AdaWebPack_Config'Object_Dir & "adawebpack";
 
    package Compiler renames AdaWebPack_Config.Compiler;

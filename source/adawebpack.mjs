@@ -459,6 +459,42 @@ export let imports = {
     __adawebpack_o2i.too(identifier).close();
   },
 
+  __adawebpack__xhr__XMLHttpRequest__constructor: function () {
+    return __adawebpack_o2i.toi(new XMLHttpRequest());
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__open: function(identifier, method_address, method_size, url_address, url_size, async, username_address, username_size, password_address, password_size) {
+    __adawebpack_o2i.too(identifier).open(string_to_js(method_address, method_size), string_to_js(url_address, url_size), (async !== 0), string_to_js(username_address, username_size), string_to_js(password_address, password_size));
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__readyState_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).readyState;
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__response_getter_stream_element_buffer: function(identifier) {
+    return buffer_to_wasm_stream_element_buffer(__adawebpack_o2i.too(identifier).response);
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__responseType_getter: function(identifier) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier).responseType);
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__responseType_setter: function(identifier, address, size) {
+    __adawebpack_o2i.too(identifier).responseType = string_to_js(address, size);
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__setRequestHeader: function(identifier, header_address, header_size, vlaue_address, value_size) {
+    __adawebpack_o2i.too(identifier).setRequestHeader(string_to_js(header_address, header_size), string_to_js(vlaue_address, value_size));
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__send: function(identifier, address, size) {
+    __adawebpack_o2i.too(identifier).send(new Uint8Array(instance.exports.memory.buffer, address, size));
+  },
+
+  __adawebpack__xhr__XMLHttpRequest__status_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).status;
+  },
+
   __adawebpack__messageevents__MessageEvent__byteLength: function(identifier) {
     return __adawebpack_o2i.too(identifier).data.byteLength;
   },
@@ -528,4 +564,13 @@ function string_to_wasm(item)
     a[i] = item.charCodeAt(i);
   }
   return s;
+}
+
+function buffer_to_wasm_stream_element_buffer(item)
+{
+  let l = item.byteLength;
+  let a = instance.exports.__adawebpack__core__allocate_stream_element_buffer(l);
+  let d = new Uint8Array(instance.exports.memory.buffer, a, l);
+  d.set(new Uint8Array(item));
+  return a;
 }
