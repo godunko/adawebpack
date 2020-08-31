@@ -16,8 +16,8 @@ URL:        https://github.com/godunko/adawebpack
 Source0:    %{name}.tar.gz
 Source1:    gnat-llvm.tar.gz
 Source2:    gnat_src.tar.gz
-# https://community.download.adacore.com/v1/d40edcdd2d3cc8c64e0f9600ca274bc13d5b49ba?filename=gnat-2019-20190517-18C94-src.tar.gz
-Source3:    gnat-2020-20200429-19B04-src.tar.gz
+# https://community.download.adacore.com/v1/f51b6c0b5591edc6eff2928e8510a467bc8ce1e4?filename=gnat-2020-20200818-19951-src.tar.gz
+Source3:    gnat-2020-20200818-19951-src.tar.gz
 Patch0:     gnat-adafinal_conv.patch
 BuildRequires:   gcc-gnat
 BuildRequires:   fedora-gnat-project-common  >= 3 
@@ -40,8 +40,8 @@ Ada WASM Runtime and Bindings for Web API
 mv ../gnat_src llvm-interface/
 %patch0 -p0
 mv ../%{name} llvm-interface/%{name}_src
-mv ../gnat-2020-20200429-19B04-src/src/ada/hie llvm-interface/rts-sources
-cp -v  ../gnat-2020-20200429-19B04-src/src/ada/libgnat/s-{stratt,statxd}.ad[sb] llvm-interface/gnat_src/libgnat/
+mv ../gnat-2020-20200818-19951-src/src/ada/hie llvm-interface/rts-sources
+cp -v  ../gnat-2020-20200818-19951-src/src/ada/libgnat/s-{stratt,statxd}.ad[sb] llvm-interface/gnat_src/libgnat/
 ln -s %{name}_src/source/rtl/Makefile.target llvm-interface/
 cd llvm-interface/rts-sources
 mkdir {math,mem,zfp,full,math/hardsp,math/harddp}
