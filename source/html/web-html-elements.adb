@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -42,6 +42,7 @@ with Web.HTML.Buttons;
 with Web.HTML.Canvases;
 with Web.HTML.Images;
 with Web.HTML.Inputs;
+with Web.HTML.Opt_Groups;
 with Web.HTML.Scripts;
 with Web.HTML.Selects;
 with Web.Strings;
@@ -119,6 +120,25 @@ package body Web.HTML.Elements is
          return Web.HTML.Inputs.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Input;
+
+   -----------------------
+   -- As_HTML_Opt_Group --
+   -----------------------
+
+   function As_HTML_Opt_Group
+    (Self : HTML_Element'Class)
+       return Web.HTML.Opt_Groups.HTML_Opt_Group_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of
+                      (Self, +"HTMLOptGroupElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Opt_Groups.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Opt_Group;
 
    --------------------
    -- As_HTML_Script --

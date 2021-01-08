@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020-2021, Vadim Godunko                                    --
+--  Copyright © 2021, Vadim Godunko                                         --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -34,44 +34,13 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.DOM.Elements;
-limited with Web.HTML.Buttons;
-limited with Web.HTML.Canvases;
-limited with Web.HTML.Images;
-limited with Web.HTML.Inputs;
-limited with Web.HTML.Opt_Groups;
-limited with Web.HTML.Scripts;
-limited with Web.HTML.Selects;
+with Web.HTML.Elements;
 
-package Web.HTML.Elements is
+package Web.HTML.Opt_Groups is
 
    pragma Preelaborate;
 
-   type HTML_Element is new Web.DOM.Elements.Element with null record;
+   type HTML_Opt_Group_Element is
+     new Web.HTML.Elements.HTML_Element with null record;
 
-   function Get_Hidden (Self : HTML_Element'Class) return Boolean;
-   procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
-
-   function As_HTML_Button
-    (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
-
-   function As_HTML_Canvas
-    (Self : HTML_Element'Class) return Web.HTML.Canvases.HTML_Canvas_Element;
-
-   function As_HTML_Image
-    (Self : HTML_Element'Class) return Web.HTML.Images.HTML_Image_Element;
-
-   function As_HTML_Input
-    (Self : HTML_Element'Class) return Web.HTML.Inputs.HTML_Input_Element;
-
-   function As_HTML_Opt_Group
-    (Self : HTML_Element'Class)
-       return Web.HTML.Opt_Groups.HTML_Opt_Group_Element;
-
-   function As_HTML_Script
-    (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
-
-   function As_HTML_Select
-    (Self : HTML_Element'Class) return Web.HTML.Selects.HTML_Select_Element;
-
-end Web.HTML.Elements;
+end Web.HTML.Opt_Groups;
