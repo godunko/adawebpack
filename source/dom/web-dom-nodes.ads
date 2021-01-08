@@ -49,6 +49,7 @@ with WASM.Objects;
 limited with Web.DOM.Documents;
 with Web.DOM.Event_Listeners;
 with Web.DOM.Event_Targets;
+limited with Web.HTML.Elements;
 with Web.Strings;
 
 package Web.DOM.Nodes is
@@ -483,5 +484,10 @@ package Web.DOM.Nodes is
      Name     : Web.Strings.Web_String;
      Callback : not null Web.DOM.Event_Listeners.Event_Listener_Access;
      Capture  : Boolean := False);
+
+   --  Additional subprograms for convenience
+
+   function As_HTML_Element
+    (Self : Node'Class) return Web.HTML.Elements.HTML_Element;
 
 end Web.DOM.Nodes;

@@ -40,9 +40,14 @@ with System;
 
 with Web.DOM.Documents;
 with Web.DOM.Events;
+with Web.HTML.Elements;
 with Web.Strings.WASM_Helpers;
+with Web.Utilities;
 
 package body Web.DOM.Nodes is
+
+   function "+" (Item : Wide_Wide_String) return Web.Strings.Web_String
+     renames Web.Strings.To_Web_String;
 
    procedure Dispatch_Event
     (Callback   : System.Address;
@@ -115,6 +120,23 @@ package body Web.DOM.Nodes is
    begin
       Dummy := Self.Append_Child (Node);
    end Append_Child;
+
+   ---------------------
+   -- As_HTML_Element --
+   ---------------------
+
+   function As_HTML_Element
+    (Self : Node'Class) return Web.HTML.Elements.HTML_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Elements.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Element;
 
    --------------------
    -- Dispatch_Event --
