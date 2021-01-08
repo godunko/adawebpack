@@ -34,18 +34,44 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.HTML.Elements;
+with Interfaces;
 
-package Web.HTML.Opt_Groups is
+with WASM.Objects;
 
-   pragma Preelaborate;
+package body Web.HTML.Opt_Groups is
 
-   type HTML_Opt_Group_Element is
-     new Web.HTML.Elements.HTML_Element with null record;
+   ------------------
+   -- Get_Disabled --
+   ------------------
 
-   function Get_Disabled (Self : HTML_Opt_Group_Element'Class) return Boolean;
+   function Get_Disabled (Self : HTML_Opt_Group_Element'Class) return Boolean is
+      use type Interfaces.Unsigned_32;
+
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__OptGroup__disabled_getter";
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Disabled;
+
+   ------------------
+   -- Set_Disabled --
+   ------------------
+
    procedure Set_Disabled
-    (Self : in out HTML_Opt_Group_Element'Class; To : Boolean);
-   --   Whether the form control is disabled
+    (Self : in out HTML_Opt_Group_Element'Class; To : Boolean)
+   is
+      procedure Imported
+       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__OptGroup__disabled_setter";
+
+   begin
+      Imported (Self.Identifier, Boolean'Pos (To));
+   end Set_Disabled;
 
 end Web.HTML.Opt_Groups;

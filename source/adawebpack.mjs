@@ -196,6 +196,14 @@ export let imports = {
     __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
   },
 
+  __adawebpack__html__OptGroup__disabled_getter: function(identifier) {
+    return +(__adawebpack_o2i.too(identifier).disabled);
+  },
+
+  __adawebpack__html__OptGroup__disabled_setter: function(identifier,to) {
+    __adawebpack_o2i.too (identifier).disabled = (to !== 0);
+  },
+
   __adawebpack__html__Script__text_getter: function(identifier) {
     return string_to_wasm(__adawebpack_o2i.too(identifier).text);
   },
