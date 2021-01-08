@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -149,6 +149,22 @@ package body Web.DOM.Nodes is
    begin
       return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
    end Get_First_Child;
+
+   ----------------------
+   -- Get_Next_Sibling --
+   ----------------------
+
+   function Get_Next_Sibling (Self : Node'Class) return Web.DOM.Nodes.Node is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Node__nextSibling_getter";
+
+   begin
+      return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
+   end Get_Next_Sibling;
 
    ------------------------
    -- Get_Owner_Document --

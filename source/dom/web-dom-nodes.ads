@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2014-2020, Vadim Godunko <vgodunko@gmail.com>                --
+-- Copyright © 2014-2021, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -82,7 +82,6 @@ package Web.DOM.Nodes is
 --    [SameObject] readonly attribute NodeList childNodes;
 --    readonly attribute Node? lastChild;
 --    readonly attribute Node? previousSibling;
---    readonly attribute Node? nextSibling;
 --
 --             attribute DOMString? nodeValue;
 --             attribute DOMString? textContent;
@@ -221,15 +220,10 @@ package Web.DOM.Nodes is
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "previousSibling";
 --   --  Returns the previous sibling.
---
---   not overriding function Get_Next_Sibling
---    (Self : not null access constant Node)
---       return WebAPI.DOM.Nodes.Node_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "nextSibling";
---   --  Returns the next sibling.
---
+
+   function Get_Next_Sibling (Self : Node'Class) return Web.DOM.Nodes.Node;
+   --  Returns the next sibling.
+
 --   not overriding function Get_Node_Value
 --    (Self : not null access constant Node) return WebAPI.DOM_String is abstract
 --       with Import     => True,
