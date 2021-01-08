@@ -96,6 +96,10 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).nextSibling);
   },
 
+  __adawebpack__dom__Node__nodeType_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).nodeType;
+  },
+
   __adawebpack__dom__Node__ownerDocument_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).ownerDocument);
   },

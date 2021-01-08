@@ -59,20 +59,35 @@ package Web.DOM.Nodes is
    type Node is new WASM.Objects.Object_Reference
      and Web.DOM.Event_Targets.Event_Target with null record;
 
+   type Node_Types is
+    (ELEMENT_NODE,
+     ATTRIBUTE_NODE,          --  historical
+     TEXT_NODE,
+     CDATA_SECTION_NODE,      --  historical
+     ENTITY_REFERENCE_NODE,   --  historical
+     ENTITY_NODE,             --  historical
+     PROCESSING_INSTRUCTION_NODE,
+     COMMENT_NODE,
+     DOCUMENT_NODE,
+     DOCUMENT_TYPE_NODE,
+     DOCUMENT_FRAGMENT_NODE,
+     NOTATION_NODE);          --  historical
+   for Node_Types'Size use Web.DOM_Unsigned_Short'Size;
+   for Node_Types use
+    (ELEMENT_NODE                => 1,
+     ATTRIBUTE_NODE              => 2,
+     TEXT_NODE                   => 3,
+     CDATA_SECTION_NODE          => 4,
+     ENTITY_REFERENCE_NODE       => 5,
+     ENTITY_NODE                 => 6,
+     PROCESSING_INSTRUCTION_NODE => 7,
+     COMMENT_NODE                => 8,
+     DOCUMENT_NODE               => 9,
+     DOCUMENT_TYPE_NODE          => 10,
+     DOCUMENT_FRAGMENT_NODE      => 11,
+     NOTATION_NODE               => 12);
+
 --  interface Node : EventTarget {
---    const unsigned short ELEMENT_NODE = 1;
---    const unsigned short ATTRIBUTE_NODE = 2; // historical
---    const unsigned short TEXT_NODE = 3;
---    const unsigned short CDATA_SECTION_NODE = 4; // historical
---    const unsigned short ENTITY_REFERENCE_NODE = 5; // historical
---    const unsigned short ENTITY_NODE = 6; // historical
---    const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
---    const unsigned short COMMENT_NODE = 8;
---    const unsigned short DOCUMENT_NODE = 9;
---    const unsigned short DOCUMENT_TYPE_NODE = 10;
---    const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
---    const unsigned short NOTATION_NODE = 12; // historical
---    readonly attribute unsigned short nodeType;
 --    readonly attribute DOMString nodeName;
 --
 --    readonly attribute DOMString? baseURI;
@@ -113,30 +128,10 @@ package Web.DOM.Nodes is
 --limited with WebAPI.DOM.Node_Lists;
 --
 --package WebAPI.DOM.Nodes is
---
---   pragma Preelaborate;
---
---   type Node is limited interface
---     and WebAPI.DOM.Event_Targets.Event_Target;
---
---   type Node_Access is access all Node'Class
---     with Storage_Size => 0;
---
---   --  XXX Not binded yet:
---   --    const unsigned short ELEMENT_NODE = 1;
---   --    const unsigned short ATTRIBUTE_NODE = 2; // historical
---   --    const unsigned short TEXT_NODE = 3;
---   --    const unsigned short CDATA_SECTION_NODE = 4; // historical
---   --    const unsigned short ENTITY_REFERENCE_NODE = 5; // historical
---   --    const unsigned short ENTITY_NODE = 6; // historical
---   --    const unsigned short PROCESSING_INSTRUCTION_NODE = 7;
---   --    const unsigned short COMMENT_NODE = 8;
---   --    const unsigned short DOCUMENT_NODE = 9;
---   --    const unsigned short DOCUMENT_TYPE_NODE = 10;
---   --    const unsigned short DOCUMENT_FRAGMENT_NODE = 11;
---   --    const unsigned short NOTATION_NODE = 12; // historical
---   --    readonly attribute unsigned short nodeType;
---
+
+   function Get_Node_Type (Self : Node'Class) return Web.DOM.Nodes.Node_Types;
+   --  Returns the type of node.
+
 --   not overriding function Get_Node_Name
 --    (Self : not null access constant Node) return WebAPI.DOM_String is abstract
 --       with Import     => True,

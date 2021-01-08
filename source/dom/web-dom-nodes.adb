@@ -188,6 +188,26 @@ package body Web.DOM.Nodes is
       return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
    end Get_Next_Sibling;
 
+   -------------------
+   -- Get_Node_Type --
+   -------------------
+
+   function Get_Node_Type (Self : Node'Class) return Web.DOM.Nodes.Node_Types is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Web.DOM_Unsigned_Short
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__Node__nodeType_getter";
+
+      function To_Node_Types is
+        new Ada.Unchecked_Conversion
+             (Web.DOM_Unsigned_Short, Web.DOM.Nodes.Node_Types);
+
+   begin
+      return To_Node_Types (Imported (Self.Identifier));
+   end Get_Node_Type;
+
    ------------------------
    -- Get_Owner_Document --
    ------------------------
