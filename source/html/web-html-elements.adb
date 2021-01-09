@@ -43,6 +43,7 @@ with Web.HTML.Canvases;
 with Web.HTML.Images;
 with Web.HTML.Inputs;
 with Web.HTML.Opt_Groups;
+with Web.HTML.Options;
 with Web.HTML.Scripts;
 with Web.HTML.Selects;
 with Web.Strings;
@@ -139,6 +140,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Opt_Groups.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Opt_Group;
+
+   --------------------
+   -- As_HTML_Option --
+   --------------------
+
+   function As_HTML_Option
+    (Self : HTML_Element'Class) return Web.HTML.Options.HTML_Option_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLOptionElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Options.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Option;
 
    --------------------
    -- As_HTML_Script --

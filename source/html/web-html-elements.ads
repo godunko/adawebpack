@@ -41,6 +41,7 @@ limited with Web.HTML.Canvases;
 limited with Web.HTML.Images;
 limited with Web.HTML.Inputs;
 limited with Web.HTML.Opt_Groups;
+limited with Web.HTML.Options;
 limited with Web.HTML.Scripts;
 limited with Web.HTML.Selects;
 
@@ -82,6 +83,10 @@ package Web.HTML.Elements is
    function Get_Hidden (Self : HTML_Element'Class) return Boolean;
    procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);
 
+   -----------------
+   --  Utilities  --
+   -----------------
+
    function As_HTML_Button
     (Self : HTML_Element'Class) return Web.HTML.Buttons.HTML_Button_Element;
 
@@ -97,6 +102,9 @@ package Web.HTML.Elements is
    function As_HTML_Opt_Group
     (Self : HTML_Element'Class)
        return Web.HTML.Opt_Groups.HTML_Opt_Group_Element;
+
+   function As_HTML_Option
+    (Self : HTML_Element'Class) return Web.HTML.Options.HTML_Option_Element;
 
    function As_HTML_Script
     (Self : HTML_Element'Class) return Web.HTML.Scripts.HTML_Script_Element;
