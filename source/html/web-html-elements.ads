@@ -35,6 +35,7 @@
 ------------------------------------------------------------------------------
 
 with Web.DOM.Elements;
+with Web.DOM.String_Maps;
 limited with Web.HTML.Buttons;
 limited with Web.HTML.Canvases;
 limited with Web.HTML.Images;
@@ -48,6 +49,35 @@ package Web.HTML.Elements is
    pragma Preelaborate;
 
    type HTML_Element is new Web.DOM.Elements.Element with null record;
+--  interface HTMLElement : Element {
+--    // metadata attributes
+--    [CEReactions] attribute DOMString title;
+--    [CEReactions] attribute DOMString lang;
+--    [CEReactions] attribute boolean translate;
+--    [CEReactions] attribute DOMString dir;
+--
+--    // user interaction
+--    void click();
+--    [CEReactions] attribute long tabIndex;
+--    void focus();
+--    void blur();
+--    [CEReactions] attribute DOMString accessKey;
+--    [CEReactions] attribute boolean draggable;
+--    [CEReactions] attribute boolean spellcheck;
+--    void forceSpellCheck();
+--    [CEReactions, TreatNullAs=EmptyString] attribute DOMString innerText;
+--  };
+--  HTMLElement implements GlobalEventHandlers;
+--  HTMLElement implements DocumentAndElementEventHandlers;
+--  HTMLElement implements ElementContentEditable;
+
+   function Get_Dataset
+    (Self : HTML_Element'Class) return Web.DOM.String_Maps.DOM_String_Map;
+   --  Returns a DOMStringMap object for the element's data-* attributes.
+   --
+   -- Hyphenated names are converted to dromedary-case (which is the same
+   -- as camel-case except the initial letter is not uppercased). For
+   -- example, data-foo-bar="" becomes element.dataset.fooBar.
 
    function Get_Hidden (Self : HTML_Element'Class) return Boolean;
    procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean);

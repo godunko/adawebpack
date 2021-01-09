@@ -174,6 +174,24 @@ package body Web.HTML.Elements is
       end if;
    end As_HTML_Select;
 
+   -----------------
+   -- Get_Dataset --
+   -----------------
+
+   function Get_Dataset
+    (Self : HTML_Element'Class) return Web.DOM.String_Maps.DOM_String_Map
+   is
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Element__dataset_getter";
+
+   begin
+      return Web.DOM.String_Maps.Instantiate (Imported (Self.Identifier));
+   end Get_Dataset;
+
    ----------------------
    -- Get_Client_Height --
    ----------------------

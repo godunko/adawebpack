@@ -144,6 +144,10 @@ export let imports = {
     __adawebpack_o2i.too(identifier).width = to;
   },
 
+  __adawebpack__html__Element__dataset_getter: function(identifier) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).dataset);
+  },
+
   __adawebpack__html__Element__hidden_setter: function(identifier,to) {
     __adawebpack_o2i.too (identifier).hidden = (to !== 0);
   },
