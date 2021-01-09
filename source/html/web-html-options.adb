@@ -34,34 +34,44 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Web.HTML.Elements;
+with Interfaces;
 
-package Web.HTML.Options is
+with WASM.Objects;
 
-   pragma Preelaborate;
+package body Web.HTML.Options is
 
-   type HTML_Option_Element is
-     new Web.HTML.Elements.HTML_Element with null record;
+   ------------------
+   -- Get_Selected --
+   ------------------
 
---  [NamedConstructor=Option(optional DOMString text = "",
---     optional DOMString value, optional boolean defaultSelected = false,
---     optional boolean selected = false)]
---  interface HTMLOptionElement : HTMLElement {
---    attribute boolean disabled;
---    readonly attribute HTMLFormElement? form;
---    attribute DOMString label;
---    attribute boolean defaultSelected;
---    attribute DOMString value;
---
---    attribute DOMString text;
---    readonly attribute long index;
---  };
+   function Get_Selected (Self : HTML_Option_Element'Class) return Boolean is
+      use type Interfaces.Unsigned_32;
 
-   function Get_Selected (Self : HTML_Option_Element'Class) return Boolean;
+      function Imported
+       (Element : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__html__Option__selected_getter";
+   begin
+      return Imported (Self.Identifier) /= 0;
+   end Get_Selected;
+
+   ------------------
+   -- Set_Selected --
+   ------------------
+
    procedure Set_Selected
-    (Self : in out HTML_Option_Element'Class; To : Boolean);
-   --  Returns true if the element is selected, and false otherwise.
-   --
-   --  Can be set, to override the current state of the element.
+    (Self : in out HTML_Option_Element'Class; To : Boolean)
+   is
+      procedure Imported
+       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack__html__Option__selected_setter";
+
+   begin
+      Imported (Self.Identifier, Boolean'Pos (To));
+   end Set_Selected;
 
 end Web.HTML.Options;
