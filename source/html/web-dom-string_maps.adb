@@ -33,26 +33,38 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  This package provides binding for interface DOMStringMap.
-------------------------------------------------------------------------------
 
-with WASM.Objects;
+with System;
 
-with Web.Strings;
+with Web.Strings.WASM_Helpers;
 
-package Web.DOM.String_Maps is
+package body Web.DOM.String_Maps is
 
-   pragma Preelaborate;
-
-   type DOM_String_Map is new WASM.Objects.Object_Reference with null record;
-
---  interface DOMStringMap {
---    [CEReactions] setter void (DOMString name , DOMString value);
---    [CEReactions] deleter void (DOMString name);
---  };
+   ---------
+   -- Get --
+   ---------
 
    function Get
     (Self : DOM_String_Map'Class;
-     Name : Web.Strings.Web_String) return Web.Strings.Web_String;
+     Name : Web.Strings.Web_String) return Web.Strings.Web_String
+   is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        Address    : System.Address;
+        Length     : Interfaces.Unsigned_32)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack__dom__StringMap__getter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Name, A, S);
+
+      return
+        Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier, A, S));
+   end Get;
 
 end Web.DOM.String_Maps;

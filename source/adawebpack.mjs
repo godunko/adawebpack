@@ -108,6 +108,10 @@ export let imports = {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).removeChild(__adawebpack_o2i.too(node_identifier)));
   },
 
+  __adawebpack__dom__StringMap__getter: function(identifier, address, size) {
+    return string_to_wasm(__adawebpack_o2i.too(identifier)[string_to_js(address, size)]);
+  },
+
   __adawebpack__dom__TokenList__add: function(identifier, address, size) {
     __adawebpack_o2i.too(identifier).add(string_to_js(address, size));
   },
