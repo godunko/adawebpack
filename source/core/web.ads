@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -41,6 +41,8 @@ package Web is
    pragma Pure;
 
    subtype DOM_Long is Interfaces.Integer_32;
+
+   subtype DOM_Short is Interfaces.Integer_16;
 
    subtype DOM_Unsigned_Short is Interfaces.Unsigned_16;
 
