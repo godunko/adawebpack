@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -41,6 +41,27 @@ package Web.UI_Events.Mouse_Events is
    pragma Preelaborate;
 
    type Mouse_Event is new Web.UI_Events.UI_Events.UI_Event with null record;
+
+--  interface MouseEvent : UIEvent {
+--    constructor(DOMString type, optional MouseEventInit eventInitDict);
+--    readonly attribute long screenX;
+--    readonly attribute long screenY;
+--    readonly attribute long clientX;
+--    readonly attribute long clientY;
+--
+--    readonly attribute boolean ctrlKey;
+--    readonly attribute boolean shiftKey;
+--    readonly attribute boolean altKey;
+--    readonly attribute boolean metaKey;
+--
+--    readonly attribute short button;
+--
+--    readonly attribute EventTarget? relatedTarget;
+--
+--    boolean getModifierState(DOMString keyArg);
+--  };
+
+   function Buttons (Self : Mouse_Event) return DOM_Unsigned_Short;
 
    -----------------------
    -- CSSOM View Module --

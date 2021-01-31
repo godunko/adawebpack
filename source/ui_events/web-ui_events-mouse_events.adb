@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -34,9 +34,28 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with Interfaces;
+
 with WASM.Objects;
 
 package body Web.UI_Events.Mouse_Events is
+
+   -------------
+   -- Buttons --
+   -------------
+
+   function Buttons (Self : Mouse_Event) return DOM_Unsigned_Short is
+      function Imported
+       (Identifier : WASM.Objects.Object_Identifier)
+          return Interfaces.Unsigned_16
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  =>
+                   "__adawebpack__uievents__MouseEvent__buttons_getter";
+
+   begin
+      return DOM_Unsigned_Short (Imported (Self.Identifier));
+   end Buttons;
 
    --------------
    -- Offset_X --

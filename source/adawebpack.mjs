@@ -276,6 +276,10 @@ export let imports = {
     return window.requestAnimationFrame(function(time){instance.exports.__adawebpack__html__Window__dispatch_animation_frame(address, time);});
   },
 
+  __adawebpack__uievents__MouseEvent__buttons_getter: function(identifier) {
+    return __adawebpack_o2i.too(identifier).buttons;
+  },
+
   __adawebpack__uievents__MouseEvent__offsetX_getter: function(identifier) {
     return __adawebpack_o2i.too(identifier).offsetX;
   },
