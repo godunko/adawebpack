@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2020, Vadim Godunko <vgodunko@gmail.com>                     --
+-- Copyright © 2020-2021, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -44,7 +44,8 @@
 
 with System;
 
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 with Web.Strings.WASM_Helpers;
 
 package body Web.HTML.Inputs is
@@ -54,15 +55,9 @@ package body Web.HTML.Inputs is
    -----------------
 
    function Get_Checked (Self : HTML_Input_Element'Class) return Boolean is
-      function Imported
-       (Self : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Input__checked_getter";
-
    begin
-      return Imported (Self.Identifier) /= 0;
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Checked);
    end Get_Checked;
 
    ------------------
@@ -160,17 +155,9 @@ package body Web.HTML.Inputs is
 
    procedure Set_Checked
     (Self : in out HTML_Input_Element'Class;
-     To   : Boolean)
-   is
-      procedure Imported
-       (Identifier : WASM.Objects.Object_Identifier;
-        To         : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Input__checked_setter";
-
+     To   : Boolean) is
    begin
-      Imported (Self.Identifier, (if To then 1 else 0));
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Checked, To);
    end Set_Checked;
 
    ------------------

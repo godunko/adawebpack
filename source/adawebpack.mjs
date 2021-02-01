@@ -8,6 +8,7 @@ export function initialize(i) {
 }
 
 let __adawebpack___attributes = [
+  "checked",
   "hidden",
 ]
 
@@ -164,14 +165,6 @@ export let imports = {
 
   __adawebpack__html__Element__dataset_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).dataset);
-  },
-
-  __adawebpack__html__Input__checked_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).checked);
-  },
-
-  __adawebpack__html__Input__checked_setter: function(identifier,to) {
-    __adawebpack_o2i.too(identifier).checked = (to !== 0);
   },
 
   __adawebpack__html__Input__disabled_getter: function(identifier) {
