@@ -7,6 +7,10 @@ export function initialize(i) {
   instance.exports.adainit();
 }
 
+let __adawebpack___attributes = [
+  "hidden",
+]
+
 export let imports = {
 
   __gnat_grow: function (size) { return instance.exports.memory.grow(size); },
@@ -38,6 +42,16 @@ export let imports = {
   __adawebpack__wasm__object_release: function (identifier) {
     __adawebpack_o2i.rel(identifier);
   },
+
+
+  __adawebpack___boolean_getter: function (object_id, attribute_id) {
+     return +(__adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]]);
+  },
+
+  __adawebpack___boolean_setter: function (object_id, attribute_id, to) {
+    __adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]] = (to !== 0);
+  },
+
 
   __adawebpack__bom__window__document: function ()
   {
@@ -150,14 +164,6 @@ export let imports = {
 
   __adawebpack__html__Element__dataset_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).dataset);
-  },
-
-  __adawebpack__html__Element__hidden_setter: function(identifier,to) {
-    __adawebpack_o2i.too (identifier).hidden = (to !== 0);
-  },
-
-  __adawebpack__html__Element__hidden_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).hidden);
   },
 
   __adawebpack__html__Input__checked_getter: function(identifier) {

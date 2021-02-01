@@ -34,9 +34,8 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Interfaces;
-
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 
 with Web.HTML.Buttons;
 with Web.HTML.Canvases;
@@ -249,16 +248,9 @@ package body Web.HTML.Elements is
    ----------------
 
    function Get_Hidden (Self : HTML_Element'Class) return Boolean is
-      use type Interfaces.Unsigned_32;
-
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Element__hidden_getter";
    begin
-      return Imported (Self.Identifier) /= 0;
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Hidden);
    end Get_Hidden;
 
    ----------------
@@ -266,14 +258,8 @@ package body Web.HTML.Elements is
    ----------------
 
    procedure Set_Hidden (Self : in out HTML_Element'Class; To : Boolean) is
-      procedure Imported
-       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Element__hidden_setter";
-
    begin
-      Imported (Self.Identifier, Boolean'Pos (To));
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Hidden, To);
    end Set_Hidden;
 
 end Web.HTML.Elements;
