@@ -9,6 +9,7 @@ export function initialize(i) {
 
 let __adawebpack___attributes = [
   "checked",
+  "disabled",
   "hidden",
 ]
 
@@ -135,14 +136,6 @@ export let imports = {
     __adawebpack_o2i.too(identifier).remove(string_to_js(address, size));
   },
 
-  __adawebpack__html__Button__disabled_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).disabled);
-  },
-
-  __adawebpack__html__Button__disabled_setter: function(identifier,to) {
-    __adawebpack_o2i.too (identifier).disabled = (to !== 0);
-  },
-
   __adawebpack__html__Canvas__height_getter: function(identifier) {
     return __adawebpack_o2i.too(identifier).height;
   },
@@ -165,14 +158,6 @@ export let imports = {
 
   __adawebpack__html__Element__dataset_getter: function(identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).dataset);
-  },
-
-  __adawebpack__html__Input__disabled_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).disabled);
-  },
-
-  __adawebpack__html__Input__disabled_setter: function(identifier,to) {
-    __adawebpack_o2i.too(identifier).disabled = (to !== 0);
   },
 
   __adawebpack__html__Input__max_getter: function(identifier) {
@@ -203,14 +188,6 @@ export let imports = {
     __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
   },
 
-  __adawebpack__html__OptGroup__disabled_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).disabled);
-  },
-
-  __adawebpack__html__OptGroup__disabled_setter: function(identifier,to) {
-    __adawebpack_o2i.too (identifier).disabled = (to !== 0);
-  },
-
   __adawebpack__html__Option__selected_getter: function(identifier) {
     return +(__adawebpack_o2i.too(identifier).selected);
   },
@@ -225,14 +202,6 @@ export let imports = {
 
   __adawebpack__html__Script__text_setter: function(identifier,address,size) {
     __adawebpack_o2i.too(identifier).text = string_to_js(address,size);
-  },
-
-  __adawebpack__html__Select__disabled_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).disabled);
-  },
-
-  __adawebpack__html__Select__disabled_setter: function(identifier,to) {
-    __adawebpack_o2i.too(identifier).disabled = (to !== 0);
   },
 
   __adawebpack__html__Select__selectedIndex_getter: function(identifier) {

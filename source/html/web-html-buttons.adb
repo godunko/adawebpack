@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -34,9 +34,8 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with Interfaces;
-
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 
 package body Web.HTML.Buttons is
 
@@ -45,16 +44,9 @@ package body Web.HTML.Buttons is
    ------------------
 
    function Get_Disabled (Self : HTML_Button_Element'Class) return Boolean is
-      use type Interfaces.Unsigned_32;
-
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Button__disabled_getter";
    begin
-      return Imported (Self.Identifier) /= 0;
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Disabled);
    end Get_Disabled;
 
    ------------------
@@ -62,16 +54,9 @@ package body Web.HTML.Buttons is
    ------------------
 
    procedure Set_Disabled
-    (Self : in out HTML_Button_Element'Class; To : Boolean)
-   is
-      procedure Imported
-       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Button__disabled_setter";
-
+    (Self : in out HTML_Button_Element'Class; To : Boolean) is
    begin
-      Imported (Self.Identifier, Boolean'Pos (To));
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Disabled, To);
    end Set_Disabled;
 
 end Web.HTML.Buttons;

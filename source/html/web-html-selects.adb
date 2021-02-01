@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -36,7 +36,8 @@
 
 with System;
 
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 with Web.Strings.WASM_Helpers;
 
 package body Web.HTML.Selects is
@@ -46,14 +47,9 @@ package body Web.HTML.Selects is
    ------------------
 
    function Get_Disabled (Self : HTML_Select_Element'Class) return Boolean is
-      function Imported
-       (Identifier : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Select__disabled_getter";
    begin
-      return Imported (Self.Identifier) /= 0;
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Disabled);
    end Get_Disabled;
 
    ------------------------
@@ -97,17 +93,9 @@ package body Web.HTML.Selects is
 
    procedure Set_Disabled
     (Self : in out HTML_Select_Element;
-     To   : Boolean)
-   is
-      procedure Imported
-       (Identifier : WASM.Objects.Object_Identifier;
-        To         : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Select__disabled_setter";
-
+     To   : Boolean) is
    begin
-      Imported (Self.Identifier, (if To then 1 else 0));
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Disabled, To);
    end Set_Disabled;
 
    ------------------------
