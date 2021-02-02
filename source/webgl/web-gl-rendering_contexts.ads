@@ -328,14 +328,14 @@ package Web.GL.Rendering_Contexts is
 ----    const GLenum VENDOR                         = 0x1F00;
 ----    const GLenum RENDERER                       = 0x1F01;
 ----    const GLenum VERSION                        = 0x1F02;
---
---   ----------------------
---   -- TextureMagFilter --
---   ----------------------
---
---   NEAREST : constant := 16#2600#;
+
+   ----------------------
+   -- TextureMagFilter --
+   ----------------------
+
+   NEAREST : constant := 16#2600#;
 --   LINEAR  : constant := 16#2601#;
---
+
 --   ----------------------
 --   -- TextureMinFilter --
 --   ----------------------
@@ -346,15 +346,15 @@ package Web.GL.Rendering_Contexts is
 --   LINEAR_MIPMAP_NEAREST  : constant := 16#2701#;
 --   NEAREST_MIPMAP_LINEAR  : constant := 16#2702#;
 --   LINEAR_MIPMAP_LINEAR   : constant := 16#2703#;
---
---   --------------------------
---   -- TextureParameterName --
---   --------------------------
---
---   TEXTURE_MAG_FILTER : constant := 16#2800#;
---   TEXTURE_MIN_FILTER : constant := 16#2801#;
---   TEXTURE_WRAP_S     : constant := 16#2802#;
---   TEXTURE_WRAP_T     : constant := 16#2803#;
+
+   --------------------------
+   -- TextureParameterName --
+   --------------------------
+
+   TEXTURE_MAG_FILTER : constant := 16#2800#;
+   TEXTURE_MIN_FILTER : constant := 16#2801#;
+   TEXTURE_WRAP_S     : constant := 16#2802#;
+   TEXTURE_WRAP_T     : constant := 16#2803#;
 
    -------------------
    -- TextureTarget --
@@ -410,15 +410,15 @@ package Web.GL.Rendering_Contexts is
 --   TEXTURE30     : constant := 16#84DE#;
 --   TEXTURE31     : constant := 16#84DF#;
 ----    const GLenum ACTIVE_TEXTURE                 = 0x84E0;
---
---   ---------------------
---   -- TextureWrapMode --
---   ---------------------
---
+
+   ---------------------
+   -- TextureWrapMode --
+   ---------------------
+
 --   REPEAT          : constant := 16#2901#;
---   CLAMP_TO_EDGE   : constant := 16#812F#;
+   CLAMP_TO_EDGE   : constant := 16#812F#;
 --   MIRRORED_REPEAT : constant := 16#8370#;
---
+
 ----    /* Uniform Types */
 ----    const GLenum FLOAT_VEC2                     = 0x8B50;
 ----    const GLenum FLOAT_VEC3                     = 0x8B51;
@@ -950,16 +950,13 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "texParameterf";
---
---   not overriding procedure Tex_Parameteri
---    (Self   : not null access WebGL_Rendering_Context;
---     Target : WebAPI.WebGL.GLenum;
---     Pname  : WebAPI.WebGL.GLenum;
---     Value  : WebAPI.WebGL.GLint) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "texParameteri";
---
+
+   procedure Tex_Parameteri
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Pname  : Web.GL.GLenum;
+     Value  : Web.GL.GLint);
+
 ----    void texSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset,
 ----                       GLsizei width, GLsizei height,
 ----                       GLenum format, GLenum type, ArrayBufferView? pixels);

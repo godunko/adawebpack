@@ -62,4 +62,11 @@ package WASM.Objects.Methods is
       Parameter_1 : Interfaces.Unsigned_32;
       Parameter_2 : Object_Reference'Class);
 
+   procedure Call_Void_U32_U32_I32
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Interfaces.Unsigned_32;
+      Parameter_2 : Interfaces.Unsigned_32;
+      Parameter_3 : Interfaces.Integer_32);
+
 end WASM.Objects.Methods;

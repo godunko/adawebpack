@@ -54,5 +54,6 @@ package WASM.Methods is
    Create_Program     : constant := 3;
    Create_Texture     : constant := 4;
    Delete_Framebuffer : constant := 5;
+   Tex_Parameteri     : constant := 6;
 
 end WASM.Methods;

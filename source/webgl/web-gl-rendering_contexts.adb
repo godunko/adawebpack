@@ -801,6 +801,24 @@ package body Web.GL.Rendering_Contexts is
         Source.Identifier);
    end Tex_Image_2D;
 
+   --------------------
+   -- Tex_Parameteri --
+   --------------------
+
+   procedure Tex_Parameteri
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Pname  : Web.GL.GLenum;
+     Value  : Web.GL.GLint) is
+   begin
+      WASM.Objects.Methods.Call_Void_U32_U32_I32
+       (Self,
+        WASM.Methods.Tex_Parameteri,
+        Interfaces.Unsigned_32 (Target),
+        Interfaces.Unsigned_32 (Pname),
+        Interfaces.Integer_32 (Value));
+   end Tex_Parameteri;
+
    ----------------
    -- Uniform_1f --
    ----------------
