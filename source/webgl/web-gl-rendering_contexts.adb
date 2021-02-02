@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -34,6 +34,8 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with WASM.Methods;
+with WASM.Objects.Methods;
 with Web.Strings.WASM_Helpers;
 
 package body Web.GL.Rendering_Contexts is
@@ -232,6 +234,20 @@ package body Web.GL.Rendering_Contexts is
    begin
       return Web.GL.Buffers.Instantiate (Imported (Self.Identifier));
    end Create_Buffer;
+
+   ------------------------
+   -- Create_Framebuffer --
+   ------------------------
+
+   function Create_Framebuffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Framebuffers.WebGL_Framebuffer is
+   begin
+      return
+        Web.GL.Framebuffers.Instantiate
+         (WASM.Objects.Methods.Call_Object_Object
+           (Self, WASM.Methods.Create_Framebuffer));
+   end Create_Framebuffer;
 
    --------------------
    -- Create_Program --

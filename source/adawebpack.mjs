@@ -13,6 +13,10 @@ let __adawebpack___attributes = [
   "hidden",
 ]
 
+let __adawebpack___methods = [
+  "createFramebuffer",
+]
+
 export let imports = {
 
   __gnat_grow: function (size) { return instance.exports.memory.grow(size); },
@@ -54,6 +58,9 @@ export let imports = {
     __adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]] = (to !== 0);
   },
 
+  __adawebpack___object_invoker: function (object_id, method_id) {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]]());
+  },
 
   __adawebpack__bom__window__document: function ()
   {

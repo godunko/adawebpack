@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2014-2020, Vadim Godunko                                    --
+--  Copyright © 2014-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -37,7 +37,6 @@
 --  with WebAPI.HTML.Canvas_Elements;
 --  with WebAPI.HTML.Rendering_Contexts;
 --  
---  with WebAPI.WebGL.Framebuffers;
 --  with WebAPI.WebGL.Renderbuffers;
 
 with System;
@@ -45,6 +44,7 @@ with System;
 with WASM.Objects;
 
 with Web.GL.Buffers;
+with Web.GL.Framebuffers;
 with Web.GL.Programs;
 with Web.GL.Shaders;
 with Web.GL.Textures;
@@ -652,12 +652,9 @@ package Web.GL.Rendering_Contexts is
     (Self : in out WebGL_Rendering_Context'Class)
        return Web.GL.Buffers.WebGL_Buffer;
 
---   not overriding function Create_Framebuffer
---    (Self : not null access WebGL_Rendering_Context)
---       return WebAPI.WebGL.Framebuffers.WebGL_Framebuffer_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createFramebuffer";
+   function Create_Framebuffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Framebuffers.WebGL_Framebuffer;
 
    function Create_Program
     (Self : in out WebGL_Rendering_Context'Class)
