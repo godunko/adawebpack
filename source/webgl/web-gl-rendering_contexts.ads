@@ -472,7 +472,7 @@ package Web.GL.Rendering_Contexts is
 --   RGBA4             : constant := 16#8056#;
 --   RGB5_A1           : constant := 16#8057#;
 --   RGB565            : constant := 16#8D62#;
---   DEPTH_COMPONENT16 : constant := 16#81A5#;
+   DEPTH_COMPONENT16 : constant := 16#81A5#;
 --   STENCIL_INDEX8    : constant := 16#8D48#;
 ----    const GLenum STENCIL_INDEX                  = 0x1901;
 ----    const GLenum DEPTH_STENCIL                  = 0x84F9;
@@ -876,17 +876,14 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "readPixels";
---
---   not overriding procedure Renderbuffer_Storage
---    (Self   : not null access WebGL_Rendering_Context;
---     Target : WebAPI.WebGL.GLenum;
---     Format : WebAPI.WebGL.GLenum;
---     Width  : WebAPI.WebGL.Glsizei;
---     Height : WebAPI.WebGL.Glsizei) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "renderbufferStorage";
---
+
+   procedure Renderbuffer_Storage
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Format : Web.GL.GLenum;
+     Width  : Web.GL.Glsizei;
+     Height : Web.GL.Glsizei);
+
 ----    void sampleCoverage(GLclampf value, GLboolean invert);
 ----    void scissor(GLint x, GLint y, GLsizei width, GLsizei height);
 

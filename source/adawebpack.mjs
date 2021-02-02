@@ -22,6 +22,7 @@ let __adawebpack___methods = [
   "createRenderbuffer",
   "createTexture",
   "deleteFramebuffer",
+  "renderbufferStorage",
   "texParameteri",
 ]
 
@@ -80,6 +81,10 @@ export let imports = {
 
   __adawebpack___void_i32_i32_i32_invoker: function (object_id, method_id, parameter_1, parameter_2, parameter_3) {
     __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](parameter_1, parameter_2, parameter_3);
+  },
+
+  __adawebpack___void_i32_i32_i32_i32_invoker: function (object_id, method_id, parameter_1, parameter_2, parameter_3, parameter_4) {
+    __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](parameter_1, parameter_2, parameter_3, parameter_4);
   },
 
 

@@ -126,4 +126,37 @@ package body WASM.Objects.Methods is
       Imported (Self.Identifier, Name, Parameter_1, Parameter_2, Parameter_3);
    end Call_Void_U32_U32_I32;
 
+   -------------------------------
+   -- Call_Void_U32_U32_I32_I32 --
+   -------------------------------
+
+   procedure Call_Void_U32_U32_I32_I32
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Interfaces.Unsigned_32;
+      Parameter_2 : Interfaces.Unsigned_32;
+      Parameter_3 : Interfaces.Integer_32;
+      Parameter_4 : Interfaces.Integer_32)
+   is
+      procedure Imported
+       (Object      : WASM.Objects.Object_Identifier;
+        Method      : WASM.Methods.Method_Index;
+        Parameter_1 : Interfaces.Unsigned_32;
+        Parameter_2 : Interfaces.Unsigned_32;
+        Parameter_3 : Interfaces.Integer_32;
+        Parameter_4 : Interfaces.Integer_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack___void_i32_i32_i32_i32_invoker";
+
+   begin
+      Imported
+        (Self.Identifier,
+         Name,
+         Parameter_1,
+         Parameter_2,
+         Parameter_3,
+         Parameter_4);
+   end Call_Void_U32_U32_I32_I32;
+
 end WASM.Objects.Methods;

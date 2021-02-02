@@ -767,6 +767,26 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Program.Identifier);
    end Link_Program;
 
+   --------------------------
+   -- Renderbuffer_Storage --
+   --------------------------
+
+   procedure Renderbuffer_Storage
+    (Self   : in out WebGL_Rendering_Context'Class;
+     Target : Web.GL.GLenum;
+     Format : Web.GL.GLenum;
+     Width  : Web.GL.Glsizei;
+     Height : Web.GL.Glsizei) is
+   begin
+      WASM.Objects.Methods.Call_Void_U32_U32_I32_I32
+       (Self,
+        WASM.Methods.Renderbuffer_Storage,
+        Interfaces.Unsigned_32 (Target),
+        Interfaces.Unsigned_32 (Format),
+        Interfaces.Integer_32 (Width),
+        Interfaces.Integer_32 (Height));
+   end Renderbuffer_Storage;
+
    -------------------
    -- Shader_Source --
    -------------------
