@@ -14,6 +14,7 @@ let __adawebpack___attributes = [
 ]
 
 let __adawebpack___methods = [
+  "bindFramebuffer",
   "createBuffer",
   "createFramebuffer",
   "createProgram",
@@ -68,6 +69,10 @@ export let imports = {
 
   __adawebpack___void_object_invoker: function (object_id, method_id, argument) {
     __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](__adawebpack_o2i.too(argument));
+  },
+
+  __adawebpack___void_i32_object_invoker: function (object_id, method_id, parameter_1, parameter_2) {
+    __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](parameter_1, __adawebpack_o2i.too(parameter_2));
   },
 
 

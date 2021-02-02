@@ -462,12 +462,12 @@ package Web.GL.Rendering_Contexts is
 ----    const GLenum LOW_INT                        = 0x8DF3;
 ----    const GLenum MEDIUM_INT                     = 0x8DF4;
 ----    const GLenum HIGH_INT                       = 0x8DF5;
---
---   ------------------------
---   -- Framebuffer Object --
---   ------------------------
---
---   FRAMEBUFFER  : constant := 16#8D40#;
+
+   ------------------------
+   -- Framebuffer Object --
+   ------------------------
+
+   FRAMEBUFFER  : constant := 16#8D40#;
 --   RENDERBUFFER : constant := 16#8D41#;
 --
 --   RGBA4             : constant := 16#8056#;
@@ -556,16 +556,12 @@ package Web.GL.Rendering_Contexts is
      Buffer : Web.GL.Buffers.WebGL_Buffer'Class);
 --            Pre'Class  => Target in ARRAY_BUFFER | ELEMENT_ARRAY_BUFFER;
 
---   not overriding procedure Bind_Framebuffer
---    (Self        : not null access WebGL_Rendering_Context;
---     Target      : GLenum;
---     Framebuffer : access WebAPI.WebGL.Framebuffers.WebGL_Framebuffer'Class)
---       is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "bindFramebuffer";
-----              Pre'Class  => Target in FRAMEBUFFER;
---
+   procedure Bind_Framebuffer
+    (Self        : in out WebGL_Rendering_Context'Class;
+     Target      : GLenum;
+     Framebuffer : Web.GL.Framebuffers.WebGL_Framebuffer'Class);
+--              Pre'Class  => Target in FRAMEBUFFER;
+
 --   not overriding procedure Bind_Renderbuffer
 --    (Self         : not null access WebGL_Rendering_Context;
 --     Target       : GLenum;

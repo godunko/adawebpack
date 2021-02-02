@@ -38,6 +38,8 @@
 --  method names table defined at JavaScript side. This allows to share code
 --  to do calls of the methods with same profile of any objects.
 
+with Interfaces;
+
 with WASM.Methods;
 
 package WASM.Objects.Methods is
@@ -53,5 +55,11 @@ package WASM.Objects.Methods is
      (Self      : Object_Reference'Class;
       Name      : WASM.Methods.Method_Index;
       Parameter : Object_Reference'Class);
+
+   procedure Call_Void_U32_Object
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Interfaces.Unsigned_32;
+      Parameter_2 : Object_Reference'Class);
 
 end WASM.Objects.Methods;
