@@ -48,6 +48,7 @@ package WASM.Methods is
    --  This declaration must be synchronized with list of attributes' name in
    --  adawebpack.mjs file.
 
-   Create_Framebuffer : constant := 0;
+   Create_Buffer      : constant := 0;
+   Create_Framebuffer : constant := 1;
 
 end WASM.Methods;
