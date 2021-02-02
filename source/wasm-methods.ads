@@ -49,12 +49,13 @@ package WASM.Methods is
    --  adawebpack.mjs file.
 
    Bind_Framebuffer    : constant := 0;
-   Create_Buffer       : constant := 1;
-   Create_Framebuffer  : constant := 2;
-   Create_Program      : constant := 3;
-   Create_Renderbuffer : constant := 4;
-   Create_Texture      : constant := 5;
-   Delete_Framebuffer  : constant := 6;
-   Tex_Parameteri      : constant := 7;
+   Bind_Renderbuffer   : constant := 1;
+   Create_Buffer       : constant := 2;
+   Create_Framebuffer  : constant := 3;
+   Create_Program      : constant := 4;
+   Create_Renderbuffer : constant := 5;
+   Create_Texture      : constant := 6;
+   Delete_Framebuffer  : constant := 7;
+   Tex_Parameteri      : constant := 8;
 
 end WASM.Methods;

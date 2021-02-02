@@ -467,8 +467,8 @@ package Web.GL.Rendering_Contexts is
    ------------------------
 
    FRAMEBUFFER  : constant := 16#8D40#;
---   RENDERBUFFER : constant := 16#8D41#;
---
+   RENDERBUFFER : constant := 16#8D41#;
+
 --   RGBA4             : constant := 16#8056#;
 --   RGB5_A1           : constant := 16#8057#;
 --   RGB565            : constant := 16#8D62#;
@@ -561,15 +561,11 @@ package Web.GL.Rendering_Contexts is
      Framebuffer : Web.GL.Framebuffers.WebGL_Framebuffer'Class);
 --              Pre'Class  => Target in FRAMEBUFFER;
 
---   not overriding procedure Bind_Renderbuffer
---    (Self         : not null access WebGL_Rendering_Context;
---     Target       : GLenum;
---     Renderbuffer : access WebAPI.WebGL.Renderbuffers.WebGL_Renderbuffer'Class)
---       is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "bindRenderbuffer";
-----              Pre'Class  => Target in RENDERBUFFER;
+   procedure Bind_Renderbuffer
+    (Self         : in out WebGL_Rendering_Context'Class;
+     Target       : GLenum;
+     Renderbuffer : Web.GL.Renderbuffers.WebGL_Renderbuffer'Class);
+--              Pre'Class  => Target in RENDERBUFFER;
 
    procedure Bind_Texture
     (Self    : in out WebGL_Rendering_Context;

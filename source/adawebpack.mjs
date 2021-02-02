@@ -15,6 +15,7 @@ let __adawebpack___attributes = [
 
 let __adawebpack___methods = [
   "bindFramebuffer",
+  "bindRenderbuffer",
   "createBuffer",
   "createFramebuffer",
   "createProgram",

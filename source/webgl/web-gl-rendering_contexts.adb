@@ -101,6 +101,22 @@ package body Web.GL.Rendering_Contexts is
         Framebuffer);
    end Bind_Framebuffer;
 
+   -----------------------
+   -- Bind_Renderbuffer --
+   -----------------------
+
+   procedure Bind_Renderbuffer
+    (Self         : in out WebGL_Rendering_Context'Class;
+     Target       : GLenum;
+     Renderbuffer : Web.GL.Renderbuffers.WebGL_Renderbuffer'Class) is
+   begin
+      WASM.Objects.Methods.Call_Void_U32_Object
+       (Self,
+        WASM.Methods.Bind_Renderbuffer,
+        Interfaces.Unsigned_32 (Target),
+        Renderbuffer);
+   end Bind_Renderbuffer;
+
    ------------------
    -- Bind_Texture --
    ------------------
