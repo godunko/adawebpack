@@ -36,8 +36,6 @@
 --  
 --  with WebAPI.HTML.Canvas_Elements;
 --  with WebAPI.HTML.Rendering_Contexts;
---  
---  with WebAPI.WebGL.Renderbuffers;
 
 with System;
 
@@ -46,6 +44,7 @@ with WASM.Objects;
 with Web.GL.Buffers;
 with Web.GL.Framebuffers;
 with Web.GL.Programs;
+with Web.GL.Renderbuffers;
 with Web.GL.Shaders;
 with Web.GL.Textures;
 with Web.GL.Uniform_Locations;
@@ -656,12 +655,9 @@ package Web.GL.Rendering_Contexts is
     (Self : in out WebGL_Rendering_Context'Class)
        return Web.GL.Programs.WebGL_Program;
 
---   not overriding function Create_Renderbuffer
---    (Self : not null access WebGL_Rendering_Context)
---       return WebAPI.WebGL.Renderbuffers.WebGL_Renderbuffer_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "createRenderbuffer";
+   function Create_Renderbuffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Renderbuffers.WebGL_Renderbuffer;
 
    function Create_Shader
     (Self     : in out WebGL_Rendering_Context'Class;

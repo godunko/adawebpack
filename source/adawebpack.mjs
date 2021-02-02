@@ -18,6 +18,7 @@ let __adawebpack___methods = [
   "createBuffer",
   "createFramebuffer",
   "createProgram",
+  "createRenderbuffer",
   "createTexture",
   "deleteFramebuffer",
   "texParameteri",

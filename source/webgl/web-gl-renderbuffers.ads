@@ -33,28 +33,13 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  This package define indicies of known object's methods to be used with
---  helper functions to call object's methods. See WASM.Objects.Methods for
---  more information.
 
-with Interfaces;
+with Web.GL.Objects;
 
-package WASM.Methods is
+package Web.GL.Renderbuffers is
 
-   pragma Pure;
+   pragma Preelaborate;
 
-   type Method_Index is new Interfaces.Unsigned_32;
+   type WebGL_Renderbuffer is new Web.GL.Objects.WebGL_Object with null record;
 
-   --  This declaration must be synchronized with list of attributes' name in
-   --  adawebpack.mjs file.
-
-   Bind_Framebuffer    : constant := 0;
-   Create_Buffer       : constant := 1;
-   Create_Framebuffer  : constant := 2;
-   Create_Program      : constant := 3;
-   Create_Renderbuffer : constant := 4;
-   Create_Texture      : constant := 5;
-   Delete_Framebuffer  : constant := 6;
-   Tex_Parameteri      : constant := 7;
-
-end WASM.Methods;
+end Web.GL.Renderbuffers;

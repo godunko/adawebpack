@@ -273,6 +273,20 @@ package body Web.GL.Rendering_Contexts is
            (Self, WASM.Methods.Create_Program));
    end Create_Program;
 
+   -------------------------
+   -- Create_Renderbuffer --
+   -------------------------
+
+   function Create_Renderbuffer
+    (Self : in out WebGL_Rendering_Context'Class)
+       return Web.GL.Renderbuffers.WebGL_Renderbuffer is
+   begin
+      return
+        Web.GL.Renderbuffers.Instantiate
+         (WASM.Objects.Methods.Call_Object_Object
+           (Self, WASM.Methods.Create_Renderbuffer));
+   end Create_Renderbuffer;
+
    --------------------
    -- Create_Texture --
    --------------------
