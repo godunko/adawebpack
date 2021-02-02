@@ -263,18 +263,12 @@ package body Web.GL.Rendering_Contexts is
 
    function Create_Texture
     (Self : in out WebGL_Rendering_Context)
-       return Web.GL.Textures.WebGL_Texture
-   is
-      function Imported
-       (Identifier : WASM.Objects.Object_Identifier)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__webgl__RenderingContext__createTexture";
-
+       return Web.GL.Textures.WebGL_Texture is
    begin
-      return Web.GL.Textures.Instantiate (Imported (Self.Identifier));
+      return
+        Web.GL.Textures.Instantiate
+         (WASM.Objects.Methods.Call_Object_Object
+           (Self, WASM.Methods.Create_Texture));
    end Create_Texture;
 
    -------------------
