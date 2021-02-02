@@ -249,18 +249,12 @@ package body Web.GL.Rendering_Contexts is
 
    function Create_Program
     (Self : in out WebGL_Rendering_Context'Class)
-       return Web.GL.Programs.WebGL_Program
-   is
-      function Imported
-       (Identifier : WASM.Objects.Object_Identifier)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  =>
-                   "__adawebpack__webgl__RenderingContext__createProgram";
-
+       return Web.GL.Programs.WebGL_Program is
    begin
-      return Web.GL.Programs.Instantiate (Imported (Self.Identifier));
+      return
+        Web.GL.Programs.Instantiate
+         (WASM.Objects.Methods.Call_Object_Object
+           (Self, WASM.Methods.Create_Program));
    end Create_Program;
 
    --------------------

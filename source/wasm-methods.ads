@@ -50,5 +50,6 @@ package WASM.Methods is
 
    Create_Buffer      : constant := 0;
    Create_Framebuffer : constant := 1;
+   Create_Program     : constant := 2;
 
 end WASM.Methods;

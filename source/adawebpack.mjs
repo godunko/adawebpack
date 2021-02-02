@@ -16,6 +16,7 @@ let __adawebpack___attributes = [
 let __adawebpack___methods = [
   "createBuffer",
   "createFramebuffer",
+  "createProgram",
 ]
 
 export let imports = {
@@ -302,10 +303,6 @@ export let imports = {
 
   __adawebpack__webgl__RenderingContext__compileShader: function(context_identifier,shader_identifier) {
     __adawebpack_o2i.too(context_identifier).compileShader(__adawebpack_o2i.too(shader_identifier));
-  },
-
-  __adawebpack__webgl__RenderingContext__createProgram: function(identifier) {
-    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createProgram());
   },
 
   __adawebpack__webgl__RenderingContext__createTexture: function(identifier) {
