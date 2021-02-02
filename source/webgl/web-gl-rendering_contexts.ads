@@ -683,15 +683,11 @@ package Web.GL.Rendering_Contexts is
 --       with Import     => True,
 --            Convention => JavaScript_Method,
 --            Link_Name  => "deleteBuffer";
---
---   not overriding procedure Delete_Framebuffer
---    (Self        : not null access WebGL_Rendering_Context;
---     Framebuffer : access WebAPI.WebGL.Framebuffers.WebGL_Framebuffer'Class)
---       is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "deleteFramebuffer";
---
+
+   procedure Delete_Framebuffer
+    (Self        : in out WebGL_Rendering_Context'Class;
+     Framebuffer : in out Web.GL.Framebuffers.WebGL_Framebuffer'Class);
+
 --   not overriding procedure Delete_Program
 --    (Self    : not null access WebGL_Rendering_Context;
 --     Program : access WebAPI.WebGL.Programs.WebGL_Program'Class) is abstract

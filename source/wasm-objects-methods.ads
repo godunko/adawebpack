@@ -49,4 +49,9 @@ package WASM.Objects.Methods is
       Name : WASM.Methods.Method_Index)
       return WASM.Objects.Object_Identifier;
 
+   procedure Call_Void_Object
+     (Self      : Object_Reference'Class;
+      Name      : WASM.Methods.Method_Index;
+      Parameter : Object_Reference'Class);
+
 end WASM.Objects.Methods;

@@ -57,4 +57,25 @@ package body WASM.Objects.Methods is
       return Imported (Self.Identifier, Name);
    end Call_Object_Object;
 
+   ----------------------
+   -- Call_Void_Object --
+   ----------------------
+
+   procedure Call_Void_Object
+     (Self      : Object_Reference'Class;
+      Name      : WASM.Methods.Method_Index;
+      Parameter : Object_Reference'Class)
+   is
+      procedure Imported
+       (Object    : WASM.Objects.Object_Identifier;
+        Method    : WASM.Methods.Method_Index;
+        Parameter : WASM.Objects.Object_Identifier)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack___void_object_invoker";
+
+   begin
+      Imported (Self.Identifier, Name, Parameter.Identifier);
+   end Call_Void_Object;
+
 end WASM.Objects.Methods;

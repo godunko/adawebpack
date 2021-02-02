@@ -294,6 +294,18 @@ package body Web.GL.Rendering_Contexts is
          (Imported (Self.Identifier, Interfaces.Unsigned_32 (The_Type)));
    end Create_Shader;
 
+   ------------------------
+   -- Delete_Framebuffer --
+   ------------------------
+
+   procedure Delete_Framebuffer
+    (Self        : in out WebGL_Rendering_Context'Class;
+     Framebuffer : in out Web.GL.Framebuffers.WebGL_Framebuffer'Class) is
+   begin
+      WASM.Objects.Methods.Call_Void_Object
+       (Self, WASM.Methods.Delete_Framebuffer, Framebuffer);
+   end Delete_Framebuffer;
+
    -------------------
    -- Delete_Shader --
    -------------------

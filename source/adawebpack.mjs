@@ -18,6 +18,7 @@ let __adawebpack___methods = [
   "createFramebuffer",
   "createProgram",
   "createTexture",
+  "deleteFramebuffer",
 ]
 
 export let imports = {
@@ -64,6 +65,11 @@ export let imports = {
   __adawebpack___object_invoker: function (object_id, method_id) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]]());
   },
+
+  __adawebpack___void_object_invoker: function (object_id, method_id, argument) {
+    __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](__adawebpack_o2i.too(argument));
+  },
+
 
   __adawebpack__bom__window__document: function ()
   {

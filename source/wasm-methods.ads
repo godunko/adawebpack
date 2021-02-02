@@ -52,5 +52,6 @@ package WASM.Methods is
    Create_Framebuffer : constant := 1;
    Create_Program     : constant := 2;
    Create_Texture     : constant := 3;
+   Delete_Framebuffer : constant := 4;
 
 end WASM.Methods;
