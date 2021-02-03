@@ -491,12 +491,12 @@ package Web.GL.Rendering_Contexts is
 ----    const GLenum FRAMEBUFFER_ATTACHMENT_OBJECT_NAME           = 0x8CD1;
 ----    const GLenum FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         = 0x8CD2;
 ----    const GLenum FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 0x8CD3;
---
+
 --   COLOR_ATTACHMENT0  : constant := 16#8CE0#;
---   DEPTH_ATTACHMENT   : constant := 16#8D00#;
+   DEPTH_ATTACHMENT         : constant := 16#8D00#;
 --   STENCIL_ATTACHMENT : constant := 16#8D20#;
-----    const GLenum DEPTH_STENCIL_ATTACHMENT       = 0x821A;
---
+   DEPTH_STENCIL_ATTACHMENT : constant := 16#821A#;
+
 ----    const GLenum NONE                           = 0;
 ----
 ----    const GLenum FRAMEBUFFER_COMPLETE                      = 0x8CD5;
@@ -746,17 +746,13 @@ package Web.GL.Rendering_Contexts is
 
    procedure Flush (Self : in out WebGL_Rendering_Context);
 
---   not overriding procedure Framebuffer_Renderbuffer
---    (Self                : not null access WebGL_Rendering_Context;
---     Target              : WebAPI.WebGL.GLenum;
---     Attachment          : WebAPI.WebGL.GLenum;
---     Renderbuffer_Target : WebAPI.WebGL.GLenum;
---     Renderbuffer        :
---       WebAPI.WebGL.Renderbuffers.WebGL_Renderbuffer_Access) is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "framebufferRenderbuffer";
---
+   procedure Framebuffer_Renderbuffer
+    (Self                : in out WebGL_Rendering_Context'Class;
+     Target              : Web.GL.GLenum;
+     Attachment          : Web.GL.GLenum;
+     Renderbuffer_Target : Web.GL.GLenum;
+     Renderbuffer        : Web.GL.Renderbuffers.WebGL_Renderbuffer'Class);
+
 --   not overriding procedure Framebuffer_Texture_2D
 --    (Self           : not null access WebGL_Rendering_Context;
 --     Target         : WebAPI.WebGL.GLenum;

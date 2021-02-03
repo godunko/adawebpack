@@ -529,6 +529,26 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier);
    end Flush;
 
+   ------------------------------
+   -- Framebuffer_Renderbuffer --
+   ------------------------------
+
+   procedure Framebuffer_Renderbuffer
+    (Self                : in out WebGL_Rendering_Context'Class;
+     Target              : Web.GL.GLenum;
+     Attachment          : Web.GL.GLenum;
+     Renderbuffer_Target : Web.GL.GLenum;
+     Renderbuffer        : Web.GL.Renderbuffers.WebGL_Renderbuffer'Class) is
+   begin
+      WASM.Objects.Methods.Call_Void_U32_U32_U32_Object
+        (Self,
+         WASM.Methods.Framebuffer_Renderbuffer,
+         Interfaces.Unsigned_32 (Target),
+         Interfaces.Unsigned_32 (Attachment),
+         Interfaces.Unsigned_32 (Renderbuffer_Target),
+         Renderbuffer);
+   end Framebuffer_Renderbuffer;
+
    ---------------------
    -- Generate_Mipmap --
    ---------------------
