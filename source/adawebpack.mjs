@@ -410,6 +410,10 @@ export let imports = {
     __adawebpack_o2i.too(context_identifier).shaderSource(__adawebpack_o2i.too(shader_identifier),string_to_js(source_address,source_size));
   },
 
+  __adawebpack__webgl__RenderingContext__texImage2D_1: function(context_identifier, target, level, internalformat, width, height, border, format, type) {
+    __adawebpack_o2i.too(context_identifier).texImage2D(target, level, internalformat, width, height, border, format, type, null);
+  },
+
   __adawebpack__webgl__RenderingContext__texImage2D: function(context_identifier, target, level, internalformat, format, type, source_identifier) {
     __adawebpack_o2i.too(context_identifier).texImage2D(target, level, internalformat, format, type, __adawebpack_o2i.too(source_identifier));
   },

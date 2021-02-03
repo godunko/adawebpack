@@ -900,21 +900,28 @@ package Web.GL.Rendering_Contexts is
 ----             HTMLImageElement or
 ----             HTMLCanvasElement or
 ----             HTMLVideoElement) TexImageSource;
---
---   not overriding procedure Tex_Image_2D
---    (Self            : not null access WebGL_Rendering_Context;
---     Target          : WebAPI.WebGL.GLenum;
---     Level           : WebAPI.WebGL.GLint;
---     Internal_Format : WebAPI.WebGL.GLint;
---     Width           : WebAPI.WebGL.GLsizei;
---     Height          : WebAPI.WebGL.GLsizei;
---     Border          : WebAPI.WebGL.GLint;
---     Format          : WebAPI.WebGL.GLenum;
---     Data_Type       : WebAPI.WebGL.GLenum;
---     Pixels          : System.Address) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "texImage2D";
+
+   procedure Tex_Image_2D
+    (Self            : in out WebGL_Rendering_Context'Class;
+     Target          : Web.GL.GLenum;
+     Level           : Web.GL.GLint;
+     Internal_Format : Web.GL.GLint;
+     Width           : Web.GL.GLsizei;
+     Height          : Web.GL.GLsizei;
+     Border          : Web.GL.GLint;
+     Format          : Web.GL.GLenum;
+     Data_Type       : Web.GL.GLenum);
+--   procedure Tex_Image_2D
+--    (Self            : in out WebGL_Rendering_Context'Class;
+--     Target          : Web.GL.GLenum;
+--     Level           : Web.GL.GLint;
+--     Internal_Format : Web.GL.GLint;
+--     Width           : Web.GL.GLsizei;
+--     Height          : Web.GL.GLsizei;
+--     Border          : Web.GL.GLint;
+--     Format          : Web.GL.GLenum;
+--     Data_Type       : Web.GL.GLenum;
+--     Pixels          : System.Address);
 
    procedure Tex_Image_2D
     (Self            : in out WebGL_Rendering_Context'Class;
