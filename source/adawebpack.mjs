@@ -411,6 +411,10 @@ export let imports = {
     __adawebpack_o2i.too(context_identifier).linkProgram(__adawebpack_o2i.too(program_identifier));
   },
 
+  __adawebpack__webgl__RenderingContext__readPixels: function(context_identifier,x,y,width,height,format,type,address,size) {
+    __adawebpack_o2i.too(context_identifier).readPixels(x, y, width, height, format, type, new Uint8Array(instance.exports.memory.buffer, address, size));
+  },
+
   __adawebpack__webgl__RenderingContext__shaderSource: function(context_identifier,shader_identifier,source_address,source_size) {
     __adawebpack_o2i.too(context_identifier).shaderSource(__adawebpack_o2i.too(shader_identifier),string_to_js(source_address,source_size));
   },

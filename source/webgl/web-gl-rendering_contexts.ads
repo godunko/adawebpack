@@ -856,19 +856,20 @@ package Web.GL.Rendering_Contexts is
 
 ----    void pixelStorei(GLenum pname, GLint param);
 ----    void polygonOffset(GLfloat factor, GLfloat units);
---
---   not overriding procedure Read_Pixels
---    (Self      : not null access WebGL_Rendering_Context;
---     X         : WebAPI.WebGL.Glint;
---     Y         : WebAPI.WebGL.Glint;
---     Width     : WebAPI.WebGL.Glsizei;
---     Height    : WebAPI.WebGL.Glsizei;
---     Format    : WebAPI.WebGL.GLenum;
---     Data_Type : WebAPI.WebGL.GLenum;
---     Pixels    : System.Address) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "readPixels";
+
+   procedure Read_Pixels
+    (Self      : in out WebGL_Rendering_Context'Class;
+     X         : Web.GL.Glint;
+     Y         : Web.GL.Glint;
+     Width     : Web.GL.Glsizei;
+     Height    : Web.GL.Glsizei;
+     Format    : Web.GL.GLenum;
+     Data_Type : Web.GL.GLenum;
+     Pixels    : System.Address;
+     Size      : Interfaces.Unsigned_32);
+   --  It is low level subprogram, whould be useful to provide more safe
+   --  implementation which takes array of GLubyte, because for WebGL 1.0
+   --  no other formats are allowed.
 
    procedure Renderbuffer_Storage
     (Self   : in out WebGL_Rendering_Context'Class;

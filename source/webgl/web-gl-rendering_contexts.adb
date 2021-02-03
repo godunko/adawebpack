@@ -809,6 +809,49 @@ package body Web.GL.Rendering_Contexts is
       Imported (Self.Identifier, Program.Identifier);
    end Link_Program;
 
+   -----------------
+   -- Read_Pixels --
+   -----------------
+
+   procedure Read_Pixels
+    (Self      : in out WebGL_Rendering_Context'Class;
+     X         : Web.GL.GLint;
+     Y         : Web.GL.GLint;
+     Width     : Web.GL.GLsizei;
+     Height    : Web.GL.GLsizei;
+     Format    : Web.GL.GLenum;
+     Data_Type : Web.GL.GLenum;
+     Pixels    : System.Address;
+     Size      : Interfaces.Unsigned_32)
+   is
+      procedure Imported
+       (Identifier : WASM.Objects.Object_Identifier;
+        X          : Web.GL.GLint;
+        Y          : Web.GL.GLint;
+        Width      : Web.GL.GLsizei;
+        Height     : Web.GL.GLsizei;
+        Format     : Web.GL.GLenum;
+        Data_Type  : Web.GL.GLenum;
+        Pixels     : System.Address;
+        Size       : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  =>
+                 "__adawebpack__webgl__RenderingContext__readPixels";
+
+   begin
+      Imported
+       (Self.Identifier,
+        X,
+        Y,
+        Width,
+        Height,
+        Format,
+        Data_Type,
+        Pixels,
+        Size);
+   end Read_Pixels;
+
    --------------------------
    -- Renderbuffer_Storage --
    --------------------------
