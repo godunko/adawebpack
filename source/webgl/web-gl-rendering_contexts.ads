@@ -492,7 +492,7 @@ package Web.GL.Rendering_Contexts is
 ----    const GLenum FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL         = 0x8CD2;
 ----    const GLenum FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 0x8CD3;
 
---   COLOR_ATTACHMENT0  : constant := 16#8CE0#;
+   COLOR_ATTACHMENT_0       : constant := 16#8CE0#;
    DEPTH_ATTACHMENT         : constant := 16#8D00#;
 --   STENCIL_ATTACHMENT : constant := 16#8D20#;
    DEPTH_STENCIL_ATTACHMENT : constant := 16#821A#;
@@ -753,17 +753,14 @@ package Web.GL.Rendering_Contexts is
      Renderbuffer_Target : Web.GL.GLenum;
      Renderbuffer        : Web.GL.Renderbuffers.WebGL_Renderbuffer'Class);
 
---   not overriding procedure Framebuffer_Texture_2D
---    (Self           : not null access WebGL_Rendering_Context;
---     Target         : WebAPI.WebGL.GLenum;
---     Attachment     : WebAPI.WebGL.GLenum;
---     Texture_Target : WebAPI.WebGL.GLenum;
---     Texture        : WebAPI.WebGL.Textures.WebGL_Texture_Access;
---     Level          : WebAPI.WebGL.GLint) is abstract
---       with Import     => True,
---            Convention => JavaScript_Method,
---            Link_Name  => "framebufferTexture2D";
---
+   procedure Framebuffer_Texture_2D
+    (Self           : in out WebGL_Rendering_Context'Class;
+     Target         : Web.GL.GLenum;
+     Attachment     : Web.GL.GLenum;
+     Texture_Target : Web.GL.GLenum;
+     Texture        : Web.GL.Textures.WebGL_Texture'Class;
+     Level          : Web.GL.GLint);
+
 ----    void frontFace(GLenum mode);
 
    procedure Generate_Mipmap

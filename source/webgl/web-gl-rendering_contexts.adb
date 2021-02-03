@@ -549,6 +549,28 @@ package body Web.GL.Rendering_Contexts is
          Renderbuffer);
    end Framebuffer_Renderbuffer;
 
+   ----------------------------
+   -- Framebuffer_Texture_2D --
+   ----------------------------
+
+   procedure Framebuffer_Texture_2D
+    (Self           : in out WebGL_Rendering_Context'Class;
+     Target         : Web.GL.GLenum;
+     Attachment     : Web.GL.GLenum;
+     Texture_Target : Web.GL.GLenum;
+     Texture        : Web.GL.Textures.WebGL_Texture'Class;
+     Level          : Web.GL.GLint) is
+   begin
+      WASM.Objects.Methods.Call_Void_U32_U32_U32_Object_I32
+        (Self,
+         WASM.Methods.Framebuffer_Texture_2D,
+         Interfaces.Unsigned_32 (Target),
+         Interfaces.Unsigned_32 (Attachment),
+         Interfaces.Unsigned_32 (Texture_Target),
+         Texture,
+         Interfaces.Integer_32 (Level));
+   end Framebuffer_Texture_2D;
+
    ---------------------
    -- Generate_Mipmap --
    ---------------------
