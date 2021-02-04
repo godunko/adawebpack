@@ -474,9 +474,9 @@ package Web.GL.Rendering_Contexts is
 --   RGB565            : constant := 16#8D62#;
    DEPTH_COMPONENT16 : constant := 16#81A5#;
 --   STENCIL_INDEX8    : constant := 16#8D48#;
+   DEPTH_STENCIL     : constant := 16#84F9#;
 ----    const GLenum STENCIL_INDEX                  = 0x1901;
-----    const GLenum DEPTH_STENCIL                  = 0x84F9;
---
+
 ----    const GLenum RENDERBUFFER_WIDTH             = 0x8D42;
 ----    const GLenum RENDERBUFFER_HEIGHT            = 0x8D43;
 ----    const GLenum RENDERBUFFER_INTERNAL_FORMAT   = 0x8D44;
