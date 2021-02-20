@@ -17,20 +17,16 @@
         gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
       }
     </script>
-    <script src='adawebpack.js'></script>
-    <script>
-      var instance;
-      var local_functions = {};
-      var imports = {
-        env: Object.assign({}, local_functions, adawebpack)
-      };
-      fetch("main.wasm")
-        .then(response => response.arrayBuffer())
-        .then(bytes => WebAssembly.instantiate(bytes, imports))
-        .then(obj => {
-          instance = obj.instance;
-          obj.instance.exports.adainit();
-        })
+    <script type='module'>
+      import * as AdaWebPack from './adawebpack.mjs';
+
+      (async () => {
+        const fetchPromise = fetch('main.wasm');
+        const { instance } =
+          await WebAssembly.instantiateStreaming(fetchPromise, {env: AdaWebPack.imports});
+        AdaWebPack.initialize(instance);
+        instance.exports['_ada_main']();
+      })();
     </script>
   </head>
   <body style='margin: auto; text-align: center; width: 400px;'>

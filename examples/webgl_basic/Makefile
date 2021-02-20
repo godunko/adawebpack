@@ -1,9 +1,9 @@
 
-all: adawebpack.js
+all: adawebpack.mjs
 	gprbuild $(GPRBUILD_FLAGS) -p -P test.gpr
 
-adawebpack.js:
-	ln -s ../../source/adawebpack.js
+adawebpack.mjs:
+	ln -s ../../source/adawebpack.mjs
 
 clean:
-	rm -rf .objs main.wasm adawebpack.js
+	rm -rf .objs main.wasm adawebpack.mjs
