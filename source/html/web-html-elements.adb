@@ -46,6 +46,7 @@ with Web.HTML.Opt_Groups;
 with Web.HTML.Options;
 with Web.HTML.Scripts;
 with Web.HTML.Selects;
+with Web.HTML.Spans;
 with Web.HTML.Templates;
 with Web.Strings;
 with Web.Utilities;
@@ -209,6 +210,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Selects.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Select;
+
+   ------------------
+   -- As_HTML_Span --
+   ------------------
+
+   function As_HTML_Span
+    (Self : HTML_Element'Class) return Web.HTML.Spans.HTML_Span_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLSpanElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Spans.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Span;
 
    ----------------------
    -- As_HTML_Template --
