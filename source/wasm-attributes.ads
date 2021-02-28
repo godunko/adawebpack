@@ -49,7 +49,8 @@ package WASM.Attributes is
    --  adawebpack.mjs file.
 
    Checked  : constant := 0;
-   Disabled : constant := 1;
-   Hidden   : constant := 2;
+   Content  : constant := 1;
+   Disabled : constant := 2;
+   Hidden   : constant := 3;
 
 end WASM.Attributes;

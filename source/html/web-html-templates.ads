@@ -34,6 +34,7 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with Web.DOM.Document_Fragments;
 with Web.HTML.Elements;
 
 package Web.HTML.Templates is
@@ -42,5 +43,10 @@ package Web.HTML.Templates is
 
    type HTML_Template_Element is
      new Web.HTML.Elements.HTML_Element with null record;
+
+   function Get_Content
+     (Self : HTML_Template_Element'Class)
+      return Web.DOM.Document_Fragments.Document_Fragment;
+   --  Returns the template contents (a DocumentFragment).
 
 end Web.HTML.Templates;

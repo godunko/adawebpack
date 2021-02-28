@@ -33,30 +33,23 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  Helper subprograms to get and set values of the object's attributes of
---  different predefined types. Helper subprograms accepts object and index
---  of the attribute in the global attribute names table defined at JavaScript
---  side. This allows to share code to access to all attributes of the same
---  type of any objects.
 
 with WASM.Attributes;
+with WASM.Objects.Attributes;
 
-package WASM.Objects.Attributes is
+package body Web.HTML.Templates is
 
-   pragma Preelaborate;
+   -----------------
+   -- Get_Content --
+   -----------------
 
-   function Get_Boolean
-     (Self : Object_Reference'Class;
-      Name : WASM.Attributes.Attribute_Index) return Boolean;
+   function Get_Content
+     (Self : HTML_Template_Element'Class)
+      return Web.DOM.Document_Fragments.Document_Fragment is
+   begin
+      return
+        Web.DOM.Document_Fragments.Instantiate
+         (WASM.Objects.Attributes.Get_Object (Self, WASM.Attributes.Content));
+   end Get_Content;
 
-   procedure Set_Boolean
-     (Self : Object_Reference'Class;
-      Name : WASM.Attributes.Attribute_Index;
-      To   : Boolean);
-
-   function Get_Object
-     (Self : Object_Reference'Class;
-      Name : WASM.Attributes.Attribute_Index)
-      return WASM.Objects.Object_Identifier;
-
-end WASM.Objects.Attributes;
+end Web.HTML.Templates;

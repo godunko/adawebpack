@@ -9,6 +9,7 @@ export function initialize(i) {
 
 let __adawebpack___attributes = [
   "checked",
+  "content",
   "disabled",
   "hidden",
 ]
@@ -68,6 +69,10 @@ export let imports = {
 
   __adawebpack___boolean_setter: function (object_id, attribute_id, to) {
     __adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]] = (to !== 0);
+  },
+
+  __adawebpack___object_getter: function (object_id, attribute_id) {
+     return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]]);
   },
 
   __adawebpack___object_invoker: function (object_id, method_id) {

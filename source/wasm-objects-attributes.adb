@@ -80,4 +80,24 @@ package body WASM.Objects.Attributes is
       Imported (Self.Identifier, Name, Boolean'Pos (To));
    end Set_Boolean;
 
+   ----------------
+   -- Get_Object --
+   ----------------
+
+   function Get_Object
+     (Self : Object_Reference'Class;
+      Name : WASM.Attributes.Attribute_Index)
+      return WASM.Objects.Object_Identifier
+   is
+      function Imported
+       (Object    : WASM.Objects.Object_Identifier;
+        Attribute : WASM.Attributes.Attribute_Index)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___object_getter";
+   begin
+      return Imported (Self.Identifier, Name);
+   end Get_Object;
+
 end WASM.Objects.Attributes;
