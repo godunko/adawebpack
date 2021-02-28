@@ -44,6 +44,7 @@ limited with Web.HTML.Opt_Groups;
 limited with Web.HTML.Options;
 limited with Web.HTML.Scripts;
 limited with Web.HTML.Selects;
+limited with Web.HTML.Templates;
 
 package Web.HTML.Elements is
 
@@ -111,5 +112,8 @@ package Web.HTML.Elements is
 
    function As_HTML_Select
     (Self : HTML_Element'Class) return Web.HTML.Selects.HTML_Select_Element;
+
+   function As_HTML_Template
+    (Self : HTML_Element'Class) return Web.HTML.Templates.HTML_Template_Element;
 
 end Web.HTML.Elements;
