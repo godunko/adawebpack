@@ -33,28 +33,32 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  This package define indicies of known object's attributes to be used
---  with helper functions to access values of the attributes. See
---  WASM.Objects.Attributes for more information.
 
-with Interfaces;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 
-package WASM.Attributes is
+package body Web.HTML.Labels is
 
-   pragma Pure;
+   ------------------
+   -- Get_HTML_For --
+   ------------------
 
-   type Attribute_Index is new Interfaces.Unsigned_32;
+   function Get_HTML_For
+    (Self : HTML_Label_Element'Class) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.HTML_For);
+   end Get_HTML_For;
 
-   --  This declaration must be synchronized with list of attributes' name in
-   --  adawebpack.mjs file.
+   ------------------
+   -- Set_HTML_For --
+   ------------------
 
-   Checked        : constant := 0;
-   Content        : constant := 1;
-   Disabled       : constant := 2;
-   First_Child    : constant := 3;
-   Hidden         : constant := 4;
-   HTML_For       : constant := 5;
-   Id             : constant := 6;
-   Parent_Element : constant := 7;
+   procedure Set_HTML_For
+    (Self : in out HTML_Label_Element'Class;
+     To   : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.HTML_For, To);
+   end Set_HTML_For;
 
-end WASM.Attributes;
+end Web.HTML.Labels;

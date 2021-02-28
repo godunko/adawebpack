@@ -13,6 +13,7 @@ let __adawebpack___attributes = [
   "disabled",
   "firstChild",
   "hidden",
+  "htmlFor",
   "id",
   "parentElement",
 ]

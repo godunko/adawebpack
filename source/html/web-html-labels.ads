@@ -43,5 +43,17 @@ package Web.HTML.Labels is
 
    type HTML_Label_Element is
      new Web.HTML.Elements.HTML_Element with null record;
+--  interface HTMLLabelElement : HTMLElement {
+--    [HTMLConstructor] constructor();
+--
+--    readonly attribute HTMLFormElement? form;
+--    readonly attribute HTMLElement? control;
+--  };
+
+   function Get_HTML_For
+    (Self : HTML_Label_Element'Class) return Web.Strings.Web_String;
+   procedure Set_HTML_For
+    (Self : in out HTML_Label_Element'Class;
+     To   : Web.Strings.Web_String);
 
 end Web.HTML.Labels;
