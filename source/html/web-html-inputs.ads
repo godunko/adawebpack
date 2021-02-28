@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2014-2020, Vadim Godunko <vgodunko@gmail.com>                --
+-- Copyright © 2014-2021, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -76,7 +76,6 @@ package Web.HTML.Inputs is
 --    attribute long maxLength;
 --    attribute long minLength;
 --    attribute boolean multiple;
---    attribute DOMString name;
 --    attribute DOMString pattern;
 --    attribute DOMString placeholder;
 --    attribute boolean readOnly;
@@ -343,21 +342,14 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "multiple";
---
---   not overriding function Get_Name
---    (Self : not null access constant HTML_Input_Element)
---       return WebAPI.DOM_String is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "name";
---
---   not overriding procedure Set_Name
---    (Self : not null access constant HTML_Input_Element;
---     To   : WebAPI.DOM_String) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "name";
---
+
+   function Get_Name
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String;
+
+   procedure Set_Name
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String);
+
 --   not overriding function Get_Pattern
 --    (Self : not null access constant HTML_Input_Element)
 --       return WebAPI.DOM_String is abstract

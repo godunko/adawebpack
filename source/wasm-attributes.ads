@@ -55,6 +55,7 @@ package WASM.Attributes is
    Hidden         : constant := 4;
    HTML_For       : constant := 5;
    Id             : constant := 6;
-   Parent_Element : constant := 7;
+   Name           : constant := 7;
+   Parent_Element : constant := 8;
 
 end WASM.Attributes;

@@ -106,6 +106,16 @@ package body Web.HTML.Inputs is
       return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
    end Get_Min;
 
+   --------------
+   -- Get_Name --
+   --------------
+
+   function Get_Name
+    (Self : HTML_Input_Element'Class) return Web.Strings.Web_String is
+   begin
+      return WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Name);
+   end Get_Name;
+
    ------------------
    -- Get_Validity --
    ------------------
@@ -212,6 +222,17 @@ package body Web.HTML.Inputs is
       Web.Strings.WASM_Helpers.To_JS (To, A, S);
       Imported (Self.Identifier, A, S);
    end Set_Min;
+
+   --------------
+   -- Set_Name --
+   --------------
+
+   procedure Set_Name
+    (Self : in out HTML_Input_Element'Class;
+     To   : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Name, To);
+   end Set_Name;
 
    ---------------
    -- Set_Value --

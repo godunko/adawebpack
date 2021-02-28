@@ -15,6 +15,7 @@ let __adawebpack___attributes = [
   "hidden",
   "htmlFor",
   "id",
+  "name",
   "parentElement",
 ]
 
