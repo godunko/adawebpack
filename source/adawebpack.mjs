@@ -11,6 +11,7 @@ let __adawebpack___attributes = [
   "checked",
   "content",
   "disabled",
+  "firstChild",
   "hidden",
   "parentElement",
 ]
@@ -158,10 +159,6 @@ export let imports = {
 
   __adawebpack__dom__Node__appendChild: function(identifier, node_identifier) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).appendChild(__adawebpack_o2i.too(node_identifier)));
-  },
-
-  __adawebpack__dom__Node__firstChild_getter: function(identifier) {
-    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).firstChild);
   },
 
   __adawebpack__dom__Node__nextSibling_getter: function(identifier) {

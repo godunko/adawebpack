@@ -179,15 +179,11 @@ package body Web.DOM.Nodes is
    ---------------------
 
    function Get_First_Child (Self : Node'Class) return Web.DOM.Nodes.Node is
-      function Imported
-       (Identifier : WASM.Objects.Object_Identifier)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__dom__Node__firstChild_getter";
-
    begin
-      return Web.DOM.Nodes.Instantiate (Imported (Self.Identifier));
+      return
+        Web.DOM.Nodes.Instantiate
+         (WASM.Objects.Attributes.Get_Object
+           (Self, WASM.Attributes.First_Child));
    end Get_First_Child;
 
    ----------------------

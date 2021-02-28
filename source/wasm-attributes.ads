@@ -51,7 +51,8 @@ package WASM.Attributes is
    Checked        : constant := 0;
    Content        : constant := 1;
    Disabled       : constant := 2;
-   Hidden         : constant := 3;
-   Parent_Element : constant := 4;
+   First_Child    : constant := 3;
+   Hidden         : constant := 4;
+   Parent_Element : constant := 5;
 
 end WASM.Attributes;
