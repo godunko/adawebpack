@@ -40,6 +40,7 @@ limited with Web.HTML.Buttons;
 limited with Web.HTML.Canvases;
 limited with Web.HTML.Images;
 limited with Web.HTML.Inputs;
+limited with Web.HTML.Labels;
 limited with Web.HTML.Opt_Groups;
 limited with Web.HTML.Options;
 limited with Web.HTML.Scripts;
@@ -99,6 +100,9 @@ package Web.HTML.Elements is
 
    function As_HTML_Input
     (Self : HTML_Element'Class) return Web.HTML.Inputs.HTML_Input_Element;
+
+   function As_HTML_Label
+    (Self : HTML_Element'Class) return Web.HTML.Labels.HTML_Label_Element;
 
    function As_HTML_Opt_Group
     (Self : HTML_Element'Class)

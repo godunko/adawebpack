@@ -41,6 +41,7 @@ with Web.HTML.Buttons;
 with Web.HTML.Canvases;
 with Web.HTML.Images;
 with Web.HTML.Inputs;
+with Web.HTML.Labels;
 with Web.HTML.Opt_Groups;
 with Web.HTML.Options;
 with Web.HTML.Scripts;
@@ -121,6 +122,23 @@ package body Web.HTML.Elements is
          return Web.HTML.Inputs.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Input;
+
+   -------------------
+   -- As_HTML_Label --
+   -------------------
+
+   function As_HTML_Label
+    (Self : HTML_Element'Class) return Web.HTML.Labels.HTML_Label_Element is
+   begin
+      if not Self.Is_Null
+        and then not Web.Utilities.Is_Instance_Of (Self, +"HTMLLabelElement")
+      then
+         raise Constraint_Error;
+
+      else
+         return Web.HTML.Labels.Instantiate (Self.Identifier);
+      end if;
+   end As_HTML_Label;
 
    -----------------------
    -- As_HTML_Opt_Group --
