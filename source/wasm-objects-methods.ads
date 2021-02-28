@@ -52,6 +52,12 @@ package WASM.Objects.Methods is
       Name : WASM.Methods.Method_Index)
       return WASM.Objects.Object_Identifier;
 
+   function Call_Object_Boolean
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Boolean)
+      return WASM.Objects.Object_Identifier;
+
    function Call_Object_String
      (Self        : Object_Reference'Class;
       Name        : WASM.Methods.Method_Index;

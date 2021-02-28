@@ -17,6 +17,7 @@ let __adawebpack___attributes = [
 let __adawebpack___methods = [
   "bindFramebuffer",
   "bindRenderbuffer",
+  "cloneNode",
   "createBuffer",
   "createFramebuffer",
   "createProgram",
@@ -77,6 +78,11 @@ export let imports = {
 
   __adawebpack___object_invoker: function (object_id, method_id) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]]());
+  },
+
+  __adawebpack___object_boolean_invoker: function (identifier, method_id, argument)
+  {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier)[__adawebpack___methods[method_id]](argument !== 0));
   },
 
   __adawebpack___object_string_invoker: function (identifier, method_id, address, size)

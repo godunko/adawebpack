@@ -50,16 +50,17 @@ package WASM.Methods is
 
    Bind_Framebuffer         : constant := 0;
    Bind_Renderbuffer        : constant := 1;
-   Create_Buffer            : constant := 2;
-   Create_Framebuffer       : constant := 3;
-   Create_Program           : constant := 4;
-   Create_Renderbuffer      : constant := 5;
-   Create_Texture           : constant := 6;
-   Delete_Framebuffer       : constant := 7;
-   Framebuffer_Renderbuffer : constant := 8;
-   Framebuffer_Texture_2D   : constant := 9;
-   Get_Element_By_Id        : constant := 10;
-   Renderbuffer_Storage     : constant := 11;
-   Tex_Parameteri           : constant := 12;
+   Clone_Node               : constant := 2;
+   Create_Buffer            : constant := 3;
+   Create_Framebuffer       : constant := 4;
+   Create_Program           : constant := 5;
+   Create_Renderbuffer      : constant := 6;
+   Create_Texture           : constant := 7;
+   Delete_Framebuffer       : constant := 8;
+   Framebuffer_Renderbuffer : constant := 9;
+   Framebuffer_Texture_2D   : constant := 10;
+   Get_Element_By_Id        : constant := 11;
+   Renderbuffer_Storage     : constant := 12;
+   Tex_Parameteri           : constant := 13;
 
 end WASM.Methods;

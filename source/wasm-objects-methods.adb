@@ -61,6 +61,29 @@ package body WASM.Objects.Methods is
       return Imported (Self.Identifier, Name);
    end Call_Object_Object;
 
+   -------------------------
+   -- Call_Object_Boolean --
+   -------------------------
+
+   function Call_Object_Boolean
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Boolean)
+      return WASM.Objects.Object_Identifier
+   is
+      function Imported
+       (Object      : WASM.Objects.Object_Identifier;
+        Method      : WASM.Methods.Method_Index;
+        Parameter_1 : Interfaces.Unsigned_32)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___object_boolean_invoker";
+
+   begin
+      return Imported (Self.Identifier, Name, Boolean'Pos (Parameter_1));
+   end Call_Object_Boolean;
+
    ------------------------
    -- Call_Object_String --
    ------------------------

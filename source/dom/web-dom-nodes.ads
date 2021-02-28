@@ -103,7 +103,6 @@ package Web.DOM.Nodes is
 --             attribute DOMString? textContent;
 --    void normalize();
 --
---    [NewObject] Node cloneNode(optional boolean deep = false);
 --    boolean isEqualNode(Node? node);
 --
 --    const unsigned short DOCUMENT_POSITION_DISCONNECTED = 0x01;
@@ -320,17 +319,12 @@ package Web.DOM.Nodes is
 --          Link_Name  => "normalize";
 --   --  Removes empty Text nodes and concatenates the data of remaining
 --   --  contiguous Text nodes into the first of their nodes.
---
---   not overriding function Clone_Node
---    (Self : not null access Node;
---     Deep : Boolean := False)
---       return not null WebAPI.DOM.Nodes.Node_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "cloneNode";
---   --  Returns a copy of node. If deep is true, the copy also includes the
---   --  node's descendants.
---
+
+   function Clone_Node
+     (Self : Node'Class; Deep : Boolean := False) return Web.DOM.Nodes.Node;
+   --  Returns a copy of node. If deep is true, the copy also includes the
+   --  node's descendants.
+
 --   not overriding function Is_Equal_Node
 --    (Self  : not null access constant Node;
 --     Other : access Node'Class) return Boolean is abstract

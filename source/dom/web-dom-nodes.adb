@@ -38,6 +38,8 @@ with Ada.Unchecked_Conversion;
 with Interfaces;
 with System;
 
+with WASM.Methods;
+with WASM.Objects.Methods;
 with Web.DOM.Documents;
 with Web.DOM.Events;
 with Web.HTML.Elements;
@@ -137,6 +139,19 @@ package body Web.DOM.Nodes is
          return Web.HTML.Elements.Instantiate (Self.Identifier);
       end if;
    end As_HTML_Element;
+
+   ----------------
+   -- Clone_Node --
+   ----------------
+
+   function Clone_Node
+     (Self : Node'Class; Deep : Boolean := False) return Web.DOM.Nodes.Node is
+   begin
+      return
+        Web.DOM.Nodes.Instantiate
+          (WASM.Objects.Methods.Call_Object_Boolean
+             (Self, WASM.Methods.Clone_Node, Deep));
+   end Clone_Node;
 
    --------------------
    -- Dispatch_Event --
