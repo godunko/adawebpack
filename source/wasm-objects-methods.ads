@@ -41,6 +41,7 @@
 with Interfaces;
 
 with WASM.Methods;
+with Web.Strings;
 
 package WASM.Objects.Methods is
 
@@ -49,6 +50,12 @@ package WASM.Objects.Methods is
    function Call_Object_Object
      (Self : Object_Reference'Class;
       Name : WASM.Methods.Method_Index)
+      return WASM.Objects.Object_Identifier;
+
+   function Call_Object_String
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Web.Strings.Web_String)
       return WASM.Objects.Object_Identifier;
 
    procedure Call_Void_Object

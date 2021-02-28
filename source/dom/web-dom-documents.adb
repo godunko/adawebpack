@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -37,7 +37,8 @@
 with Interfaces;
 with System;
 
-with WASM.Objects;
+with WASM.Methods;
+with WASM.Objects.Methods;
 with Web.Strings.WASM_Helpers;
 
 package body Web.DOM.Documents is
@@ -74,24 +75,12 @@ package body Web.DOM.Documents is
 
    overriding function Get_Element_By_Id
     (Self       : Document;
-     Element_Id : Web.Strings.Web_String) return Web.DOM.Elements.Element
-   is
-      function Internal
-       (Identifier : WASM.Objects.Object_Identifier;
-        Address    : System.Address;
-        Length     : Interfaces.Unsigned_32)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__dom__Document__getElementById";
-
-      A : System.Address;
-      S : Interfaces.Unsigned_32;
-
+     Element_Id : Web.Strings.Web_String) return Web.DOM.Elements.Element is
    begin
-      Web.Strings.WASM_Helpers.To_JS (Element_Id, A, S);
-
-      return Web.DOM.Elements.Instantiate (Internal (Self.Identifier, A, S));
+      return
+        Web.DOM.Elements.Instantiate
+         (WASM.Objects.Methods.Call_Object_String
+           (Self, WASM.Methods.Get_Element_By_Id, Element_Id));
    end Get_Element_By_Id;
 
 end Web.DOM.Documents;

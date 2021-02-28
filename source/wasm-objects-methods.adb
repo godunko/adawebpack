@@ -34,6 +34,10 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
+with Web.Strings.WASM_Helpers;
+
 package body WASM.Objects.Methods is
 
    ------------------------
@@ -56,6 +60,36 @@ package body WASM.Objects.Methods is
    begin
       return Imported (Self.Identifier, Name);
    end Call_Object_Object;
+
+   ------------------------
+   -- Call_Object_String --
+   ------------------------
+
+   function Call_Object_String
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Web.Strings.Web_String)
+      return WASM.Objects.Object_Identifier
+   is
+      function Imported
+       (Object              : WASM.Objects.Object_Identifier;
+        Method              : WASM.Methods.Method_Index;
+        Parameter_1_Address : System.Address;
+        Parameter_1_Size    : Interfaces.Unsigned_32)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___object_string_invoker";
+
+      Parameter_1_Address : System.Address;
+      Parameter_1_Size    : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS
+       (Parameter_1, Parameter_1_Address, Parameter_1_Size);
+
+      return Imported (Self.Identifier, Name, Parameter_1_Address, Parameter_1_Size);
+   end Call_Object_String;
 
    ----------------------
    -- Call_Void_Object --

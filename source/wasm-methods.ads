@@ -58,7 +58,8 @@ package WASM.Methods is
    Delete_Framebuffer       : constant := 7;
    Framebuffer_Renderbuffer : constant := 8;
    Framebuffer_Texture_2D   : constant := 9;
-   Renderbuffer_Storage     : constant := 10;
-   Tex_Parameteri           : constant := 11;
+   Get_Element_By_Id        : constant := 10;
+   Renderbuffer_Storage     : constant := 11;
+   Tex_Parameteri           : constant := 12;
 
 end WASM.Methods;

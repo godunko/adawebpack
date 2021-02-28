@@ -24,6 +24,7 @@ let __adawebpack___methods = [
   "deleteFramebuffer",
   "framebufferRenderbuffer",
   "framebufferTexture2D",
+  "getElementById",
   "renderbufferStorage",
   "texParameteri",
 ]
@@ -71,6 +72,11 @@ export let imports = {
 
   __adawebpack___object_invoker: function (object_id, method_id) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]]());
+  },
+
+  __adawebpack___object_string_invoker: function (identifier, method_id, address, size)
+  {
+    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier)[__adawebpack___methods[method_id]](string_to_js(address, size)));
   },
 
   __adawebpack___void_object_invoker: function (object_id, method_id, argument) {
@@ -122,11 +128,6 @@ export let imports = {
   __adawebpack__dom__Document__createTextNode: function (identifier, address, size)
   {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).createTextNode(string_to_js(address, size)));
-  },
-
-  __adawebpack__dom__Document__getElementById: function (identifier, address, size)
-  {
-    return __adawebpack_o2i.toi(__adawebpack_o2i.too(identifier).getElementById(string_to_js(address, size)));
   },
 
   __adawebpack__dom__Node__addEventListener: function (identifier, type_address, type_size, callback, capture)
