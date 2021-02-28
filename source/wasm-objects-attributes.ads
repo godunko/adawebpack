@@ -40,6 +40,7 @@
 --  type of any objects.
 
 with WASM.Attributes;
+with Web.Strings;
 
 package WASM.Objects.Attributes is
 
@@ -53,6 +54,16 @@ package WASM.Objects.Attributes is
      (Self : Object_Reference'Class;
       Name : WASM.Attributes.Attribute_Index;
       To   : Boolean);
+
+   function Get_String
+     (Self : Object_Reference'Class;
+      Name : WASM.Attributes.Attribute_Index)
+      return Web.Strings.Web_String;
+
+   procedure Set_String
+     (Self : Object_Reference'Class;
+      Name : WASM.Attributes.Attribute_Index;
+      To   : Web.Strings.Web_String);
 
    function Get_Object
      (Self : Object_Reference'Class;

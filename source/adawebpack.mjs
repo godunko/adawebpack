@@ -13,6 +13,7 @@ let __adawebpack___attributes = [
   "disabled",
   "firstChild",
   "hidden",
+  "id",
   "parentElement",
 ]
 
@@ -72,6 +73,14 @@ export let imports = {
 
   __adawebpack___boolean_setter: function (object_id, attribute_id, to) {
     __adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]] = (to !== 0);
+  },
+
+  __adawebpack___string_getter: function(object_id,attribute_id) {
+    return string_to_wasm(__adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]]);
+  },
+
+  __adawebpack___string_setter: function(object_id,attribute_id,address,size) {
+    __adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]] = string_to_js(address,size);
   },
 
   __adawebpack___object_getter: function (object_id, attribute_id) {

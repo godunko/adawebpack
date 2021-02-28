@@ -34,6 +34,10 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
+with Web.Strings.WASM_Helpers;
+
 package body WASM.Objects.Attributes is
 
    -----------------
@@ -59,6 +63,48 @@ package body WASM.Objects.Attributes is
       return Imported (Self.Identifier, Name) /= 0;
    end Get_Boolean;
 
+   ----------------
+   -- Get_Object --
+   ----------------
+
+   function Get_Object
+     (Self : Object_Reference'Class;
+      Name : WASM.Attributes.Attribute_Index)
+      return WASM.Objects.Object_Identifier
+   is
+      function Imported
+       (Object    : WASM.Objects.Object_Identifier;
+        Attribute : WASM.Attributes.Attribute_Index)
+          return WASM.Objects.Object_Identifier
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___object_getter";
+   begin
+      return Imported (Self.Identifier, Name);
+   end Get_Object;
+
+   ----------------
+   -- Get_String --
+   ----------------
+
+   function Get_String
+     (Self : Object_Reference'Class;
+      Name : WASM.Attributes.Attribute_Index)
+      return Web.Strings.Web_String
+   is
+      function Imported
+       (Object    : WASM.Objects.Object_Identifier;
+        Attribute : WASM.Attributes.Attribute_Index)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___string_getter";
+
+   begin
+      return
+        Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier, Name));
+   end Get_String;
+
    -----------------
    -- Set_Boolean --
    -----------------
@@ -81,23 +127,29 @@ package body WASM.Objects.Attributes is
    end Set_Boolean;
 
    ----------------
-   -- Get_Object --
+   -- Set_String --
    ----------------
 
-   function Get_Object
+   procedure Set_String
      (Self : Object_Reference'Class;
-      Name : WASM.Attributes.Attribute_Index)
-      return WASM.Objects.Object_Identifier
+      Name : WASM.Attributes.Attribute_Index;
+      To   : Web.Strings.Web_String)
    is
-      function Imported
+      procedure Imported
        (Object    : WASM.Objects.Object_Identifier;
-        Attribute : WASM.Attributes.Attribute_Index)
-          return WASM.Objects.Object_Identifier
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack___object_getter";
+        Attribute : WASM.Attributes.Attribute_Index;
+        Address   : System.Address;
+        Size      : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack___string_setter";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
    begin
-      return Imported (Self.Identifier, Name);
-   end Get_Object;
+      Web.Strings.WASM_Helpers.To_JS (To, A, S);
+      Imported (Self.Identifier, Name, A, S);
+   end Set_String;
 
 end WASM.Objects.Attributes;

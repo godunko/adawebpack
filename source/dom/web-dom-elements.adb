@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -34,7 +34,8 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 
 package body Web.DOM.Elements is
 
@@ -90,5 +91,25 @@ package body Web.DOM.Elements is
    begin
       return Imported (Self.Identifier);
    end Get_Client_Width;
+
+   ------------
+   -- Get_Id --
+   ------------
+
+   function Get_Id (Self : Element'Class) return Web.Strings.Web_String is
+   begin
+      return WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Id);
+   end Get_Id;
+
+   ------------
+   -- Set_Id --
+   ------------
+
+   procedure Set_Id
+    (Self : in out Element'Class;
+     To   : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Id, To);
+   end Set_Id;
 
 end Web.DOM.Elements;

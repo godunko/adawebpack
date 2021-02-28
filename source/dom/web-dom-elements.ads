@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -36,6 +36,7 @@
 
 with Web.DOM.Nodes;
 with Web.DOM.Token_Lists;
+with Web.Strings;
 
 package Web.DOM.Elements is
 
@@ -49,7 +50,6 @@ package Web.DOM.Elements is
    --    readonly attribute DOMString localName;
    --    readonly attribute DOMString tagName;
    --
-   --    [CEReactions] attribute DOMString id;
    --    [CEReactions] attribute DOMString className;
    --    [CEReactions, Unscopable] attribute DOMString slot;
    --
@@ -86,6 +86,16 @@ package Web.DOM.Elements is
    --    [CEReactions] Element? insertAdjacentElement(DOMString where, Element element); // historical
    --    void insertAdjacentText(DOMString where, DOMString data); // historical
    --  };
+
+   function Get_Id (Self : Element'Class) return Web.Strings.Web_String;
+   --  Returns the value of element’s id content attribute. Can be set to
+   --  change it.
+
+   procedure Set_Id
+    (Self : in out Element'Class;
+     To   : Web.Strings.Web_String);
+   --  Returns the value of element’s id content attribute. Can be set to
+   --  change it.
 
    function Get_Class_List
     (Self : Element'Class) return Web.DOM.Token_Lists.DOM_Token_List;

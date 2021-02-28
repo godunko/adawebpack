@@ -53,6 +53,7 @@ package WASM.Attributes is
    Disabled       : constant := 2;
    First_Child    : constant := 3;
    Hidden         : constant := 4;
-   Parent_Element : constant := 5;
+   Id             : constant := 5;
+   Parent_Element : constant := 6;
 
 end WASM.Attributes;
