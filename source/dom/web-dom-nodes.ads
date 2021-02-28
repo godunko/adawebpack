@@ -47,6 +47,7 @@
 with WASM.Objects;
 
 limited with Web.DOM.Documents;
+limited with Web.DOM.Elements;
 with Web.DOM.Event_Listeners;
 with Web.DOM.Event_Targets;
 limited with Web.HTML.Elements;
@@ -93,7 +94,6 @@ package Web.DOM.Nodes is
 --    readonly attribute DOMString? baseURI;
 --
 --    readonly attribute Node? parentNode;
---    readonly attribute Element? parentElement;
 --    boolean hasChildNodes();
 --    [SameObject] readonly attribute NodeList childNodes;
 --    readonly attribute Node? lastChild;
@@ -173,15 +173,11 @@ package Web.DOM.Nodes is
 --              Convention => JavaScript_Property_Getter,
 --              Link_Name  => "parentNode";
 --   --  Returns the parent.
---
---   not overriding function Get_Parent_Element
---    (Self : not null access constant Node)
---       return WebAPI.DOM.Elements.Element_Access is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "parentElement";
---   --  Returns the parent element.
---
+
+   function Get_Parent_Element
+     (Self : Node'Class) return Web.DOM.Elements.Element;
+   --  Returns the parent element.
+
 --   not overriding function Has_Child_Nodes
 --    (Self : not null access constant Node) return Boolean is abstract
 --       with Import     => True,

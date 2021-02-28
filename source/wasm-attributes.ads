@@ -48,9 +48,10 @@ package WASM.Attributes is
    --  This declaration must be synchronized with list of attributes' name in
    --  adawebpack.mjs file.
 
-   Checked  : constant := 0;
-   Content  : constant := 1;
-   Disabled : constant := 2;
-   Hidden   : constant := 3;
+   Checked        : constant := 0;
+   Content        : constant := 1;
+   Disabled       : constant := 2;
+   Hidden         : constant := 3;
+   Parent_Element : constant := 4;
 
 end WASM.Attributes;

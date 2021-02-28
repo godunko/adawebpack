@@ -12,6 +12,7 @@ let __adawebpack___attributes = [
   "content",
   "disabled",
   "hidden",
+  "parentElement",
 ]
 
 let __adawebpack___methods = [

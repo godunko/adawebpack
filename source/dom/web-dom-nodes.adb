@@ -38,9 +38,12 @@ with Ada.Unchecked_Conversion;
 with Interfaces;
 with System;
 
+with WASM.Attributes;
 with WASM.Methods;
+with WASM.Objects.Attributes;
 with WASM.Objects.Methods;
 with Web.DOM.Documents;
+with Web.DOM.Elements;
 with Web.DOM.Events;
 with Web.HTML.Elements;
 with Web.Strings.WASM_Helpers;
@@ -239,6 +242,19 @@ package body Web.DOM.Nodes is
    begin
       return Web.DOM.Documents.Instantiate (Imported (Self.Identifier));
    end Get_Owner_Document;
+
+   ------------------------
+   -- Get_Parent_Element --
+   ------------------------
+
+   function Get_Parent_Element
+     (Self : Node'Class) return Web.DOM.Elements.Element is
+   begin
+      return
+        Web.DOM.Elements.Instantiate
+         (WASM.Objects.Attributes.Get_Object
+           (Self, WASM.Attributes.Parent_Element));
+   end Get_Parent_Element;
 
    ------------------
    -- Remove_Child --
