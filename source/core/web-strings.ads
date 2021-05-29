@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2021, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -41,11 +41,12 @@ private with Interfaces;
 
 private with Web.Unicode;
 
-package Web.Strings is
+package Web.Strings
+  with Preelaborate
+is
 
-   pragma Preelaborate;
-
-   type Web_String is tagged private;
+   type Web_String is tagged private
+     with String_Literal => To_Web_String;
 
    Empty_Web_String : constant Web_String;
 
