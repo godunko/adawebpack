@@ -45,8 +45,8 @@ package Web.Strings
   with Preelaborate
 is
 
-   type Web_String is tagged private
-     with String_Literal => To_Web_String;
+   type Web_String is tagged private;
+--     with String_Literal => To_Web_String;
 
    Empty_Web_String : constant Web_String;
 
