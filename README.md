@@ -21,6 +21,13 @@ so, cmake command line should contain among other switches:
 cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
 ```
 
+On Ubuntu it is possible to install prebuild LLVM/CLang packages. However,
+alternatives need to be updated using provided script:
+
+```
+sudo utilities/update-alternatives-clang.sh 12 100
+```
+
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
 `adawebpack_src` and create link for Makefile.target.
 
