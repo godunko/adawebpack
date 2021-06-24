@@ -1,11 +1,12 @@
 [![CircleCI](https://circleci.com/gh/godunko/adawebpack.svg?style=svg)](https://circleci.com/gh/godunko/adawebpack)
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/reznik/adawebpack/package/adawebpack/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/reznik/adawebpack/package/adawebpack/)
 
 # AdaWebPack
 Ada WASM Runtime and Bindings for Web API
 
 ## How to install
 
-Prebuild package is available for Fedora Linux, see https://bintray.com/reznikmm/matreshka/adawebpack/
+Prebuild package is available for Fedora Linux, see https://copr.fedorainfracloud.org/coprs/reznik/adawebpack/
 It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and AdaWebPack bindings for Web API.
 
 ## How to build
