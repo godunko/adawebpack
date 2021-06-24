@@ -30,13 +30,6 @@ jobs:
           tar czf ~/rpmbuild/SOURCES/gnat_src.tar.gz --exclude-vcs gnat_src
           curl -L -o ~/rpmbuild/SOURCES/gnat-2020-20200818-19951-src.tar.gz https://community.download.adacore.com/v1/f51b6c0b5591edc6eff2928e8510a467bc8ce1e4?filename=gnat-2020-20200818-19951-src.tar.gz
           rpmbuild -ba ~/rpmbuild/SPECS/adawebpack.spec
-       - run: |
-          echo CIRCLE_BRANCH=$CIRCLE_BRANCH CIRCLE_PULL_REQUEST=$CIRCLE_PULL_REQUEST
-          if [ "$CIRCLE_BRANCH" = "master" -a -z "$CIRCLE_PULL_REQUEST" ]; then
-            curl -T ~/rpmbuild/RPMS/x86_64/adawebpack-0.1.0-git.fc*.x86_64.rpm \
-              -ureznikmm:$API_KEY -H "X-Bintray-Publish: 1" -H "X-Bintray-Override: 1" \
-              https://api.bintray.com/content/reznikmm/matreshka/adawebpack/0.1.0-git/
-          fi
 
 workflows:
   version: 2

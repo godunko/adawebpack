@@ -1,5 +1,7 @@
 # WASM runtime
 
+LLVM_RANLIB=llvm-ranlib
+
 COMMON_WASM_SRCS= \
 ada.ads      \
 a-assert.adb \
@@ -236,5 +238,5 @@ wasm: build
 	  echo "<<< Compile $$f"; \
 	  if [ $$f != '../adainclude/a-excach.adb' ]; then $(COMPILE) $$f || exit 1; fi \
 	done
-	cd $(WASMLIB) && $(CHMOD) a-wx *.ali && $(AR) libgnat.a *.o && llvm-ranlib libgnat.a && $(RM) *.o
+	cd $(WASMLIB) && $(CHMOD) a-wx *.ali && $(AR) libgnat.a *.o && $(LLVM_RANLIB) libgnat.a && $(RM) *.o
 
