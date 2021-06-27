@@ -15,6 +15,17 @@ a-nllefu.ads \
 a-numeri.ads \
 a-stream.adb \
 a-stream.ads \
+a-string.ads \
+a-sttebu.adb \
+a-sttebu.ads \
+a-suewst.adb \
+a-suewst.ads \
+a-suezst.adb \
+a-suezst.ads \
+a-stbuut.adb \
+a-stbuut.ads \
+a-stuten.adb \
+a-stuten.ads \
 a-tags.adb   \
 a-tags.ads   \
 a-unccon.ads \
@@ -27,43 +38,55 @@ s-atacco.adb \
 s-atacco.ads \
 s-casuti.adb \
 s-casuti.ads \
-s-exnllf.ads \
-s-exnllf.adb \
+s-dorepr.adb \
+s-dourea.adb \
+s-dourea.ads \
+s-exnlfl.ads \
+s-exponr.adb \
+s-exponr.ads \
+s-fatflt.ads \
 s-fatgen.adb \
 s-fatgen.ads \
-s-fatflt.ads \
 s-fatlfl.ads \
 s-fatllf.ads \
-s-fatsfl.ads \
 s-finmas.ads \
 s-finroo.adb \
 s-finroo.ads \
 s-flocon.ads \
 s-htable.adb \
 s-htable.ads \
-s-imenne.adb \
-s-imenne.ads \
-s-imgboo.adb \
-s-imgboo.ads \
+s-imagei.adb \
+s-imagei.ads \
+s-imager.adb \
+s-imager.ads \
+s-imageu.adb \
+s-imageu.ads \
 s-imgint.adb \
 s-imgint.ads \
-s-imglli.adb \
-s-imglli.ads \
+s-imglfl.ads \
+s-imgllf.ads \
 s-imgllu.adb \
 s-imgllu.ads \
 s-imgrea.adb \
 s-imgrea.ads \
 s-imguns.adb \
 s-imguns.ads \
+s-imguti.adb \
+s-imguti.ads \
 s-io.ads     \
 s-maccod.ads \
 s-memory.ads \
 s-parame.adb \
 s-pooglo.adb \
 s-pooglo.ads \
-s-powtab.ads \
+s-powlfl.ads \
+s-powllf.ads \
+s-putima.adb \
+s-putima.ads \
 s-secsta.adb \
 s-secsta.ads \
+s-spsufi.adb \
+s-spsufi.ads \
 s-stalib.adb \
 s-stalib.ads \
 s-statxd.adb \
@@ -75,36 +98,57 @@ s-stopoo.ads \
 s-stposu.ads \
 s-stratt.adb \
 s-stratt.ads \
-s-spsufi.adb \
-s-spsufi.ads \
 s-strhas.adb \
 s-strhas.ads \
-s-traent.adb \
-s-traent.ads \
-s-unstyp.ads \
-s-valenu.adb \
-s-valenu.ads \
+s-vaenu8.ads \
 s-valint.adb \
 s-valint.ads \
+s-vallfl.ads \
 s-valrea.adb \
 s-valrea.ads \
+s-valuei.adb \
+s-valuei.ads \
+s-valuen.adb \
+s-valuen.ads \
+s-valuer.adb \
+s-valuer.ads \
+s-valueu.adb \
+s-valueu.ads \
 s-valuns.adb \
 s-valuns.ads \
 s-valuti.adb \
 s-valuti.ads \
-s-vercon.adb \
-s-vercon.ads \
-s-wchcon.adb \
-s-wchcon.ads \
 s-wchcnv.adb \
 s-wchcnv.ads \
+s-wchcon.adb \
+s-wchcon.ads \
 s-wchjis.adb \
 s-wchjis.ads \
 s-wchstw.adb \
 s-wchstw.ads \
 s-wchwts.adb \
 s-wchwts.ads \
+s-unstyp.ads \
 unchconv.ads
+
+
+# not ported to GNAT CE 2021 \
+s-exnllf.ads \
+s-exnllf.adb \
+s-imenne.adb \
+s-imenne.ads \
+s-imgboo.adb \
+s-imgboo.ads \
+s-imglli.adb \
+s-imglli.ads \
+s-imgllu.adb \
+s-imgllu.ads \
+s-traent.adb \
+s-traent.ads \
+s-valenu.adb \
+s-valenu.ads \
+s-vercon.adb \
+s-vercon.ads \
 
 #gnat.ads     \
 g-souinf.ads \
@@ -157,18 +201,25 @@ a-nlelfu.ads \
 a-nllefu.ads \
 a-nuelfu.ads \
 a-numeri.ads \
+a-string.ads \
 a-unccon.ads \
 a-uncdea.ads \
 interfac.ads \
 system.ads   \
+s-exnlfl.ads \
 s-fatflt.ads \
 s-fatlfl.ads \
 s-fatllf.ads \
-s-fatsfl.ads \
+s-imglfl.ads \
+s-imgllf.ads \
 s-libpre.ads \
 s-maccod.ads \
-s-powtab.ads \
+s-memtyp.ads \
+s-powlfl.ads \
+s-powllf.ads \
 s-unstyp.ads \
+s-vallfl.ads \
+s-vaenu8.ads \
 unchconv.ads \
 
 #gnat.ads     \
@@ -228,7 +279,7 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.adb $(WASMINCLUDE)/s-soflin.adb
 	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
 	cp -p $(AWP_SRC)/rtl/s-stposu__wasm.adb $(WASMINCLUDE)/s-stposu.adb
-	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
+#	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
 	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb
 	cd $(WASMLIB) && for f in $(COMPILABLE_WASM_SPECS); do \
 	  echo ">>> Compile $$f"; \
@@ -236,7 +287,7 @@ wasm: build
 	done
 	cd $(WASMLIB) && for f in ../adainclude/*.adb; do \
 	  echo "<<< Compile $$f"; \
-	  if [ $$f != '../adainclude/a-excach.adb' ]; then $(COMPILE) $$f || exit 1; fi \
+	  if [ $$f != '../adainclude/a-excach.adb' -a $$f != '../adainclude/s-dorepr.adb' ]; then $(COMPILE) $$f || exit 1; fi \
 	done
 	cd $(WASMLIB) && $(CHMOD) a-wx *.ali && $(AR) libgnat.a *.o && $(LLVM_RANLIB) libgnat.a && $(RM) *.o
 

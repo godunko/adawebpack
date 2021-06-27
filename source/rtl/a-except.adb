@@ -37,6 +37,51 @@ package body Ada.Exceptions is
       --  pragma Warnings (On);
    end Raise_Exception;
 
+   -------------------------------------
+   -- Raise_From_Controlled_Operation --
+   -------------------------------------
+
+   procedure Raise_From_Controlled_Operation (X : Exception_Occurrence) is
+      Prefix             : constant String := "adjust/finalize raised ";
+--      Orig_Msg           : constant String := Exception_Message (X);
+--      Orig_Prefix_Length : constant Natural :=
+--                             Integer'Min (Prefix'Length, Orig_Msg'Length);
+--
+--      Orig_Prefix : String renames
+--        Orig_Msg (Orig_Msg'First .. Orig_Msg'First + Orig_Prefix_Length - 1);
+
+   begin
+      Last_Chance_Handler (Prefix'Address, 0);
+--      --  Message already has the proper prefix, just re-raise
+--
+--      if Orig_Prefix = Prefix then
+--         Raise_Exception_No_Defer
+--           (E       => Program_Error'Identity,
+--            Message => Orig_Msg);
+--
+--      else
+--         declare
+--            New_Msg  : constant String := Prefix & Exception_Name (X);
+--
+--         begin
+--            --  No message present, just provide our own
+--
+--            if Orig_Msg = "" then
+--               Raise_Exception_No_Defer
+--                 (E       => Program_Error'Identity,
+--                  Message => New_Msg);
+--
+--            --  Message present, add informational prefix
+--
+--            else
+--               Raise_Exception_No_Defer
+--                 (E       => Program_Error'Identity,
+--                  Message => New_Msg & ": " & Orig_Msg);
+--            end if;
+--         end;
+--      end if;
+   end Raise_From_Controlled_Operation;
+
    -------------------------------
    -- Read_Exception_Occurrence --
    -------------------------------

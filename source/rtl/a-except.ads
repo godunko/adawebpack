@@ -71,4 +71,13 @@ private
    for Exception_Occurrence'Write use Write_Exception_Occurrence;
 
    Null_Occurrence : constant Exception_Occurrence := null;
+
+   procedure Raise_From_Controlled_Operation (X : Exception_Occurrence);
+   pragma No_Return (Raise_From_Controlled_Operation);
+   pragma Export
+     (Ada, Raise_From_Controlled_Operation,
+           "__gnat_raise_from_controlled_operation");
+   --  Raise Program_Error, providing information about X (an exception raised
+   --  during a controlled operation) in the exception message.
+
 end Ada.Exceptions;
