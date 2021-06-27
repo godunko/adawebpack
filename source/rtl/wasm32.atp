@@ -11,7 +11,7 @@ Float_Words_BE                0
 Int_Size                     32
 Long_Double_Size             64
 Long_Long_Size               64
-Long_Size                    64
+Long_Size                    32
 Maximum_Alignment            16
 Max_Unaligned_Field          64
 Pointer_Size                 32
