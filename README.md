@@ -13,6 +13,8 @@ It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and
 
 Setup GNAT Community 2021 for ARM to default location.
 
+Latest known good revision of GNAT-LLVM compatible with GNAT Community 2021 is 1d76aa3a057a8fa8d267fc1c5a75d0c729c48840.
+
 Unpack source code of the GNAT Community 2021 and use it at next step as source code of the compiler.
 
 Setup GNAT-LLVM development environment, see
