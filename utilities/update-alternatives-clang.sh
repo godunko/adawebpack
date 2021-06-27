@@ -49,6 +49,9 @@ function register_clang_version {
         --slave   /usr/bin/clang-tidy            clang-tidy            /usr/bin/clang-tidy-${version} \
         --slave   /usr/bin/lldb                  lldb                  /usr/bin/lldb-${version} \
         --slave   /usr/bin/lldb-server           lldb-server           /usr/bin/lldb-server-${version}
+
+    update-alternatives \
+        --install /usr/bin/wasm-ld                 wasm-ld                 /usr/bin/wasm-ld-${version} ${priority}
 }
 
 register_clang_version $1 $2
