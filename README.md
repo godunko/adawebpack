@@ -11,7 +11,9 @@ It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and
 
 ## How to build
 
-Setup GNAT Community 2020 for ARM to default location.
+Setup GNAT Community 2021 for ARM to default location.
+
+Unpack source code of the GNAT Community 2021 and use it at next step as source code of the compiler.
 
 Setup GNAT-LLVM development environment, see
 [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Note, you need to use
@@ -26,7 +28,7 @@ On Ubuntu it is possible to install prebuild LLVM/CLang packages. However,
 alternatives need to be updated using provided script:
 
 ```
-sudo utilities/update-alternatives-clang.sh 12 100
+sudo utilities/update-alternatives-clang.sh 11 100
 ```
 
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
@@ -42,7 +44,7 @@ Create link to RTS source code
 
 ```
 cd gnat-llvm/llvm-interface
-ln -s ~/opt/GNAT/2020-arm-elf/arm-eabi/include/rts-sources/
+ln -s ~/opt/GNAT/2021-arm-elf/arm-eabi/include/rts-sources/
 ```
 
 Use `make wasm` to build compiler and Run Time Library
