@@ -15,17 +15,16 @@ URL:        https://github.com/godunko/adawebpack
 ### Direct download is not availeble
 Source0:    adawebpack.tar.gz
 Source1:    gnat-llvm.tar.gz
-Source2:    gnat_src.tar.gz
-# https://community.download.adacore.com/v1/f51b6c0b5591edc6eff2928e8510a467bc8ce1e4?filename=gnat-2020-20200818-19951-src.tar.gz
-Source3:    gnat-2020-20200818-19951-src.tar.gz
-Patch0:     gnat-adafinal_conv.patch
+# https://community.download.adacore.com/v1/005d2b2eff627177986d2517eb31e1959bec6f3a?filename=gnat-2021-20210519-19A70-src.tar.gz
+Source2:    gnat-2021-20210519-19A70-src.tar.gz
+#Source3:    gnat_src.tar.gz
 BuildRequires:   gcc-gnat
 BuildRequires:   fedora-gnat-project-common  >= 3 
 BuildRequires:   gprbuild
 BuildRequires:   gcc-c++
 BuildRequires:   libstdc++-static
 BuildRequires:   lld
-BuildRequires:   llvm10-devel
+BuildRequires:   llvm-devel
 BuildRequires:   clang
 BuildRequires:   chrpath
 
@@ -36,27 +35,25 @@ ExclusiveArch: %GPRbuild_arches
 Ada WASM Runtime and Bindings for Web API
 
 %prep
-%setup -q -b 1 -b 2 -b 3 -n gnat-llvm
-mv ../gnat_src llvm-interface/
-%patch0 -p0
+%setup -q -b 1 -b 2 -n gnat-llvm
+cp -r ../gnat-2021-20210519-19A70-src/src/ada llvm-interface/gnat_src
 mv ../%{name} llvm-interface/%{name}_src
-mv ../gnat-2020-20200818-19951-src/src/ada/hie llvm-interface/rts-sources
-cp -v  ../gnat-2020-20200818-19951-src/src/ada/libgnat/s-{stratt,statxd}.ad[sb] llvm-interface/gnat_src/libgnat/
+mv ../gnat-2021-20210519-19A70-src/src/ada/hie llvm-interface/rts-sources
+#cp -v  ../gnat-2021-20210519-19A70-src/src/ada/libgnat/s-{stratt,statxd}.ad[sb] llvm-interface/gnat_src/libgnat/
 ln -s %{name}_src/source/rtl/Makefile.target llvm-interface/
 cd llvm-interface/rts-sources
 mkdir {math,mem,zfp,full,math/hardsp,math/harddp}
 mv a-elchha__zfp.ads zfp/a-elchha.ads
 mv s-assert__xi.adb zfp/s-assert.adb
-mv s-sssita.ad[sb] zfp/
 mv s-init.ads full/
-for J in a-ngelfu a-nlelfu a-nllefu a-nuelfu s-gcmain s-lidosq s-libdou s-libm s-libpre s-libsin s-lisisq ; do mv -v ${J}__ada.ads math/$J.ads; done
+for J in a-ngelfu a-nlelfu a-nuelfu s-gcmain s-lidosq s-libdou s-libm s-libpre s-libsin s-lisisq ; do mv -v ${J}__ada.ads math/$J.ads; done
 for J in s-gcmain s-libdou s-libm s-libsin a-ngelfu; do mv -v ${J}__ada.adb math/$J.adb; done
 mv -v s-lisisq__fpu.adb math/hardsp/s-lisisq.adb
 mv -v s-lidosq__fpu.adb math/harddp/s-lidosq.adb
 mv -v s-memcom.ad[sb] s-memcop.ad[sb] s-memmov.ad[sb] s-memset.ad[sb] s-memtyp.ads mem/
 
 %build
-make -C llvm-interface/ LLVM_CONFIG=llvm-config-10-64 LLVM_RANLIB=llvm-ranlib-10 wasm
+make -C llvm-interface/ wasm
 PATH=$PATH:`pwd`/llvm-interface/bin make -C llvm-interface/%{name}_src GPRBUILD_FLAGS=--db\ `pwd`/llvm-interface/%{name}_src/packages/Fedora
 
 %install
