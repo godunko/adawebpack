@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/buttons-min.css"/>
+    <script type='module'>
+      import * as AdaWebPack from './adawebpack.mjs';
+
+      (async () => {
+        const fetchPromise = fetch('main.wasm');
+        const { instance } =
+          await WebAssembly.instantiateStreaming(fetchPromise, {env: AdaWebPack.imports});
+        AdaWebPack.initialize(instance);
+        instance.exports['_ada_main']();
+        window.AWP = instance;
+      })();
+    </script>
+
+    <script>
+      function calculate()
+      {
+        v = document.getElementById('value').value;
+        r = window.AWP.exports['Calculate_Square_Root'](v);
+        document.getElementById('result').value = r;
+      }
+    </script>
+  </head>
+  <body style='margin: auto; text-align: center; width: 400px;'>
+    <form>
+      <label for='value'>Value</label>
+      <input type='number' id='value' value='25'/>
+      <br/>
+      <button type='button' onclick="calculate()">Calculate</button>
+      <br/>
+      <label for='result'>Square root</label>
+      <input type='number' readonly='readonly' id='result'/>
+    </form>
+  </body>
+</html>
