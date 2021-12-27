@@ -1,0 +1,58 @@
+_realname=adawebpack
+pkgbase=mingw-w64-${_realname}
+pkgname=${MINGW_PACKAGE_PREFIX}-${_realname}
+pkgver=22.0.0
+pkgrel=1
+pkgdesc="AdaWebPack is a toolchain, RTL and WebAPI binding for Ada on WebAssembly"
+arch=('any')
+mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64')
+url="https://github.com/godunko/adawebpack"
+license=('GPL3' 'BSD3')
+makedepends=("${MINGW_PACKAGE_PREFIX}-gcc-ada"
+             "${MINGW_PACKAGE_PREFIX}-gprbuild"
+             "${MINGW_PACKAGE_PREFIX}-clang"
+             "${MINGW_PACKAGE_PREFIX}-lld"
+             "${MINGW_PACKAGE_PREFIX}-llvm")
+depends=("${MINGW_PACKAGE_PREFIX}-llvm")
+source=("gnat-llvm.zip::https://github.com/AdaCore/gnat-llvm/archive/e3f56dce0df148c5f27e97d973cfbdc1bd72248f.zip"
+        "bb-runtimes.zip::https://github.com/Fabien-Chouteau/bb-runtimes/archive/7a4674ae9221d2fa046bed20fbaf9de9caa09d41.zip"
+        "gcc.zip::https://github.com/gcc-mirror/gcc/archive/e078de24eae8253fd4f24342f65166b525dd99c6.zip"
+        "${_realname}.tar.gz")
+md5sums=( SKIP SKIP SKIP SKIP )
+noextract=( "gcc.zip" )
+
+prepare() {
+  cd ${srcdir}/
+  bsdtar -x -f gcc.zip gcc-*/gcc/ada
+  mv -v gnat-llvm-* gnat-llvm
+  mv -v gcc-*/gcc/ada gnat-llvm/llvm-interface/gnat_src
+  mv -v bb-runtimes-*/gnat_rts_sources/include/rts-sources gnat-llvm/llvm-interface/
+  mv -v adawebpack gnat-llvm/llvm-interface/adawebpack_src
+  cd gnat-llvm/llvm-interface/
+  cp -v adawebpack_src/source/rtl/Makefile.target .
+  rm -rf gcc-*
+  rm -rf bb-runtimes-*
+}
+
+
+build() {
+  cd ${srcdir}/gnat-llvm/llvm-interface/
+  make wasm
+  export PATH=$PWD/bin:$PATH
+  gprconfig --batch -o /tmp/llvm.cgpr --db `pwd`/adawebpack_src/packages/Fedora --target=llvm --config=ada,,
+  gprbuild --target=llvm -P adawebpack_src/gnat/adawebpack.gpr -p --config=/tmp/llvm.cgpr
+}
+
+package() {
+  cd ${srcdir}/gnat-llvm/llvm-interface/
+  export PATH=$PWD/bin:$PATH
+  PREFIX=${pkgdir}
+  mkdir -p ${PREFIX}/share/gprconfig
+  mkdir -p ${PREFIX}/lib/gnat
+  mkdir -p ${PREFIX}/share/adawebpack
+  cp adawebpack_src/packages/Fedora/llvm.xml ${PREFIX}/share/gprconfig/
+  cp adawebpack_src/gnat/adawebpack_config.gpr ${PREFIX}/lib/gnat/
+  cp -r bin lib ${PREFIX}
+  cp -v adawebpack_src/source/adawebpack.mjs ${PREFIX}/share/adawebpack/
+  gprinstall --target=llvm --prefix=${PREFIX} --project-subdir=${PREFIX}/lib/gnat -P adawebpack_src/gnat/adawebpack.gpr -p --config=/tmp/llvm.cgpr
+}
