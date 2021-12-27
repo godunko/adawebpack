@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2021 Max Reznik <reznikmm@gmail.com>
+# SPDX-FileCopyrightText: 2021-2022 Max Reznik <reznikmm@gmail.com>
 #
 # SPDX-License-Identifier: MIT
 #
@@ -10,20 +10,7 @@ srpm:
 	mkdir /tmp/.copr
 	tar cavf /tmp/.copr/`grep ^Source0: $(spec)| sed -e 's/^.* //'` \
 	  --exclude-vcs -C .. `basename $(realpath .)`
-	dnf --assumeyes install git
-	git clone https://github.com/AdaCore/gnat-llvm.git gnat-llvm
-	git -C gnat-llvm checkout 1d76aa3a057a8fa8d267fc1c5a75d0c729c48840
-	tar czf /tmp/.copr/gnat-llvm.tar.gz --exclude-vcs gnat-llvm
-	
-	#git init gcc
-	#git -C gcc remote add origin https://github.com/gcc-mirror/gcc.git
-	#git -C gcc fetch --depth=1 origin acf190b208ae6883e94bcaa13adf9e3439bee63d
-	#git -C gcc reset --hard FETCH_HEAD
-	#git clone --depth=1 git://gcc.gnu.org/git/gcc.git
-	#mv gcc/gcc/ada gnat_src
-	#svn export --force svn://gcc.gnu.org/svn/gcc/trunk/gcc/ada gnat_src
-	#tar czf /tmp/.copr/gnat_src.tar.gz --exclude-vcs gnat_src
-	
-	curl -L -o /tmp/.copr/gnat-2021-20210519-19A70-src.tar.gz \
- https://community.download.adacore.com/v1/005d2b2eff627177986d2517eb31e1959bec6f3a?filename=gnat-2021-20210519-19A70-src.tar.gz
+	curl -L -o /tmp/.copr/gnat-llvm.zip https://github.com/AdaCore/gnat-llvm/archive/e3f56dce0df148c5f27e97d973cfbdc1bd72248f.zip
+	curl -L -o /tmp/.copr/bb-runtimes.zip https://github.com/Fabien-Chouteau/bb-runtimes/archive/7a4674ae9221d2fa046bed20fbaf9de9caa09d41.zip
+	curl -L -o /tmp/.copr/gcc.zip https://github.com/gcc-mirror/gcc/archive/e078de24eae8253fd4f24342f65166b525dd99c6.zip
 	rpmbuild -bs $(spec) --define="_sourcedir /tmp/.copr" --define="_srcrpmdir $(outdir)"
