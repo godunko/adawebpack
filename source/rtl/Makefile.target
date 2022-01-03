@@ -61,6 +61,7 @@ s-imager.adb \
 s-imager.ads \
 s-imageu.adb \
 s-imageu.ads \
+s-imgflt.ads \
 s-imgint.adb \
 s-imgint.ads \
 s-imglfl.ads \
@@ -79,6 +80,7 @@ s-memory.ads \
 s-parame.adb \
 s-pooglo.adb \
 s-pooglo.ads \
+s-powflt.ads \
 s-powlfl.ads \
 s-powllf.ads \
 s-putima.adb \
@@ -210,11 +212,13 @@ s-exnlfl.ads \
 s-fatflt.ads \
 s-fatlfl.ads \
 s-fatllf.ads \
+s-imgflt.ads \
 s-imglfl.ads \
 s-imgllf.ads \
 s-libpre.ads \
 s-maccod.ads \
 s-memtyp.ads \
+s-powflt.ads \
 s-powlfl.ads \
 s-powllf.ads \
 s-unstyp.ads \
