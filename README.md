@@ -11,11 +11,13 @@ It includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Library and
 
 ## How to build
 
-Setup GNAT Community 2021 for ARM to default location.
+Setup some GNAT compiler and gprbuild tool (GNAT CE and GNAT FSF 11 is know to work fine).
 
-Latest known good revision of GNAT-LLVM compatible with GNAT Community 2021 is 1d76aa3a057a8fa8d267fc1c5a75d0c729c48840.
+Checkout latest known good revision of GNAT-LLVM (11fa85dcdaedc632ab77f3eb1dfe476aac531c95).
 
-Unpack source code of the GNAT Community 2021 and use it at next step as source code of the compiler.
+Checkout latest known good revision of FSF GCC (6447f6f983ffeaecb8753ef685d702bf2594968b).
+
+Checkout latest known good revision of bb-runtimes (7a4674ae9221d2fa046bed20fbaf9de9caa09d41).
 
 Setup GNAT-LLVM development environment, see
 [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Note, you need to use
@@ -26,11 +28,11 @@ so, cmake command line should contain among other switches:
 cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
 ```
 
-On Ubuntu it is possible to install prebuild LLVM/CLang packages. However,
-alternatives need to be updated using provided script:
+On Ubuntu it is possible to install prebuild LLVM/CLang packages (`llvm-13`, `clang-13` and `lld-13`).
+However, alternatives need to be updated using provided script:
 
 ```
-sudo utilities/update-alternatives-clang.sh 11 100
+sudo utilities/update-alternatives-clang.sh 13 100
 ```
 
 Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
@@ -46,7 +48,7 @@ Create link to RTS source code
 
 ```
 cd gnat-llvm/llvm-interface
-ln -s ~/opt/GNAT/2021-arm-elf/arm-eabi/include/rts-sources/
+ln -s <bb-runtimes>/gnat_rts_sources/include/rts-sources
 ```
 
 Use `make wasm` to build compiler and Run Time Library
@@ -69,4 +71,4 @@ make wasm
 
 Web API bindings is licensed under BSD3 license.
 
-GNAT Runtime Library is licensed under GPL3 license.
+GNAT Runtime Library is licensed under GPL3 license with GCC Runtime Library Exception
