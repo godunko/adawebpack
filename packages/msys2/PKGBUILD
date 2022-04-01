@@ -2,7 +2,7 @@ _realname=adawebpack
 pkgbase=mingw-w64-${_realname}
 pkgname=${MINGW_PACKAGE_PREFIX}-${_realname}
 pkgver=22.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="AdaWebPack is a toolchain, RTL and WebAPI binding for Ada on WebAssembly"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64')
@@ -47,12 +47,12 @@ package() {
   cd ${srcdir}/gnat-llvm/llvm-interface/
   export PATH=$PWD/bin:$PATH
   PREFIX=${pkgdir}
-  mkdir -p ${PREFIX}/share/gprconfig
-  mkdir -p ${PREFIX}/lib/gnat
-  mkdir -p ${PREFIX}/share/adawebpack
-  cp adawebpack_src/packages/Fedora/llvm.xml ${PREFIX}/share/gprconfig/
-  cp adawebpack_src/gnat/adawebpack_config.gpr ${PREFIX}/lib/gnat/
-  cp -r bin lib ${PREFIX}
-  cp -v adawebpack_src/source/adawebpack.mjs ${PREFIX}/share/adawebpack/
-  gprinstall --target=llvm --prefix=${PREFIX} --project-subdir=${PREFIX}/lib/gnat -P adawebpack_src/gnat/adawebpack.gpr -p --config=/tmp/llvm.cgpr
+  mkdir -p ${pkgdir}${MINGW_PREFIX}/share/gprconfig
+  mkdir -p ${pkgdir}${MINGW_PREFIX}/lib/gnat
+  mkdir -p ${pkgdir}${MINGW_PREFIX}/share/adawebpack
+  cp adawebpack_src/packages/Fedora/llvm.xml ${pkgdir}${MINGW_PREFIX}/share/gprconfig/
+  cp adawebpack_src/gnat/adawebpack_config.gpr ${pkgdir}${MINGW_PREFIX}/lib/gnat/
+  cp -r bin lib ${pkgdir}${MINGW_PREFIX}
+  cp -v adawebpack_src/source/adawebpack.mjs ${pkgdir}${MINGW_PREFIX}/share/adawebpack/
+  gprinstall --target=llvm --prefix=${pkgdir}${MINGW_PREFIX} --project-subdir=${pkgdir}${MINGW_PREFIX}/lib/gnat -P adawebpack_src/gnat/adawebpack.gpr -p --config=/tmp/llvm.cgpr
 }
