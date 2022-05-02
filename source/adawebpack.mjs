@@ -692,10 +692,13 @@ function string_to_js(address, size)
 
 function string_to_wasm(item)
 {
-  let s = instance.exports.__adawebpack__core__allocate_string(item.length);
-  let a = new Uint16Array(instance.exports.memory.buffer, s, item.length);
-  for(let i=0, l=item.length; i < l; i++) {
-    a[i] = item.charCodeAt(i);
+  let s = 0;
+  if (item !== null) {
+    s = instance.exports.__adawebpack__core__allocate_string(item.length);
+    let a = new Uint16Array(instance.exports.memory.buffer, s, item.length);
+    for(let i=0, l=item.length; i < l; i++) {
+      a[i] = item.charCodeAt(i);
+    }
   }
   return s;
 }
