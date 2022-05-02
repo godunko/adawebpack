@@ -69,6 +69,7 @@ let __adawebpack___methods = [
   "getElementById",
   "renderbufferStorage",
   "texParameteri",
+  "toString",
 ]
 
 let __adawebpack___classes = [
@@ -149,6 +150,10 @@ export let imports = {
 
   __adawebpack___void_object_invoker: function (object_id, method_id, argument) {
     __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](__adawebpack_o2i.too(argument));
+  },
+
+  __adawebpack___string_invoker: function (object_id, method_index) {
+    return string_to_wasm(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_index]]());
   },
 
   __adawebpack___void_i32_object_invoker: function (object_id, method_id, parameter_1, parameter_2) {

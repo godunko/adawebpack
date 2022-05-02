@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021, Vadim Godunko                                         --
+--  Copyright © 2021-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -113,6 +113,28 @@ package body WASM.Objects.Methods is
 
       return Imported (Self.Identifier, Name, Parameter_1_Address, Parameter_1_Size);
    end Call_Object_String;
+
+   -----------------
+   -- Call_String --
+   -----------------
+
+   function Call_String
+     (Self : Object_Reference'Class;
+      Name : WASM.Methods.Method_Index)
+      return Web.Strings.Web_String
+   is
+      function Imported
+       (Object    : WASM.Objects.Object_Identifier;
+        Attribute : WASM.Methods.Method_Index)
+          return System.Address
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___string_invoker";
+
+   begin
+      return
+        Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier, Name));
+   end Call_String;
 
    ----------------------
    -- Call_Void_Object --

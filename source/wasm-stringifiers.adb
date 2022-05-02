@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021-2022, Vadim Godunko                                    --
+--  Copyright © 2022, Vadim Godunko                                         --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -33,35 +33,23 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  This package define indicies of known object's methods to be used with
---  helper functions to call object's methods. See WASM.Objects.Methods for
---  more information.
 
-with Interfaces;
+with WASM.Methods;
+with WASM.Objects.Methods;
 
-package WASM.Methods is
+package body WASM.Stringifiers is
 
-   pragma Pure;
+   ---------------
+   -- To_String --
+   ---------------
 
-   type Method_Index is new Interfaces.Unsigned_32;
+   function To_String
+     (Object : Expose_Stringifier'Class) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Methods.Call_String
+          (WASM.Objects.Object_Reference'Class (Object),
+           WASM.Methods.To_String);
+   end To_String;
 
-   --  This declaration must be synchronized with list of attributes' name in
-   --  adawebpack.mjs file.
-
-   Bind_Framebuffer         : constant := 0;
-   Bind_Renderbuffer        : constant := 1;
-   Clone_Node               : constant := 2;
-   Create_Buffer            : constant := 3;
-   Create_Framebuffer       : constant := 4;
-   Create_Program           : constant := 5;
-   Create_Renderbuffer      : constant := 6;
-   Create_Texture           : constant := 7;
-   Delete_Framebuffer       : constant := 8;
-   Framebuffer_Renderbuffer : constant := 9;
-   Framebuffer_Texture_2D   : constant := 10;
-   Get_Element_By_Id        : constant := 11;
-   Renderbuffer_Storage     : constant := 12;
-   Tex_Parameteri           : constant := 13;
-   To_String                : constant := 14;
-
-end WASM.Methods;
+end WASM.Stringifiers;

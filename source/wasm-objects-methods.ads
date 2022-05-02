@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021, Vadim Godunko                                         --
+--  Copyright © 2021-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -63,6 +63,11 @@ package WASM.Objects.Methods is
       Name        : WASM.Methods.Method_Index;
       Parameter_1 : Web.Strings.Web_String)
       return WASM.Objects.Object_Identifier;
+
+   function Call_String
+     (Self : Object_Reference'Class;
+      Name : WASM.Methods.Method_Index)
+      return Web.Strings.Web_String;
 
    procedure Call_Void_Object
      (Self      : Object_Reference'Class;
