@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -36,13 +36,15 @@
 
 with System;
 
+with Web.Strings.WASM_Helpers;
+
 package body WASM.Console is
 
    ---------
    -- Log --
    ---------
 
-   procedure Log (Item : String) is
+   procedure Log (Item : Web.Strings.Web_String) is
       procedure Imported
        (Address : System.Address;
         Size    : Interfaces.Unsigned_32)
@@ -50,8 +52,12 @@ package body WASM.Console is
                Convention => C,
                Link_Name  => "__gnat_put_string";
 
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
    begin
-      Imported (Item'Address, Item'Length);
+      Web.Strings.WASM_Helpers.To_JS (Item, A, S);
+      Imported (A, S);
    end Log;
 
 end WASM.Console;

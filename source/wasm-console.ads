@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -64,6 +64,6 @@ package WASM.Console is
           Convention => C,
           Link_Name  => "__gnat_put_f64";
 
-   procedure Log (Item : String);
+   procedure Log (Item : Web.Strings.Web_String);
 
 end WASM.Console;
