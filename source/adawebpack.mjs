@@ -156,6 +156,10 @@ export let imports = {
     return string_to_wasm(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_index]]());
   },
 
+  __adawebpack___string_string_invoker: function (object_id, method_index, address, size) {
+    return string_to_wasm(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_index]](string_to_js(address,size)));
+  },
+
   __adawebpack___void_i32_object_invoker: function (object_id, method_id, parameter_1, parameter_2) {
     __adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]](parameter_1, __adawebpack_o2i.too(parameter_2));
   },

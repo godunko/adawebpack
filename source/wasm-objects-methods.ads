@@ -69,6 +69,12 @@ package WASM.Objects.Methods is
       Name : WASM.Methods.Method_Index)
       return Web.Strings.Web_String;
 
+   function Call_String_String
+     (Self      : Object_Reference'Class;
+      Name      : WASM.Methods.Method_Index;
+      Parameter : Web.Strings.Web_String)
+      return Web.Strings.Web_String;
+
    procedure Call_Void_String_String
      (Self        : Object_Reference'Class;
       Name        : WASM.Methods.Method_Index;
