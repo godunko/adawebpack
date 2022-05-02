@@ -136,6 +136,39 @@ package body WASM.Objects.Methods is
         Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier, Name));
    end Call_String;
 
+   -----------------------------
+   -- Call_Void_String_String --
+   -----------------------------
+
+   procedure Call_Void_String_String
+     (Self        : Object_Reference'Class;
+      Name        : WASM.Methods.Method_Index;
+      Parameter_1 : Web.Strings.Web_String;
+      Parameter_2 : Web.Strings.Web_String)
+   is
+      procedure Imported
+       (Object      : WASM.Objects.Object_Identifier;
+        Method      : WASM.Methods.Method_Index;
+        Parameter_1_Address : System.Address;
+        Parameter_1_Size    : Interfaces.Unsigned_32;
+        Parameter_2_Address : System.Address;
+        Parameter_2_Size    : Interfaces.Unsigned_32)
+          with Import     => True,
+               Convention => C,
+               Link_Name  => "__adawebpack___void_string_string_invoker";
+
+      Address_1 : System.Address;
+      Size_1    : Interfaces.Unsigned_32;
+      Address_2 : System.Address;
+      Size_2    : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Parameter_1, Address_1, Size_1);
+      Web.Strings.WASM_Helpers.To_JS (Parameter_2, Address_2, Size_2);
+
+      Imported (Self.Identifier, Name, Address_1, Size_1, Address_2, Size_2);
+   end Call_Void_String_String;
+
    ----------------------
    -- Call_Void_Object --
    ----------------------
