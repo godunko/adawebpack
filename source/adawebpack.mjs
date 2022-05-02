@@ -66,8 +66,10 @@ let __adawebpack___methods = [
   "deleteFramebuffer",
   "framebufferRenderbuffer",
   "framebufferTexture2D",
+  "get",
   "getElementById",
   "renderbufferStorage",
+  "set",
   "texParameteri",
   "toString",
 ]

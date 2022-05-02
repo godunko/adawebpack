@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020-2022, Vadim Godunko                                    --
+--  Copyright © 2022, Vadim Godunko                                         --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -33,35 +33,57 @@
 --  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE   --
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
---  Project file to AdaWebPack library.
-------------------------------------------------------------------------------
-with "adawebpack_config.gpr";
 
-project AdaWebPack is
+with WASM.Classes;
+with WASM.Methods;
+with WASM.Objects.Constructors;
+with WASM.Objects.Methods;
 
-   for Target use "llvm";
+package body Web.URL.URL_Search_Params is
 
---   for Library_Name use "AdaWebPack";
---   for Library_Dir use "../.libs";
---   for Library_ALI_Dir use "../.libs/alis";
---  XXX In the better world this project should be library project, or even
---  shared library project, but right now, shared libraries are not supported
---  by WebAssembly, and gprbuild can't know that llvm-ranlib should be run
---  to index static archive, so ordinary project is used.
+   ------------------
+   -- Constructors --
+   ------------------
 
-   for Source_Dirs use
-    ("../source",
-     "../source/bom",
-     "../source/core",
-     "../source/dom",
-     "../source/html",
-     "../source/ui_events",
-     "../source/sockets",
-     "../source/url",
-     "../source/webgl",
-     "../source/xhr");
-   for Object_Dir use AdaWebPack_Config'Object_Dir & "adawebpack";
+   package body Constructors is
 
-   package Compiler renames AdaWebPack_Config.Compiler;
+      ---------------------------
+      -- New_URL_Search_Params --
+      ---------------------------
 
-end AdaWebPack;
+      function New_URL_Search_Params return URL_Search_Params is
+      begin
+         return
+           Web.URL.URL_Search_Params.Instantiate
+            (WASM.Objects.Constructors.New_Object
+              (WASM.Classes.URL_Search_Params));
+      end New_URL_Search_Params;
+
+   end Constructors;
+
+   ---------
+   -- Get --
+   ---------
+
+   function Get
+    (Self : URL_Search_Params'Class;
+     Name : Web.Strings.Web_String) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Methods.Call_String_String (Self, WASM.Methods.Get, Name);
+   end Get;
+
+   ---------
+   -- Set --
+   ---------
+
+   procedure Set
+     (Self  : in out URL_Search_Params'Class;
+      Name  : Web.Strings.Web_String;
+      Value : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Methods.Call_Void_String_String
+        (Self, WASM.Methods.Set, Name, Value);
+   end Set;
+
+end Web.URL.URL_Search_Params;
