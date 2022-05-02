@@ -52,6 +52,8 @@ is
 
    function Is_Empty (Self : Web_String'Class) return Boolean;
 
+   function Is_Null (Self : Web_String'Class) return Boolean;
+
    function Length (Self : Web_String'Class) return Natural;
 
    procedure Clear (Self : in out Web_String'Class);

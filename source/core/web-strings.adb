@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020, Vadim Godunko                                         --
+--  Copyright © 2020-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -166,6 +166,15 @@ package body Web.Strings is
    begin
       return Self.Data = null or else Self.Data.Length = 0;
    end Is_Empty;
+
+   -------------
+   -- Is_Null --
+   -------------
+
+   function Is_Null (Self : Web_String'Class) return Boolean is
+   begin
+      return Self.Data = null;
+   end Is_Null;
 
    ------------
    -- Length --
