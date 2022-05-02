@@ -71,6 +71,10 @@ let __adawebpack___methods = [
   "texParameteri",
 ]
 
+let __adawebpack___classes = [
+  "URLSearchParams",
+]
+
 export let imports = {
 
   __gnat_grow: function (size) { return instance.exports.memory.grow(size); },
@@ -88,6 +92,11 @@ export let imports = {
      } else {
         console.error("User defined exception, message: %s", msg);
      }
+  },
+
+  __adawebpack___new_object: function (class_index)
+  {
+    return __adawebpack_o2i.toi(new window[__adawebpack___classes[class_index]]());
   },
 
   __adawebpack__is_instance_of: function(identifier, address, size)
