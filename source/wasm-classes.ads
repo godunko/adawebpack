@@ -48,6 +48,7 @@ package WASM.Classes is
    --  This declaration must be synchronized with list of class's names in
    --  adawebpack.mjs file.
 
-   URL_Search_Params        : constant := 0;
+   URL_Search_Params : constant := 0;
+   XML_Http_Request  : constant := 1;
 
 end WASM.Classes;

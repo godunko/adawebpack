@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2020, Vadim Godunko <vgodunko@gmail.com>                     --
+-- Copyright © 2020-2022, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -43,6 +43,9 @@
 with Ada.Unchecked_Conversion;
 with Ada.Unchecked_Deallocation;
 with System.Storage_Elements;
+
+with WASM.Classes;
+with WASM.Objects.Constructors;
 
 with Web.Strings.WASM_Helpers;
 
@@ -164,13 +167,11 @@ package body Web.XHR.Requests is
       --------------------------
 
       function New_XML_Http_Request return XML_Http_Request is
-         function Internal return WASM.Objects.Object_Identifier
-           with Import     => True,
-                Convention => C,
-                Link_Name  => "__adawebpack__xhr__XMLHttpRequest__constructor";
-
       begin
-         return Web.XHR.Requests.Instantiate (Internal);
+         return
+           Web.XHR.Requests.Instantiate
+            (WASM.Objects.Constructors.New_Object
+              (WASM.Classes.XML_Http_Request));
       end New_XML_Http_Request;
 
    end Constructors;

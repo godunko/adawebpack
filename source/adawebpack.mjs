@@ -76,6 +76,7 @@ let __adawebpack___methods = [
 
 let __adawebpack___classes = [
   "URLSearchParams",
+  "XMLHttpRequest",
 ]
 
 export let imports = {
@@ -593,10 +594,6 @@ export let imports = {
 
   __adawebpack__sockets__WebSocket__close: function(identifier) {
     __adawebpack_o2i.too(identifier).close();
-  },
-
-  __adawebpack__xhr__XMLHttpRequest__constructor: function () {
-    return __adawebpack_o2i.toi(new XMLHttpRequest());
   },
 
   __adawebpack__xhr__XMLHttpRequest__open: function(identifier, method_address, method_size, url_address, url_size, async, username_address, username_size, password_address, password_size) {
