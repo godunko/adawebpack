@@ -52,6 +52,7 @@ let __adawebpack___attributes = [
   "id",
   "name",
   "parentElement",
+  "value",
 ]
 
 let __adawebpack___methods = [

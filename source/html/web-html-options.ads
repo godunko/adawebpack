@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021, Vadim Godunko                                         --
+--  Copyright © 2021-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -35,6 +35,7 @@
 ------------------------------------------------------------------------------
 
 with Web.HTML.Elements;
+with Web.Strings;
 
 package Web.HTML.Options is
 
@@ -63,5 +64,16 @@ package Web.HTML.Options is
    --  Returns true if the element is selected, and false otherwise.
    --
    --  Can be set, to override the current state of the element.
+
+   function Get_Value
+     (Self : HTML_Option_Element'Class) return Web.Strings.Web_String;
+
+   procedure Set_Value
+     (Self : HTML_Option_Element'Class;
+      To   : Web.Strings.Web_String);
+   --  The value attribute provides a value for element. The value of an
+   --  option element is the value of the value content attribute, if there
+   --  is one, or, if there is not, the value of the element's text IDL
+   --  attribute.
 
 end Web.HTML.Options;

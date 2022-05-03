@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021, Vadim Godunko                                         --
+--  Copyright © 2021-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -57,5 +57,6 @@ package WASM.Attributes is
    Id             : constant := 6;
    Name           : constant := 7;
    Parent_Element : constant := 8;
+   Value          : constant := 9;
 
 end WASM.Attributes;

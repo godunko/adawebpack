@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2021, Vadim Godunko                                         --
+--  Copyright © 2021-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -36,7 +36,8 @@
 
 with Interfaces;
 
-with WASM.Objects;
+with WASM.Attributes;
+with WASM.Objects.Attributes;
 
 package body Web.HTML.Options is
 
@@ -57,6 +58,17 @@ package body Web.HTML.Options is
       return Imported (Self.Identifier) /= 0;
    end Get_Selected;
 
+   ---------------
+   -- Get_Value --
+   ---------------
+
+   function Get_Value
+     (Self : HTML_Option_Element'Class) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Value);
+   end Get_Value;
+
    ------------------
    -- Set_Selected --
    ------------------
@@ -73,5 +85,16 @@ package body Web.HTML.Options is
    begin
       Imported (Self.Identifier, Boolean'Pos (To));
    end Set_Selected;
+
+   ---------------
+   -- Set_Value --
+   ---------------
+
+   procedure Set_Value
+     (Self : HTML_Option_Element'Class;
+      To   : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Value, To);
+   end Set_Value;
 
 end Web.HTML.Options;
