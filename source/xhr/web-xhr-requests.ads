@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2016-2020, Vadim Godunko <vgodunko@gmail.com>                --
+-- Copyright © 2016-2022, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -81,7 +81,7 @@ package Web.XHR.Requests is
      Document,
      JSON,
      Text);
-   
+
    type XML_Http_Request is new WASM.Objects.Object_Reference
      and Web.DOM.Event_Targets.Event_Target
 --   and Web.XHR.Event_Targets.XML_Http_Request_Event_Target
@@ -166,12 +166,9 @@ package Web.XHR.Requests is
    procedure Send
     (Self : XML_Http_Request'Class;
      Data : Ada.Streams.Stream_Element_Array);
---   not overriding procedure Send
---    (Self : not null access XML_Http_Request;
---     Data : League.Strings.Universal_String)
---         with Import     => True,
---              Convention => JavaScript_Method,
---              Link_Name  => "send";
+   procedure Send
+    (Self : XML_Http_Request'Class;
+     Data : Web.Strings.Web_String);
 --   not overriding procedure Send
 --    (Self : not null access XML_Http_Request;
 --     Data : access WebAPI.XHR.Form_Datas.Form_Data'Class := null)
@@ -180,7 +177,7 @@ package Web.XHR.Requests is
 --              Link_Name  => "send";
    --  Initiates the request. The optional argument provides the request entity
    --  body. The argument is ignored if request method is GET or HEAD.
- 
+
 --   not overriding procedure Abort_Request
 --    (Self     : not null access XML_Http_Request)
 --         with Import     => True,
@@ -189,8 +186,8 @@ package Web.XHR.Requests is
 --   --  Cancels any network activity.
 
    --  Response
- 
-   function Get_Status 
+
+   function Get_Status
     (Self : XML_Http_Request'Class) return Web.DOM_Unsigned_Short;
    --  Returns the HTTP status code.
 
@@ -243,7 +240,7 @@ package Web.XHR.Requests is
    function Get_Response
     (Self : XML_Http_Request'Class) return Ada.Streams.Stream_Element_Array;
    --  Returns the response’s body.
-   
+
 --   not overriding function Get_Response_Text
 --    (Self : not null access constant XML_Http_Request)
 --       return WebAPI.DOM_String
@@ -262,11 +259,11 @@ package Web.XHR.Requests is
 --
 
    package Constructors is
-      
+
       function New_XML_Http_Request return XML_Http_Request;
-      
+
    end Constructors;
-   
+
 --private
 --
 --   type XML_Http_Request is limited new WebAPI.XHR.Event_Targets.Event_Target
@@ -284,7 +281,7 @@ package Web.XHR.Requests is
 --            Link_Name  => "dispatchEvent";
 
 private
-   
+
    overriding procedure Add_Event_Listener
     (Self     : in out XML_Http_Request;
      Name     : Web.Strings.Web_String;

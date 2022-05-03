@@ -62,8 +62,9 @@ package WASM.Methods is
    Get                      : constant := 11;
    Get_Element_By_Id        : constant := 12;
    Renderbuffer_Storage     : constant := 13;
-   Set                      : constant := 14;
-   Tex_Parameteri           : constant := 15;
-   To_String                : constant := 16;
+   Send                     : constant := 14;
+   Set                      : constant := 15;
+   Tex_Parameteri           : constant := 16;
+   To_String                : constant := 17;
 
 end WASM.Methods;

@@ -69,6 +69,7 @@ let __adawebpack___methods = [
   "get",
   "getElementById",
   "renderbufferStorage",
+  "send",
   "set",
   "texParameteri",
   "toString",

@@ -45,7 +45,9 @@ with Ada.Unchecked_Deallocation;
 with System.Storage_Elements;
 
 with WASM.Classes;
+with WASM.Methods;
 with WASM.Objects.Constructors;
+with WASM.Objects.Methods;
 
 with Web.Strings.WASM_Helpers;
 
@@ -352,6 +354,17 @@ package body Web.XHR.Requests is
 
    begin
       Imported (Self.Identifier, Data'Address, Data'Length);
+   end Send;
+
+   ----------
+   -- Send --
+   ----------
+
+   procedure Send
+    (Self : XML_Http_Request'Class;
+     Data : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Methods.Call_Void_String (Self, WASM.Methods.Send, Data);
    end Send;
 
    ------------------------
