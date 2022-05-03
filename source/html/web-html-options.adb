@@ -46,16 +46,9 @@ package body Web.HTML.Options is
    ------------------
 
    function Get_Selected (Self : HTML_Option_Element'Class) return Boolean is
-      use type Interfaces.Unsigned_32;
-
-      function Imported
-       (Element : WASM.Objects.Object_Identifier)
-          return Interfaces.Unsigned_32
-            with Import     => True,
-                 Convention => C,
-                 Link_Name  => "__adawebpack__html__Option__selected_getter";
    begin
-      return Imported (Self.Identifier) /= 0;
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Selected);
    end Get_Selected;
 
    ---------------
@@ -74,16 +67,9 @@ package body Web.HTML.Options is
    ------------------
 
    procedure Set_Selected
-    (Self : in out HTML_Option_Element'Class; To : Boolean)
-   is
-      procedure Imported
-       (Element : WASM.Objects.Object_Identifier; To : Interfaces.Unsigned_32)
-          with Import     => True,
-               Convention => C,
-               Link_Name  => "__adawebpack__html__Option__selected_setter";
-
+    (Self : in out HTML_Option_Element'Class; To : Boolean) is
    begin
-      Imported (Self.Identifier, Boolean'Pos (To));
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Selected, To);
    end Set_Selected;
 
    ---------------

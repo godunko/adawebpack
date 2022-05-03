@@ -57,6 +57,7 @@ package WASM.Attributes is
    Id             : constant := 6;
    Name           : constant := 7;
    Parent_Element : constant := 8;
-   Value          : constant := 9;
+   Selected       : constant := 9;
+   Value          : constant := 10;
 
 end WASM.Attributes;

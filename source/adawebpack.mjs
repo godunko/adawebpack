@@ -52,6 +52,7 @@ let __adawebpack___attributes = [
   "id",
   "name",
   "parentElement",
+  "selected",
   "value",
 ]
 
@@ -316,14 +317,6 @@ export let imports = {
 
   __adawebpack__html__Input__value_setter: function(identifier,address,size) {
     __adawebpack_o2i.too(identifier).value = string_to_js(address,size);
-  },
-
-  __adawebpack__html__Option__selected_getter: function(identifier) {
-    return +(__adawebpack_o2i.too(identifier).selected);
-  },
-
-  __adawebpack__html__Option__selected_setter: function(identifier,to) {
-    __adawebpack_o2i.too (identifier).selected = (to !== 0);
   },
 
   __adawebpack__html__Script__text_getter: function(identifier) {
