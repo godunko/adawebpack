@@ -241,14 +241,10 @@ package Web.XHR.Requests is
     (Self : XML_Http_Request'Class) return Ada.Streams.Stream_Element_Array;
    --  Returns the response’s body.
 
---   not overriding function Get_Response_Text
---    (Self : not null access constant XML_Http_Request)
---       return WebAPI.DOM_String
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "responseText";
---   --  Returns the text response entity body.
---
+   function Get_Response_Text
+     (Self : XML_Http_Request'Class) return Web.Strings.Web_String;
+   --  Returns the text response entity body.
+
 --   not overriding function Get_Response_XML
 --    (Self : not null access constant XML_Http_Request)
 --       return WebAPI.DOM.Documents.Document_Access

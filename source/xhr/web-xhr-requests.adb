@@ -44,8 +44,10 @@ with Ada.Unchecked_Conversion;
 with Ada.Unchecked_Deallocation;
 with System.Storage_Elements;
 
+with WASM.Attributes;
 with WASM.Classes;
 with WASM.Methods;
+with WASM.Objects.Attributes;
 with WASM.Objects.Constructors;
 with WASM.Objects.Methods;
 
@@ -215,6 +217,18 @@ package body Web.XHR.Requests is
    begin
       return To_Ada (Aux);
    end Get_Response;
+
+   -----------------------
+   -- Get_Response_Text --
+   -----------------------
+
+   function Get_Response_Text
+     (Self : XML_Http_Request'Class) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Attributes.Get_String
+          (Self, WASM.Attributes.Response_Text);
+   end Get_Response_Text;
 
    -----------------------
    -- Get_Response_Type --
