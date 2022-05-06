@@ -273,15 +273,16 @@ wasm: build
 	cp -p $(RTS_SRC)/mem/s-memcop.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memmov.ad[sb] $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-memory__wasm.adb $(WASMINCLUDE)/s-memory.adb
-	cp -p $(RTS_SRC)/mem/s-memset.ad[sb] $(WASMINCLUDE)/
+#	cp -p $(RTS_SRC)/mem/s-memset.ad[sb] $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/mem/s-memset.ads $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/aux/s-memset.adb $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memtyp.ads $(WASMINCLUDE)/
-	cp -p $(AWP_SRC)/rtl/s-parame__wasm.ads $(WASMINCLUDE)/s-parame.ads
-	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.adb $(WASMINCLUDE)/s-soflin.adb
-	cp -p $(AWP_SRC)/rtl/s-soflin__wasm.ads $(WASMINCLUDE)/s-soflin.ads
+	cp -p $(AWP_SRC)/rtl/s-parame.ads $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-soflin.adb $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-soflin.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-stposu__wasm.adb $(WASMINCLUDE)/s-stposu.adb
-	cp -p $(AWP_SRC)/rtl/s-wchcon__wasm.ads $(WASMINCLUDE)/s-wchcon.ads
-	cp -p $(AWP_SRC)/rtl/s-wchcon__wasm.adb $(WASMINCLUDE)/s-wchcon.adb
-	cp -p $(AWP_SRC)/rtl/s-wchcnv__wasm.adb $(WASMINCLUDE)/s-wchcnv.adb
+	cp -p $(AWP_SRC)/rtl/s-wchcon.ad[sb] $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/s-wchcnv.adb $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-wchstw__wasm.adb $(WASMINCLUDE)/s-wchstw.adb
 #	cp -p $(RTS_SRC)/zfp/s-sssita.ad[sb] $(WASMINCLUDE)/
 	cp -p $(GNAT_SRC)/libgnat/s-flocon__none.adb $(WASMINCLUDE)/s-flocon.adb

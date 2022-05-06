@@ -31,7 +31,6 @@
 
 --  This is the WASM version of this package
 
-pragma Compiler_Unit_Warning;
 pragma Style_Checks (Off);
 
 pragma Warnings (Off);

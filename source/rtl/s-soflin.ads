@@ -39,7 +39,6 @@
 --  initialized to non-tasking versions, and then if the tasking support is
 --  initialized, they are set to the real tasking versions.
 
-pragma Compiler_Unit_Warning;
 pragma Style_Checks (Off);
 
 --  with Ada.Exceptions;
