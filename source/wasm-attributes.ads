@@ -59,6 +59,7 @@ package WASM.Attributes is
    Parent_Element : constant := 8;
    Response_Text  : constant := 9;
    Selected       : constant := 10;
-   Value          : constant := 11;
+   Step           : constant := 11;
+   Value          : constant := 12;
 
 end WASM.Attributes;

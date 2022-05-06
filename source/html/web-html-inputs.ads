@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2014-2021, Vadim Godunko <vgodunko@gmail.com>                --
+-- Copyright © 2014-2022, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -421,21 +421,14 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "src";
---
---   not overriding function Get_Step
---    (Self : not null access constant HTML_Input_Element)
---       return WebAPI.DOM_String is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "step";
---
---   not overriding procedure Set_Step
---    (Self : not null access constant HTML_Input_Element;
---     To   : WebAPI.DOM_String) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "step";
---
+
+   function Get_Step
+     (Self : HTML_Input_Element'Class) return Web.Strings.Web_String;
+
+   procedure Set_Step
+     (Self : in out HTML_Input_Element;
+      To   : Web.Strings.Web_String);
+
 --   not overriding function Get_Type
 --    (Self : not null access constant HTML_Input_Element)
 --       return WebAPI.DOM_String is abstract

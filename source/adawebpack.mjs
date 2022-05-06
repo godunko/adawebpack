@@ -54,6 +54,7 @@ let __adawebpack___attributes = [
   "parentElement",
   "responseText",
   "selected",
+  "step",
   "value",
 ]
 

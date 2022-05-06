@@ -8,7 +8,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 --                                                                          --
--- Copyright © 2020-2021, Vadim Godunko <vgodunko@gmail.com>                --
+-- Copyright © 2020-2022, Vadim Godunko <vgodunko@gmail.com>                --
 -- All rights reserved.                                                     --
 --                                                                          --
 -- Redistribution and use in source and binary forms, with or without       --
@@ -115,6 +115,17 @@ package body Web.HTML.Inputs is
    begin
       return WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Name);
    end Get_Name;
+
+   --------------
+   -- Get_Step --
+   --------------
+
+   function Get_Step
+     (Self : HTML_Input_Element'Class) return Web.Strings.Web_String is
+   begin
+      return
+        WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Step);
+   end Get_Step;
 
    ------------------
    -- Get_Validity --
@@ -233,6 +244,17 @@ package body Web.HTML.Inputs is
    begin
       WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Name, To);
    end Set_Name;
+
+   --------------
+   -- Set_Step --
+   --------------
+
+   procedure Set_Step
+     (Self : in out HTML_Input_Element;
+      To   : Web.Strings.Web_String) is
+   begin
+      WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Step, To);
+   end Set_Step;
 
    ---------------
    -- Set_Value --
