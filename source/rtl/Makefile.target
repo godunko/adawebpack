@@ -103,6 +103,8 @@ s-stratt.ads \
 s-strhas.adb \
 s-strhas.ads \
 s-vaenu8.ads \
+s-valboo.adb \
+s-valboo.ads \
 s-valint.adb \
 s-valint.ads \
 s-vallfl.ads \
