@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2016-2020, Vadim Godunko                                    --
+--  Copyright © 2016-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -35,6 +35,7 @@
 ------------------------------------------------------------------------------
 
 with Web.HTML.Elements;
+limited with Web.HTML.Options;
 with Web.Strings;
 
 package Web.HTML.Selects is
@@ -52,14 +53,12 @@ package Web.HTML.Selects is
 --    attribute DOMString name;
 --    attribute boolean _required;
 --    attribute unsigned long size;
---  
+--
 --    readonly attribute DOMString type;
---  
+--
 --    [SameObject] readonly attribute HTMLOptionsCollection options;
 --    attribute unsigned long length;
 --    getter Element? item(unsigned long index
---  );
---    HTMLOptionElement? namedItem(DOMString name
 --  );
 --    void add((HTMLOptionElement or HTMLOptGroupElement) element
 --  , optional (HTMLElement or long)? before
@@ -70,9 +69,9 @@ package Web.HTML.Selects is
 --    setter void (unsigned long index
 --  , HTMLOptionElement? option
 --  );
---  
+--
 --    [SameObject] readonly attribute HTMLCollection selectedOptions;
---  
+--
 --    readonly attribute boolean willValidate;
 --    readonly attribute ValidityState validity;
 --    readonly attribute DOMString validationMessage;
@@ -80,7 +79,7 @@ package Web.HTML.Selects is
 --    boolean reportValidity();
 --    void setCustomValidity(DOMString error
 --  );
---  
+--
 --    [SameObject] readonly attribute NodeList labels;
 --  };
 
@@ -166,7 +165,7 @@ package Web.HTML.Selects is
 --   --    void remove(); // ChildNode overload
 --   --    void remove(long index);
 --   --    setter creator void (unsigned long index, HTMLOptionElement? option);
---   --  
+--   --
 --   --    readonly attribute HTMLCollection selectedOptions;
 
    function Get_Selected_Index
@@ -182,6 +181,11 @@ package Web.HTML.Selects is
    procedure Set_Value
     (Self : in out HTML_Select_Element'Class;
      To   : Web.Strings.Web_String);
+
+   function Named_Item
+     (Self : HTML_Select_Element'Class;
+      Name : Web.Strings.Web_String)
+      return Web.HTML.Options.HTML_Option_Element;
 
 --   not overriding function Get_Will_Validate
 --    (Self : not null access constant HTML_Select_Element)

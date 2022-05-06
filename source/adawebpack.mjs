@@ -72,6 +72,7 @@ let __adawebpack___methods = [
   "get",
   "getElementById",
   "has",
+  "namedItem",
   "renderbufferStorage",
   "send",
   "set",

@@ -3,7 +3,7 @@
 --                                AdaWebPack                                --
 --                                                                          --
 ------------------------------------------------------------------------------
---  Copyright © 2020-2021, Vadim Godunko                                    --
+--  Copyright © 2020-2022, Vadim Godunko                                    --
 --  All rights reserved.                                                    --
 --                                                                          --
 --  Redistribution and use in source and binary forms, with or without      --
@@ -37,7 +37,10 @@
 with System;
 
 with WASM.Attributes;
+with WASM.Methods;
 with WASM.Objects.Attributes;
+with WASM.Objects.Methods;
+with Web.HTML.Options;
 with Web.Strings.WASM_Helpers;
 
 package body Web.HTML.Selects is
@@ -86,6 +89,21 @@ package body Web.HTML.Selects is
    begin
       return Web.Strings.WASM_Helpers.To_Ada (Imported (Self.Identifier));
    end Get_Value;
+
+   ----------------
+   -- Named_Item --
+   ----------------
+
+   function Named_Item
+     (Self : HTML_Select_Element'Class;
+      Name : Web.Strings.Web_String)
+      return Web.HTML.Options.HTML_Option_Element is
+   begin
+      return
+        Web.HTML.Options.Instantiate
+          (WASM.Objects.Methods.Call_Object_String
+             (Self, WASM.Methods.Named_Item, Name));
+   end Named_Item;
 
    ------------------
    -- Set_Disabled --
