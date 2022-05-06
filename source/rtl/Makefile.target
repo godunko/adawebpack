@@ -275,7 +275,7 @@ wasm: build
 	cp -p $(AWP_SRC)/rtl/s-memory__wasm.adb $(WASMINCLUDE)/s-memory.adb
 #	cp -p $(RTS_SRC)/mem/s-memset.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memset.ads $(WASMINCLUDE)/
-	cp -p $(AWP_SRC)/rtl/aux/s-memset.adb $(WASMINCLUDE)/
+	cp -p $(AWP_SRC)/rtl/temporary/s-memset.adb $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/mem/s-memtyp.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-parame.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-soflin.adb $(WASMINCLUDE)/
