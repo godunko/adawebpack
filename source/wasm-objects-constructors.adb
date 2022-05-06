@@ -34,6 +34,10 @@
 --  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    --
 ------------------------------------------------------------------------------
 
+with System;
+
+with Web.Strings.WASM_Helpers;
+
 package body WASM.Objects.Constructors is
 
    ----------------
@@ -54,5 +58,32 @@ package body WASM.Objects.Constructors is
    begin
       return Imported (Class);
    end New_Object;
+
+   -----------------------
+   -- New_Object_String --
+   -----------------------
+
+   function New_Object_String
+     (Class     : WASM.Classes.Class_Index;
+      Parameter : Web.Strings.Web_String)
+      return WASM.Objects.Object_Identifier
+   is
+      function Imported
+        (Class   : WASM.Classes.Class_Index;
+         Address : System.Address;
+         Size    : Interfaces.Unsigned_32)
+         return WASM.Objects.Object_Identifier
+           with Import     => True,
+                Convention => C,
+                Link_Name  => "__adawebpack___new_object_string";
+
+      A : System.Address;
+      S : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS (Parameter, A, S);
+
+      return Imported (Class, A, S);
+   end New_Object_String;
 
 end WASM.Objects.Constructors;

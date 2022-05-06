@@ -107,6 +107,11 @@ export let imports = {
     return __adawebpack_o2i.toi(new window[__adawebpack___classes[class_index]]());
   },
 
+  __adawebpack___new_object_string: function (class_index, address, size)
+  {
+    return __adawebpack_o2i.toi(new window[__adawebpack___classes[class_index]](string_to_js(address, size)));
+  },
+
   __adawebpack__is_instance_of: function(identifier, address, size)
   {
     return __adawebpack_o2i.too(identifier) instanceof window[string_to_js(address, size)];

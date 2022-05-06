@@ -47,4 +47,9 @@ package WASM.Objects.Constructors is
      (Class : WASM.Classes.Class_Index)
       return WASM.Objects.Object_Identifier;
 
+   function New_Object_String
+     (Class     : WASM.Classes.Class_Index;
+      Parameter : Web.Strings.Web_String)
+      return WASM.Objects.Object_Identifier;
+
 end WASM.Objects.Constructors;
