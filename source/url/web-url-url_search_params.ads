@@ -69,6 +69,10 @@ package Web.URL.URL_Search_Params is
      Name  : Web.Strings.Web_String;
      Value : Web.Strings.Web_String);
 
+   function Has
+     (Self : URL_Search_Params'Class;
+      Name : Web.Strings.Web_String) return Boolean;
+
    package Constructors is
 
       function New_URL_Search_Params return URL_Search_Params;

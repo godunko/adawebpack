@@ -87,6 +87,19 @@ package body Web.URL.URL_Search_Params is
    end Get;
 
    ---------
+   -- Has --
+   ---------
+
+   function Has
+     (Self : URL_Search_Params'Class;
+      Name : Web.Strings.Web_String) return Boolean is
+   begin
+      return
+        WASM.Objects.Methods.Call_Boolean_String
+          (Self, WASM.Methods.Has, Name);
+   end Has;
+
+   ---------
    -- Set --
    ---------
 

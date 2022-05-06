@@ -71,6 +71,7 @@ let __adawebpack___methods = [
   "framebufferTexture2D",
   "get",
   "getElementById",
+  "has",
   "renderbufferStorage",
   "send",
   "set",
