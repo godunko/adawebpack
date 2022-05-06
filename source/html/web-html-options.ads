@@ -48,7 +48,6 @@ package Web.HTML.Options is
 --     optional DOMString value, optional boolean defaultSelected = false,
 --     optional boolean selected = false)]
 --  interface HTMLOptionElement : HTMLElement {
---    attribute boolean disabled;
 --    readonly attribute HTMLFormElement? form;
 --    attribute DOMString label;
 --    attribute boolean defaultSelected;
@@ -57,6 +56,11 @@ package Web.HTML.Options is
 --    attribute DOMString text;
 --    readonly attribute long index;
 --  };
+
+   function Get_Disabled (Self : HTML_Option_Element'Class) return Boolean;
+
+   procedure Set_Disabled
+     (Self : HTML_Option_Element'Class; To : Boolean);
 
    function Get_Selected (Self : HTML_Option_Element'Class) return Boolean;
    procedure Set_Selected

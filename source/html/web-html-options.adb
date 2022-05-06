@@ -42,6 +42,16 @@ with WASM.Objects.Attributes;
 package body Web.HTML.Options is
 
    ------------------
+   -- Get_Disabled --
+   ------------------
+
+   function Get_Disabled (Self : HTML_Option_Element'Class) return Boolean is
+   begin
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Disabled);
+   end Get_Disabled;
+
+   ------------------
    -- Get_Selected --
    ------------------
 
@@ -61,6 +71,16 @@ package body Web.HTML.Options is
       return
         WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Value);
    end Get_Value;
+
+   ------------------
+   -- Set_Disabled --
+   ------------------
+
+   procedure Set_Disabled
+     (Self : HTML_Option_Element'Class; To : Boolean) is
+   begin
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Disabled, To);
+   end Set_Disabled;
 
    ------------------
    -- Set_Selected --
