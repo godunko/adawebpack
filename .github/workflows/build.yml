@@ -22,7 +22,7 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         with:
           repository: AdaCore/gnat-llvm
-          ref: 'e3f56dce0df148c5f27e97d973cfbdc1bd72248f'
+          ref: 'e63df749d39fe80c2feadbb7640f3f2860424039'
           path: gnat-llvm
 
       - name: Get bb-runtimes
@@ -39,7 +39,7 @@ jobs:
         with:
           repository: gcc-mirror/gcc
           path: gnat-llvm/llvm-interface/gcc
-          ref: 'e078de24eae8253fd4f24342f65166b525dd99c6'
+          ref: 'ab869e7f7548537a16b57658fb0826f92b3d2af6'
 
       - name: Get AdaWebPack
         uses: actions/checkout@v2
