@@ -59,6 +59,19 @@ package body Web.URL.URL_Search_Params is
               (WASM.Classes.URL_Search_Params));
       end New_URL_Search_Params;
 
+      ---------------------------
+      -- New_URL_Search_Params --
+      ---------------------------
+
+      function New_URL_Search_Params
+        (Init : Web.Strings.Web_String) return URL_Search_Params is
+      begin
+         return
+           Web.URL.URL_Search_Params.Instantiate
+            (WASM.Objects.Constructors.New_Object_String
+              (WASM.Classes.URL_Search_Params, Init));
+      end New_URL_Search_Params;
+
    end Constructors;
 
    ---------

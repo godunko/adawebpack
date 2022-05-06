@@ -73,6 +73,9 @@ package Web.URL.URL_Search_Params is
 
       function New_URL_Search_Params return URL_Search_Params;
 
+      function New_URL_Search_Params
+        (Init : Web.Strings.Web_String) return URL_Search_Params;
+
    end Constructors;
 
 end Web.URL.URL_Search_Params;
