@@ -40,6 +40,39 @@ with Web.Strings.WASM_Helpers;
 
 package body WASM.Objects.Methods is
 
+   -------------------------
+   -- Call_Boolean_String --
+   -------------------------
+
+   function Call_Boolean_String
+     (Self      : Object_Reference'Class;
+      Name      : WASM.Methods.Method_Index;
+      Parameter : Web.Strings.Web_String) return Boolean
+   is
+      use type Interfaces.Unsigned_32;
+
+      function Imported
+       (Object            : WASM.Objects.Object_Identifier;
+        Method            : WASM.Methods.Method_Index;
+        Parameter_Address : System.Address;
+        Parameter_Size    : Interfaces.Unsigned_32)
+          return Interfaces.Unsigned_32
+            with Import     => True,
+                 Convention => C,
+                 Link_Name  => "__adawebpack___boolean_string_invoker";
+
+      Parameter_Address : System.Address;
+      Parameter_Size    : Interfaces.Unsigned_32;
+
+   begin
+      Web.Strings.WASM_Helpers.To_JS
+       (Parameter, Parameter_Address, Parameter_Size);
+
+      return
+        Imported (Self.Identifier, Name, Parameter_Address, Parameter_Size)
+          /= 0;
+   end Call_Boolean_String;
+
    ------------------------
    -- Call_Object_Object --
    ------------------------

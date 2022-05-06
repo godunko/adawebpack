@@ -146,6 +146,10 @@ export let imports = {
      return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___attributes[attribute_id]]);
   },
 
+  __adawebpack___boolean_string_invoker: function (object_id, method_index, address, size) {
+    return +(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_index]](string_to_js(address, size)));
+  },
+
   __adawebpack___object_invoker: function (object_id, method_id) {
     return __adawebpack_o2i.toi(__adawebpack_o2i.too(object_id)[__adawebpack___methods[method_id]]());
   },

@@ -47,6 +47,11 @@ package WASM.Objects.Methods is
 
    pragma Preelaborate;
 
+   function Call_Boolean_String
+     (Self      : Object_Reference'Class;
+      Name      : WASM.Methods.Method_Index;
+      Parameter : Web.Strings.Web_String) return Boolean;
+
    function Call_Object_Object
      (Self : Object_Reference'Class;
       Name : WASM.Methods.Method_Index)
