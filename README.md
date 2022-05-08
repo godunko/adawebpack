@@ -7,6 +7,12 @@ AdaWebPack includes GNAT-LLVM compiler for WebAssembly target, GNAT Run Time Lib
 
 Prebuild packages are available on [Release page](https://github.com/godunko/adawebpack/releases).
 
+You will also need `wasm-ld`, the Web asssembly linker. You will find this:
+
+ * on Fedora Linux through the `lld` package;
+ * on Ubuntu through the `lld-13` package;
+ * on other Linux systems look for a similarly-named package.
+
 ## How to build
 
  * Setup GNAT using [Alire](https://alire.ada.dev/) or GNAT Community 2021.
@@ -90,6 +96,9 @@ Prebuild packages are available on [Release page](https://github.com/godunko/ada
    make build_examples
    cd -
    ```
+   You will most likely need to run the examples through an HTTP server;
+   otherwise, the browser will report a security error and/or refuse to load the page.
+   An easy way to obtain an HTTP server is by via Python 3 with `python3 -m http.server`.
 
 ## Usage with Docker
 
