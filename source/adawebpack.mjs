@@ -52,6 +52,7 @@ let __adawebpack___attributes = [
   "id",
   "name",
   "parentElement",
+  "required",
   "responseText",
   "selected",
   "step",

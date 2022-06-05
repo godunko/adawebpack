@@ -116,6 +116,16 @@ package body Web.HTML.Inputs is
       return WASM.Objects.Attributes.Get_String (Self, WASM.Attributes.Name);
    end Get_Name;
 
+   ------------------
+   -- Get_Required --
+   ------------------
+
+   function Get_Required (Self : HTML_Input_Element'Class) return Boolean is
+   begin
+      return
+        WASM.Objects.Attributes.Get_Boolean (Self, WASM.Attributes.Required);
+   end Get_Required;
+
    --------------
    -- Get_Step --
    --------------
@@ -244,6 +254,17 @@ package body Web.HTML.Inputs is
    begin
       WASM.Objects.Attributes.Set_String (Self, WASM.Attributes.Name, To);
    end Set_Name;
+
+   ------------------
+   -- Set_Required --
+   ------------------
+
+   procedure Set_Required
+    (Self : in out HTML_Input_Element'Class;
+     To   : Boolean) is
+   begin
+      WASM.Objects.Attributes.Set_Boolean (Self, WASM.Attributes.Required, To);
+   end Set_Required;
 
    --------------
    -- Set_Step --

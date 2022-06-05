@@ -391,21 +391,13 @@ package Web.HTML.Inputs is
 --       with Import     => True,
 --            Convention => JavaScript_Property_Setter,
 --            Link_Name  => "readOnly";
---
---   not overriding function Get_Required
---    (Self : not null access constant HTML_Input_Element)
---       return Boolean is abstract
---         with Import     => True,
---              Convention => JavaScript_Property_Getter,
---              Link_Name  => "required";
---
---   not overriding procedure Set_Required
---    (Self : not null access constant HTML_Input_Element;
---     To   : Boolean) is abstract
---       with Import     => True,
---            Convention => JavaScript_Property_Setter,
---            Link_Name  => "required";
---
+
+   function Get_Required (Self : HTML_Input_Element'Class) return Boolean;
+
+   procedure Set_Required
+     (Self : in out HTML_Input_Element'Class;
+      To   : Boolean);
+
 --   --             attribute unsigned long size;
 --
 --   not overriding function Get_Src
