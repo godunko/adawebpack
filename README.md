@@ -17,21 +17,21 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * Setup GNAT using [Alire](https://alire.ada.dev/) or GNAT Community 2021.
 
- * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `e3f56dce`.
+ * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de`.
    ```
    git clone https://github.com/AdaCore/gnat-llvm
-   git -C gnat-llvm checkout e3f56dce
+   git -C gnat-llvm checkout 28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de
    ```
 
- * Clone [bb-runtimes](https://github.com/Fabien-Chouteau/bb-runtimes). Use `gnat-fsf-11` branch.
+ * Clone [bb-runtimes](https://github.com/Fabien-Chouteau/bb-runtimes). Use `gnat-fsf-12` branch.
    ```
-   git clone -b gnat-fsf-11 https://github.com/Fabien-Chouteau/bb-runtimes gnat-llvm/llvm-interface/bb-runtimes
+   git clone -b gnat-fsf-12 https://github.com/Fabien-Chouteau/bb-runtimes gnat-llvm/llvm-interface/bb-runtimes
    ```
 
- * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `e078de24` commit.
+ * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `64d5610f44c995b88261bf83f53a200355cb530f` commit.
    ```
    git clone --single-branch --shallow-since=01-12-2021 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
-   git -C gnat-llvm/gcc checkout e078de24
+   git -C gnat-llvm/gcc checkout 64d5610f44c995b88261bf83f53a200355cb530f
    ```
 
  * Setup GNAT-LLVM development environment, see details in
@@ -43,14 +43,14 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
    cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
    ```
 
-   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 13). However,
+   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 14). However,
    alternatives need to be updated using the provided script:
 
    ```
-   sudo utilities/update-alternatives-clang.sh 13 100
+   sudo utilities/update-alternatives-clang.sh 14 100
    ```
 
-   Or install a [LLVM 13 binary release](https://github.com/llvm/llvm-project/releases).
+   Or install a [LLVM 14 binary release](https://github.com/llvm/llvm-project/releases) (`llvm-14`, `lld-14` and `clang-14` are required).
 
  * Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
    `adawebpack_src` and create link for Makefile.target.
@@ -73,6 +73,13 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
    ```
    cd gnat-llvm/llvm-interface
    ln -s gcc/gcc/ada gnat_src
+   cd -
+   ```
+
+ * Apply patch to GNAT-LLVM repository
+   ```
+   cd gnat-llvm
+   patch -p0 < llvm-interface/adawebpack_src/patches/gnat-llvm.patch
    cd -
    ```
 
