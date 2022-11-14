@@ -11,7 +11,10 @@ a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
 a-ioexce.ads \
+a-nbnbig.adb \
+a-nbnbig.ads \
 a-nllefu.ads \
+a-nubinu.ads \
 a-numeri.ads \
 a-stream.adb \
 a-stream.ads \
@@ -85,6 +88,7 @@ s-powlfl.ads \
 s-powllf.ads \
 s-putima.adb \
 s-putima.ads \
+s-retsta.ads \
 s-secsta.adb \
 s-secsta.ads \
 s-spsufi.adb \
@@ -107,7 +111,10 @@ s-valboo.adb \
 s-valboo.ads \
 s-valint.adb \
 s-valint.ads \
+s-vaispe.adb \
+s-vaispe.ads \
 s-vallfl.ads \
+s-valllu.ads \
 s-valrea.adb \
 s-valrea.ads \
 s-valuei.adb \
@@ -122,10 +129,16 @@ s-valuns.adb \
 s-valuns.ads \
 s-valuti.adb \
 s-valuti.ads \
+s-vauspe.adb \
+s-vauspe.ads \
 s-wchcnv.ads \
 s-wchstw.ads \
 s-wchwts.adb \
 s-wchwts.ads \
+s-widthu.adb \
+s-widthu.ads \
+s-widllu.ads \
+s-widuns.ads \
 s-unstyp.ads \
 unchconv.ads
 
@@ -175,8 +188,6 @@ s-valcha.adb \
 s-valcha.ads \
 s-vallli.adb \
 s-vallli.ads \
-s-valllu.adb \
-s-valllu.ads \
 machcode.ads \
 text_io.ads  \
 unchdeal.ads \
@@ -197,6 +208,7 @@ a-chzla1.ads \
 a-ioexce.ads \
 a-nlelfu.ads \
 a-nllefu.ads \
+a-nubinu.ads \
 a-nuelfu.ads \
 a-numeri.ads \
 a-string.ads \
@@ -217,9 +229,13 @@ s-memtyp.ads \
 s-powflt.ads \
 s-powlfl.ads \
 s-powllf.ads \
+s-retsta.ads \
 s-unstyp.ads \
 s-vallfl.ads \
+s-valllu.ads \
 s-vaenu8.ads \
+s-widllu.ads \
+s-widuns.ads \
 unchconv.ads \
 
 #gnat.ads     \
@@ -247,14 +263,14 @@ wasm: build
 	  cp -p $(GNAT_SRC)/libgnat/$$f $(WASMINCLUDE); \
 	done
 	cp -p $(AWP_SRC)/rtl/a-elchha__wasm.adb $(WASMINCLUDE)/a-elchha.adb
-	cp -p $(RTS_SRC)/zfp/a-elchha.ads $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/light/a-elchha.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/a-except.ad[sb] $(WASMINCLUDE)/
 #	cp -p $(GNAT_SRC)/hie/i-c__hie.ads $(WASMINCLUDE)/i-c.ads
 	cp -p $(RTS_SRC)/math/a-ngelfu.ad[sb] $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nlelfu.ads $(WASMINCLUDE)/
 	cp -p $(RTS_SRC)/math/a-nuelfu.ads $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/system.ads $(WASMINCLUDE)/
-	cp -p $(RTS_SRC)/zfp/s-assert.adb $(WASMINCLUDE)/
+	cp -p $(RTS_SRC)/light/s-assert.adb $(WASMINCLUDE)/
 	cp -p $(AWP_SRC)/rtl/s-builti.ad[sb] $(WASMINCLUDE)
 	cp -p $(AWP_SRC)/rtl/s-finmas__wasm.adb $(WASMINCLUDE)/s-finmas.adb
 	cp -p $(RTS_SRC)/math/s-gcmain.ad[sb] $(WASMINCLUDE)/
