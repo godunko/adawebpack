@@ -31,7 +31,7 @@ jobs:
         with:
           repository: Fabien-Chouteau/bb-runtimes
           path: gnat-llvm/llvm-interface/bb-runtimes
-          ref: 'gnat-fsf-11'
+          ref: 'gnat-fsf-12'
 
       - name: Get gcc
         uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
         with:
           repository: gcc-mirror/gcc
           path: gnat-llvm/llvm-interface/gcc
-          ref: 'ab869e7f7548537a16b57658fb0826f92b3d2af6'
+          ref: '64d5610f44c995b88261bf83f53a200355cb530f'
 
       - name: Get AdaWebPack
         uses: actions/checkout@v2
@@ -50,14 +50,14 @@ jobs:
         uses: alire-project/setup-alire@v1
         if: ${{ runner.os != 'Windows' }}
         with:
-          toolchain: gnat_native^11 gprbuild^21
+          toolchain: gnat_native^12 gprbuild^22
           toolchain_dir: ./cached_gnat
 
       - name: Fetch LLVM
         if: ${{ runner.os != 'Windows' }}
         run: |
-          URL=https://github.com/llvm/llvm-project/releases/download/llvmorg-13.0.0
-          curl -L $URL/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz \
+          URL=https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0
+          curl -L $URL/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
            | tar xJf -
 
       - name: Build (Linux)
@@ -66,7 +66,7 @@ jobs:
           export PREFIX=$PWD/adawebpack
           export PATH=$PWD/gnat-llvm/llvm-interface/bin:$PATH
           export PATH=`ls -d $PWD/cached_gnat/*/bin |tr '\n' ':'`$PATH
-          export PATH=$PWD/clang+llvm-13.0.0-x86_64-linux-gnu-ubuntu-16.04/bin:$PATH
+          export PATH=$PWD/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04/bin:$PATH
           echo PATH=$PATH
           pwd
           ls -l
