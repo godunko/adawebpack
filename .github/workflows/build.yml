@@ -22,7 +22,7 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         with:
           repository: AdaCore/gnat-llvm
-          ref: 'e63df749d39fe80c2feadbb7640f3f2860424039'
+          ref: '28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de'
           path: gnat-llvm
 
       - name: Get bb-runtimes
@@ -71,7 +71,9 @@ jobs:
           pwd
           ls -l
           ls -l gnat-llvm/llvm-interface/
-          cd gnat-llvm/llvm-interface
+          cd gnat-llvm
+          patch -p0 < llvm-interface/adawebpack_src/patches/gnat-llvm.patch
+          cd llvm-interface
           ln -sv gcc/gcc/ada gnat_src
           ln -sv adawebpack_src/source/rtl/Makefile.target
           ln -sv bb-runtimes/gnat_rts_sources/include/rts-sources
@@ -102,13 +104,19 @@ jobs:
             mingw-w64-x86_64-toolchain
             mingw-w64-x86_64-gcc-ada
             mingw-w64-x86_64-gprbuild
-            mingw-w64-x86_64-clang
-            mingw-w64-x86_64-lld
+
+# mingw-w64-x86_64-clang
+# mingw-w64-x86_64-lld
 
       - name: Build MSYS2 package
         if: ${{ runner.os == 'Windows' }}
         shell: msys2 {0}
         run: |
+          curl -O https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-llvm-14.0.6-6-any.pkg.tar.zst
+          curl -O https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-clang-14.0.6-6-any.pkg.tar.zst
+          curl -O https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-lld-14.0.6-6-any.pkg.tar.zst
+          pacman -U --noconfirm mingw-w64-x86_64-*-14.0.6-6-any.pkg.tar.zst
+          rm -rf *.tar.zst
           mv gnat-llvm/llvm-interface/adawebpack_src adawebpack
           cp -r adawebpack/packages/msys2 .
           tar czf msys2/adawebpack.tar.gz adawebpack

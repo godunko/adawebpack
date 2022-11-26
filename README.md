@@ -10,7 +10,7 @@ Prebuild packages are available on [Release page](https://github.com/godunko/ada
 You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * on Fedora Linux through the `lld` package;
- * on Ubuntu through the `lld-13` package;
+ * on Ubuntu through the `lld-14` package;
  * on other Linux systems look for a similarly-named package.
 
 ## How to build
@@ -30,8 +30,8 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `64d5610f44c995b88261bf83f53a200355cb530f` commit.
    ```
-   git clone --single-branch --shallow-since=01-12-2021 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
-   git -C gnat-llvm/gcc checkout 64d5610f44c995b88261bf83f53a200355cb530f
+   git clone --single-branch --shallow-since=13-11-2022 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
+   git -C gnat-llvm/llvm-interface/gcc checkout 64d5610f44c995b88261bf83f53a200355cb530f
    ```
 
  * Setup GNAT-LLVM development environment, see details in
@@ -114,7 +114,7 @@ It could be handy to use docker.
 * Build a container image (make sure to replace `curl` argument with latest RPM URL)
   ```
   docker build --tag wgprbuild - <<EOF
-  FROM registry.fedoraproject.org/fedora-minimal:35
+  FROM registry.fedoraproject.org/fedora-minimal:36
   RUN microdnf --assumeyes install \
     make \
     rpmdevtools \
@@ -132,7 +132,7 @@ It could be handy to use docker.
     chrpath \
     ca-certificates && \
   curl -O \
-  https://download.copr.fedorainfracloud.org/results/reznik/adawebpack/fedora-35-x86_64/03123013-adawebpack/adawebpack-22.0.1-git.fc35.x86_64.rpm && \
+  https://download.copr.fedorainfracloud.org/results/reznik/adawebpack/fedora-36-x86_64/05068491-adawebpack/adawebpack-22.1.0-git.fc36.x86_64.rpm && \
   rpm -i adawebpack*.rpm && \
   rm -f adawebpack*.rpm && \
   microdnf clean all
