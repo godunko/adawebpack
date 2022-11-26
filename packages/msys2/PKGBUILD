@@ -1,8 +1,8 @@
 _realname=adawebpack
 pkgbase=mingw-w64-${_realname}
 pkgname=${MINGW_PACKAGE_PREFIX}-${_realname}
-pkgver=22.0.0
-pkgrel=2
+pkgver=22.1.0
+pkgrel=1
 pkgdesc="AdaWebPack is a toolchain, RTL and WebAPI binding for Ada on WebAssembly"
 arch=('any')
 mingw_arch=('mingw32' 'mingw64' 'ucrt64' 'clang64')
@@ -10,13 +10,13 @@ url="https://github.com/godunko/adawebpack"
 license=('GPL3' 'BSD3')
 makedepends=("${MINGW_PACKAGE_PREFIX}-gcc-ada"
              "${MINGW_PACKAGE_PREFIX}-gprbuild"
-             "${MINGW_PACKAGE_PREFIX}-clang"
-             "${MINGW_PACKAGE_PREFIX}-lld"
-             "${MINGW_PACKAGE_PREFIX}-llvm")
-depends=("${MINGW_PACKAGE_PREFIX}-llvm")
-source=("gnat-llvm.zip::https://github.com/AdaCore/gnat-llvm/archive/e3f56dce0df148c5f27e97d973cfbdc1bd72248f.zip"
-        "bb-runtimes.zip::https://github.com/Fabien-Chouteau/bb-runtimes/archive/7a4674ae9221d2fa046bed20fbaf9de9caa09d41.zip"
-        "gcc.zip::https://github.com/gcc-mirror/gcc/archive/e078de24eae8253fd4f24342f65166b525dd99c6.zip"
+             "${MINGW_PACKAGE_PREFIX}-clang<15.0.0"
+             "${MINGW_PACKAGE_PREFIX}-lld<15.0.0"
+             "${MINGW_PACKAGE_PREFIX}-llvm<15.0.0")
+depends=("${MINGW_PACKAGE_PREFIX}-llvm<15.0.0")
+source=("gnat-llvm.zip::https://github.com/AdaCore/gnat-llvm/archive/28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de.zip"
+        "bb-runtimes.zip::https://github.com/Fabien-Chouteau/bb-runtimes/archive/c1d089bd8880cec250266cf71d6a22cc74fdba79.zip"
+        "gcc.zip::https://github.com/gcc-mirror/gcc/archive/64d5610f44c995b88261bf83f53a200355cb530f.zip"
         "${_realname}.tar.gz")
 md5sums=( SKIP SKIP SKIP SKIP )
 noextract=( "gcc.zip" )
@@ -28,7 +28,9 @@ prepare() {
   mv -v gcc-*/gcc/ada gnat-llvm/llvm-interface/gnat_src
   mv -v bb-runtimes-*/gnat_rts_sources/include/rts-sources gnat-llvm/llvm-interface/
   mv -v adawebpack gnat-llvm/llvm-interface/adawebpack_src
-  cd gnat-llvm/llvm-interface/
+  cd gnat-llvm
+  patch -p0 < llvm-interface/adawebpack_src/patches/gnat-llvm.patch
+  cd llvm-interface/
   cp -v adawebpack_src/source/rtl/Makefile.target .
   rm -rf gcc-*
   rm -rf bb-runtimes-*

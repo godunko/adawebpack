@@ -6,7 +6,7 @@
 %define __os_install_post %{nil}
 
 Name:       adawebpack
-Version:    22.0.1
+Version:    22.1.0
 Release:    git%{?dist}
 Summary:    Ada WASM Runtime and Bindings for Web API
 Group:      Development/Libraries
@@ -16,6 +16,7 @@ Source0:    adawebpack.tar.gz
 Source1:    gnat-llvm.zip
 Source2:    bb-runtimes.zip
 Source3:    gcc.zip
+Patch0:     gnat-llvm.patch
 BuildRequires:   bsdtar
 BuildRequires:   gcc-gnat
 BuildRequires:   fedora-gnat-project-common  >= 3
@@ -23,7 +24,7 @@ BuildRequires:   gprbuild
 BuildRequires:   gcc-c++
 BuildRequires:   libstdc++-static
 BuildRequires:   lld
-BuildRequires:   llvm-devel >= 13
+BuildRequires:   llvm-devel >= 14
 BuildRequires:   clang
 BuildRequires:   chrpath
 
@@ -34,13 +35,14 @@ ExclusiveArch: %GPRbuild_arches
 Ada WASM Runtime and Bindings for Web API
 
 %prep
-%setup -T -b1 -a 0 -a 2 -n gnat-llvm-e3f56dce0df148c5f27e97d973cfbdc1bd72248f/
+%setup -T -b1 -a 0 -a 2 -n gnat-llvm-28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de/
 #export LANG=C.utf8
 LANG=C.utf8 bsdtar -x -f %{S:3} gcc-*/gcc/ada
 mv -v gcc-*/gcc/ada llvm-interface/gnat_src
 mv %{name} llvm-interface/%{name}_src
 mv -v bb-runtimes-*/gnat_rts_sources/include/rts-sources llvm-interface/
 ln -s %{name}_src/source/rtl/Makefile.target llvm-interface/
+%patch0 -p0
 
 %build
 make -C llvm-interface/ wasm
