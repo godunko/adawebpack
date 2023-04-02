@@ -10,17 +10,17 @@ Prebuild packages are available on [Release page](https://github.com/godunko/ada
 You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * on Fedora Linux through the `lld` package;
- * on Ubuntu through the `lld-14` package;
+ * on Ubuntu through the `lld-15` package;
  * on other Linux systems look for a similarly-named package.
 
 ## How to build
 
  * Setup GNAT using [Alire](https://alire.ada.dev/) or GNAT Community 2021.
 
- * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de`.
+ * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `e000ea613704acc27238ec17ce020251427f9e1d`.
    ```
    git clone https://github.com/AdaCore/gnat-llvm
-   git -C gnat-llvm checkout 28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de
+   git -C gnat-llvm checkout e000ea613704acc27238ec17ce020251427f9e1d
    ```
 
  * Clone [bb-runtimes](https://github.com/Fabien-Chouteau/bb-runtimes). Use `gnat-fsf-12` branch.
@@ -28,10 +28,10 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
    git clone -b gnat-fsf-12 https://github.com/Fabien-Chouteau/bb-runtimes gnat-llvm/llvm-interface/bb-runtimes
    ```
 
- * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `64d5610f44c995b88261bf83f53a200355cb530f` commit.
+ * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `e000ea613704acc27238ec17ce020251427f9e1d` commit.
    ```
    git clone --single-branch --shallow-since=13-11-2022 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
-   git -C gnat-llvm/llvm-interface/gcc checkout 64d5610f44c995b88261bf83f53a200355cb530f
+   git -C gnat-llvm/llvm-interface/gcc checkout e000ea613704acc27238ec17ce020251427f9e1d
    ```
 
  * Setup GNAT-LLVM development environment, see details in
@@ -43,14 +43,14 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
    cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
    ```
 
-   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 14). However,
+   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 15). However,
    alternatives need to be updated using the provided script:
 
    ```
-   sudo utilities/update-alternatives-clang.sh 14 100
+   sudo utilities/update-alternatives-clang.sh 15 100
    ```
 
-   Or install a [LLVM 14 binary release](https://github.com/llvm/llvm-project/releases) (`llvm-14`, `lld-14` and `clang-14` are required).
+   Or install a [LLVM 15 binary release](https://github.com/llvm/llvm-project/releases) (`llvm-15`, `lld-15` and `clang-15` are required).
 
  * Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
    `adawebpack_src` and create link for Makefile.target.
