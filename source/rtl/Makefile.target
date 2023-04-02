@@ -263,6 +263,7 @@ WASMINCLUDE=lib/rts-native/adainclude
 WASMLIB=lib/rts-native/adalib
 
 wasm: build
+	cp adawebpack_src/source/rtl/wasm32.atp bin/target.atp
 	$(RMDIR) $(WASMINCLUDE) $(WASMLIB)
 	$(MKDIR) $(WASMINCLUDE) $(WASMLIB)
 	for f in $(COMMON_WASM_SRCS); do \
