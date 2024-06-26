@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - master
+      - topic/gha_up
   pull_request:
 name: Build binaries
 jobs:
@@ -10,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: # Build debug and production
-        os: [ubuntu-18.04, windows-latest]
+        os: [ubuntu-20.04] # , windows-latest] # there is no LLD 14 in msys2 anymore
     runs-on: ${{ matrix.os }}
     steps:
       - name: 'git config'
@@ -80,7 +81,7 @@ jobs:
           make wasm
           make -C adawebpack_src build_examples
           set -x
-          chrpath -d bin/*
+          find -D exec bin -size +100k -exec chrpath -d {} \;
           mkdir -p ${PREFIX}/share/gprconfig
           mkdir -p ${PREFIX}/lib/gnat
           mkdir -p ${PREFIX}/share/adawebpack
