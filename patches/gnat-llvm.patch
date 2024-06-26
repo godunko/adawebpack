@@ -1,10 +1,9 @@
-diff --git llvm-interface/gnatllvm-instructions.adb llvm-interface/gnatllvm-instructions.adb
-index f8066fc0..4ba3a5cc 100644
+diff -aur llvm-interface/gnatllvm-instructions.adb llvm-interface/gnatllvm-instructions.adb
 --- llvm-interface/gnatllvm-instructions.adb
 +++ llvm-interface/gnatllvm-instructions.adb
-@@ -1447,29 +1447,23 @@ package body GNATLLVM.Instructions is
-       Args        : GL_Value_Array;
-       Name        : String := "") return Value_T
+@@ -1548,29 +1548,23 @@
+       Args : GL_Value_Array;
+       Name : String := "") return Value_T
     is
 -      function To_Param_Num (Idx : Nat) return unsigned;
 -      --  Map index in Args array to LLVM parameter number
@@ -36,8 +35,8 @@ index f8066fc0..4ba3a5cc 100644
        end loop;
  
        --  If we have a landing pad, use an invoke instruction, first creating
-@@ -1486,32 +1480,22 @@ package body GNATLLVM.Instructions is
-                             Arg_Values'Address, Arg_Values'Length, Name);
+@@ -1587,32 +1581,22 @@
+                               Arg_Values'Address, Arg_Values'Length, Name);
        end if;
  
 -      --   Set some parameter attributes based on the called function.
@@ -78,3 +77,4 @@ index f8066fc0..4ba3a5cc 100644
        end loop;
  
        return Call_Inst;
+Only in new/gnat-llvm/llvm-interface: gnatllvm-instructions.adb.orig
