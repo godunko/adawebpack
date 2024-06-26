@@ -8,10 +8,10 @@
 
 srpm:
 	mkdir /tmp/.copr
-	cp -v `dirname $(spec)`/../patches/gnat-llvm.patch /tmp/.copr
+	cp -v `dirname $(spec)`/../patches/*.patch /tmp/.copr
 	tar cavf /tmp/.copr/`grep ^Source0: $(spec)| sed -e 's/^.* //'` \
 	  --exclude-vcs -C .. `basename $(realpath .)`
-	curl -L -o /tmp/.copr/gnat-llvm.zip https://github.com/AdaCore/gnat-llvm/archive/28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de.zip
-	curl -L -o /tmp/.copr/bb-runtimes.zip https://github.com/Fabien-Chouteau/bb-runtimes/archive/c1d089bd8880cec250266cf71d6a22cc74fdba79.zip
-	curl -L -o /tmp/.copr/gcc.zip https://github.com/gcc-mirror/gcc/archive/64d5610f44c995b88261bf83f53a200355cb530f.zip
+	curl -L -o /tmp/.copr/gnat-llvm.zip https://github.com/AdaCore/gnat-llvm/archive/66e36d929524972353600db5d604d0189cf0308f.zip
+	curl -L -o /tmp/.copr/bb-runtimes.zip https://github.com/Fabien-Chouteau/bb-runtimes/archive/e59080e0c4b49d12e00538595052dea2dceb5a6e.zip
+	curl -L -o /tmp/.copr/gcc.zip https://github.com/gcc-mirror/gcc/archive/cd0059a1976303638cea95f216de129334fc04d1.zip
 	rpmbuild -bs $(spec) --define="_sourcedir /tmp/.copr" --define="_srcrpmdir $(outdir)"

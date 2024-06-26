@@ -10,28 +10,28 @@ Prebuild packages are available on [Release page](https://github.com/godunko/ada
 You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * on Fedora Linux through the `lld` package;
- * on Ubuntu through the `lld-15` package;
+ * on Ubuntu through the `lld-16` package;
  * on other Linux systems look for a similarly-named package.
 
 ## How to build
 
- * Setup GNAT using [Alire](https://alire.ada.dev/) or GNAT Community 2021.
+ * Setup GNAT using [Alire](https://alire.ada.dev/).
 
- * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `e000ea613704acc27238ec17ce020251427f9e1d`.
+ * Clone [GNAT-LLVM](https://github.com/AdaCore/gnat-llvm). Latest known good revision of GNAT-LLVM compatible with GNAT FSF is `66e36d929524972353600db5d604d0189cf0308f`.
    ```
    git clone https://github.com/AdaCore/gnat-llvm
-   git -C gnat-llvm checkout e000ea613704acc27238ec17ce020251427f9e1d
+   git -C gnat-llvm checkout 66e36d929524972353600db5d604d0189cf0308f
    ```
 
- * Clone [bb-runtimes](https://github.com/Fabien-Chouteau/bb-runtimes). Use `gnat-fsf-12` branch.
+ * Clone [bb-runtimes](https://github.com/Fabien-Chouteau/bb-runtimes). Use `gnat-fsf-14` branch.
    ```
-   git clone -b gnat-fsf-12 https://github.com/Fabien-Chouteau/bb-runtimes gnat-llvm/llvm-interface/bb-runtimes
+   git clone -b gnat-fsf-14 https://github.com/Fabien-Chouteau/bb-runtimes gnat-llvm/llvm-interface/bb-runtimes
    ```
 
- * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `e000ea613704acc27238ec17ce020251427f9e1d` commit.
+ * Clone [GCC](https://github.com/gcc-mirror/gcc) sources. Use, for instance, `releases/gcc-14.1.0` commit.
    ```
-   git clone --single-branch --shallow-since=13-11-2022 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
-   git -C gnat-llvm/llvm-interface/gcc checkout e000ea613704acc27238ec17ce020251427f9e1d
+   git clone --single-branch --branch=releases/gcc-14 --shallow-since=01-04-2024 https://github.com/gcc-mirror/gcc gnat-llvm/llvm-interface/gcc
+   git -C gnat-llvm/llvm-interface/gcc checkout releases/gcc-14.1.0
    ```
 
  * Setup GNAT-LLVM development environment, see details in
@@ -43,14 +43,14 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
    cmake ... -DLLVM_ENABLE_PROJECTS='...;clang;lld' -DLLVM_TARGETS_TO_BUILD="...;WebAssembly"
    ```
 
-   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 15). However,
+   On Ubuntu it is possible to install prebuild LLVM/CLang packages (use LLVM/CLang 16). However,
    alternatives need to be updated using the provided script:
 
    ```
-   sudo utilities/update-alternatives-clang.sh 15 100
+   sudo utilities/update-alternatives-clang.sh 16 100
    ```
 
-   Or install a [LLVM 15 binary release](https://github.com/llvm/llvm-project/releases) (`llvm-15`, `lld-15` and `clang-15` are required).
+   Or install a [LLVM 16 binary release](https://github.com/llvm/llvm-project/releases) (`llvm-16`, `lld-16` and `clang-16` are required).
 
  * Checkout AdaWebPack repository into `gnat-llvm/llvm-interface` as
    `adawebpack_src` and create link for Makefile.target.
@@ -78,8 +78,9 @@ You will also need `wasm-ld`, the Web asssembly linker. You will find this:
 
  * Apply patch to GNAT-LLVM repository
    ```
-   cd gnat-llvm
-   patch -p0 < llvm-interface/adawebpack_src/patches/gnat-llvm.patch
+   cd gnat-llvm/llvm-interface
+   patch -p1 < adawebpack_src/patches/gnat-llvm.patch
+   patch -p1 < adawebpack_src/patches/llvm_wrapper2.patch
    cd -
    ```
 
@@ -114,27 +115,19 @@ It could be handy to use docker.
 * Build a container image (make sure to replace `curl` argument with latest RPM URL)
   ```
   docker build --tag wgprbuild - <<EOF
-  FROM registry.fedoraproject.org/fedora-minimal:36
+  FROM registry.fedoraproject.org/fedora-minimal:40
   RUN microdnf --assumeyes install \
-    make \
-    rpmdevtools \
-    libstdc++-static \
-    libgnat \
-    clang \
-    llvm-devel \
-    lld \
     gprbuild \
-    gdb \
-    git \
-    openssh-server \
-    tar \
-    gzip \
-    chrpath \
+    clang16 \
+    llvm16 \
+    lld \
+    libgnat \
     ca-certificates && \
   curl -O \
-  https://download.copr.fedorainfracloud.org/results/reznik/adawebpack/fedora-36-x86_64/05068491-adawebpack/adawebpack-22.1.0-git.fc36.x86_64.rpm && \
+  https://download.copr.fedorainfracloud.org/results/reznik/adawebpack/fedora-40-x86_64/07674186-adawebpack/adawebpack-24.0.0-git.fc40.x86_64.rpm && \
   rpm -i adawebpack*.rpm && \
   rm -f adawebpack*.rpm && \
+  /usr/share/adawebpack/update-alternatives-clang.sh 16 99 && \
   microdnf clean all
   EOF
   ```

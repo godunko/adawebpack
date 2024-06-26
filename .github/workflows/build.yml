@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: # Build debug and production
-        os: [ubuntu-20.04] # , windows-latest] # there is no LLD 14 in msys2 anymore
+        os: [ubuntu-22.04] # , windows-latest] # there is no LLD 14 in msys2 anymore
     runs-on: ${{ matrix.os }}
     steps:
       - name: 'git config'
@@ -23,7 +23,7 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         with:
           repository: AdaCore/gnat-llvm
-          ref: '28c91e94c4227e6d9eabb2aeed4c0c12f6a4f3de'
+          ref: '66e36d929524972353600db5d604d0189cf0308f'
           path: gnat-llvm
 
       - name: Get bb-runtimes
@@ -32,7 +32,7 @@ jobs:
         with:
           repository: Fabien-Chouteau/bb-runtimes
           path: gnat-llvm/llvm-interface/bb-runtimes
-          ref: 'gnat-fsf-12'
+          ref: 'gnat-fsf-14'
 
       - name: Get gcc
         uses: actions/checkout@v2
@@ -40,7 +40,7 @@ jobs:
         with:
           repository: gcc-mirror/gcc
           path: gnat-llvm/llvm-interface/gcc
-          ref: '64d5610f44c995b88261bf83f53a200355cb530f'
+          ref: 'releases/gcc-14.1.0'
 
       - name: Get AdaWebPack
         uses: actions/checkout@v2
@@ -48,33 +48,33 @@ jobs:
           path: gnat-llvm/llvm-interface/adawebpack_src
 
       - name: Get GNAT toolchain with alire
-        uses: alire-project/setup-alire@v1
+        uses: alire-project/setup-alire@v3
         if: ${{ runner.os != 'Windows' }}
         with:
-          toolchain: gnat_native^12 gprbuild^22
-          toolchain_dir: ./cached_gnat
+          toolchain: gnat_native^14 gprbuild
 
       - name: Fetch LLVM
         if: ${{ runner.os != 'Windows' }}
         run: |
-          URL=https://github.com/llvm/llvm-project/releases/download/llvmorg-14.0.0
-          curl -L $URL/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz \
+          URL=https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.4
+          curl -L $URL/clang+llvm-16.0.4-x86_64-linux-gnu-ubuntu-22.04.tar.xz \
            | tar xJf -
 
       - name: Build (Linux)
         if: ${{ runner.os != 'Windows' }}
         run: |
+          alr toolchain --select gnat_native^14 gprbuild
           export PREFIX=$PWD/adawebpack
           export PATH=$PWD/gnat-llvm/llvm-interface/bin:$PATH
-          export PATH=`ls -d $PWD/cached_gnat/*/bin |tr '\n' ':'`$PATH
-          export PATH=$PWD/clang+llvm-14.0.0-x86_64-linux-gnu-ubuntu-18.04/bin:$PATH
+          export PATH=`ls -d $HOME/.local/share/alire/toolchains/*/bin |tr '\n' ':'`$PATH
+          export PATH=$PWD/clang+llvm-16.0.4-x86_64-linux-gnu-ubuntu-22.04/bin:$PATH
           echo PATH=$PATH
           pwd
           ls -l
           ls -l gnat-llvm/llvm-interface/
-          cd gnat-llvm
-          patch -p0 < llvm-interface/adawebpack_src/patches/gnat-llvm.patch
-          cd llvm-interface
+          cd gnat-llvm/llvm-interface
+          patch -p1 < adawebpack_src/patches/gnat-llvm.patch
+          patch -p1 < adawebpack_src/patches/llvm_wrapper2.patch
           ln -sv gcc/gcc/ada gnat_src
           ln -sv adawebpack_src/source/rtl/Makefile.target
           ln -sv bb-runtimes/gnat_rts_sources/include/rts-sources
