@@ -11,6 +11,7 @@ a-chzla1.ads \
 a-finali.adb \
 a-finali.ads \
 a-ioexce.ads \
+a-iteint.ads \
 a-nbnbig.adb \
 a-nbnbig.ads \
 a-nllefu.ads \
@@ -216,6 +217,7 @@ ada.ads      \
 a-charac.ads \
 a-chzla1.ads \
 a-ioexce.ads \
+a-iteint.ads \
 a-nlelfu.ads \
 a-nllefu.ads \
 a-nubinu.ads \
